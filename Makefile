@@ -31,7 +31,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): clean $(OBJS)
-	$(CC) $(OBJS) -o $(BINDIR)/$(NAME) $(CXXFLAGS) $(SFML)
+	$(CC) $(OBJS) -o $(BINDIR)/$(NAME) $(CXXFLAGS)
 
 clean:
 	$(RM) $(OBJS)
