@@ -1,0 +1,5 @@
+utiliser errno dans Basic_File et ses héritages (au lieu de _state ?)
+changer toutes les boucles par des std::transform, std::swap, for(type &var : tableau) ....... optimisation ++
+dans Loaded_Exception, changer les std::string path en std::PATH path (et partout ailleur dans le programme)
+dans loaded exception, ajouter les arguments de path de fichier de log dans les constructeur
+implémenter remove dans directory.cpp
