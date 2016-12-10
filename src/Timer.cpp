@@ -2,13 +2,16 @@
 
 #include "Timer.hpp"
 
-Timer::Timer() : _Begin(std::chrono::high_resolution_clock::now()), _BeginPause(), _PausedTime(0), _isPaused(false), _isStopped(false)
+
+Timer::Timer() : _Begin(std::chrono::high_resolution_clock::now()), _BeginPause(), _PausedTime(0), _isPaused(true), _isStopped(true)
 {
 }
+
 
 Timer::~Timer()
 {
 }
+
 
 unsigned long long Timer::getNano() const
 {
@@ -17,40 +20,11 @@ unsigned long long Timer::getNano() const
   else
   {
     std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> Now = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds ActualPausedTime = Now - _BeginPause;
-    return (static_cast<unsigned long long>(((Now - _Begin) - (_PausedTime + ActualPausedTime)).count()));
+    std::chrono::nanoseconds CurrentPausedTime = Now - _BeginPause;
+    return (static_cast<unsigned long long>(((Now - _Begin) - (_PausedTime + CurrentPausedTime)).count()));
   }
 }
 
-unsigned long long Timer::getMicro() const
-{
-  return getNano()/(1000);
-}
-
-unsigned long long Timer::getMilli() const
-{
-  return getNano()/(1000*1000);
-}
-
-unsigned long long Timer::getSec() const
-{
-  return getNano()/(1000*1000*1000);
-}
-
-unsigned long long Timer::get() const
-{
-  return getNano()/(1000*1000*1000);
-}
-
-unsigned long long Timer::getMin() const
-{
-  return getSec()/60;
-}
-
-unsigned long long Timer::getHour() const
-{
-  return getSec()/(60*60);
-}
 
 std::chrono::nanoseconds Timer::getNanoDuration() const
 {
@@ -59,45 +33,11 @@ std::chrono::nanoseconds Timer::getNanoDuration() const
   else
   {
     std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> Now = std::chrono::high_resolution_clock::now();
-    std::chrono::nanoseconds ActualPausedTime = Now - _BeginPause;
-    return ((Now - _Begin) - (_PausedTime + ActualPausedTime));
+    std::chrono::nanoseconds CurrentPausedTime = Now - _BeginPause;
+    return ((Now - _Begin) - (_PausedTime + CurrentPausedTime));
   }
 }
 
-std::chrono::microseconds Timer::getMicroDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::microseconds>(getNanoDuration());
-}
-
-std::chrono::milliseconds Timer::getMilliDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::milliseconds>(getNanoDuration());
-}
-
-std::chrono::seconds Timer::getSecDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::seconds>(getNanoDuration());
-}
-
-std::chrono::seconds Timer::getDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::seconds>(getNanoDuration());
-}
-
-std::chrono::minutes Timer::getMinDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::minutes>(getNanoDuration());
-}
-
-std::chrono::hours Timer::getHourDuration() const
-{
-  return std::chrono::duration_cast<std::chrono::hours>(getNanoDuration());
-}
-
-std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> Timer::getBegin() const
-{
-  return _Begin;
-}
 
 void Timer::start()
 {
@@ -114,6 +54,7 @@ void Timer::start()
   }
 }
 
+
 void Timer::pause()
 {
   if(! _isPaused && ! _isStopped)
@@ -122,6 +63,7 @@ void Timer::pause()
     _BeginPause = std::chrono::high_resolution_clock::now();
   }
 }
+
 
 void Timer::stop()
 {

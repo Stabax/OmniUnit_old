@@ -45,7 +45,7 @@ public:
   //méthodes statiques et swap
   static bool exist(std::string path); //retourne false si le répertoire n'existe pas ou que les droits ne permettent pas de s'y déplacer
   static char* getDirPath(); //retourne le chemin absolu du répertoire courrant
-  static const char* firstDir(const std::string path); //retourne le répertoire d'un path le plus proche de la racine
+  static std::string firstDir(const std::string path); //retourne le nom du répertoire le plus proche de la racine d'un path
 
   //accesseurs
 

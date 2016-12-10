@@ -14,6 +14,14 @@
 #include <thread>
 #include <string>
 
+
+namespace std
+{
+  typedef ratio<1, 1> second;
+  typedef ratio<60, 1> minute;
+  typedef ratio<60*60, 1> hour;
+}
+
 class Date
 {
 public:
@@ -32,13 +40,6 @@ public:
 
   static int timeLag; //contient le décalage horraire en heure par rapport à l'heure GMT
 };
-
-namespace std
-{
-  typedef ratio<1, 1> second;
-  typedef ratio<60, 1> minute;
-  typedef ratio<60*60, 1> hour;
-}
 
 //ratio peut être std::hour std::minute std::second std::milli, std::micro, std::nano ...
 template<typename ratio, typename durationType>

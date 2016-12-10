@@ -5,15 +5,19 @@
 *ayant pour précision: la nanoseconde
 */
 
+#include "Counter.hpp"
+
 #ifndef TIMER_H_
 #define TIMER_H_
 
 #include <chrono>
+#include "time.hpp"
 
 class Timer
 {
 public:
   //fonctions amies
+  friend class Counter;
   
   //constructeurs
   Timer();
@@ -23,39 +27,39 @@ public:
   ~Timer();
   
   //accesseurs
-  unsigned long long getNano() const; //retournent la durée écoulée
-  unsigned long long getMicro() const;
-  unsigned long long getMilli() const;
-  unsigned long long getSec() const;
-  unsigned long long get() const; //retourne des secondes
-  unsigned long long getMin() const;
-  unsigned long long getHour() const;
-  std::chrono::nanoseconds getNanoDuration() const;
-  std::chrono::microseconds getMicroDuration() const;
-  std::chrono::milliseconds getMilliDuration() const;
-  std::chrono::seconds getSecDuration() const;
-  std::chrono::seconds getDuration() const; //retourne des secondes
-  std::chrono::minutes getMinDuration() const;
-  std::chrono::hours getHourDuration() const;
+  unsigned long long getNano() const; //retourne la durée écoulée en nanoseconde
+  std::chrono::nanoseconds getNanoDuration() const; //retourne la durée écoulée en nanoseconde dans une instance std::chrono::duration
+  
+template<typename ratio = std::second>
+unsigned long long get() const
+{
+  return (getNano() * ratio::den) / ((1000*1000*1000) * ratio::num); //on multiplie par 10^9 pour avoir des secondes, qui seront modifiées par le ratio std::ratio
+}
 
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> getBegin() const;
+
+template<typename unit = std::chrono::seconds>
+unit getDuration() const
+{
+  return std::chrono::duration_cast<unit>(getNanoDuration());
+}
+
 
   //méthodes
   void start();
   void pause();
   void stop();
   
-public:
-  //opérateurs méthodes ( =, (), [], -> )
+  //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
   Timer& operator=(Timer const &Other) = delete;
 
 protected:
   //attributs
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin;
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause;
-  std::chrono::nanoseconds _PausedTime; //duration
+  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin; //point du premier start() suivant le dernier stop()
+  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause; //point du dernier pause()
+  std::chrono::nanoseconds _PausedTime; //de type std::chrono::duration, stock le temps total passé en pause() depuis le dernier stop()
   bool _isPaused;
   bool _isStopped;
 };
+//opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
 
 #endif //TIMER_H_

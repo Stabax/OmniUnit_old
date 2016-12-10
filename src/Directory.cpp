@@ -56,13 +56,13 @@ void Directory::close()
   closedir(_dir);
 }
 
-const char* Directory::firstDir(const std::string path)
+std::string Directory::firstDir(const std::string path)
 {
   if(path.find_first_of("/\\") != std::string::npos)
   {
-    return (path.substr(0, path.find_first_of("/\\")).c_str());
+    return (path.substr(0, path.find_first_of("/\\")));
   }
-  return (nullptr);
+  return ("");
 }
 
 bool Directory::exist()
@@ -71,14 +71,13 @@ bool Directory::exist()
 }
 
 
-
 bool Directory::create(mode_t mode)
 {
   std::string path2(_path);
-  std::string toCreate(""); 
+  std::string toCreate; 
   while(path2.find_first_of("/\\") != std::string::npos)
   {
-    toCreate += firstDir(path2);
+    toCreate = toCreate + firstDir(path2);
     if(! exist(toCreate.c_str()))
       if(mkdir(toCreate.c_str(), mode) == -1)
         return false;

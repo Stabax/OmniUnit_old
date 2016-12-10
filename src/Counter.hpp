@@ -26,20 +26,22 @@ public:
   //méthodes statiques et swap
 
   //accesseurs
-  unsigned long long getNano() const; //retournent la durée restante
-  unsigned long long getMicro() const;
-  unsigned long long getMilli() const;
-  unsigned long long getSec() const;
-  unsigned long long get() const; //retourne des secondes
-  unsigned long long getMin() const;
-  unsigned long long getHour() const;
-  std::chrono::nanoseconds getNanoDuration() const;
-  std::chrono::microseconds getMicroDuration() const;
-  std::chrono::milliseconds getMilliDuration() const;
-  std::chrono::seconds getSecDuration() const;
-  std::chrono::seconds getDuration() const; //retourne des secondes
-  std::chrono::minutes getMinDuration() const;
-  std::chrono::hours getHourDuration() const;   
+  unsigned long long getNano() const; //retourne la durée restante en nanoseconde
+  std::chrono::nanoseconds getNanoDuration() const; //retourne la durée restante en nanoseconde dans une instance std::chrono::duration
+  
+template<typename ratio = std::second>
+unsigned long long get() const
+{
+  return (getNano() * ratio::den) / ((1000*1000*1000) * ratio::num);
+}
+
+
+template<typename unit = std::chrono::seconds>
+unit getDuration() const
+{
+  return std::chrono::duration_cast<unit>(getNanoDuration());
+} 
+
 
   //mutateurs
   template<typename ratio, typename durationType>

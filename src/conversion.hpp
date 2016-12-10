@@ -15,7 +15,7 @@ returnType toNumber(std::string txt)
   return value;
 }
 
-template <typename argType>
+template <typename argType> //ne fonctionne qu'avec les bases 8, 10 et 16
 std::string toBase(argType number, int base)
 {
   std::ostringstream converter;
