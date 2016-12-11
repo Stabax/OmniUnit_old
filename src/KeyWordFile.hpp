@@ -19,7 +19,8 @@ class KeyWordFile : public File
 
 public:
   //constructeurs
-  KeyWordFile(std::string const &path = "");
+  KeyWordFile();
+  KeyWordFile(std::string const &path);
 
   //destructeur
   virtual ~KeyWordFile();
@@ -39,12 +40,12 @@ public:
   void addKeyword(std::string const &keyword, std::string const &text = "", std::string const &parser = "=");
   void removeKeyword(std::string const &keyword, std::string const &parser = "=");
 
-  //opérateurs méthodes ( =, (), [], -> )
+  //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
 
 protected:
   //attributs
 };
 typedef KeyWordFile KWFile;
-//opérateurs non méthodes (+, ++, -, --, +=, -=, /=, *=, %=, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+//opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 #endif //KEYWORDFILE_H_

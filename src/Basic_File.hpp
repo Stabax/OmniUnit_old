@@ -35,7 +35,8 @@ public:
   };
   
   //constructeurs
-  Basic_File(std::string const &path = "");
+  Basic_File();
+  Basic_File(std::string const &path);
   Basic_File(Basic_File const &Other) = delete;
 
   //destructeur
@@ -49,7 +50,6 @@ public:
   state getState() const;
 
   //mutateurs
-  void setPath(std::string const &path);
 
   //méthodes
   protected:
@@ -61,7 +61,8 @@ public:
   std::string extractDirPath();
   void displayState() const; //méthode de debugging:
   void create(mode_t mode = m777); //(crée tout le chemin du fichier s'il n'existe pas) et crée le fichier
-  void open();
+  void open(); //ouvre (et crée s'il n'existe pas) le fichier
+  void open(std::string const& path);
   void close();
   void rename(std::string const &name);
   void move(std::string const &dir = "");

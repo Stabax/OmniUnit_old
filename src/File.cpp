@@ -2,13 +2,21 @@
 
 #include "File.hpp"
 
+
+File::File() : Basic_File()
+{
+}
+
+
 File::File(std::string const &filePath) : Basic_File(filePath)
 {
 }
 
+
 File::~File()
 {
 }
+
 
 unsigned File::getLineCount()
 {
@@ -29,6 +37,7 @@ unsigned File::getLineCount()
   _state = state::close;
   throw(DException("close", "unsigned File::getLineCount()", __FILE__));
 }
+
 
 std::string File::readLine(unsigned const &line)
 {
@@ -101,6 +110,7 @@ std::vector<std::string> File::readLine(unsigned const &line, unsigned n)
     return (std::vector<std::string>(0));  
 }
 
+
 void File::removeLine(unsigned const &line, unsigned const &n)
 {
   clearState();
@@ -132,6 +142,7 @@ void File::removeLine(unsigned const &line, unsigned const &n)
     _state = state::close;
 }
 
+
 void File::write(std::string const &text, unsigned n)
 {
   clearState();
@@ -140,27 +151,18 @@ void File::write(std::string const &text, unsigned n)
     if(n == 0 || n > getLineCount())
       n = getLineCount() + 1;
     removeLine(n, getLineCount());
-    close();
-    //bloc artificiel pour supprimer WritableFile avant d'appeler open()
-    {
-      std::ofstream WritableFile(_path.c_str(), std::ios::app);
-      if(WritableFile)
-    	{
-    	  WritableFile.seekp(0, std::ios::beg);
-	      WritableFile << text << '\n';
-	      if(WritableFile.rdstate() == std::ios::goodbit)
-	        ;
-	      else
-	        _state = state::fail;
-      }
-      else
-        _state = state::fail;
-    }
-    open();
+    _file->clear();
+	  _file->seekp(0, std::ios::beg);
+    *_file << text << '\n';
+    if(_file->rdstate() == std::ios::goodbit)
+      ;
+    else
+      _state = state::fail;
   }
   else
     _state = state::close;
 }
+
 
 void File::write(std::vector<std::string> const &text, unsigned const &n)
 {
@@ -172,6 +174,7 @@ void File::write(std::vector<std::string> const &text, unsigned const &n)
     for(unsigned counter = 0; counter < textSize; counter++)
       write(text[counter], n + counter);
 }
+
 
 void File::insert(std::string const &text, unsigned const &n)
 {
@@ -195,12 +198,14 @@ void File::insert(std::string const &text, unsigned const &n)
     _state = state::close;
 }
 
+
 void File::insert(std::vector<std::string> const &text, unsigned const &n)
 {
   size_t textSize = text.size();
   for(unsigned counter = 0; counter < textSize; counter++)
     insert(text[counter], n + counter);
 }
+
 
 bool File::isSameContent(File &a)
 {
@@ -218,4 +223,3 @@ bool File::isSameContent(File &a)
   }
   return (true);
 }
-

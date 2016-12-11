@@ -2,16 +2,27 @@
 
 #include "Basic_File.hpp"
 
-Basic_File::Basic_File(std::string const &path) : Directory_Item(path), _file(nullptr), _state(state::good)
+
+Basic_File::Basic_File() : Directory_Item(""), _file(nullptr), _state(state::good)
 {
 }
 
+
+Basic_File::Basic_File(std::string const &path) : Directory_Item(path), _file(new std::fstream(_path.c_str(), std::ios_base::in | std::ios_base::out | std::ios_base::app)), _state(_file == nullptr ?state::fail : state::good)
+{
+}
+
+
 Basic_File::~Basic_File()
 {
-  _file->close();
-  delete _file;
-  _file = nullptr;
+  if(_file != nullptr)
+  {
+    _file->close();
+    delete _file;
+    _file = nullptr;
+  }
 }
+
 
 bool Basic_File::exist(std::string const &path)
 {
@@ -22,6 +33,7 @@ bool Basic_File::exist(std::string const &path)
     return false;
 }
 
+
 std::string Basic_File::extractDirPath(std::string const &path)
 {
   size_t slash = path.find_last_of("/");
@@ -31,24 +43,18 @@ std::string Basic_File::extractDirPath(std::string const &path)
     return (path.substr(0, slash));
 }
 
+
 Basic_File::state Basic_File::getState() const
 {
   return _state;
 }
 
-void Basic_File::setPath(std::string const &path)
-{
-  clearState();
-  if(_path == "")
-    _path = path;
-  else
-    _state = state::fail;
-}
 
 void Basic_File::clearState()
 {
   _state = state::good;
 }
+
 
 bool Basic_File::isOpen() const
 {
@@ -57,6 +63,7 @@ bool Basic_File::isOpen() const
   else
     return true;
 }
+
 
 bool Basic_File::exist()
 {
@@ -69,12 +76,14 @@ bool Basic_File::exist()
   throw(DException("no_path", "bool Basic_File::exist()", __FILE__));
 }
 
+
 bool Basic_File::isGood() const
 {
   if(_state == state::good)
     return true;
   return false;
 }
+
 
 std::string Basic_File::extractDirPath()
 {
@@ -86,6 +95,7 @@ std::string Basic_File::extractDirPath()
     throw(DException("no_path", "std::string Basic_File::extractDirPath()", __FILE__));
   }
 }
+
 
 void Basic_File::displayState() const
 {
@@ -103,6 +113,7 @@ void Basic_File::displayState() const
     std::cout<<"FAIL\n";
 }
 
+
 void Basic_File::create(mode_t mode)
 {
   clearState();
@@ -115,7 +126,7 @@ void Basic_File::create(mode_t mode)
         Directory Dir(extractDirPath().c_str());
         Dir.create(mode);
       }
-      std::ofstream tmpFile(_path.c_str());
+      std::fstream tmpFile(_path.c_str(), std::ios_base::out); //std::ios_base::out OU std::ios_base::trunc SEULS pour qu'un fichier soit créé
       if(tmpFile)
         ;
       else
@@ -128,6 +139,7 @@ void Basic_File::create(mode_t mode)
     _state = state::nopath;
 }
 
+
 void Basic_File::open()
 {
   clearState();
@@ -135,21 +147,19 @@ void Basic_File::open()
   {
     if(isPathSet())
 	  {
-	    if(exist())
+	    if(! exist())
+	      create();	
+	          
+      _file = new std::fstream(_path.c_str(), std::ios_base::in | std::ios_base::out | std::ios_base::app); //in et out pour pouvoir écrire et lire, app pour écrire à la fin par défaut
+      if(_file->rdstate() == std::fstream::goodbit)
+	      ;
+      else
 	    {
-	      _file = new std::fstream();
-	      _file->open(_path.c_str());
-	      if(_file->rdstate() == std::fstream::goodbit)
-		      ;
-	      else
-		    {
-		      _state = state::fail;
-		      delete _file;
-		      _file = nullptr;
-		    }
-	    }
-	    else
 	      _state = state::fail;
+	      delete _file;
+	      _file = nullptr;
+		    }
+		  
 	  }
     else
 	    _state = state::nopath;
@@ -157,6 +167,14 @@ void Basic_File::open()
   else
     _state = state::open;
 }
+
+
+void Basic_File::open(std::string const& path)
+{
+  setPath(path);
+  open();
+}
+
 
 void Basic_File::close()
 {
@@ -176,6 +194,7 @@ void Basic_File::close()
   else
     _state = state::close;
 }
+
 
 void Basic_File::rename(std::string const &name)
 {
@@ -208,6 +227,7 @@ void Basic_File::rename(std::string const &name)
   else
     _state = state::open;
 }
+
 
 void Basic_File::move(std::string const &dir)
 {
@@ -246,6 +266,7 @@ void Basic_File::move(std::string const &dir)
   else
     _state = state::open;
 }
+
 
 void Basic_File::remove()
 {

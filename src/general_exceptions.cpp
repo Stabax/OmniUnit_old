@@ -154,7 +154,7 @@ std::string Loaded_Exception::loadException(std::string const &path, std::string
 
 const char* Loaded_Exception::what() const noexcept
 {
-  return ("Exception : [" + _date + "] : " + _reason).c_str();
+  return ("[" + _date + "] : " + _reason).c_str();
 }
 
 
@@ -188,19 +188,19 @@ Detailed_Exception::~Detailed_Exception()
 
 void Detailed_Exception::printDetails() const noexcept
 {
-  std::cout << "Exception : [" << _date << "] : " << _reason << ", from function : " << _senderFunction << ", from file : " << _senderFile<< ".\n";
+  std::cout << "[" << _date << "] : " << _reason << ", from function : " << _senderFunction << ", from file : " << _senderFile<< ".\n";
 }
 
 
 const char* Detailed_Exception::Detailed_Exception::what() const noexcept
 {
-  return ("Exception : [" + _date + "] : " + _reason).c_str();
+  return ("[" + _date + "] : " + _reason).c_str();
 }
 
 
 void Detailed_Exception::Detailed_Exception::log() const noexcept
 {
-  std::string toLog("Exception : [" + _date + "] : " + _reason + ", from function : " + _senderFunction + ", from file : " + _senderFile + ".");
+  std::string toLog("[" + _date + "] : " + _reason + ", from function : " + _senderFunction + ", from file : " + _senderFile + ".");
   File Log(_logFilePath);
   if(! Log.exist())
     Log.create();
@@ -234,7 +234,7 @@ const char* Detailed_Loaded_Exception::what() const noexcept
 
 void Detailed_Exception::Detailed_Exception::log() const noexcept
 {
-  std::string toLog = "Exception : [" + _date + "] : " + _reason + ", from function : " + _senderFunction + ", from file : " + _senderLine + ".";
+  std::string toLog = "[" + _date + "] : " + _reason + ", from function : " + _senderFunction + ", from file : " + _senderLine + ".";
   File Log(_logFilePath);
   if(! Log.exist())
     Log.create();

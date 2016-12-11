@@ -31,7 +31,8 @@ class GroupedKeyWordFile : public KeyWordFile
 
 public:
   //constructeurs
-  GroupedKeyWordFile(std::string const &filePath = "");
+  GroupedKeyWordFile();
+  GroupedKeyWordFile(std::string const &filePath);
 
   //destructeur
   virtual ~GroupedKeyWordFile();
@@ -56,12 +57,12 @@ public:
   void addGroup(std::string const &name);
   void removeGroup(std::string const &name);
 
-//opérateurs méthodes ( =, (), [], -> )
+//opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
 
 protected:
   //attributs
 };
 typedef GroupedKeyWordFile GFile;
-//opérateurs non méthodes (+, ++, -, --, +=, -=, /=, *=, %=, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+//opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 #endif //GROUPEDKEYWORDFILE_H_

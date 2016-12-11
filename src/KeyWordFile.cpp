@@ -2,13 +2,21 @@
 
 #include "KeyWordFile.hpp"
 
+
+KeyWordFile::KeyWordFile() : File()
+{
+}
+
+
 KeyWordFile::KeyWordFile(std::string const &filePath) : File(filePath)
 {
 }
 
+
 KeyWordFile::~KeyWordFile()
 {
 }
+
 
 unsigned KeyWordFile::findKeyword(std::string const &keyword , std::string const &parser)
 {
@@ -37,12 +45,14 @@ unsigned KeyWordFile::findKeyword(std::string const &keyword , std::string const
   }
 }
 
+
 bool KeyWordFile::keywordExist(std::string const &keyword, std::string const &parser)
 {
   if(findKeyword(keyword, parser) != 0)
     return true;
   return false;
 }
+
 
 std::string KeyWordFile::readKeywordValue(std::string const &keyword, std::string const &parser)
 {
@@ -68,6 +78,7 @@ std::string KeyWordFile::readKeywordValue(std::string const &keyword, std::strin
   }
 }
 
+
 void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string const &text, std::string const &parser)
 {
   clearState();
@@ -87,14 +98,15 @@ void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string cons
     _state = state::close;
 }
 
+
 void KeyWordFile::addKeyword(std::string const &keyword, std::string const &text, std::string const &parser)
 {
   if(! keywordExist(keyword, parser))
     write(keyword + parser + text, 0);
 }
 
+
 void KeyWordFile::removeKeyword(std::string const &keyword, std::string const &parser)
 {
   removeLine(findKeyword(keyword, parser));
 }
-

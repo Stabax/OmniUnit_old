@@ -2,13 +2,21 @@
 
 #include "GroupedKeyWordFile.hpp"
 
+
+GroupedKeyWordFile::GroupedKeyWordFile() : KeyWordFile()
+{
+}
+
+
 GroupedKeyWordFile::GroupedKeyWordFile(std::string const &filePath) : KeyWordFile(filePath)
 {
 }
 
+
 GroupedKeyWordFile::~GroupedKeyWordFile()
 {
 }
+
 
 unsigned GroupedKeyWordFile::findBegGroup(std::string const &group)
 {
@@ -22,6 +30,7 @@ unsigned GroupedKeyWordFile::findBegGroup(std::string const &group)
     throw(DException("close", "unsigned GroupedKeyWordFile::findBegGroup(std::string const&)", __FILE__));
   }
 }
+
 
 unsigned GroupedKeyWordFile::findEndGroup(std::string const &group)
 {
@@ -47,12 +56,15 @@ unsigned GroupedKeyWordFile::findEndGroup(std::string const &group)
   }
 }
 
+
 bool GroupedKeyWordFile::groupExist(std::string const &group)
 {
   if(findBegGroup(group) != 0 && findEndGroup(group) != 0)
     return true;
   return false;
 }
+
+
 unsigned GroupedKeyWordFile::findGKeyword(std::string const &group, std::string const &keyword, std::string const &parser)
 {
   clearState();
@@ -84,15 +96,14 @@ unsigned GroupedKeyWordFile::findGKeyword(std::string const &group, std::string 
   }
 }
 
+
 bool GroupedKeyWordFile::gKeywordExist(std::string const &group, std::string const &keyword, std::string const &parser)
 {
-  if(groupExist(group))
-  {
-    if(findGKeyword(keyword, parser) != 0)
-      return true;
-  }
+  if(findGKeyword(group, keyword, parser) != 0)
+    return true;
   return false;
 }
+
   
 std::string GroupedKeyWordFile::readGKeywordValue(std::string const &group, std::string const &keyword, std::string const &parser)
 {
@@ -120,6 +131,7 @@ std::string GroupedKeyWordFile::readGKeywordValue(std::string const &group, std:
   }
 }
 
+
 void GroupedKeyWordFile::writeGKeywordValue(std::string const &group, std::string const &keyword, std::string const &text, std::string const &parser)
 {
   clearState();
@@ -138,16 +150,19 @@ void GroupedKeyWordFile::writeGKeywordValue(std::string const &group, std::strin
     _state = state::close;
 }
 
+
 void GroupedKeyWordFile::addGKeyword(std::string const &group, std::string const &keyword, std::string const &text, std::string const &parser)
 {
   if(! gKeywordExist(group, keyword, parser))
     insert(keyword + parser + text, findEndGroup(group));
 }
 
+
 void GroupedKeyWordFile::removeGKeyword(std::string const &group, std::string const &keyword, std::string const &parser)
 {
   removeLine(findGKeyword(group, keyword, parser));
 }
+
 
 void GroupedKeyWordFile::addGroup(std::string const &name)
 {
@@ -158,8 +173,8 @@ void GroupedKeyWordFile::addGroup(std::string const &name)
   }
 }
 
+
 void GroupedKeyWordFile::removeGroup(std::string const &name)
 {
   removeLine(findBegGroup(name), findEndGroup(name) - findBegGroup(name) + 1);
 }
-

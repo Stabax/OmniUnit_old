@@ -27,24 +27,23 @@ perror("mkdir");
 ////////////////////////////////////////
 
   GFile file;
-  file.setPath("dir1/dir2/hey");
-  file.displayState();
+  file.open("dir1/dir2/hey.txt");
   file.create(m777);
-  file.displayState();
-  file.rename("hoy");
-  file.displayState();
+  //file.rename("hoy");
   file.move("");
-  file.displayState();
-  std::cout<<file.getPath()<<'\n';
+  //std::cout<<file.getPath()<<'\n';
   
-  file.open();
+  //file.open();
+  //file.displayState();
   file.addGroup("mot1");
-  file.addKeyword("NTM");
+  file.displayState();
+  //file.addKeyword("NTM");
   file.addGKeyword("mot1", "yay");
-  std::cout<<file.findEndGroup("mot1")<<'\n';
+  file.displayState();
+  //std::cout<<file.findEndGroup("mot1")<<'\n';
   file.close();
 
-  std::cout<<BFile::extractDirPath("starfullah/yolo/t.txt")<<'\n';
+  //std::cout<<BFile::extractDirPath("starfullah/yolo/t.txt")<<'\n';
 
 ////////////////////////////////////////
 /*

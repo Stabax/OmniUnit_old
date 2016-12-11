@@ -79,11 +79,11 @@ std::string Date::dateTime(location const& type) noexcept
   
   try
   {
-    toReturn = (date(type) + " - " + time(type));
+    toReturn = (date(type) + "-" + time(type));
   }
   catch(std::string const& except)
   {
-    toReturn = "?/?/? - ?:?:?";
+    toReturn = "?/?/?-?:?:?";
   }
   //on gère l'exception ici pour pas que cette fonction puisse elle même en envoyer
   //car cette fonction est utilisée dans les classes d'exceptions
