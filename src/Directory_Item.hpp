@@ -38,7 +38,7 @@ public:
   virtual ~Directory_Item();
 
   //méthodes statiques et swap
-  static bool exist(std::string const &path);
+  static std::string extractDirPath(std::string const &path);
 
   //accesseurs
   std::string getPath() const;
@@ -47,20 +47,19 @@ public:
   void setPath(std::string const& path);
 
   //méthodes
-  void load();
-  void close();
-  bool isOpen() const;
+  virtual bool exist() const = 0;
+  virtual bool isOpen() const = 0;
   bool isPathSet() const;
-  bool exist() const;
-  void remove();
+  void remove() const; //A IMPLEMENTER
+  std::string extractDirPath() const;
 
-  //opérateurs méthodes ( =, (), [], -> )
+  //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
   Directory_Item& operator=(Directory_Item const& Obj) = delete;
 
 protected:
   //attributs
   std::string _path;
 };
-//opérateurs non méthodes (+, ++, -, --, +=, -=, /=, *=, %=, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+//opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 #endif //DIRECTORY_ITEM_H_

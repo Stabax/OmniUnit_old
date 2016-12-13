@@ -44,10 +44,13 @@ public:
 
   //méthodes statiques
   static bool exist(std::string const &path);
-  static std::string extractDirPath(std::string const &path);
+  static bool create(std::string const& name, mode_t mode);
+  static bool createAll(std::string const& name, mode_t mode);
 
   //accesseurs
+  std::string getStateStr() const;
   state getState() const;
+  int rdstate() const;
 
   //mutateurs
 
@@ -55,12 +58,11 @@ public:
   protected:
   void clearState();
   public:
-  bool isOpen() const;
-  bool exist();
+  virtual bool exist() const;
+  virtual bool isOpen() const;
   bool isGood() const;
-  std::string extractDirPath();
-  void displayState() const; //méthode de debugging:
-  void create(mode_t mode = m777); //(crée tout le chemin du fichier s'il n'existe pas) et crée le fichier
+  bool create(mode_t mode = m777); //(crée tout le chemin du fichier s'il n'existe pas) et crée le fichier
+  bool createAll(mode_t mode = m777);
   void open(); //ouvre (et crée s'il n'existe pas) le fichier
   void open(std::string const& path);
   void close();

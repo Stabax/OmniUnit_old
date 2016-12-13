@@ -25,7 +25,7 @@ perror("mkdir");
     std::cout<< vec2[i] << " --> " << vec[i]<<'\n';
 */ 
 ////////////////////////////////////////
-
+/*
   GFile file;
   file.open("dir1/dir2/hey.txt");
   file.create(m777);
@@ -44,7 +44,7 @@ perror("mkdir");
   file.close();
 
   //std::cout<<BFile::extractDirPath("starfullah/yolo/t.txt")<<'\n';
-
+*/
 ////////////////////////////////////////
 /*
   unsigned var;
@@ -90,7 +90,7 @@ perror("mkdir");
 }
 catch(Detailed_Loaded_Exception const &e)
 {
-  std::cout<<"Exception: "<<e.what() <<", at function : "<< e.getFunction()<< ", at file : "<< e.getFile()<<'\n';
+  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getFunction()<< ", at file : "<< e.getFile()<<'\n';
 }
 catch(Detailed_Exception const &e)
 {
@@ -98,7 +98,7 @@ catch(Detailed_Exception const &e)
 }
 catch(Loaded_Exception const &e)
 {
-  std::cout<<"Exception: "<<e.what()<<'\n';
+  std::cout<<"Exception : "<<e.what()<<'\n';
 }
 catch(Failure const &e)
 {
@@ -106,7 +106,7 @@ catch(Failure const &e)
 }
 catch(std::exception const &e)
 {
-  std::cout<<"Exception: "<<e.what()<<'\n';
+  std::cout<<"Exception : "<<e.what()<<'\n';
 }
 catch(std::string const &e)
 {

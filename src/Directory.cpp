@@ -2,9 +2,11 @@
 
 #include "Directory.hpp"
 
+
 Directory::Directory(std::string const& path) : Directory_Item(path), _dir(nullptr)
 {
 }
+
 
 Directory::~Directory()
 {
@@ -12,7 +14,8 @@ Directory::~Directory()
   _dir = nullptr;
 }
 
-bool Directory::exist(std::string path)
+
+bool Directory::exist(std::string const& path)
 {
   bool exist;
   const char* currentDir = getDirPath();
@@ -22,8 +25,9 @@ bool Directory::exist(std::string path)
     exist = false;
   if(chdir(currentDir) == 0)
     return (exist);
-  throw (std::string ("Unable to go to the main working directory: bool Directory::exist()."));
+  throw (std::string ("Unable to go back to the main working directory: bool Directory::exist()."));
 }
+
 
 char* Directory::getDirPath()
 {
@@ -45,18 +49,8 @@ char* Directory::getDirPath()
 
 }
 
-void Directory::open()
-{
-  if(isPathSet() && exist())
-    _dir = opendir(_path.c_str());
-}
 
-void Directory::close()
-{
-  closedir(_dir);
-}
-
-std::string Directory::firstDir(const std::string path)
+std::string Directory::firstDir(std::string const& path)
 {
   if(path.find_first_of("/\\") != std::string::npos)
   {
@@ -65,29 +59,74 @@ std::string Directory::firstDir(const std::string path)
   return ("");
 }
 
-bool Directory::exist()
+
+bool Directory::create(std::string const& name, mode_t mode)
+{
+  mode += 0; //permet de compiler sous windows
+  
+  if(mkdir(name.c_str(), mode) == -1)
+    return false;
+  return false;
+}
+
+
+bool Directory::createAll(std::string const& name, mode_t mode)
+{
+  mode += 0; //permet de compiler sous windows
+  
+  std::string path2(name);
+  std::string toCreate = ""; 
+  while(path2.find_first_of("/\\") != std::string::npos)
+  {
+    toCreate += firstDir(path2);
+    if(! exist(toCreate))
+      if(! create(toCreate, mode))
+        return false;
+    path2 = path2.substr(path2.find_first_of("/\\") + 1, path2.size());
+    toCreate += '/';
+  }
+  return create(name, mode);
+}
+
+
+bool Directory::exist() const
 {
   return (exist(_path));
 }
 
 
-bool Directory::create(mode_t mode)
+bool Directory::isOpen() const
 {
-  std::string path2(_path);
-  std::string toCreate; 
-  while(path2.find_first_of("/\\") != std::string::npos)
-  {
-    toCreate = toCreate + firstDir(path2);
-    if(! exist(toCreate.c_str()))
-      if(mkdir(toCreate.c_str(), mode) == -1)
-        return false;
-    path2 = path2.substr(path2.find_first_of("/\\") + 1, path2.size());
-    toCreate += '/';
-  }
-  mkdir(_path.c_str(), mode);
-  mode += 0; //permet de compiler sous windows
+  if(_dir == nullptr)
+    return false;
   return true;
 }
+
+
+void Directory::open()
+{
+  if(isPathSet() && exist())
+    _dir = opendir(_path.c_str());
+}
+
+
+void Directory::close()
+{
+  closedir(_dir);
+}
+
+
+bool Directory::create(mode_t mode)
+{
+ return create(_path, mode);
+}
+
+
+bool Directory::createAll(mode_t mode)
+{
+  return createAll(_path, mode);
+}
+
 
 std::vector<std::string> Directory::getContent()
 {
@@ -100,6 +139,7 @@ std::vector<std::string> Directory::getContent()
 
   return content;
 }
+
 
 std::vector<long> Directory::getId()
 {
