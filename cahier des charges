@@ -1,5 +1,12 @@
-utiliser errno dans Basic_File et ses héritages (au lieu de _state ?)
 changer toutes les boucles par des std::transform, std::swap, for(type &var : tableau) ....... optimisation ++
-dans Loaded_Exception, changer les std::string path en std::PATH path (et partout ailleur dans le programme)
-dans loaded exception, ajouter les arguments de path de fichier de log dans les constructeur
+partout dans le programme, changer les std::string path en std::PATH path (C++2017)
 implémenter remove dans directory.cpp
+mettre une option dans les Files pour indiquer si on log automatiquement les erreurs (et les afficher ?)
+les groupes dans GKWFile devraient se fermer par }groupname
+gérer les erreurs de permission
+transformer tout les "mode_t" en "mode_t const&"
+chmod ne marche pas dans Basic_File::create
+dans les files, transformer les vector en un type plus général (ou plus adapté) ?
+ajouter le niveau de permission mod_t en attribut du File (du directory item ??)
+move() rename() et remove() devraient être dans directory_item ?
+implémenter directory (on peut rien faire pour le moment a part créer des repertoires ...)

@@ -1,6 +1,7 @@
 //Directory_Item.cpp
 
 #include "Directory_Item.hpp"
+#include "general_exceptions.hpp"
 
 
 Directory_Item::Directory_Item(std::string const& path) : _path(path)
@@ -37,12 +38,14 @@ std::string Directory_Item::getPath() const
 }
 
 
-void Directory_Item::setPath(std::string const& path)
+bool Directory_Item::setPath(std::string const& path)
 {
   if(! isOpen())
+  {
     _path = path;
-  else
-    throw Detailed_Exception("Cannot change path while entity is open.", "void Directory_Item::setPath(std::string const&)", __FILE__);
+    return true;
+  }
+  return false;
 }
 
 
@@ -50,9 +53,6 @@ std::string Directory_Item::extractDirPath() const
 {
   if(isPathSet())
     return extractDirPath(_path);
-  else
-  {
-    throw(DException("no_path", "std::string Basic_File::extractDirPath()", __FILE__));
-  }
+  return "";
 }
 

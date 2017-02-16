@@ -1,7 +1,11 @@
 CC = g++
 
-CXXFLAGS = -std=c++11 -pthread -Wl,--no-as-needed -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-qual -Wcast-align -Wfloat-equal -Woverloaded-virtual -Wconversion -Wwrite-strings -Weffc++ -Wswitch-default -Wundef -Wunused -Wuninitialized -Werror -Os -s -O2 -flto -march=native
-# -pthread -Wl,--no-as-needed sert à activer le multithreading
+CXXFLAGS = -std=c++11 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual  -Weffc++ -Wswitch-default -Werror -s -O2 -Os -Wl,--no-as-needed
+
+# -Wunreachable-code ==> warning si un bout de code n'est jamais exétuté
+#-Wdisabled-optimization ===> warning si le compilateur n'a pas réussi a optimisé un bout de code trop compliqué
+#-m8-bit -m16-bit -m32-bit ===> l'alignement des variables se fait sur 8, 16 ou 32 bits (32 par défaut)
+#-flto ===> supprime les erreurs de vtable quand des méthodes virtuelles sont déclarées(.h) mais non implémentées(.cpp) (vtable = VMT = virtual method table)
 
 SFML = -lsfml-system -lsfml-window -lsfml-graphics -lsfml-network -lsfml-audio
 
@@ -24,7 +28,9 @@ SRCS =  $(SRCDIR)/main.cpp \
 	$(SRCDIR)/KeyWordFile.cpp  		\
 	$(SRCDIR)/GroupedKeyWordFile.cpp 	\
   $(SRCDIR)/Hasher.cpp  \
-  $(SRCDIR)/Error.cpp
+  $(SRCDIR)/Error.cpp \
+  $(SRCDIR)/Loggable.cpp \
+  $(SRCDIR)/log_exceptions.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

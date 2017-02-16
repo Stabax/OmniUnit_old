@@ -33,12 +33,12 @@ public:
 
   //méthodes
   //parser représente les caratères qui séparent le KeyWord et la valaur qui lui est associée
-  unsigned findKeyword(std::string const &keyword, std::string const &parser = "=");
-  bool keywordExist(std::string const &keyword, std::string const &parser = "=");
-  std::string readKeywordValue(std::string const &keyword, std::string const &parser = "=");
-  void writeKeywordValue(std::string const &keyword, std::string const &text, std::string const &parser = "=");
-  void addKeyword(std::string const &keyword, std::string const &text = "", std::string const &parser = "=");
-  void removeKeyword(std::string const &keyword, std::string const &parser = "=");
+  unsigned findKeyword(std::string const &keyword, char const &parser = '=');
+  bool keywordExist(std::string const &keyword, char const &parser = '=');
+  std::string readKeywordValue(std::string const &keyword, char const &parser = '=');
+  void writeKeywordValue(std::string const &keyword, std::string const &text, char const &parser = '=');
+  void addKeyword(std::string const &keyword, std::string const &text = "", char const &parser = '=');
+  void removeKeyword(std::string const &keyword, char const &parser = '=');
 
   //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
 

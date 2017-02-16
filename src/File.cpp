@@ -1,6 +1,7 @@
 //File.cpp
 
 #include "File.hpp"
+#include "general_exceptions.hpp"
 
 
 File::File() : Basic_File()
@@ -20,7 +21,6 @@ File::~File()
 
 unsigned File::getLineCount()
 {
-  clearState();
   if(isOpen())
   {
     _file->clear();
@@ -32,16 +32,16 @@ unsigned File::getLineCount()
       std::getline(*_file, line);
       lineCount++;
     }
-    return (lineCount - 1);
+    if(lineCount == 1 && line == "")
+      lineCount--;
+    return (lineCount);
   }
-  _state = state::close;
-  throw(DException("close", "unsigned File::getLineCount()", __FILE__));
+  throw(DException("File -> " + _path + " is close.", "unsigned File::getLineCount()", __FILE__));
 }
 
 
 std::string File::readLine(unsigned const &line)
 {
-  clearState();
   if(line != 0)
   {
     if(isOpen())
@@ -54,66 +54,50 @@ std::string File::readLine(unsigned const &line)
 	    return (text);
 	  }
     else
-    {
-	    _state = state::close;
-	    throw(DException("close", "std::string File::readLine(unsigned const&)", __FILE__));
-	  }
+	    throw(DException("File -> " + _path + " is close.", "std::string File::readLine(unsigned const&)", __FILE__));
   }
   else
-  {
-    _state = state::badarg;
-    throw(DException("bad_arg", "std::string File::readLine(unsigned const&)", __FILE__));
-  }
+    throw(DException("Bad argument : line 0 doesn't exist.", "std::string File::readLine(unsigned const&)", __FILE__));
 }
 
 
 std::vector<std::string> File::readLine(unsigned const &line, unsigned n)
 {
-  clearState();
+  std::vector<std::string> text(0);
   if(getLineCount() >= line)
   {
-    if(line != 0)
+    if(isOpen())
     {
-      if(isOpen())
+      if(n == 0 || n >= getLineCount())
+        n = getLineCount() - line + 1;
+      _file->clear();
+      _file->seekg(0, std::ios::beg);
+      std::string tmpLine;
+      for(unsigned ligne = 1; ligne <= line; ligne++)
       {
-        if(n == 0 || n >= getLineCount())
-          n = getLineCount() - line + 1;
-        std::vector<std::string> text(n);
-        _file->clear();
-        _file->seekg(0, std::ios::beg);
-        std::string tmpLine;
-        for(unsigned ligne = 1; ligne <= line; ligne++)
+        std::getline(*_file, tmpLine);
+        if(ligne == line)
         {
-          std::getline(*_file, tmpLine);
-          if(ligne == line)
+          text.push_back(tmpLine);
+          for(unsigned ligne2 = 1; ligne2 < n; ligne2++)
           {
-            text[0] = tmpLine;
-            for(unsigned ligne2 = 1; ligne2 < n; ligne2++)
-	            std::getline(*_file, text[ligne2]);
+            std::getline(*_file, tmpLine);
+            text.push_back(tmpLine);
           }
         }
-        return (text);
       }
-      else
-      {
-        _state = state::close;
-        throw(DException("close", "std::vector<std::string> File::readLine(unsigned const&, unsigned)", __FILE__));
-      }
+      return (text);
     }
     else
-    {
-      _state = state::badarg;
-      throw(DException("bad_arg", "std::vector<std::string> File::readLine(unsigned const&, unsigned)", __FILE__));
-    }
+      throw(DException("File -> " + _path + " is close.", "std::vector<std::string> File::readLine(unsigned const&, unsigned)", __FILE__));
   }
   else
-    return (std::vector<std::string>(0));  
+    return text;  
 }
 
 
 void File::removeLine(unsigned const &line, unsigned const &n)
 {
-  clearState();
   if(isOpen())
   {
     if(line != 0)
@@ -123,44 +107,29 @@ void File::removeLine(unsigned const &line, unsigned const &n)
 	      std::vector<std::string> fileContent = readLine(1, getLineCount());
 	      close();
 	      remove();
-	      create();
+	      create(); //IL FAUT TROUVER UN MOYEN DE RECUPERER MODE_T DU FICHIER POUR LE RECREER AVEC LES MEMES DROITS 
 	      open();
 	      size_t fileSize = fileContent.size();
 	      for(unsigned counter = 1; counter <= fileSize; counter++)
-	      {
-	        if(counter >= line && counter < line + n)
-		        ;
-	        else
+	        if(counter < line || counter >= line + n)
 		        *_file << fileContent[counter - 1] << '\n';
-	      }
 	    }
 	  }
-    else
-	  _state = state::badarg;
   }
-  else
-    _state = state::close;
 }
 
 
 void File::write(std::string const &text, unsigned n)
 {
-  clearState();
   if(isOpen())
   {
     if(n == 0 || n > getLineCount())
       n = getLineCount() + 1;
     removeLine(n, getLineCount());
     _file->clear();
-	  _file->seekp(0, std::ios::beg);
+	  _file->seekp(0, std::ios::end);
     *_file << text << '\n';
-    if(_file->rdstate() == std::ios::goodbit)
-      ;
-    else
-      _state = state::fail;
   }
-  else
-    _state = state::close;
 }
 
 
@@ -178,7 +147,6 @@ void File::write(std::vector<std::string> const &text, unsigned const &n)
 
 void File::insert(std::string const &text, unsigned const &n)
 {
-  clearState();
   if(isOpen())
   {
     if(getLineCount() == 0)
@@ -191,11 +159,7 @@ void File::insert(std::string const &text, unsigned const &n)
 	    write(text, n);
 	    write(fileContent, 0);
 	  }
-    else
-	    _state = state::badarg;
   }
-  else
-    _state = state::close;
 }
 
 

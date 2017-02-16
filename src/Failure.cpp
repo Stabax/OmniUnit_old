@@ -5,7 +5,7 @@
 
 //////////////////////////////////////////////////////////////////
 
-Failure::Failure(std::string const &reason, std::string const &path) noexcept : _reason(reason), _logFilePath(path), _date(Date::dateTime())
+Failure::Failure(std::string const &reason) noexcept : _reason(reason), _date(Date::dateTime())
 {
 }
 
@@ -15,27 +15,21 @@ Failure::~Failure()
 }
 
 
-void Failure::setLogFilePath(std::string const& path) noexcept
+std::string Failure::getReason() const noexcept
 {
-  _logFilePath = path;
+  return _reason;
 }
 
 
-const char* Failure::getReason() const noexcept
+std::string Failure::getDate() const noexcept
 {
-  return _reason.c_str();
-}
-
-
-const char* Failure::getDate() const noexcept
-{
-  return _date.c_str();
+  return _date;
 }
 
 
 //////////////////////////////////////////////////////////////////
 
-Detailed_Failure::Detailed_Failure(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const &path) noexcept : Failure(reason, path), _senderFunction(senderFunction), _senderFile(senderFile)
+Detailed_Failure::Detailed_Failure(std::string const &reason, std::string const &senderFunction, std::string const &senderFile) noexcept : Failure(reason), _senderFunction(senderFunction), _senderFile(senderFile)
 {
 }
 
@@ -45,13 +39,13 @@ Detailed_Failure::~Detailed_Failure()
 }
 
 
-const char* Detailed_Failure::getFunction() const noexcept
+std::string Detailed_Failure::getSenderFunction() const noexcept
 {
-  return _senderFunction.c_str();
+  return _senderFunction;
 }
 
 
-const char* Detailed_Failure::getFile() const noexcept
+std::string Detailed_Failure::getSenderFile() const noexcept
 {
-  return _senderFile.c_str();
+  return _senderFile;
 }

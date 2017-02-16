@@ -52,10 +52,7 @@ char* Directory::getDirPath()
 
 std::string Directory::firstDir(std::string const& path)
 {
-  if(path.find_first_of("/\\") != std::string::npos)
-  {
     return (path.substr(0, path.find_first_of("/\\")));
-  }
   return ("");
 }
 
@@ -66,7 +63,7 @@ bool Directory::create(std::string const& name, mode_t mode)
   
   if(mkdir(name.c_str(), mode) == -1)
     return false;
-  return false;
+  return true;
 }
 
 
@@ -152,4 +149,10 @@ std::vector<long> Directory::getId()
   }
   
   return id;
+}
+
+
+bool Directory::remove() const
+{
+  return false;
 }

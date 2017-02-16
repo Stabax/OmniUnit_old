@@ -7,8 +7,8 @@
 *(détaillants ou non les occurences)
 */
 
-#ifndef FAILURE_H_
-#define FAILURE_H_
+#ifndef FAILURE_H
+#define FAILURE_H
 
 #include "time.hpp"
 
@@ -19,7 +19,7 @@ class Failure
 
 public:
   //constructeurs
-  Failure(std::string const &reason, std::string const &path) noexcept;
+  Failure(std::string const &reason) noexcept;
 
   //destructeur
   virtual ~Failure();
@@ -27,27 +27,24 @@ public:
   //méthodes statiques et swap
   
   //méthodes
-  virtual void log() const noexcept = 0; //log la failure dans un fichier
-                                         //virtuelle pure car cette classe n'a pas a être instanciée
+  
   //mutateurs
-  void setLogFilePath(std::string const& path) noexcept;
 
   //accesseurs
-  const char* getReason() const noexcept;
-  const char* getDate() const noexcept;
+   std::string getReason() const noexcept;
+   std::string getDate() const noexcept;
 
   //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
   
 protected:
   //attributs
   std::string _reason; //quelle est le problème ?
-  std::string _logFilePath; //dans quel fichier ce problème sera loggé ?
   std::string _date; //quand le problème est il survenu ?
 };
 //opérateurs non méthodes (+, ++, -, --, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 
-
+////////////////////////////////////////////////////////////////////////////////////
 
 
 class Detailed_Failure : virtual public Failure
@@ -56,7 +53,7 @@ class Detailed_Failure : virtual public Failure
 
 public:
   //constructeurs
-  Detailed_Failure(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const &path) noexcept;
+  Detailed_Failure(std::string const &reason, std::string const &senderFunction, std::string const &senderFile) noexcept;
 
   //destructeur
   virtual ~Detailed_Failure();
@@ -64,13 +61,12 @@ public:
   //méthodes statiques et swap
   
   //méthodes
-  virtual void printDetails() const noexcept = 0; //virtuelle pure car cette classe n'a pas a être instanciée
 
   //mutateurs
 
   //accesseurs
-  const char* getFunction() const noexcept;
-  const char* getFile() const noexcept;
+  std::string getSenderFunction() const noexcept;
+  std::string getSenderFile() const noexcept;
 
   //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
 
@@ -82,4 +78,4 @@ protected:
 //opérateurs non méthodes (+, ++, -, --, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 typedef Detailed_Failure DFailure;
 
-#endif //FAILURE_H_
+#endif //FAILURE_H

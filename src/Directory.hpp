@@ -34,14 +34,14 @@ public:
   Directory(Directory const &Other) = delete;
 
   //destructeur
-  ~Directory();
+  virtual ~Directory();
 
   //méthodes statiques et swap
   static bool exist(std::string const& path); //retourne false si le répertoire n'existe pas ou que les droits ne permettent pas de s'y déplacer
   static char* getDirPath(); //retourne le chemin absolu du répertoire courrant
   static std::string firstDir(std::string const& path); //retourne le nom du répertoire le plus proche de la racine d'un path
-  static bool create(std::string const& path, mode_t mode);
-  static bool createAll(std::string const& name, mode_t mode);
+  static bool create(std::string const& path, mode_t mode = m755);
+  static bool createAll(std::string const& name, mode_t mode = m755);
 
   //accesseurs
 
@@ -53,11 +53,11 @@ public:
   std::string extractDirPath() const = delete;
   void open();
   void close();
-  bool create(mode_t mode);
-  bool createAll(mode_t mode);
+  bool create(mode_t mode = m755);
+  bool createAll(mode_t mode = m755);
   std::vector<std::string> getContent();
   std::vector<long> getId();
-  bool remove();
+  virtual bool remove() const;  //A IMPLEMENTER
 
   //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
   Directory& operator=(Directory const &Other) = delete; 

@@ -9,7 +9,6 @@
 #ifndef BASIC_FILE_H_
 #define BASIC_FILE_H_
 
-#include "general_exceptions.hpp"
 #include "Directory.hpp"
 #include <fstream>
 #include <iostream>
@@ -18,25 +17,10 @@ class Basic_File : public Directory_Item
 {
   //fonctions amies
 
-public:
-  enum class state
-  {
-    good,
-    //le fichier est fermé... erreur
-    close,
-    //le fichier est ouvert ... erreur
-    open,
-    //mauvais argument envoyé
-    badarg,
-    //le fichier n'a pas de chemin spécifié
-    nopath,
-    //autre erreur, la reqête n'a pas aboutie
-    fail,
-  };
-  
+public:  
   //constructeurs
   Basic_File();
-  Basic_File(std::string const &path);
+  Basic_File(std::string const &path, mode_t mode = m755);
   Basic_File(Basic_File const &Other) = delete;
 
   //destructeur
@@ -44,44 +28,39 @@ public:
 
   //méthodes statiques
   static bool exist(std::string const &path);
-  static bool create(std::string const& name, mode_t mode);
-  static bool createAll(std::string const& name, mode_t mode);
+  static bool create(std::string const& name, mode_t  mode = m755);
+  static bool createAll(std::string const& name, mode_t mode = m777);
+  protected:
+  static std::fstream* newFile(std::string const& path, mode_t mode = m755); //permet d'initialiser l'attribut _file dans la liste d'initialisation du constructeur (create fait un chmod, indispensable)
+  public:
 
   //accesseurs
+  int getState() const;
   std::string getStateStr() const;
-  state getState() const;
-  int rdstate() const;
 
   //mutateurs
 
   //méthodes
-  protected:
-  void clearState();
-  public:
   virtual bool exist() const;
   virtual bool isOpen() const;
-  bool isGood() const;
-  bool create(mode_t mode = m777); //(crée tout le chemin du fichier s'il n'existe pas) et crée le fichier
-  bool createAll(mode_t mode = m777);
-  void open(); //ouvre (et crée s'il n'existe pas) le fichier
-  void open(std::string const& path);
-  void close();
-  void rename(std::string const &name);
-  void move(std::string const &dir = "");
-  void remove();
+  bool create(mode_t mode = m755) const; //(crée tout le chemin du fichier s'il n'existe pas) et crée le fichier
+  bool createAll(mode_t mode = m755) const;
+  bool open(mode_t mode = m777); //ouvre (et crée s'il n'existe pas) le fichier
+  bool open(std::string const& path, mode_t mode = m755);
+  bool close();
+  bool rename(std::string const &name);
+  bool move(std::string const &dir = "");
+  virtual bool remove() const;
 
-  //opérateurs méthodes ( =, (), [], -> )
+  //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
   Basic_File& operator=(Basic_File const &Other) = delete; 
 
 protected:
   //attributs
   std::fstream *_file;
-  state _state;
 };
-
-typedef Basic_File::state fstate;
 typedef Basic_File BFile;
 
-//opérateurs non méthodes (+, ++, -, --, +=, -=, /=, *=, %=, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+//opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 #endif //BASIC_FILE_H_

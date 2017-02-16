@@ -1,6 +1,7 @@
 //KeyWordFile.cpp
 
 #include "KeyWordFile.hpp"
+#include "general_exceptions.hpp"
 
 
 KeyWordFile::KeyWordFile() : File()
@@ -18,9 +19,8 @@ KeyWordFile::~KeyWordFile()
 }
 
 
-unsigned KeyWordFile::findKeyword(std::string const &keyword , std::string const &parser)
+unsigned KeyWordFile::findKeyword(std::string const &keyword , char const &parser)
 {
-  clearState();
   if(isOpen())
   {
     _file->clear();
@@ -31,7 +31,7 @@ unsigned KeyWordFile::findKeyword(std::string const &keyword , std::string const
 	  {
 	    std::getline(*_file, text);
 	    line++;
-	    if(text.substr(0, keyword.length() + parser.length()) == keyword+parser)
+	    if(text.substr(0, keyword.length() + 1) == keyword+parser) //+1 pour le parser
 	    {
 	      return (line);
 	    }
@@ -39,14 +39,11 @@ unsigned KeyWordFile::findKeyword(std::string const &keyword , std::string const
 	  return (0);
   }
   else
-  {
-    _state = state::close;
-    throw(DException("close", "unsigned KeyWordFile::findKeyword(std::string const&, std::string const&)", __FILE__));
-  }
+    throw(DException("File -> " + _path + " is close.", "unsigned KeyWordFile::findKeyword(std::string const&, char const&)", __FILE__));
 }
 
 
-bool KeyWordFile::keywordExist(std::string const &keyword, std::string const &parser)
+bool KeyWordFile::keywordExist(std::string const &keyword, char const &parser)
 {
   if(findKeyword(keyword, parser) != 0)
     return true;
@@ -54,9 +51,8 @@ bool KeyWordFile::keywordExist(std::string const &keyword, std::string const &pa
 }
 
 
-std::string KeyWordFile::readKeywordValue(std::string const &keyword, std::string const &parser)
+std::string KeyWordFile::readKeywordValue(std::string const &keyword, char const &parser)
 {
-  clearState();
   if(isOpen())
   {
     unsigned line = findKeyword(keyword , parser);
@@ -66,22 +62,18 @@ std::string KeyWordFile::readKeywordValue(std::string const &keyword, std::strin
     if(line != 0)
     {
       text = readLine(line);
-      return (text.erase(0, keyword.length() + parser.length()));    
+      return (text.erase(0, keyword.length() + 1));    //+1 pour le parser
 	  }
 	  else
 	    return (std::string(""));
   }
   else
-  {
-    _state = state::close;
-    throw(DException("close", "std::string KeyWordFile::readKeywordValue(std::string const&, std::string const&)", __FILE__));
-  }
+    throw(DException("File -> " + _path + " is close.", "std::string KeyWordFile::readKeywordValue(std::string const&, char const&)", __FILE__));
 }
 
 
-void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string const &text, std::string const &parser)
+void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string const &text, char const &parser)
 {
-  clearState();
   if(isOpen())
   {
     _file->clear();
@@ -94,19 +86,17 @@ void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string cons
       write(fileContent, 0);
     }
   }
-  else
-    _state = state::close;
 }
 
 
-void KeyWordFile::addKeyword(std::string const &keyword, std::string const &text, std::string const &parser)
+void KeyWordFile::addKeyword(std::string const &keyword, std::string const &text, char const &parser)
 {
   if(! keywordExist(keyword, parser))
     write(keyword + parser + text, 0);
 }
 
 
-void KeyWordFile::removeKeyword(std::string const &keyword, std::string const &parser)
+void KeyWordFile::removeKeyword(std::string const &keyword, char const &parser)
 {
   removeLine(findKeyword(keyword, parser));
 }

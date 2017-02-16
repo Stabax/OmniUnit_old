@@ -12,7 +12,6 @@
 
 //#include <sys/stat.h>
 #include <string>
-#include "general_exceptions.hpp"
 
 /*les modes pour POSIX:
 *3 chiffres
@@ -44,13 +43,13 @@ public:
   std::string getPath() const;
 
   //mutateurs
-  void setPath(std::string const& path);
+  bool setPath(std::string const& path);
 
   //méthodes
   virtual bool exist() const = 0;
   virtual bool isOpen() const = 0;
   bool isPathSet() const;
-  void remove() const; //A IMPLEMENTER
+  virtual bool remove() const = 0;
   std::string extractDirPath() const;
 
   //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)

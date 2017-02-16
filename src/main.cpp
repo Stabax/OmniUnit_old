@@ -5,15 +5,17 @@
 
 int main()
 {
-
 try
 {
+  //RANDOM TEST
 /*
 Directory Dir("yolo/yata");
 std::cout << Dir.create(m777) << '\n';
 perror("mkdir");
 */
+
 ////////////////////////////////////////
+  //TEST DE DIRECTORY
 /*
   Directory Dir("../src");
   Dir.open();
@@ -24,38 +26,18 @@ perror("mkdir");
   for(unsigned int i = 0; i < vec.size(); i++)
     std::cout<< vec2[i] << " --> " << vec[i]<<'\n';
 */ 
-////////////////////////////////////////
-/*
-  GFile file;
-  file.open("dir1/dir2/hey.txt");
-  file.create(m777);
-  //file.rename("hoy");
-  file.move("");
-  //std::cout<<file.getPath()<<'\n';
-  
-  //file.open();
-  //file.displayState();
-  file.addGroup("mot1");
-  file.displayState();
-  //file.addKeyword("NTM");
-  file.addGKeyword("mot1", "yay");
-  file.displayState();
-  //std::cout<<file.findEndGroup("mot1")<<'\n';
-  file.close();
 
-  //std::cout<<BFile::extractDirPath("starfullah/yolo/t.txt")<<'\n';
-*/
 ////////////////////////////////////////
-/*
-  unsigned var;
-  std::cin>>var;
-  std::cout<<toBase(var, 8)<<'\n';
-*/
+  //TEST DES FILES
+  
+  //Directory::createAll("dir1/dir2");
+  GFile file("hey.txt");
+  
+  std::cout<<file.findGKeyword("hey", "YOLO", '.')<<'\n';
+
+
 ////////////////////////////////////////
-/*  
-  sleep<std::second>(8);
-*/
-////////////////////////////////////////
+  //TEST DE COUNTER
 /*
   Counter count;
   count.init<std::second>(8);
@@ -65,7 +47,9 @@ perror("mkdir");
     std::cout<< count.get() << '\n';
   }
 */
+
 ////////////////////////////////////////
+  //TEST DE TIMER
 /*
   Timer tim;
   //tim.pause();
@@ -76,7 +60,9 @@ perror("mkdir");
     std::cout<< tim.get<std::nano>() << '\n';
   }
 */
+
 ////////////////////////////////////////
+  //TEST DES DATES
 /*
   Date::setTimeLag(2);
   std::cout<<Date::time()<<'\n';
@@ -90,19 +76,15 @@ perror("mkdir");
 }
 catch(Detailed_Loaded_Exception const &e)
 {
-  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getFunction()<< ", at file : "<< e.getFile()<<'\n';
+  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getSenderFunction()<< ", at file : "<< e.getSenderFile()<<'\n';
 }
 catch(Detailed_Exception const &e)
 {
-  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getFunction()<< ", at file : "<< e.getFile()<<'\n';
+  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getSenderFunction()<< ", at file : "<< e.getSenderFile()<<'\n';
 }
 catch(Loaded_Exception const &e)
 {
   std::cout<<"Exception : "<<e.what()<<'\n';
-}
-catch(Failure const &e)
-{
-  std::cout<<"Exception : "<< e.getReason() <<'\n';
 }
 catch(std::exception const &e)
 {

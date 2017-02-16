@@ -48,12 +48,15 @@ public:
   unsigned findBegGroup(std::string const &group);
   unsigned findEndGroup(std::string const &group);
   bool groupExist(std::string const &group);
-  unsigned findGKeyword(std::string const &group, std::string const &keyword, std::string const &parser = "=");
-  bool gKeywordExist(std::string const &group, std::string const &keyword, std::string const &parser = "=");
-  std::string readGKeywordValue(std::string const &group, std::string const &keyword, std::string const &parser = "=");
-  void writeGKeywordValue(std::string const &group, std::string const &keyword, std::string const &text, std::string const &parser = "=");
-  void addGKeyword(std::string const &group, std::string const &keyword, std::string const &text = "", std::string const &parser = "=");
-  void removeGKeyword(std::string const &group, std::string const &keyword, std::string const &parser = "=");
+  
+  unsigned findGKeyword(std::string const &group, std::string const &keyword, char const &parser = '=');
+  bool gKeywordExist(std::string const &group, std::string const &keyword, char const &parser = '=');
+  
+  std::string readGKeywordValue(std::string const &group, std::string const &keyword, char const &parser = '=');
+  void writeGKeywordValue(std::string const &group, std::string const &keyword, std::string const &text, char const &parser = '=');
+  void addGKeyword(std::string const &group, std::string const &keyword, std::string const &text = "", char const &parser = '=');
+  void removeGKeyword(std::string const &group, std::string const &keyword, char const &parser = '=');
+  
   void addGroup(std::string const &name);
   void removeGroup(std::string const &name);
 
@@ -63,6 +66,7 @@ protected:
   //attributs
 };
 typedef GroupedKeyWordFile GFile;
+typedef GroupedKeyWordFile GKWFile;
 //opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 
 #endif //GROUPEDKEYWORDFILE_H_
