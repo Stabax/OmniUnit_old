@@ -16,21 +16,19 @@ BINDIR = bin
 SRCDIR = src
 
 SRCS =  $(SRCDIR)/main.cpp \
-  $(SRCDIR)/Counter.cpp \
-  $(SRCDIR)/Timer.cpp  \
-  $(SRCDIR)/time.cpp  \
-  $(SRCDIR)/Failure.cpp \
-  $(SRCDIR)/general_exceptions.cpp  \
   $(SRCDIR)/Directory_Item.cpp  \
   $(SRCDIR)/Directory.cpp  \
   $(SRCDIR)/Basic_File.cpp	\
 	$(SRCDIR)/File.cpp  		\
 	$(SRCDIR)/KeyWordFile.cpp  		\
 	$(SRCDIR)/GroupedKeyWordFile.cpp 	\
-  $(SRCDIR)/Hasher.cpp  \
+	$(SRCDIR)/time.cpp  \
+  $(SRCDIR)/Timer.cpp  \
+  $(SRCDIR)/Counter.cpp \
+  $(SRCDIR)/Loggable.cpp  \
   $(SRCDIR)/Error.cpp \
-  $(SRCDIR)/Loggable.cpp \
-  $(SRCDIR)/log_exceptions.cpp
+  $(SRCDIR)/Exception.cpp  \
+  $(SRCDIR)/Hasher.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

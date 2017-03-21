@@ -1,20 +1,37 @@
 //Basic_File.cpp
 
-#include "Basic_File.hpp"
-#include "general_exceptions.hpp"
+#include "Basic_File.hh"
+#include "Directory.hh"
 
 
-Basic_File::Basic_File() : Directory_Item(""), _file(nullptr)
+
+stb::File_Exception::File_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Read_Only::File_Read_Only(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Permission_Denied::File_Permission_Denied(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Unlinked::File_Unlinked(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Invalid_Argument::File_Invalid_Argument(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Exist::File_Exist(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Open::File_Open(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+
+
+
+
+mode_t stb::Basic_File::defaultMode = m755;
+
+
+stb::Basic_File::Basic_File(std::string const &path, mode_t mode) : Directory_Item(path), _file(newFile(_path, mode))
 {
 }
 
 
-Basic_File::Basic_File(std::string const &path, mode_t mode) : Directory_Item(path), _file(newFile(_path, mode))
-{
-}
-
-
-Basic_File::~Basic_File()
+stb::Basic_File::~Basic_File()
 {
   if(_file != nullptr)
   {
@@ -25,79 +42,136 @@ Basic_File::~Basic_File()
 }
 
 
-bool Basic_File::exist(std::string const &path)
+bool stb::Basic_File::exist(std::string const &path)
 {
-  std::fstream tmpFile(path.c_str());
-  if(tmpFile)
-    return true;
-  else
+  errno = 0;
+  std::ifstream tmpFile(path.c_str()); //ifstream permet de tester les fichiers même en read-only
+  
+  if(errno == ENOENT)
     return false;
+  else if(errno == EACCES)
+    throw File_Permission_Denied("stb::Basic_File::exist(std::string const&)", __FILE__);
+  else
+    return true;
 }
 
 
-bool Basic_File::create(std::string const& path, mode_t mode)
+void stb::Basic_File::create(std::string const& path, mode_t mode)
 {
   if(! exist(path))
   {
+    errno = 0;
     std::fstream tmpFile(path.c_str(), std::fstream::out | std::fstream::in | std::fstream::trunc);
-    if(tmpFile)
+    int err = errno;
+    
+    if(exist(path))
     {
       tmpFile.close();
       mode+=0;
       //_chmod(path.c_str(), mode);
-      return true;
+      //TESTER CHMOD
     }
-    return false;
-  }
-  return true;
+    else if(err == EROFS)
+      throw Directory_Read_Only("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+    else if(err == EACCES)
+      throw Directory_Permission_Denied("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+    else
+      throw File_Exception("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+  } 
+  else
+    throw File_Exist("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
 }
 
 
-bool Basic_File::createAll(std::string const& path, mode_t mode)
+void stb::Basic_File::createAll(std::string const& path, mode_t mode)
 {
   Directory::createAll(extractDirPath(path), mode);
-  return create(path, mode);
+  create(path, mode);
 }
 
 
-std::fstream* Basic_File::newFile(std::string const& path, mode_t mode)
+std::fstream* stb::Basic_File::newFile(std::string const& path, mode_t mode)
 {
-  if(create(path, mode))
-    return new std::fstream(path.c_str(), std::fstream::out | std::fstream::in); //on ne met ni ate ni trunc pour lire le fichier au début (ni app car ça ne va pas avec fstream, mais avec ofstream seulement)
-  throw DException("Unable to open file : " + path , "bool Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+  if(! exist(path))
+    create(path, mode);
+
+  errno = 0;
+  std::fstream* file = new std::fstream(path.c_str(), std::fstream::out | std::fstream::in); //on ne met ni ate ni trunc pour lire le fichier au début (ni app car ça ne va pas avec fstream, mais avec ofstream seulement)
+  if(file != nullptr)
+    return file;
+  else if(errno == EROFS)
+      throw File_Read_Only("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+  else if(errno == EACCES)
+    throw File_Permission_Denied("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+  else
+    throw File_Exception("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
 }
 
 
-int Basic_File::getState() const
+mode_t stb::Basic_File::getDefaultMode()
+{
+  return defaultMode;
+}
+
+
+void stb::Basic_File::setDefaultMode(mode_t mode)
+{
+  defaultMode = mode;
+}
+
+
+std::fstream::iostate stb::Basic_File::getState() const
 {
   return _file->rdstate();
 }
 
 
-std::string Basic_File::getStateStr() const
+std::string stb::Basic_File::getStateStr() const
 {
   if(_file->good())
-    return "no problem";
+    return "good";
   else if(_file->eof())
     return "end of file reached";
   else if(_file->bad())
     return "reading/writing error";
-  else if(_file->fail()) //on teste fail() seul en dernier car il peut être true pour plusieurs raison
+  else if(_file->fail()) //on teste fail() seul en dernier car il peut être true pour plusieurs raisons (dont quand eof() est vrai)
     return "Logical error on i/o operation";
   else
     return "unknown error";
 }
 
 
-bool Basic_File::exist() const
+bool stb::Basic_File::good() const
 {
-  if(isPathSet())
-    return(exist(_path));
-  return false;
+  return _file->good();
 }
 
 
-bool Basic_File::isOpen() const
+bool stb::Basic_File::eof() const
+{
+  return _file->eof();
+}
+
+
+bool stb::Basic_File::bad() const
+{
+  return _file->bad();
+}
+
+
+bool stb::Basic_File::fail() const
+{
+  return _file->fail();
+}
+    
+
+bool stb::Basic_File::exist() const
+{
+  return(exist(_path));
+}
+
+
+bool stb::Basic_File::isOpen() const
 {
   if(_file == nullptr || ! _file->is_open())
     return false;
@@ -106,51 +180,27 @@ bool Basic_File::isOpen() const
 }
 
 
-bool Basic_File::create(mode_t mode) const
+void stb::Basic_File::create(mode_t mode) const
 {
-  if(isPathSet())
-      return create(_path, mode);
-  return false;
+  create(_path, mode);
 }
 
 
-bool Basic_File::createAll(mode_t mode) const
+void stb::Basic_File::createAll(mode_t mode) const
 {
-  if(isPathSet())
-      return createAll(_path, mode);
-  return false;
+  createAll(_path, mode);
 }
 
 
-bool Basic_File::open(mode_t mode)
+void stb::Basic_File::open(mode_t mode)
 {
-  if(! isOpen())
-  {
-    if(isPathSet())
-	  {	      	          
-      _file = newFile(_path, mode); //in et out pour pouvoir écrire et lire, app pour écrire à la fin par défaut
-      if(! *_file)
-	    {
-        delete _file;
-        _file = nullptr;
-		  }
-		  else
-		    return true;	  
-	  }
-  }
-  return false;
+  if(! isOpen())  	          
+    _file = newFile(_path, mode);
+    //Pas de test a faire, newFile lève déjà des exceptions
 }
 
 
-bool Basic_File::open(std::string const& path, mode_t mode)
-{
-  if(setPath(path))
-    return open(mode);
-  return false;
-}
-
-
-bool Basic_File::close()
+void stb::Basic_File::close()
 {
   if(isOpen())
   {
@@ -160,72 +210,63 @@ bool Basic_File::close()
 	  {
 	    delete _file;
 	    _file = nullptr;
-	    return true;
 	  }
 	}
-	return false;
 }
 
 
-bool Basic_File::rename(std::string const &name)
+void stb::Basic_File::rename(std::string const& name)
 {
-  if(! isOpen())
+  if(isOpen())
   {
-    if(isPathSet())
+    if(name.find_first_of("/") == std::string::npos && name != "")
     {
-      if(name.find_first_of("/") == std::string::npos && name != "")
+      std::string dirPath = extractDirPath();
+      if(dirPath != "")
+        dirPath += '/';
+      if(exist() && ! exist(dirPath + name))
       {
-	      std::string dirPath = extractDirPath();
-	      if(dirPath != "")
-	        dirPath += '/';
-        if(exist() && ! exist(dirPath + name))
-	      {
-	        if(std::rename(_path.c_str(), (dirPath + name).c_str()) == 0)
-	        {
-	          _path = dirPath + name;
-	          return true;
-	        }
-	      }
+        if(std::rename(_path.c_str(), (dirPath + name).c_str()) == 0)
+        {
+          _path = dirPath + name;
+        }
       }
     }
+    else
+      throw File_Invalid_Argument("stb::Basic_File::rename(std::string const&)", __FILE__);
   }
-  return false;	        
+  else
+    throw File_Open("stb::Basic_File::rename(std::string const&)", __FILE__);
 }
 
 
-bool Basic_File::move(std::string const &dir)
+void stb::Basic_File::move(std::string const &dir)
 {
   if(! isOpen())
   {
-    if(isPathSet())
-	  {
-      if(dir.find_last_of("/") != dir.length() - 1)
-      {	      
-        std::string fileName(_path.substr(extractDirPath().length(), _path.length()));
-        if(exist() && ! exist(dir + '/' + fileName))
+    if(dir.find_last_of("/") != dir.length() - 1)
+    {	      
+      std::string fileName(_path.substr(extractDirPath().length(), _path.length()));
+      if(exist() && ! exist(dir + '/' + fileName))
+      {
+        if(std::rename(_path.c_str(), (dir + '/' + fileName).c_str()) == 0)
         {
-          if(std::rename(_path.c_str(), (dir + '/' + fileName).c_str()) == 0)
-          {
-            _path = dir + '/' + fileName;
-            return true;
-          }
+          _path = dir + '/' + fileName;
         }
-	    }    
-	  }
+      }
+    }    
   }
-  return false;
+  throw File_Open("stb::Basic_File::move(std::string const&)", __FILE__);
 }
 
 
-bool Basic_File::remove() const
+void stb::Basic_File::remove() const
 {
   if(! isOpen())
   {
-    if(isPathSet())
-	  {
-	    if(std::remove(_path.c_str()) == 0)
-	      return true;
-	  }
+    if(std::remove(_path.c_str()) == 0)
+    {}
   }
-  return false;
+  else
+    throw File_Open("stb::Basic_File::rename(std::string const&)", __FILE__);
 }

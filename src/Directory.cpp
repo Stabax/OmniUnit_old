@@ -1,21 +1,37 @@
 //Directory.cpp
 
-#include "Directory.hpp"
+#include "Directory.hh"
 
 
-Directory::Directory(std::string const& path) : Directory_Item(path), _dir(nullptr)
+stb::Directory_Exception::Directory_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
+
+stb::Directory_Path_Too_Long::Directory_Path_Too_Long(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
+
+stb::Directory_Permission_Denied::Directory_Permission_Denied(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
+
+stb::Directory_Unlinked::Directory_Unlinked(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
+
+stb::Directory_Unable_Access::Directory_Unable_Access(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
+
+stb::Directory_Read_Only::Directory_Read_Only(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
+
+
+
+
+
+stb::Directory::Directory(std::string const& path) : Directory_Item(path), _dir(nullptr)
 {
 }
 
 
-Directory::~Directory()
+stb::Directory::~Directory()
 {
   closedir(_dir); //s'occupe aussi de delete _dir
   _dir = nullptr;
 }
 
 
-bool Directory::exist(std::string const& path)
+bool stb::Directory::exist(std::string const& path)
 {
   bool exist;
   const char* currentDir = getDirPath();
@@ -25,39 +41,37 @@ bool Directory::exist(std::string const& path)
     exist = false;
   if(chdir(currentDir) == 0)
     return (exist);
-  throw (std::string ("Unable to go back to the main working directory: bool Directory::exist()."));
+  throw Directory_Unable_Access("bool stb::Directory::exist(std::string const&)", __FILE__);
 }
 
 
-char* Directory::getDirPath()
+char* stb::Directory::getDirPath()
 {
   char* path = getcwd(nullptr, PATH_MAX);
   if(path == nullptr)
   {
     if(errno == ERANGE || errno == ENAMETOOLONG)
-      throw(std::string("Path length of current working directory exceeds PATH_MAX macro : char* Directory::getDirPath()."));
-    if(errno == EACCES)
-      throw(std::string("Permission to get directory name DENIED : char* Directory::getDirPath()."));
-    if(errno == EFAULT)
-      throw(std::string("Segfault : char* Directory::getDirPath()."));
-    if(errno == EINVAL)
-      throw(std::string("invalid PATH_MAX macro : char* Directory::getDirPath()."));
-    if(errno == ENOENT)
-      throw(std::string("The current working directory is unlinked : char* Directory::getDirPath()."));
+      throw Directory_Path_Too_Long("char* stb::Directory::getDirPath()", __FILE__);
+    else if(errno == EACCES)
+      throw Directory_Permission_Denied("char* stb::Directory::getDirPath()", __FILE__);
+    else if(errno == ENOENT)
+      throw Directory_Unlinked("char* stb::Directory::getDirPath()", __FILE__);
+    else
+      throw Directory_Exception("char* stb::Directory::getDirPath()", __FILE__);
   }
   return path;
 
 }
 
 
-std::string Directory::firstDir(std::string const& path)
+std::string stb::Directory::firstDir(std::string const& path)
 {
     return (path.substr(0, path.find_first_of("/\\")));
   return ("");
 }
 
 
-bool Directory::create(std::string const& name, mode_t mode)
+bool stb::Directory::create(std::string const& name, mode_t mode)
 {
   mode += 0; //permet de compiler sous windows
   
@@ -67,7 +81,7 @@ bool Directory::create(std::string const& name, mode_t mode)
 }
 
 
-bool Directory::createAll(std::string const& name, mode_t mode)
+bool stb::Directory::createAll(std::string const& name, mode_t mode)
 {
   mode += 0; //permet de compiler sous windows
   
@@ -86,13 +100,13 @@ bool Directory::createAll(std::string const& name, mode_t mode)
 }
 
 
-bool Directory::exist() const
+bool stb::Directory::exist() const
 {
   return (exist(_path));
 }
 
 
-bool Directory::isOpen() const
+bool stb::Directory::isOpen() const
 {
   if(_dir == nullptr)
     return false;
@@ -100,32 +114,32 @@ bool Directory::isOpen() const
 }
 
 
-void Directory::open()
+void stb::Directory::open()
 {
-  if(isPathSet() && exist())
+  if(exist())
     _dir = opendir(_path.c_str());
 }
 
 
-void Directory::close()
+void stb::Directory::close()
 {
   closedir(_dir);
 }
 
 
-bool Directory::create(mode_t mode)
+bool stb::Directory::create(mode_t mode)
 {
  return create(_path, mode);
 }
 
 
-bool Directory::createAll(mode_t mode)
+bool stb::Directory::createAll(mode_t mode)
 {
   return createAll(_path, mode);
 }
 
 
-std::vector<std::string> Directory::getContent()
+std::vector<std::string> stb::Directory::getContent()
 {
   std::vector<std::string> content;
   struct dirent *fileInfo = nullptr;
@@ -138,7 +152,7 @@ std::vector<std::string> Directory::getContent()
 }
 
 
-std::vector<long> Directory::getId()
+std::vector<long> stb::Directory::getId()
 {
   std::vector<long> id;
   rewinddir(_dir);
@@ -149,10 +163,4 @@ std::vector<long> Directory::getId()
   }
   
   return id;
-}
-
-
-bool Directory::remove() const
-{
-  return false;
 }

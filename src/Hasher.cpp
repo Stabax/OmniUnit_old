@@ -1,23 +1,21 @@
 //Hasher.cpp
 
-#include "Hasher.hpp"
+#include <vector>
 
-Hasher::Hasher(std::string salt) : m_salt(salt)
+#include "Hasher.hh"
+
+
+stb::Hasher::Hasher(std::string salt) : m_salt(salt)
 {
-
 }
 
-Hasher::~Hasher()
-{
 
-}
-
-std::string Hasher::getSalt() const
+std::string stb::Hasher::getSalt() const
 {
   return (m_salt);
 }
 
-void Hasher::setSalt(std::string salt)
+void stb::Hasher::setSalt(std::string salt)
 {
   if(m_salt != "")
     ;
@@ -25,7 +23,7 @@ void Hasher::setSalt(std::string salt)
     m_salt = salt;
 }
 
-void Hasher::salting(std::string &text) const
+void stb::Hasher::salting(std::string &text) const
 {
   if(text.size() < m_salt.size())
   {
@@ -43,12 +41,12 @@ void Hasher::salting(std::string &text) const
   //A REMPLIR
 //}
 
-std::string Hasher::hashTotalSize(std::string text) const
+std::string stb::Hasher::hashTotalSize(std::string text) const
 {
   return (toBase(text.length(), 16));
 }
 
-std::string Hasher::hashTotalSize(std::vector<std::string> text) const
+std::string stb::Hasher::hashTotalSize(std::vector<std::string> text) const
 {
   size_t size = text.size();
   size_t textLength = 0;
@@ -57,12 +55,12 @@ std::string Hasher::hashTotalSize(std::vector<std::string> text) const
   return (toBase(textLength, 16));
 }
 
-std::string Hasher::hashLineSize(std::string text) const
+std::string stb::Hasher::hashLineSize(std::string text) const
 {
   return (toBase(text.length(), 16));
 }
 
-std::string Hasher::hashLineSize(std::vector<std::string> text) const
+std::string stb::Hasher::hashLineSize(std::vector<std::string> text) const
 {
   std::string toHash;
   size_t size = text.size();
@@ -71,7 +69,7 @@ std::string Hasher::hashLineSize(std::vector<std::string> text) const
   return (toHash);
 }
 
-std::string Hasher::hashTotalChar(std::string text) const
+std::string stb::Hasher::hashTotalChar(std::string text) const
 {
   size_t size = text.size();
   unsigned toHash = 0;
@@ -80,7 +78,7 @@ std::string Hasher::hashTotalChar(std::string text) const
   return (toBase(toHash, 16));
 }
 
-std::string Hasher::hashTotalChar(std::vector<std::string> text) const
+std::string stb::Hasher::hashTotalChar(std::vector<std::string> text) const
 {
   size_t size = text.size();
   unsigned toHash = 0;
@@ -93,7 +91,7 @@ std::string Hasher::hashTotalChar(std::vector<std::string> text) const
   return (toBase(toHash, 16));
 }
 
-std::string Hasher::hashLineChar(std::string text) const
+std::string stb::Hasher::hashLineChar(std::string text) const
 {
   size_t size = text.size();
   unsigned toHash = 0;
@@ -102,7 +100,7 @@ std::string Hasher::hashLineChar(std::string text) const
   return (toBase(toHash, 16));
 }
 
-std::string Hasher::hashLineChar(std::vector<std::string> text) const
+std::string stb::Hasher::hashLineChar(std::vector<std::string> text) const
 {
   size_t size = text.size();
   std::string toReturn;

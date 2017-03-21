@@ -1,17 +1,19 @@
 //Directory_Item.hpp
 
 /*
-*Cette classe abstraite est une base
-*représentant tout ce qu'on peut
-*trouver dans un répertoire
+*Cette classe à sémentique d'entité est une interface
+*représentant tous ce que l'on peut trouver dans un répertoire
 *(répertoire, son, executable, image, txt...)
 */
 
-#ifndef DIRECTORY_ITEM_H_
-#define DIRECTORY_ITEM_H_
 
-//#include <sys/stat.h>
+#ifndef DIRECTORY_ITEM_HPP_
+#define DIRECTORY_ITEM_HPP_
+
 #include <string>
+
+#include "mode.h"
+
 
 /*les modes pour POSIX:
 *3 chiffres
@@ -22,43 +24,46 @@
 *7 = tout les droits
 */
 
-mode_t getMode(short mode);
 
-class Directory_Item
+namespace stb
 {
-  //fonctions amies
 
-public:
-  //constructeurs
-  Directory_Item(std::string const& path);
-  Directory_Item(Directory_Item const& Obj) = delete;
+  mode_t getMode(mode_t mode);
 
-  //destructeur
-  virtual ~Directory_Item();
+  class Directory_Item
+  {
+    //fonctions amies
 
-  //méthodes statiques et swap
-  static std::string extractDirPath(std::string const &path);
+  public:
+    //constructeurs
+    explicit Directory_Item(std::string const& path);
+    Directory_Item(Directory_Item const& Obj) = delete;
 
-  //accesseurs
-  std::string getPath() const;
+    //destructeur
+    virtual ~Directory_Item();
 
-  //mutateurs
-  bool setPath(std::string const& path);
+    //méthodes statiques et swap
+    static std::string extractDirPath(std::string const &path);
 
-  //méthodes
-  virtual bool exist() const = 0;
-  virtual bool isOpen() const = 0;
-  bool isPathSet() const;
-  virtual bool remove() const = 0;
-  std::string extractDirPath() const;
+    //accesseurs
+    std::string getPath() const;
 
-  //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
-  Directory_Item& operator=(Directory_Item const& Obj) = delete;
+    //mutateurs
 
-protected:
-  //attributs
-  std::string _path;
-};
-//opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+    //méthodes
+    virtual bool exist() const = 0;
+    virtual bool isOpen() const = 0;
+    std::string extractDirPath() const;
 
-#endif //DIRECTORY_ITEM_H_
+    //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
+    Directory_Item& operator=(Directory_Item const& Obj) = delete;
+
+  protected:
+    //attributs
+    std::string _path;
+  };
+  //opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
+
+}//namespace
+
+#endif //DIRECTORY_ITEM_HPP_

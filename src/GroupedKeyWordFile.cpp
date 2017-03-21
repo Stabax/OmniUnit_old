@@ -1,33 +1,23 @@
 //GroupedKeyWordFile.cpp
 
-#include "GroupedKeyWordFile.hpp"
-#include "general_exceptions.hpp"
+#include "GroupedKeyWordFile.hh"
+#include "Exception.hpp"
 
 
-GroupedKeyWordFile::GroupedKeyWordFile() : KeyWordFile()
+stb::GroupedKeyWordFile::GroupedKeyWordFile(std::string const &filePath) : KeyWordFile(filePath)
 {
 }
 
 
-GroupedKeyWordFile::GroupedKeyWordFile(std::string const &filePath) : KeyWordFile(filePath)
-{
-}
-
-
-GroupedKeyWordFile::~GroupedKeyWordFile()
-{
-}
-
-
-unsigned GroupedKeyWordFile::findBegGroup(std::string const &group)
+unsigned stb::GroupedKeyWordFile::findBegGroup(std::string const &group)
 {
   if(isOpen())
     return (findKeyword(group, '{'));
-  throw(DException("File -> " + _path + " is close.", "unsigned GroupedKeyWordFile::findBegGroup(std::string const&)", __FILE__));
+  throw File_Close("unsigned stb::GroupedKeyWordFile::findBegGroup(std::string const&)", __FILE__);
 }
 
 
-unsigned GroupedKeyWordFile::findEndGroup(std::string const &group)
+unsigned stb::GroupedKeyWordFile::findEndGroup(std::string const &group)
 {
   if(isOpen())
   {
@@ -44,11 +34,11 @@ unsigned GroupedKeyWordFile::findEndGroup(std::string const &group)
     return (0);
   }
   else
-    throw(DException("File -> " + _path + " is close.", "unsigned GroupedKeyWordFile::findEndGroup(std::string const&)", __FILE__));
+    throw File_Close("unsigned stb::GroupedKeyWordFile::findEndGroup(std::string const&)", __FILE__);
 }
 
 
-bool GroupedKeyWordFile::groupExist(std::string const &group)
+bool stb::GroupedKeyWordFile::groupExist(std::string const &group)
 {
   if(findBegGroup(group) != 0 && findEndGroup(group) != 0)
     return true;
@@ -56,7 +46,7 @@ bool GroupedKeyWordFile::groupExist(std::string const &group)
 }
 
 
-unsigned GroupedKeyWordFile::findGKeyword(std::string const &group, std::string const &keyword, char const &parser)
+unsigned stb::GroupedKeyWordFile::findGKeyword(std::string const &group, std::string const &keyword, char const &parser)
 {
   if(isOpen())
   {
@@ -79,11 +69,11 @@ unsigned GroupedKeyWordFile::findGKeyword(std::string const &group, std::string 
       return (0);
   }
   else
-    throw(DException("File -> " + _path + " is close.", "unsigned GroupedKeyWordFile::findGKeyword(std::string const&, std::string const&, char const&)", __FILE__));
+    throw File_Close("unsigned stb::GroupedKeyWordFile::findGKeyword(std::string const&, std::string const&, char const&)", __FILE__);
 }
 
 
-bool GroupedKeyWordFile::gKeywordExist(std::string const &group, std::string const &keyword, char const &parser)
+bool stb::GroupedKeyWordFile::gKeywordExist(std::string const &group, std::string const &keyword, char const &parser)
 {
   if(findGKeyword(group, keyword, parser) != 0)
     return true;
@@ -91,7 +81,7 @@ bool GroupedKeyWordFile::gKeywordExist(std::string const &group, std::string con
 }
 
   
-std::string GroupedKeyWordFile::readGKeywordValue(std::string const &group, std::string const &keyword, char const &parser)
+std::string stb::GroupedKeyWordFile::readGKeywordValue(std::string const &group, std::string const &keyword, char const &parser)
 {
   if(isOpen())
   {
@@ -110,11 +100,11 @@ std::string GroupedKeyWordFile::readGKeywordValue(std::string const &group, std:
 	    return ("");
   }
   else
-    throw(DException("File -> " + _path + " is close.", "std::string GroupedKeyWordFile::readGKeywordValue(std::string const&, std::string const&, char const&)", __FILE__));
+    throw File_Close("std::string stb::GroupedKeyWordFile::readGKeywordValue(std::string const&, std::string const&, char const&)", __FILE__);
 }
 
 
-void GroupedKeyWordFile::writeGKeywordValue(std::string const &group, std::string const &keyword, std::string const &text, char const &parser)
+void stb::GroupedKeyWordFile::writeGKeywordValue(std::string const &group, std::string const &keyword, std::string const &text, char const &parser)
 {
   if(isOpen())
   {
@@ -128,20 +118,20 @@ void GroupedKeyWordFile::writeGKeywordValue(std::string const &group, std::strin
 }
 
 
-void GroupedKeyWordFile::addGKeyword(std::string const &group, std::string const &keyword, std::string const &text, char const &parser)
+void stb::GroupedKeyWordFile::addGKeyword(std::string const &group, std::string const &keyword, char const &parser, std::string const &text)
 {
   if(! gKeywordExist(group, keyword, parser))
     insert(keyword + parser + text, findEndGroup(group));
 }
 
 
-void GroupedKeyWordFile::removeGKeyword(std::string const &group, std::string const &keyword, char const &parser)
+void stb::GroupedKeyWordFile::removeGKeyword(std::string const &group, std::string const &keyword, char const &parser)
 {
   removeLine(findGKeyword(group, keyword, parser));
 }
 
 
-void GroupedKeyWordFile::addGroup(std::string const &name)
+void stb::GroupedKeyWordFile::addGroup(std::string const &name)
 {
   if(! groupExist(name))
   {
@@ -151,7 +141,7 @@ void GroupedKeyWordFile::addGroup(std::string const &name)
 }
 
 
-void GroupedKeyWordFile::removeGroup(std::string const &name)
+void stb::GroupedKeyWordFile::removeGroup(std::string const &name)
 {
   removeLine(findBegGroup(name), findEndGroup(name) - findBegGroup(name) + 1);
 }

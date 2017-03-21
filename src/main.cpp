@@ -1,7 +1,12 @@
 //main.cpp
 
-#include "GroupedKeyWordFile.hpp"
-#include "Counter.hpp"
+#include <iostream>
+
+#include "Directory.hh"
+#include "GroupedKeyWordFile.hh"
+#include "Counter.hh"
+#include "Error.hh"
+
 
 int main()
 {
@@ -30,10 +35,10 @@ perror("mkdir");
 ////////////////////////////////////////
   //TEST DES FILES
   
-  //Directory::createAll("dir1/dir2");
-  GFile file("hey.txt");
+  stb::File::create("file");
+  //GFile file("hey.txt");
   
-  std::cout<<file.findGKeyword("hey", "YOLO", '.')<<'\n';
+  //std::cout<<file.findGKeyword("hey", "YOLO", '.')<<'\n';
 
 
 ////////////////////////////////////////
@@ -64,39 +69,36 @@ perror("mkdir");
 ////////////////////////////////////////
   //TEST DES DATES
 /*
-  Date::setTimeLag(2);
-  std::cout<<Date::time()<<'\n';
-  std::cout<<Date::time(Date::location::gmt)<<'\n';
-  std::cout<<Date::time(Date::location::local)<<'\n';
-  std::cout<<Date::time(Date::unit::year)<<'\n';
-  std::cout<<Date::date(Date::location::local) << " " << Date::time(Date::location::local)<<'\n';
+  //Date::setTimeLag(2);
+
+  std::cout << Date::time<std::second>(Date::location::local) << '\n';
+  std::cout << Date::time<std::minute>(Date::location::local) << '\n';
+  std::cout << Date::time<std::hour>(Date::location::local) << '\n';
+  std::cout << Date::time<std::day>(Date::location::local) << '\n';
+  std::cout << Date::time<std::month>(Date::location::local) << '\n';
+  std::cout << Date::time<std::year>(Date::location::local) << '\n';
 */
 ////////////////////////////////////////
+  //TEST DE ERROR
 
+
+////////////////////////////////////////
 }
-catch(Detailed_Loaded_Exception const &e)
+catch(stb::Exception const &e)
 {
-  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getSenderFunction()<< ", at file : "<< e.getSenderFile()<<'\n';
-}
-catch(Detailed_Exception const &e)
-{
-  std::cout<<"Exception : "<<e.what() <<", at function : "<< e.getSenderFunction()<< ", at file : "<< e.getSenderFile()<<'\n';
-}
-catch(Loaded_Exception const &e)
-{
-  std::cout<<"Exception : "<<e.what()<<'\n';
+  std::cout<<"Exception : [" << e.getDate() << "] : " << e.what() << " , at function : " << e.getSenderFunction() << " , from source file : " << e.getSenderFile() << '\n';
 }
 catch(std::exception const &e)
 {
-  std::cout<<"Exception : "<<e.what()<<'\n';
+  std::cout<<"Exception : " << e.what() << '\n';
 }
 catch(std::string const &e)
 {
-  std::cout<<e<<'\n';
+  std::cout << e << '\n';
 }
 catch(...)
 {
-  std::cout<<"Unknown exception thrown."<<'\n';
+  std::cout<<"Unknown exception thrown." << '\n';
 }
 
   return 0;

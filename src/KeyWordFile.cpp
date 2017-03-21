@@ -1,25 +1,15 @@
 //KeyWordFile.cpp
 
-#include "KeyWordFile.hpp"
-#include "general_exceptions.hpp"
+#include "KeyWordFile.hh"
+#include "Exception.hpp"
 
 
-KeyWordFile::KeyWordFile() : File()
+stb::KeyWordFile::KeyWordFile(std::string const &filePath) : File(filePath)
 {
 }
 
 
-KeyWordFile::KeyWordFile(std::string const &filePath) : File(filePath)
-{
-}
-
-
-KeyWordFile::~KeyWordFile()
-{
-}
-
-
-unsigned KeyWordFile::findKeyword(std::string const &keyword , char const &parser)
+unsigned stb::KeyWordFile::findKeyword(std::string const &keyword , char const &parser)
 {
   if(isOpen())
   {
@@ -39,11 +29,11 @@ unsigned KeyWordFile::findKeyword(std::string const &keyword , char const &parse
 	  return (0);
   }
   else
-    throw(DException("File -> " + _path + " is close.", "unsigned KeyWordFile::findKeyword(std::string const&, char const&)", __FILE__));
+    throw File_Close("unsigned stb::KeyWordFile::findKeyword(std::string const&, char const&)", __FILE__);
 }
 
 
-bool KeyWordFile::keywordExist(std::string const &keyword, char const &parser)
+bool stb::KeyWordFile::keywordExist(std::string const &keyword, char const &parser)
 {
   if(findKeyword(keyword, parser) != 0)
     return true;
@@ -51,7 +41,7 @@ bool KeyWordFile::keywordExist(std::string const &keyword, char const &parser)
 }
 
 
-std::string KeyWordFile::readKeywordValue(std::string const &keyword, char const &parser)
+std::string stb::KeyWordFile::readKeywordValue(std::string const &keyword, char const &parser)
 {
   if(isOpen())
   {
@@ -68,11 +58,11 @@ std::string KeyWordFile::readKeywordValue(std::string const &keyword, char const
 	    return (std::string(""));
   }
   else
-    throw(DException("File -> " + _path + " is close.", "std::string KeyWordFile::readKeywordValue(std::string const&, char const&)", __FILE__));
+    throw File_Close("std::string stb::KeyWordFile::readKeywordValue(std::string const&, char const&)", __FILE__);
 }
 
 
-void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string const &text, char const &parser)
+void stb::KeyWordFile::writeKeywordValue(std::string const &keyword, std::string const &text, char const &parser)
 {
   if(isOpen())
   {
@@ -89,14 +79,14 @@ void KeyWordFile::writeKeywordValue(std::string const &keyword, std::string cons
 }
 
 
-void KeyWordFile::addKeyword(std::string const &keyword, std::string const &text, char const &parser)
+void stb::KeyWordFile::addKeyword(std::string const &keyword, char const &parser, std::string const &text)
 {
   if(! keywordExist(keyword, parser))
     write(keyword + parser + text, 0);
 }
 
 
-void KeyWordFile::removeKeyword(std::string const &keyword, char const &parser)
+void stb::KeyWordFile::removeKeyword(std::string const &keyword, char const &parser)
 {
   removeLine(findKeyword(keyword, parser));
 }

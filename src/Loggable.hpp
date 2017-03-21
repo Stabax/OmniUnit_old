@@ -1,43 +1,129 @@
 //Loggable.hpp
 
 /*
-*Cette classe abstraite sert de base
-*pour toute autre classe ayant pour
-*vocation à logger, voire enregistrer des données dans un fichier
+*Cees classes à sémentique d'entité sont des interfaces
+*pour toute autre classe ayant pour vocation à logguer des données.
 */
 
-#ifndef LOGGABLE_H
-#define LOGGABLE_H
+
+#ifndef LOGGABLE_HPP_
+#define LOGGABLE_HPP_
 
 #include <string>
 
-class Loggable
+
+namespace stb
 {
+
+  enum class file
+  {
+    source,
+    log
+  };
+
+
+
+  class Loggable
+  {
+    //fonctions amies
+
+  public:  
+    //constructeurs
+    explicit Loggable(std::string const& logPath);
+
+    //destructeur
+    virtual ~Loggable();
+
+    //méthodes statiques et swap
+    
+    //méthodes
+    virtual void log() const = 0;
+
+    //mutateurs
+
+    //accesseurs
+
+    //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
+
+  protected:
+    //attributs
+    std::string _logPath;
+  };
+  //opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
+
+
+
+  //////////////////////////////////////////////////////////////////////////
+
+
+
+  class Loggable_Exception : public Loggable
+  {
   //fonctions amies
 
-public:
-  //constructeurs
-  Loggable(std::string const& logPath = "");
+  public:
+    //constructeurs
+    explicit Loggable_Exception(std::string const& logPath = defaultLogPath) noexcept;
 
-  //destructeur
-  virtual ~Loggable();
+    //destructeur
+    virtual ~Loggable_Exception() noexcept;
 
-  //méthodes statiques et swap
+    //méthodes statiques et swap
+    static void setDefaultLogPath(std::string const& logPath);
+    static std::string getDefaultLogPath();
+    
+    //méthodes
+    virtual void log() const noexcept = 0;
+
+    //mutateurs
+
+    //accesseurs
+
+    //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
+
+  protected:
+    //attributs
+    
+    static std::string defaultLogPath;
+  };
+  //opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
+
+
+
+  //////////////////////////////////////////////////////////////////////////
+
+
+
+  class Loggable_Error : public Loggable
+  {
+  //fonctions amies
+
+  public:
+    //constructeurs
+    explicit Loggable_Error(std::string const& logPath = defaultLogPath);
+
+    //destructeur
+
+    //méthodes statiques et swap
+    static void setDefaultLogPath(std::string const& logPath);
+    static std::string getDefaultLogPath();
+    
+    //méthodes
+
+    //mutateurs
+
+    //accesseurs
+
+    //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
+
+  protected:
+    //attributs
+    
+    static std::string defaultLogPath;
+  };
+  //opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
+
   
-  //méthodes
-  virtual void log() const = 0;
+}//namespace
 
-  //mutateurs
-  void setLogPath(std::string const& path);
-
-  //accesseurs
-
-  //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
-
-protected:
-  //attributs
-  std::string _logPath;
-};
-//opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
-
-#endif //LOGGABLE_H
+#endif //LOGGABLE_HPP_

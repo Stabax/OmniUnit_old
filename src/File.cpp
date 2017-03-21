@@ -1,25 +1,21 @@
 //File.cpp
 
-#include "File.hpp"
-#include "general_exceptions.hpp"
+#include "File.hh"
+#include "Exception.hpp"
 
 
-File::File() : Basic_File()
+stb::File_Close::File_Close(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+
+
+
+
+stb::File::File(std::string const &filePath) : Basic_File(filePath)
 {
 }
 
 
-File::File(std::string const &filePath) : Basic_File(filePath)
-{
-}
-
-
-File::~File()
-{
-}
-
-
-unsigned File::getLineCount()
+unsigned stb::File::getLineCount()
 {
   if(isOpen())
   {
@@ -36,11 +32,11 @@ unsigned File::getLineCount()
       lineCount--;
     return (lineCount);
   }
-  throw(DException("File -> " + _path + " is close.", "unsigned File::getLineCount()", __FILE__));
+  throw File_Close("unsigned stb::File::getLineCount()", __FILE__);
 }
 
 
-std::string File::readLine(unsigned const &line)
+std::string stb::File::readLine(unsigned const &line)
 {
   if(line != 0)
   {
@@ -54,14 +50,14 @@ std::string File::readLine(unsigned const &line)
 	    return (text);
 	  }
     else
-	    throw(DException("File -> " + _path + " is close.", "std::string File::readLine(unsigned const&)", __FILE__));
+	    throw File_Close("std::string stb::File::readLine(unsigned const&)", __FILE__);
   }
   else
-    throw(DException("Bad argument : line 0 doesn't exist.", "std::string File::readLine(unsigned const&)", __FILE__));
+    throw File_Invalid_Argument("std::string stb::File::readLine(unsigned const&)", __FILE__);
 }
 
 
-std::vector<std::string> File::readLine(unsigned const &line, unsigned n)
+std::vector<std::string> stb::File::readLine(unsigned const &line, unsigned n)
 {
   std::vector<std::string> text(0);
   if(getLineCount() >= line)
@@ -89,14 +85,14 @@ std::vector<std::string> File::readLine(unsigned const &line, unsigned n)
       return (text);
     }
     else
-      throw(DException("File -> " + _path + " is close.", "std::vector<std::string> File::readLine(unsigned const&, unsigned)", __FILE__));
+      throw File_Close("std::vector<std::string> stb::File::readLine(unsigned const&, unsigned)", __FILE__);
   }
   else
     return text;  
 }
 
 
-void File::removeLine(unsigned const &line, unsigned const &n)
+void stb::File::removeLine(unsigned const &line, unsigned const &n)
 {
   if(isOpen())
   {
@@ -119,7 +115,7 @@ void File::removeLine(unsigned const &line, unsigned const &n)
 }
 
 
-void File::write(std::string const &text, unsigned n)
+void stb::File::write(std::string const &text, unsigned n)
 {
   if(isOpen())
   {
@@ -133,7 +129,7 @@ void File::write(std::string const &text, unsigned n)
 }
 
 
-void File::write(std::vector<std::string> const &text, unsigned const &n)
+void stb::File::write(std::vector<std::string> const &text, unsigned const &n)
 {
   size_t textSize = text.size();
   if(n == 0 || n >= getLineCount())
@@ -145,7 +141,7 @@ void File::write(std::vector<std::string> const &text, unsigned const &n)
 }
 
 
-void File::insert(std::string const &text, unsigned const &n)
+void stb::File::insert(std::string const &text, unsigned const &n)
 {
   if(isOpen())
   {
@@ -163,7 +159,7 @@ void File::insert(std::string const &text, unsigned const &n)
 }
 
 
-void File::insert(std::vector<std::string> const &text, unsigned const &n)
+void stb::File::insert(std::vector<std::string> const &text, unsigned const &n)
 {
   size_t textSize = text.size();
   for(unsigned counter = 0; counter < textSize; counter++)
@@ -171,7 +167,7 @@ void File::insert(std::vector<std::string> const &text, unsigned const &n)
 }
 
 
-bool File::isSameContent(File &a)
+bool stb::File::isSameContent(File &a)
 {
   std::vector<std::string> aContent = a.readLine(1, 0);
   std::vector<std::string> thisContent = readLine(1, 0);

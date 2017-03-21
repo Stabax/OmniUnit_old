@@ -1,9 +1,13 @@
-//mode.hpp
+//mode.h
 
 /*
 *Ce header définit des valeurs permattant
 *d'utiliser facilement les variables de type mode_t
 */
+
+
+#ifndef MODE_H_
+#define MODE_H_
 
 #if !defined (_WIN16) && !defined (_WIN32) && !defined (_WIN64)
 
@@ -1036,3 +1040,5 @@
 #define m777 0
 
 #endif //(_WIN16) || defined (_WIN32) || defined (_WIN64)
+
+#endif //MODE_H_

@@ -1,22 +1,26 @@
 //time.cpp
 
-#include "time.hpp"
+#include "time.h"
+
+stb::Date_Exception::Date_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
+
+stb::Date_Current_Unaviable::Date_Current_Unaviable(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Date_Exception(senderFunction, senderFile, logPath){}
 
 
-int Date::timeLag = 0;
+int stb::Date::timeLag = 0;
  
  
-void Date::setTimeLag(int const& hour)
+void stb::Date::setTimeLag(int const& hour)
 {
   timeLag = hour * 3600;
 }
 
 
-struct tm* Date::getTm(location const& type)
+struct tm* stb::Date::getTm(location const& type)
 {
   time_t seconds = std::time(nullptr);
   if(seconds == -1)
-    throw std::string("Unable to get current time, from function : struct tm* Date::getTm(place const&), from file : ") + __FILE__;
+    throw Date_Current_Unaviable("struct tm* stb::Date::getTm(location const&)", __FILE__);
   if(type == location::gmt)
     return (gmtime(&seconds));
   else if(type == location::timeZone)
@@ -29,7 +33,7 @@ struct tm* Date::getTm(location const& type)
 }
 
 
-std::string Date::time(location const& type)
+std::string stb::Date::time(location const& type)
 {
   struct tm* instant = getTm(type);
   std::string toReturn;
@@ -42,7 +46,7 @@ std::string Date::time(location const& type)
 }
 
 
-std::string Date::date(location const& type)
+std::string stb::Date::date(location const& type)
 {
   struct tm* instant = getTm(type);
   std::string toReturn;
@@ -55,25 +59,7 @@ std::string Date::date(location const& type)
 }
 
 
-int Date::time(unit const& value, location const& type)
-{
-  struct tm* instant = getTm(type);
-  if(value == unit::second)
-    return (instant->tm_sec);
-  else if(value == unit::minute)
-    return (instant->tm_min);
-  else if(value == unit::hour)
-    return (instant->tm_hour);
-  else if(value == unit::day)
-    return (instant->tm_mday);
-  else if(value == unit::month)
-    return (instant->tm_mon + 1);
-  else
-    return (instant->tm_year + 1900);
-}
-
-
-std::string Date::dateTime(location const& type) noexcept
+std::string stb::Date::dateTime(location const& type) noexcept
 {
   std::string toReturn;
   
@@ -81,7 +67,7 @@ std::string Date::dateTime(location const& type) noexcept
   {
     toReturn = (date(type) + "-" + time(type));
   }
-  catch(std::string const& except)
+  catch(Date_Exception const& e)
   {
     toReturn = "?/?/?-?:?:?";
   }

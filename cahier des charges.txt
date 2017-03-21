@@ -1,0 +1,25 @@
+changer toutes les boucles while et for, par des std::transform, std::swap, for(type &var : tableau), for_each... optimisation ++
+partout dans le programme, changer les std::string path en std::PATH path (C++2017)
+incorporer std::filesystem (C++2017)
+
+gérer les erreurs de permission
+chmod ne marche pas dans Basic_File::create(), a revoir
+changer mode.hpp : stocker les droits dans une struct (ou autrement) mais il faut trouver un autre moyen de définir tout les modes.
+ajouter le niveau de permission mod_t en attribut des classes dérivées de directory_item
+ajouter le niveau de permission static mod_t par défaut en attribut des classes dérivées de directory_item
+log() devrait prendre en argument le mode du fichier a créer s'il n'existe pas.
+
+dans les files, transformer les vector en un type plus général (ou plus adapté) ? un std::Array serait sympa, et une surcharge avec un tableau statique
+implémenter remove dans Directory.cpp
+move() rename() et remove() devraient être dans directory_item ?
+implémenter directory (on peut rien faire pour le moment a part créer des repertoires ...)
+Mettre une Detailed_Error en attribut MUTABLE des Files (ou des directory_Items ?) pour remplacer _state
+
+implémenter la classe de hashage
+
+retirer les const& aux types primitifs en paramèrtres de fonctions
+
+tester post/pré incrementation
+
+operator + et - pour timer et counter (et comparaison)
+les constructeurs par mouvement et affectation par mouvement doivent être noexcept

@@ -1,19 +1,14 @@
 //Timer.cpp
 
-#include "Timer.hpp"
+#include "Timer.hh"
 
 
-Timer::Timer() : _Begin(std::chrono::high_resolution_clock::now()), _BeginPause(), _PausedTime(0), _isPaused(true), _isStopped(true)
+stb::Timer::Timer() : _Begin(std::chrono::high_resolution_clock::now()), _BeginPause(), _PausedTime(0), _isPaused(true), _isStopped(true)
 {
 }
 
 
-Timer::~Timer()
-{
-}
-
-
-unsigned long long Timer::getNano() const
+unsigned long long stb::Timer::getNano() const
 {
   if(! _isPaused && ! _isStopped)
     return (static_cast<unsigned long long>(((std::chrono::high_resolution_clock::now() - _Begin) - _PausedTime).count()));
@@ -26,7 +21,7 @@ unsigned long long Timer::getNano() const
 }
 
 
-std::chrono::nanoseconds Timer::getNanoDuration() const
+std::chrono::nanoseconds stb::Timer::getNanoDuration() const
 {
   if(! _isPaused && ! _isStopped)
     return ((std::chrono::high_resolution_clock::now() - _Begin) - _PausedTime);
@@ -39,7 +34,7 @@ std::chrono::nanoseconds Timer::getNanoDuration() const
 }
 
 
-void Timer::start()
+void stb::Timer::start()
 {
   if(_isPaused)
   {
@@ -55,7 +50,7 @@ void Timer::start()
 }
 
 
-void Timer::pause()
+void stb::Timer::pause()
 {
   if(! _isPaused && ! _isStopped)
   {
@@ -65,7 +60,7 @@ void Timer::pause()
 }
 
 
-void Timer::stop()
+void stb::Timer::stop()
 {
   _isStopped = true;
   if(! _isPaused)
