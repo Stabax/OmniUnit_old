@@ -49,6 +49,13 @@ namespace stb
     void addGroup(std::string const &name);
     void removeGroup(std::string const &name);
 
+    std::vector<std::string> readGOpt(std::string const &group, std::string const &keyword, char const &parser);
+    void addGOpt(std::string const &group, std::string const &keyword, char const &parser, std::string const& opt);
+    void removeGOpt(std::string const &group, std::string const &keyword, char const &parser, std::string const& opt = "");
+
+    std::vector<std::string> groupList();
+
+
   //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
 
   protected:

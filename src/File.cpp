@@ -4,13 +4,13 @@
 #include "Exception.hpp"
 
 
-stb::File_Close::File_Close(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Close::File_Close(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
 
 
 
 
-stb::File::File(std::string const &filePath) : Basic_File(filePath)
+stb::File::File(std::string const& filePath) : Basic_File(filePath)
 {
 }
 
@@ -36,7 +36,7 @@ unsigned stb::File::getLineCount()
 }
 
 
-std::string stb::File::readLine(unsigned const &line)
+std::string stb::File::readLine(unsigned line)
 {
   if(line != 0)
   {
@@ -57,7 +57,7 @@ std::string stb::File::readLine(unsigned const &line)
 }
 
 
-std::vector<std::string> stb::File::readLine(unsigned const &line, unsigned n)
+std::vector<std::string> stb::File::readLine(unsigned line, unsigned n)
 {
   std::vector<std::string> text(0);
   if(getLineCount() >= line)
@@ -92,7 +92,7 @@ std::vector<std::string> stb::File::readLine(unsigned const &line, unsigned n)
 }
 
 
-void stb::File::removeLine(unsigned const &line, unsigned const &n)
+void stb::File::removeLine(unsigned line, unsigned n)
 {
   if(isOpen())
   {
@@ -115,7 +115,7 @@ void stb::File::removeLine(unsigned const &line, unsigned const &n)
 }
 
 
-void stb::File::write(std::string const &text, unsigned n)
+void stb::File::write(std::string const& text, unsigned n)
 {
   if(isOpen())
   {
@@ -129,7 +129,7 @@ void stb::File::write(std::string const &text, unsigned n)
 }
 
 
-void stb::File::write(std::vector<std::string> const &text, unsigned const &n)
+void stb::File::write(std::vector<std::string> const& text, unsigned n)
 {
   size_t textSize = text.size();
   if(n == 0 || n >= getLineCount())
@@ -141,7 +141,7 @@ void stb::File::write(std::vector<std::string> const &text, unsigned const &n)
 }
 
 
-void stb::File::insert(std::string const &text, unsigned const &n)
+void stb::File::insert(std::string const& text, unsigned n)
 {
   if(isOpen())
   {
@@ -159,7 +159,7 @@ void stb::File::insert(std::string const &text, unsigned const &n)
 }
 
 
-void stb::File::insert(std::vector<std::string> const &text, unsigned const &n)
+void stb::File::insert(std::vector<std::string> const& text, unsigned n)
 {
   size_t textSize = text.size();
   for(unsigned counter = 0; counter < textSize; counter++)

@@ -3,7 +3,7 @@
 #include "Directory_Item.hpp"
 
 
-stb::Directory_Item::Directory_Item(std::string const& path) : _path(path)
+stb::Directory_Item::Directory_Item(std::string const& path, stb::access acc) : _path(path), _readOnly(acc == stb::access::r)
 {
 }
 

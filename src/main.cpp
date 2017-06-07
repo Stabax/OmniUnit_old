@@ -14,10 +14,34 @@ try
 {
   //RANDOM TEST
 /*
-Directory Dir("yolo/yata");
-std::cout << Dir.create(m777) << '\n';
-perror("mkdir");
+
 */
+/*
+  std::cout<< "0. quitter" <<'\n';
+  std::cout<< "1. lire" <<'\n';
+  std::cout<< "2. ecrire" <<'\n';
+  std::cout<< "3. effacer" <<'\n';
+  std::cout<< "" <<'\n';
+
+  unsigned choix = 0;
+  stb::File file("txt.txt");
+  do
+  {
+    std::cin >> choix;
+    std::cin.ignore();
+    if(choix == 1)
+    {
+      unsigned line;
+      std::cin >> line;
+      std::vector<std::string> vec = file.readLine(line, 2);
+      for(unsigned i = 0; i < vec.size(); ++i)
+        std::cout << vec[i] << '\n';
+      std::cin.ignore();
+    }
+  }while(choix != 0);
+  
+*/
+  
 
 ////////////////////////////////////////
   //TEST DE DIRECTORY
@@ -35,7 +59,7 @@ perror("mkdir");
 ////////////////////////////////////////
   //TEST DES FILES
   
-  stb::File::create("file");
+  //stb::File::create("file");
   //GFile file("hey.txt");
   
   //std::cout<<file.findGKeyword("hey", "YOLO", '.')<<'\n';
@@ -44,25 +68,31 @@ perror("mkdir");
 ////////////////////////////////////////
   //TEST DE COUNTER
 /*
-  Counter count;
-  count.init<std::second>(8);
-  while(count.get() > 0)
+  stb::Counter count;
+  count.add(5);
+  count.reset();
+  count.add<std::milli>(5);
+  count.start();
+  while(1)
   {
-    sleep<std::second>(1);
-    std::cout<< count.get() << '\n';
+    stb::sleep<std::micro>(50000);
+    std::cout<< count.get<std::nano>() << std::endl;
   }
 */
 
 ////////////////////////////////////////
   //TEST DE TIMER
 /*
-  Timer tim;
+  stb::Timer tim;
   //tim.pause();
+  tim.start();
+  tim.add<stb::minute>(10);
 
-  while(tim.get() < 5)
+  //tim.subtract<stb::minute>(1);
+  while(1)
   {
-    sleep<std::second>(1);
-    std::cout<< tim.get<std::nano>() << '\n';
+    stb::sleep<std::micro>(50000);
+    std::cout<< tim.get<std::nano>() << std::endl;
   }
 */
 

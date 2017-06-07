@@ -27,8 +27,13 @@
 
 namespace stb
 {
+  enum class access
+  {
+    r,//lecture seule
+    rw //lecture + ecriture
+  };
+  
 
-  mode_t getMode(mode_t mode);
 
   class Directory_Item
   {
@@ -36,7 +41,7 @@ namespace stb
 
   public:
     //constructeurs
-    explicit Directory_Item(std::string const& path);
+    explicit Directory_Item(std::string const& path, access acc = access::rw);
     Directory_Item(Directory_Item const& Obj) = delete;
 
     //destructeur
@@ -61,6 +66,7 @@ namespace stb
   protected:
     //attributs
     std::string _path;
+    bool _readOnly;
   };
   //opérateurs non méthodes (+, ++, -, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >> )
 

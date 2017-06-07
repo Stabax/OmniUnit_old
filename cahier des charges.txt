@@ -1,4 +1,4 @@
-changer toutes les boucles while et for, par des std::transform, std::swap, for(type &var : tableau), for_each... optimisation ++
+changer toutes les boucles while et for, par des std::transform, std::swap, for(type &var : tableau), for_each... AVEC DES LAMBDAS
 partout dans le programme, changer les std::string path en std::PATH path (C++2017)
 incorporer std::filesystem (C++2017)
 
@@ -9,17 +9,21 @@ ajouter le niveau de permission mod_t en attribut des classes dérivées de dire
 ajouter le niveau de permission static mod_t par défaut en attribut des classes dérivées de directory_item
 log() devrait prendre en argument le mode du fichier a créer s'il n'existe pas.
 
-dans les files, transformer les vector en un type plus général (ou plus adapté) ? un std::Array serait sympa, et une surcharge avec un tableau statique
 implémenter remove dans Directory.cpp
 move() rename() et remove() devraient être dans directory_item ?
 implémenter directory (on peut rien faire pour le moment a part créer des repertoires ...)
-Mettre une Detailed_Error en attribut MUTABLE des Files (ou des directory_Items ?) pour remplacer _state
 
 implémenter la classe de hashage
 
 retirer les const& aux types primitifs en paramèrtres de fonctions
 
-tester post/pré incrementation
+operator+ et - pour timer et counter (et comparaison)
+les constructeurs par mouvement et affectation par mouvement doivent être noexcept (une histoire avec les conteneurs et les algorithmes je crois ...)
 
-operator + et - pour timer et counter (et comparaison)
-les constructeurs par mouvement et affectation par mouvement doivent être noexcept
+toujours tester si parser != ''
+readKeywordValue ne doit pas prendre les opt
+
+Ajouter des options après les valeurs des mots clefs KEYWORD=value<<<opt1, opt2, opt3, ...>>>
+GKWFile doit avoir une methode retournant un vecteur sur tout le contenu du groupe
+
+une classe imbriqued grouped file ? ou alors on inclue cette fonctionnalité dans la glasse GKWFile ?

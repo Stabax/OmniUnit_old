@@ -145,3 +145,42 @@ void stb::GroupedKeyWordFile::removeGroup(std::string const &name)
 {
   removeLine(findBegGroup(name), findEndGroup(name) - findBegGroup(name) + 1);
 }
+
+/*
+std::vector<std::string> stb::GroupedKeyWordFile::readGOpt(std::string const &group, std::string const &keyword, char const &parser)
+{
+
+}
+
+
+void stb::GroupedKeyWordFile::addGOpt(std::string const &group, std::string const &keyword, char const &parser, std::string const& opt)
+{
+
+}
+
+
+void stb::GroupedKeyWordFile::removeGOpt(std::string const &group, std::string const &keyword, char const &parser, std::string const& opt = "")
+{
+
+}
+  */  
+
+std::vector<std::string> stb::GroupedKeyWordFile::groupList()
+{
+  unsigned lineCount = getLineCount();
+  std::vector<std::string> list;
+  
+  for(unsigned line = 0; line < lineCount; ++line)
+  {
+    std::string content = readLine(line);
+    if(content.find_first_of("{") != std::string::npos)
+    {
+      std::string group = content.substr(0, content.find_first_of("{"));
+      if(findEndGroup(group) != 0)
+        list.push_back(group);
+    }
+  }
+
+  return list;
+}
+

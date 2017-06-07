@@ -1,5 +1,7 @@
 //KeyWordFile.cpp
 
+#include <algorithm>
+
 #include "KeyWordFile.hh"
 #include "Exception.hpp"
 
@@ -9,21 +11,41 @@ stb::KeyWordFile::KeyWordFile(std::string const &filePath) : File(filePath)
 }
 
 
+std::string stb::KeyWordFile::removeSpaces(std::string const& line, char parser)
+{
+  std::string toReturn = "";
+  unsigned size = line.length();
+  for(unsigned count = 0; count < size; ++count)
+  {
+    if((line[count] == ' ' && toReturn == "") ||
+    (line[count] == ' ' && line[count+1] == ' ') ||
+    (line[count] == ' ' && (line[count+1] == parser || line[count-1] == parser)) ||
+    (line[count] == ' ' && count == size-1))
+    {}
+    else
+      toReturn += line[count];
+  }
+  return toReturn;
+}
+
+
 unsigned stb::KeyWordFile::findKeyword(std::string const &keyword , char const &parser)
 {
   if(isOpen())
   {
-    _file->clear();
     _file->seekg(0, std::ios::beg);
     std::string text;
-    unsigned line = 0;
-    while(_file->rdstate() == std::fstream::goodbit)
+    
+    for(unsigned line = 0; _file->rdstate() == std::fstream::goodbit; ++line)
 	  {
 	    std::getline(*_file, text);
-	    line++;
-	    if(text.substr(0, keyword.length() + 1) == keyword+parser) //+1 pour le parser
+	    
+	    if(text.find_first_of(parser) != text.find_last_of(parser) &&
+	    text.find_first_of(parser) != std::string::npos)
 	    {
-	      return (line);
+	      text = removeSpaces(text, parser);
+	      if(text.substr(0, keyword.length() + 1) == keyword+parser) //+1 pour le parser
+	        return (line);
 	    }
 	  }
 	  return (0);
@@ -90,3 +112,31 @@ void stb::KeyWordFile::removeKeyword(std::string const &keyword, char const &par
 {
   removeLine(findKeyword(keyword, parser));
 }
+
+
+std::vector<std::string> stb::KeyWordFile::readOpt(std::string const &keyword, char const &parser)
+{
+  std::vector<std::string> list;
+  unsigned line = findKeyword(keyword, parser);
+  if(line != 0)
+  {
+    std::string content = readLine(line);
+    content.substr(0, content.find_first_of("\\"));
+    /////////.......................
+  }
+  
+  return list;
+}
+
+/*
+void stb::KeyWordFile::addOpt(std::string const &keyword, char const &parser, std::string const& opt)
+{
+
+}
+
+
+void stb::KeyWordFile::removeOpt(std::string const &keyword, char const &parser, std::string const& opt)
+{
+
+}
+*/

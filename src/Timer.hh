@@ -31,13 +31,15 @@ namespace stb
     //destructeur
     
     //accesseurs
-    unsigned long long getNano() const; //retourne la durée écoulée en nanoseconde
+    private:
     std::chrono::nanoseconds getNanoDuration() const; //retourne la durée écoulée en nanoseconde dans une instance std::chrono::duration
-    
+
+    public:
     template<typename ratio = second>  
     unsigned long long get() const  
     {
-      return (getNano() * ratio::den) / ((1000*1000*1000) * ratio::num); //on multiplie par 10^9 pour avoir des secondes, qui seront modifiées par le ratio std::ratio
+      return static_cast<unsigned long long>(getDuration<std::chrono::duration<long long, ratio>>().count()); //on multiplie par 10^9 pour avoir des secondes, qui sont modifiées par le ratio std::ratio
+      //le type long long est signé car std::chrono::nano est signé (on s'aligne)
     }  
 
     template<typename unit = std::chrono::seconds>
@@ -50,7 +52,44 @@ namespace stb
     void start();
     void pause();
     void stop();
+    
+    template<typename ratio = second, typename durationType>  
+    void add(durationType time)
+    {
+      _addedTime += std::chrono::duration<unsigned long long, ratio>(time);
+    }
 
+    template<typename ratio = second, typename durationType>  
+    void subtract(durationType time)
+    {
+      unsigned long long current = get<ratio>();
+      if(time < current)
+        _addedTime -= std::chrono::duration<unsigned long long, ratio>(time);
+      else
+        _addedTime -= std::chrono::duration<unsigned long long, ratio>(current);
+    }
+
+
+
+    template<typename unit = std::chrono::seconds>
+    void addDuration(unit const& time)
+    {
+      _addedTime += time;
+    }
+    
+    template<typename unit = std::chrono::seconds>
+    void subtractDuration(unit const& time)
+    {
+      unit current = get<unit>();
+      if(time < current)
+        _addedTime -= time;
+      else
+        _addedTime -= current;
+    }   
+
+    void clear();
+    void reset();
+    
     //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
 
   protected:
@@ -58,6 +97,7 @@ namespace stb
     std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin; //point du premier start() suivant le dernier stop()
     std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause; //point du dernier pause()
     std::chrono::nanoseconds _PausedTime; //stock le temps total passé en pause() depuis le dernier stop()
+    std::chrono::nanoseconds _addedTime; //temps ajouté / retiré (add ou substract)
     bool _isPaused;
     bool _isStopped;
   };

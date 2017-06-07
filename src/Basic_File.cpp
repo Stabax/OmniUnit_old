@@ -5,19 +5,23 @@
 
 
 
-stb::File_Exception::File_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
+stb::File_Exception::File_Exception(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Read_Only::File_Read_Only(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Read_Only::File_Read_Only(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Permission_Denied::File_Permission_Denied(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Read_Only_Mode::File_Read_Only_Mode(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Unlinked::File_Unlinked(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Permission_Denied::File_Permission_Denied(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Invalid_Argument::File_Invalid_Argument(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Unlinked::File_Unlinked(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Exist::File_Exist(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Invalid_Argument::File_Invalid_Argument(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
-stb::File_Open::File_Open(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+stb::File_Exist::File_Exist(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_Open::File_Open(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
+
+stb::File_End_Reached::File_End_Reached(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
 
 
 
@@ -26,7 +30,7 @@ stb::File_Open::File_Open(std::string const &senderFunction, std::string const &
 mode_t stb::Basic_File::defaultMode = m755;
 
 
-stb::Basic_File::Basic_File(std::string const &path, mode_t mode) : Directory_Item(path), _file(newFile(_path, mode))
+stb::Basic_File::Basic_File(std::string const& path, mode_t mode) : Directory_Item(path), _file(newFile(_path, mode))
 {
 }
 
@@ -42,7 +46,7 @@ stb::Basic_File::~Basic_File()
 }
 
 
-bool stb::Basic_File::exist(std::string const &path)
+bool stb::Basic_File::exist(std::string const& path)
 {
   errno = 0;
   std::ifstream tmpFile(path.c_str()); //ifstream permet de tester les fichiers même en read-only
@@ -240,7 +244,7 @@ void stb::Basic_File::rename(std::string const& name)
 }
 
 
-void stb::Basic_File::move(std::string const &dir)
+void stb::Basic_File::move(std::string const& dir)
 {
   if(! isOpen())
   {

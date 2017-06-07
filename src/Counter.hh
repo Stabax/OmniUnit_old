@@ -21,28 +21,21 @@ namespace stb
 
   public:
     //constructeurs
-    template<typename ratio, typename durationType>
-    explicit Counter(durationType const& duration) : _End(std::chrono::high_resolution_clock::now() + std::chrono::duration<long long, ratio>(duration))
-    {
-    }
-    
-    template<typename durationType>
-    explicit Counter(durationType const& duration) : _End(std::chrono::high_resolution_clock::now() + duration)
-    {
-    }
+    explicit Counter();
 
     //destructeur
 
     //méthodes statiques et swap
 
     //accesseurs
-    unsigned long long getNano() const; //retourne la durée restante en nanoseconde
+    private:
     std::chrono::nanoseconds getNanoDuration() const; //retourne la durée restante en nanoseconde dans une instance std::chrono::duration
-    
+
+    public:
     template<typename ratio = second>
     unsigned long long get() const
     {
-      return (getNano() * ratio::den) / ((1000*1000*1000) * ratio::num);
+      return static_cast<unsigned long long>(getDuration<std::chrono::duration<long long, ratio>>().count());
     }
 
 
@@ -54,29 +47,32 @@ namespace stb
 
 
     //mutateurs
-    template<typename ratio, typename durationType>
-    void add(durationType const& duration)
+    template<typename ratio = stb::second, typename durationType>
+    void add(durationType duration)
     {
       _End = _End + std::chrono::duration<long long, ratio>(duration);
     }
-      
-    template<typename durationType>
-    void add(durationType const& duration)
-    {
-       _End = _End + duration;
-    }
     
-    template<typename ratio, typename durationType>
-    void subtract(durationType const& duration)
+    template<typename ratio = stb::second, typename durationType>
+    void subtract(durationType duration)
     {
       _End = _End - std::chrono::duration<long long, ratio>(duration);
     }
-    
+
+
+
     template<typename durationType>
-    void subtract(durationType const& duration)
+    void addDuration(durationType const& duration)
+    {
+       _End = _End + duration;
+    }
+    template<typename durationType>
+    void subtractDuration(durationType const& duration)
     {
       _End = _End - duration;
     }
+
+
     
     template<typename timePointType>
     void setEnd(timePointType const& timePoint)
@@ -87,6 +83,7 @@ namespace stb
     //méthodes
     void start();
     void pause();
+    void reset(); //remet _End à now et arrête le décompte
 
     //opérateurs méthodes ( =, (), [], ->, ++, --, +=, -=, /=, *=, %=)
 

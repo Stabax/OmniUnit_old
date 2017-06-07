@@ -3,19 +3,14 @@
 #include "Counter.hh"
 
 
-unsigned long long stb::Counter::getNano() const
-{
-  if((_End - std::chrono::high_resolution_clock::now()).count() < 0)
-    return 0;
-  return static_cast<unsigned long long>(((_End - _Timer._Begin) - _Timer.getNanoDuration()).count());
-}
+stb::Counter::Counter() : _End(std::chrono::high_resolution_clock::now()), _Timer()
+{}
 
 
 std::chrono::nanoseconds stb::Counter::getNanoDuration() const
 {
-  if((_End - std::chrono::high_resolution_clock::now()).count() < 0)
-    return std::chrono::nanoseconds(0);
-  return (_End - _Timer._Begin) - _Timer.getNanoDuration();
+  std::chrono::nanoseconds current = (_End - _Timer._Begin) - _Timer.getNanoDuration();
+  return current.count() < 0 ? std::chrono::nanoseconds::zero() : current;
 }
 
 
@@ -28,4 +23,11 @@ void stb::Counter::start()
 void stb::Counter::pause()
 {
   _Timer.pause();
+}
+
+void stb::Counter::reset()
+{
+  _Timer.pause();
+  _End = std::chrono::high_resolution_clock::now();
+  _Timer._Begin = _End;
 }

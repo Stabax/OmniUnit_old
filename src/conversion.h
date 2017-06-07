@@ -38,6 +38,11 @@ namespace stb
   }
 
   template <typename A, typename B>
+  bool isSameType(A a, B b)
+  {
+    return (typeid(a) == typeid(b));
+  }
+  template <typename A, typename B>
   bool isSameType()
   {
     return (typeid(A) == typeid(B));
