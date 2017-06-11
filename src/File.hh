@@ -30,6 +30,8 @@ namespace stb
   
   class File : public Basic_File
   {
+  //raison de changement : modification de std::fstream
+  
     //fonctions amies
 
   public:

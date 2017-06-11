@@ -14,7 +14,7 @@
 
 namespace stb
 {
-
+//raison de changement : modification de la classe Timer
   class Counter
   {
     //fonctions amies

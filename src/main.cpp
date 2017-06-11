@@ -12,19 +12,19 @@ int main()
 {
 try
 {
-  //RANDOM TEST
-/*
 
-*/
-/*
-  std::cout<< "0. quitter" <<'\n';
-  std::cout<< "1. lire" <<'\n';
-  std::cout<< "2. ecrire" <<'\n';
-  std::cout<< "3. effacer" <<'\n';
-  std::cout<< "" <<'\n';
 
-  unsigned choix = 0;
-  stb::File file("txt.txt");
+  stb::GKWFile file("txt.txt");
+  std::cout << file.findBegGroup("1")<<'\n';
+  std::cout << file.findEndGroup("1")<<'\n';
+
+  std::vector<std::string> test {"1", "2"};
+  std::cout << file.findBegGroup(test)<<'\n';
+  std::cout << file.findEndGroup(test)<<'\n';
+  
+  std::cout << file.findBegGroup({"1", "2", "3"})<<'\n';
+  std::cout << file.findEndGroup({"1", "2", "3"})<<'\n';
+/*
   do
   {
     std::cin >> choix;

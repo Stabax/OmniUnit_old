@@ -18,7 +18,7 @@
 
 namespace stb
 {
-
+//raison de changement : modification de std::chrono
   class Timer
   {
   public:

@@ -17,13 +17,11 @@ implémenter la classe de hashage
 
 retirer les const& aux types primitifs en paramèrtres de fonctions
 
-operator+ et - pour timer et counter (et comparaison)
 les constructeurs par mouvement et affectation par mouvement doivent être noexcept (une histoire avec les conteneurs et les algorithmes je crois ...)
 
 toujours tester si parser != ''
-readKeywordValue ne doit pas prendre les opt
 
-Ajouter des options après les valeurs des mots clefs KEYWORD=value<<<opt1, opt2, opt3, ...>>>
 GKWFile doit avoir une methode retournant un vecteur sur tout le contenu du groupe
 
-une classe imbriqued grouped file ? ou alors on inclue cette fonctionnalité dans la glasse GKWFile ?
+nombre de sous groupes dans un groupe (récursir et non récursif ?)
+liste des sous groupes dans un groupe

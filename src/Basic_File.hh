@@ -95,6 +95,8 @@ namespace stb
 
   class Basic_File : public Directory_Item
   {
+  //raison de changement : modification de std::filesystem
+  
     //fonctions amies
 
   public:  

@@ -1,5 +1,7 @@
 //File.cpp
 
+#include <algorithm>
+
 #include "File.hh"
 #include "Exception.hpp"
 
@@ -21,16 +23,7 @@ unsigned stb::File::getLineCount()
   {
     _file->clear();
     _file->seekg(0, std::ios::beg);
-    std::string line;
-    unsigned lineCount = 0;
-    while(_file->rdstate() == std::fstream::goodbit)
-    {
-      std::getline(*_file, line);
-      lineCount++;
-    }
-    if(lineCount == 1 && line == "")
-      lineCount--;
-    return (lineCount);
+    return static_cast<unsigned>(std::count( std::istreambuf_iterator<char>( *_file ), std::istreambuf_iterator<char>(), '\n' ));
   }
   throw File_Close("unsigned stb::File::getLineCount()", __FILE__);
 }
@@ -50,19 +43,19 @@ std::string stb::File::readLine(unsigned line)
 	    return (text);
 	  }
     else
-	    throw File_Close("std::string stb::File::readLine(unsigned const&)", __FILE__);
+	    throw File_Close("std::string stb::File::readLine(unsigned)", __FILE__);
   }
   else
-    throw File_Invalid_Argument("std::string stb::File::readLine(unsigned const&)", __FILE__);
+    throw File_Invalid_Argument("std::string stb::File::readLine(unsigned)", __FILE__);
 }
 
 
 std::vector<std::string> stb::File::readLine(unsigned line, unsigned n)
 {
-  std::vector<std::string> text(0);
-  if(getLineCount() >= line)
+  if(isOpen())
   {
-    if(isOpen())
+    std::vector<std::string> text(0);
+    if(line <= getLineCount())
     {
       if(n == 0 || n >= getLineCount())
         n = getLineCount() - line + 1;
@@ -82,13 +75,11 @@ std::vector<std::string> stb::File::readLine(unsigned line, unsigned n)
           }
         }
       }
-      return (text);
     }
-    else
-      throw File_Close("std::vector<std::string> stb::File::readLine(unsigned const&, unsigned)", __FILE__);
+    return text;
   }
   else
-    return text;  
+    throw File_Close("std::vector<std::string> stb::File::readLine(unsigned, unsigned)", __FILE__);
 }
 
 

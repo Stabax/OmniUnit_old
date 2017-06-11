@@ -15,7 +15,7 @@
 
 namespace stb
 {
-
+//raison de changement : modification de la forme des jeux clef-valeurs
   class KeyWordFile : public File
   {
     //fonctions amies
@@ -43,9 +43,6 @@ namespace stb
     void addKeyword(std::string const &keyword, char const &parser, std::string const &text = "");
     void removeKeyword(std::string const &keyword, char const &parser);
 
-    std::vector<std::string> readOpt(std::string const &keyword, char const &parser);
-    void addOpt(std::string const &keyword, char const &parser, std::string const& opt);
-    void removeOpt(std::string const &keyword, char const &parser, std::string const& opt = "");
     
     //opérateurs méthodes ( =, (), [], ->, +=, -=, /=, *=, %=)
 

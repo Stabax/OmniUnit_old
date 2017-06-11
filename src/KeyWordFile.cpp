@@ -33,14 +33,15 @@ unsigned stb::KeyWordFile::findKeyword(std::string const &keyword , char const &
 {
   if(isOpen())
   {
+    _file->clear();
     _file->seekg(0, std::ios::beg);
     std::string text;
     
-    for(unsigned line = 0; _file->rdstate() == std::fstream::goodbit; ++line)
+    for(unsigned line = 1; _file->rdstate() == std::fstream::goodbit; ++line)
 	  {
 	    std::getline(*_file, text);
 	    
-	    if(text.find_first_of(parser) != text.find_last_of(parser) &&
+	    if(text.find_first_of(parser) == text.find_last_of(parser) &&
 	    text.find_first_of(parser) != std::string::npos)
 	    {
 	      text = removeSpaces(text, parser);
@@ -112,31 +113,3 @@ void stb::KeyWordFile::removeKeyword(std::string const &keyword, char const &par
 {
   removeLine(findKeyword(keyword, parser));
 }
-
-
-std::vector<std::string> stb::KeyWordFile::readOpt(std::string const &keyword, char const &parser)
-{
-  std::vector<std::string> list;
-  unsigned line = findKeyword(keyword, parser);
-  if(line != 0)
-  {
-    std::string content = readLine(line);
-    content.substr(0, content.find_first_of("\\"));
-    /////////.......................
-  }
-  
-  return list;
-}
-
-/*
-void stb::KeyWordFile::addOpt(std::string const &keyword, char const &parser, std::string const& opt)
-{
-
-}
-
-
-void stb::KeyWordFile::removeOpt(std::string const &keyword, char const &parser, std::string const& opt)
-{
-
-}
-*/
