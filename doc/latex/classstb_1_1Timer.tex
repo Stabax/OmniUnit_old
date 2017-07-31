@@ -1,0 +1,76 @@
+\hypertarget{classstb_1_1Timer}{\section{stb\+:\+:Timer Class Reference}
+\label{classstb_1_1Timer}\index{stb\+::\+Timer@{stb\+::\+Timer}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Timer_a26037b02ded84a9db819cac817760a4f}{{\footnotesize template$<$typename ratio  = second$>$ }\\unsigned long long {\bfseries get} () const }\label{classstb_1_1Timer_a26037b02ded84a9db819cac817760a4f}
+
+\item 
+\hypertarget{classstb_1_1Timer_ad167f1cda1a984a51db0988b0be36a5b}{{\footnotesize template$<$typename unit  = std\+::chrono\+::seconds$>$ }\\unit {\bfseries get\+Duration} () const }\label{classstb_1_1Timer_ad167f1cda1a984a51db0988b0be36a5b}
+
+\item 
+\hypertarget{classstb_1_1Timer_aeaec01e8e60bb496562d99f8d4d01678}{void {\bfseries start} ()}\label{classstb_1_1Timer_aeaec01e8e60bb496562d99f8d4d01678}
+
+\item 
+\hypertarget{classstb_1_1Timer_a93e6e60298c6edd63d4e0708886425bd}{void {\bfseries pause} ()}\label{classstb_1_1Timer_a93e6e60298c6edd63d4e0708886425bd}
+
+\item 
+\hypertarget{classstb_1_1Timer_a9f68a8b467843ba53cb502d30ccc66c8}{void {\bfseries stop} ()}\label{classstb_1_1Timer_a9f68a8b467843ba53cb502d30ccc66c8}
+
+\item 
+\hypertarget{classstb_1_1Timer_a2e3807d4f91d0dfb04f9e0a78f1ea681}{{\footnotesize template$<$typename ratio  = second, typename duration\+Type $>$ }\\void {\bfseries add} (duration\+Type time)}\label{classstb_1_1Timer_a2e3807d4f91d0dfb04f9e0a78f1ea681}
+
+\item 
+\hypertarget{classstb_1_1Timer_ab05c79c7feff035899c7f828567644cc}{{\footnotesize template$<$typename ratio  = second, typename duration\+Type $>$ }\\void {\bfseries subtract} (duration\+Type time)}\label{classstb_1_1Timer_ab05c79c7feff035899c7f828567644cc}
+
+\item 
+\hypertarget{classstb_1_1Timer_ae73beef5bda968742e0958403738da87}{{\footnotesize template$<$typename unit  = std\+::chrono\+::seconds$>$ }\\void {\bfseries add\+Duration} (unit const \&time)}\label{classstb_1_1Timer_ae73beef5bda968742e0958403738da87}
+
+\item 
+\hypertarget{classstb_1_1Timer_a6e3dcff21a6433f257bc59b5b29a3339}{{\footnotesize template$<$typename unit  = std\+::chrono\+::seconds$>$ }\\void {\bfseries subtract\+Duration} (unit const \&time)}\label{classstb_1_1Timer_a6e3dcff21a6433f257bc59b5b29a3339}
+
+\item 
+\hypertarget{classstb_1_1Timer_aac66cb13a7217ad9c4c4ec301a229ed0}{void {\bfseries clear} ()}\label{classstb_1_1Timer_aac66cb13a7217ad9c4c4ec301a229ed0}
+
+\item 
+\hypertarget{classstb_1_1Timer_aba7273a277185b9e01a7075b432de7e8}{void {\bfseries reset} ()}\label{classstb_1_1Timer_aba7273a277185b9e01a7075b432de7e8}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Timer_a1613a6eeb760536938046f1a41010a32}{std\+::chrono\+::time\+\_\+point\\*
+$<$ std\+::chrono\+::high\+\_\+resolution\+\_\+clock, \\*
+std\+::chrono\+::nanoseconds $>$ {\bfseries \+\_\+\+Begin}}\label{classstb_1_1Timer_a1613a6eeb760536938046f1a41010a32}
+
+\item 
+\hypertarget{classstb_1_1Timer_ac688e16e37c2b09f1d83a9a2d6df98ea}{std\+::chrono\+::time\+\_\+point\\*
+$<$ std\+::chrono\+::high\+\_\+resolution\+\_\+clock, \\*
+std\+::chrono\+::nanoseconds $>$ {\bfseries \+\_\+\+Begin\+Pause}}\label{classstb_1_1Timer_ac688e16e37c2b09f1d83a9a2d6df98ea}
+
+\item 
+\hypertarget{classstb_1_1Timer_a78f309f8365e4cc4c3aabba2383a3d4d}{std\+::chrono\+::nanoseconds {\bfseries \+\_\+\+Paused\+Time}}\label{classstb_1_1Timer_a78f309f8365e4cc4c3aabba2383a3d4d}
+
+\item 
+\hypertarget{classstb_1_1Timer_ad8af48caafad1a0daaef0ca9be597429}{std\+::chrono\+::nanoseconds {\bfseries \+\_\+added\+Time}}\label{classstb_1_1Timer_ad8af48caafad1a0daaef0ca9be597429}
+
+\item 
+\hypertarget{classstb_1_1Timer_a0e3889711d526ab1e7962703e0a21606}{bool {\bfseries \+\_\+is\+Paused}}\label{classstb_1_1Timer_a0e3889711d526ab1e7962703e0a21606}
+
+\item 
+\hypertarget{classstb_1_1Timer_ab6b5c2077f7444d7cd5041199d69628a}{bool {\bfseries \+\_\+is\+Stopped}}\label{classstb_1_1Timer_ab6b5c2077f7444d7cd5041199d69628a}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Timer_ab25f3b4c3811997d7268d73eb481f239}{class {\bfseries Counter}}\label{classstb_1_1Timer_ab25f3b4c3811997d7268d73eb481f239}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Timer.\+hh\item 
+src/Timer.\+cpp\end{DoxyCompactItemize}

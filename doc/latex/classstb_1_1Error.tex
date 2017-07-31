@@ -1,0 +1,82 @@
+\hypertarget{classstb_1_1Error}{\section{stb\+:\+:Error Class Reference}
+\label{classstb_1_1Error}\index{stb\+::\+Error@{stb\+::\+Error}}
+}
+
+
+Inheritance diagram for stb\+:\+:Error\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{classstb_1_1Error__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Error_a164d493ebaeb01cae57d27572e1c5122}{{\bfseries Error} (\hyperlink{classstb_1_1Error}{Error} const \&Obj)=delete}\label{classstb_1_1Error_a164d493ebaeb01cae57d27572e1c5122}
+
+\item 
+\hypertarget{classstb_1_1Error_ab0b6bc245915e5ab56205c75fbc62c04}{{\bfseries Error} (std\+::string const \&reason)}\label{classstb_1_1Error_ab0b6bc245915e5ab56205c75fbc62c04}
+
+\item 
+\hypertarget{classstb_1_1Error_a55fdff142eeb3b1bfc65f25826462670}{{\bfseries Error} (unsigned const \&line, std\+::string const \&source\+Path=default\+Source\+Path)}\label{classstb_1_1Error_a55fdff142eeb3b1bfc65f25826462670}
+
+\item 
+\hypertarget{classstb_1_1Error_a88766f6c9e79450819a6226373bca503}{{\bfseries Error} (std\+::string const \&keyword, char const \&parser, std\+::string const \&source\+Path=default\+Source\+Path)}\label{classstb_1_1Error_a88766f6c9e79450819a6226373bca503}
+
+\item 
+\hypertarget{classstb_1_1Error_a5c0899c77e8bd5ea13ba60d48f3e6adf}{{\bfseries Error} (std\+::string const \&group, std\+::string const \&keyword, char const \&parser, std\+::string const \&source\+Path=default\+Source\+Path)}\label{classstb_1_1Error_a5c0899c77e8bd5ea13ba60d48f3e6adf}
+
+\item 
+\hypertarget{classstb_1_1Error_ac0159810929ea5d676ef31e161017bf1}{std\+::string {\bfseries get\+Date} () const }\label{classstb_1_1Error_ac0159810929ea5d676ef31e161017bf1}
+
+\item 
+\hypertarget{classstb_1_1Error_adb6b777e10687277cd0d11a91f8278bd}{virtual const char $\ast$ {\bfseries err} () const }\label{classstb_1_1Error_adb6b777e10687277cd0d11a91f8278bd}
+
+\item 
+\hypertarget{classstb_1_1Error_aa39b36abd3371e2f8480654a647636d4}{\hyperlink{classstb_1_1Error}{Error} \& {\bfseries operator=} (\hyperlink{classstb_1_1Error}{Error} const \&Obj)=delete}\label{classstb_1_1Error_aa39b36abd3371e2f8480654a647636d4}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Error_ae1fb982d1e8142949afb5a504887a603}{static void {\bfseries set\+Default\+Source\+Path} (std\+::string const \&path)}\label{classstb_1_1Error_ae1fb982d1e8142949afb5a504887a603}
+
+\item 
+\hypertarget{classstb_1_1Error_ab789142a97ea96ba4c6c465ba126dabf}{static std\+::string {\bfseries get\+Default\+Source\+Path} ()}\label{classstb_1_1Error_ab789142a97ea96ba4c6c465ba126dabf}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Error_a4ad1d6e526639c25ec5366738f89e71c}{static std\+::string {\bfseries load\+Reason} (unsigned const \&line, std\+::string const \&path)}\label{classstb_1_1Error_a4ad1d6e526639c25ec5366738f89e71c}
+
+\item 
+\hypertarget{classstb_1_1Error_a6c82cee5e945d8ff558174b73cf887c4}{static std\+::string {\bfseries load\+Reason} (std\+::string const \&keyword, char const \&parser, std\+::string const \&path)}\label{classstb_1_1Error_a6c82cee5e945d8ff558174b73cf887c4}
+
+\item 
+\hypertarget{classstb_1_1Error_a2d42bfcb8d2d6e113ea5c2feeeaa053f}{static std\+::string {\bfseries load\+Reason} (std\+::string const \&group, std\+::string const \&keyword, char const \&parser, std\+::string const \&path)}\label{classstb_1_1Error_a2d42bfcb8d2d6e113ea5c2feeeaa053f}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Error_a0a7a01e9d66691c0aae09e616baac1a5}{std\+::string {\bfseries \+\_\+reason}}\label{classstb_1_1Error_a0a7a01e9d66691c0aae09e616baac1a5}
+
+\item 
+\hypertarget{classstb_1_1Error_acee5779af314f3bccf62877a3112e050}{std\+::string {\bfseries \+\_\+date}}\label{classstb_1_1Error_acee5779af314f3bccf62877a3112e050}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classstb_1_1Error_a199497abb5bd7a2ad6fa119f5f718ea3}{static std\+::string {\bfseries default\+Source\+Path} = \char`\"{}error.\+src\char`\"{}}\label{classstb_1_1Error_a199497abb5bd7a2ad6fa119f5f718ea3}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Error.\+hh\item 
+src/Error.\+cpp\end{DoxyCompactItemize}
