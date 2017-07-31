@@ -25,6 +25,7 @@ namespace stb
   typedef std::ratio<60, 1> minute;
   typedef std::ratio<60*60, 1> hour;
   typedef std::ratio<60*60*24, 1> day;
+  typedef std::ratio<60*60*24*7, 1> week;
   typedef std::ratio<60*60*24*30, 1> month;
   typedef std::ratio<60*60*24*365, 1> year;
 
@@ -33,21 +34,14 @@ namespace stb
   class Date_Exception : public Exception
   {
     public:
-    Date_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Unknown date exception";}
-  };
-
-    class Date_Current_Unaviable : public Date_Exception
-  {
-    public:
-    Date_Current_Unaviable(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Unable to get current time";}
+    Date_Exception(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
   };
 
 
 
-  
-  
+
+
+
   class Date
   {
   public:
@@ -59,13 +53,13 @@ namespace stb
     Date() = delete;
 
     //méthodes statiques
-    static void setTimeLag(int const& hour); //enregistre le décalage horraire (en heure) par rapport à l'heure GMT
-    static struct tm* getTm(location const& type);
-    static std::string time(location const& type = location::local); //retourne l'heure actuelle
-    static std::string date(location const& type = location::local); //retourne la date actuelle
+    static void setTimeLag(int hour); //enregistre le décalage horraire (en heure) par rapport à l'heure GMT
+    static struct tm* getTm(location type);
+    static std::string time(location type = location::local); //retourne l'heure actuelle
+    static std::string date(location type = location::local); //retourne la date actuelle
 
     template<typename unit>
-    static int time(location const& type = location::local) //ne retourne qu'une valeur (seconde OU minutes OU heure OU jour, etc...)
+    static int time(location type = location::local) //ne retourne qu'une valeur (seconde OU minutes OU heure OU jour, etc...)
     {
       struct tm* instant = getTm(type);
       if(isSameType<unit, second>())
@@ -84,7 +78,7 @@ namespace stb
         throw std::string("");
     }
     
-    static std::string dateTime(location const& type = location::local) noexcept; //retourne la date et l'heure. noexcept car cette fonction est utilisée dans les classes d'exceptions
+    static std::string dateTime(location type = location::local) noexcept; //retourne la date et l'heure. noexcept car cette fonction est utilisée dans les classes d'exceptions
 
     protected:
     //attributs

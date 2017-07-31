@@ -1,7 +1,7 @@
 //Error.cpp
 
 #include "Error.hh"
-#include "GroupedKeyWordFile.hh"
+#include "KeyWordFile.hh"
 #include "time.h"
 
 
@@ -23,11 +23,6 @@ stb::Error::Error(std::string const &keyword, char const &parser, std::string co
 }
 
 
-stb::Error::Error(std::string const& group, std::string const &keyword, char const &parser, std::string const& sourcePath) : _reason(loadReason(group, keyword, parser, sourcePath)), _date(Date::dateTime())
-{
-}
-
-
 stb::Error::~Error()
 {
 }
@@ -44,13 +39,6 @@ std::string stb::Error::loadReason(std::string const &keyword, char const &parse
 {
   KeyWordFile sourceFile(path);
   return sourceFile.readKeywordValue(keyword, parser);
-}
-
-
-std::string stb::Error::loadReason(std::string const& group, std::string const& keyword, char const &parser, std::string const &path)
-{
-  GroupedKeyWordFile sourceFile(path);
-  return sourceFile.readGKeywordValue(group, keyword, parser);
 }
 
 
@@ -98,11 +86,6 @@ stb::Detailed_Error::Detailed_Error(std::string const &keyword, std::string cons
 }
 
 
-stb::Detailed_Error::Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath) : Error(group, keyword, parser, sourcePath), _senderFunction(senderFunction), _senderFile(senderFile)
-{
-}
-
-
 std::string stb::Detailed_Error::getSenderFunction() const noexcept
 {
   return _senderFunction;
@@ -135,11 +118,6 @@ stb::Log_Error::Log_Error(std::string const &keyword, char const &parser) : Erro
 }
 
 
-stb::Log_Error::Log_Error(std::string const &group, std::string const& keyword, char const &parser) : Error(group, keyword, parser, defaultSourcePath), Loggable_Error(defaultLogPath)
-{
-}
-
-
 stb::Log_Error::Log_Error(unsigned const& line, file const& type, std::string const& path) : Error(line, type == file::source ? path : defaultSourcePath), Loggable_Error(type == file::log ? path : defaultLogPath)
 {
 }
@@ -150,22 +128,12 @@ stb::Log_Error::Log_Error(std::string const& keyword, char const &parser, file c
 }
 
 
-stb::Log_Error::Log_Error(std::string const& group, std::string const &keyword, char const &parser, file const& type, std::string const& path) : Error(group, keyword, parser, type == file::source ? path : defaultSourcePath), Loggable_Error(type == file::log ? path : defaultLogPath)
-{
-}
-
-
 stb::Log_Error::Log_Error(unsigned const &line, std::string const& sourcePath, std::string const& logPath) : Error(line, sourcePath), Loggable_Error(logPath)
 {
 }
 
 
 stb::Log_Error::Log_Error(std::string const &keyword, char const &parser, std::string const& sourcePath, std::string const& logPath) : Error(keyword, parser, sourcePath), Loggable_Error(logPath)
-{
-}
-
-
-stb::Log_Error::Log_Error(std::string const &group, std::string const& keyword, char const &parser, std::string const& sourcePath, std::string const& logPath) : Error(group, keyword, parser, sourcePath), Loggable_Error(logPath)
 {
 }
 
@@ -198,11 +166,6 @@ stb::Log_Detailed_Error::Log_Detailed_Error(std::string const &keyword, std::str
 }
 
 
-stb::Log_Detailed_Error::Log_Detailed_Error(std::string const &group, std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser) : Detailed_Error(group, keyword, senderFunction, senderFile, parser, defaultSourcePath), Loggable_Error(defaultLogPath)
-{
-}
-
-
 stb::Log_Detailed_Error::Log_Detailed_Error(unsigned const& line, std::string const &senderFunction, std::string const &senderFile, file const& type, std::string const& path) : Detailed_Error(line, senderFunction, senderFile, type == file::source ? path : defaultSourcePath), Loggable_Error(type == file::log ? path : defaultLogPath)
 {
 }
@@ -213,22 +176,12 @@ stb::Log_Detailed_Error::Log_Detailed_Error(std::string const& keyword, std::str
 }
 
 
-stb::Log_Detailed_Error::Log_Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, file const& type, std::string const& path) : Detailed_Error(group, keyword, senderFunction, senderFile, parser, type == file::source ? path : defaultSourcePath), Loggable_Error(type == file::log ? path : defaultLogPath)
-{
-}
-
-
 stb::Log_Detailed_Error::Log_Detailed_Error(unsigned const &line, std::string const &senderFunction, std::string const &senderFile, std::string const& sourcePath, std::string const& logPath) : Detailed_Error(line, senderFunction, senderFile, sourcePath), Loggable_Error(logPath)
 {
 }
 
 
 stb::Log_Detailed_Error::Log_Detailed_Error(std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath, std::string const& logPath) : Detailed_Error(keyword, senderFunction, senderFile, parser, sourcePath), Loggable_Error(logPath)
-{
-}
-
-
-stb::Log_Detailed_Error::Log_Detailed_Error(std::string const &group, std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath, std::string const& logPath) : Detailed_Error(group, keyword, senderFunction, senderFile, parser, sourcePath), Loggable_Error(logPath)
 {
 }
 

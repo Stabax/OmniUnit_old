@@ -2,25 +2,23 @@
 
 #include "time.h"
 
-stb::Date_Exception::Date_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
-
-stb::Date_Current_Unaviable::Date_Current_Unaviable(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Date_Exception(senderFunction, senderFile, logPath){}
+stb::Date_Exception::Date_Exception(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(reason,senderFunction, senderFile, logPath){}
 
 
 int stb::Date::timeLag = 0;
  
  
-void stb::Date::setTimeLag(int const& hour)
+void stb::Date::setTimeLag(int hour)
 {
   timeLag = hour * 3600;
 }
 
 
-struct tm* stb::Date::getTm(location const& type)
+struct tm* stb::Date::getTm(location type)
 {
   time_t seconds = std::time(nullptr);
   if(seconds == -1)
-    throw Date_Current_Unaviable("struct tm* stb::Date::getTm(location const&)", __FILE__);
+    throw Date_Exception("Unable to get current time", "struct tm* stb::Date::getTm(location)", __FILE__);
   if(type == location::gmt)
     return (gmtime(&seconds));
   else if(type == location::timeZone)
@@ -33,7 +31,7 @@ struct tm* stb::Date::getTm(location const& type)
 }
 
 
-std::string stb::Date::time(location const& type)
+std::string stb::Date::time(location type)
 {
   struct tm* instant = getTm(type);
   std::string toReturn;
@@ -46,7 +44,7 @@ std::string stb::Date::time(location const& type)
 }
 
 
-std::string stb::Date::date(location const& type)
+std::string stb::Date::date(location type)
 {
   struct tm* instant = getTm(type);
   std::string toReturn;
@@ -59,7 +57,7 @@ std::string stb::Date::date(location const& type)
 }
 
 
-std::string stb::Date::dateTime(location const& type) noexcept
+std::string stb::Date::dateTime(location type) noexcept
 {
   std::string toReturn;
   

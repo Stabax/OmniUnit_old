@@ -6,12 +6,6 @@
 #include "Exception.hpp"
 
 
-stb::File_Close::File_Close(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-
-
-
-
 stb::File::File(std::string const& filePath) : Basic_File(filePath)
 {
 }
@@ -25,7 +19,7 @@ unsigned stb::File::getLineCount()
     _file->seekg(0, std::ios::beg);
     return static_cast<unsigned>(std::count( std::istreambuf_iterator<char>( *_file ), std::istreambuf_iterator<char>(), '\n' ));
   }
-  throw File_Close("unsigned stb::File::getLineCount()", __FILE__);
+  throw File_Exception("File is close", "unsigned stb::File::getLineCount()", __FILE__);
 }
 
 
@@ -43,10 +37,10 @@ std::string stb::File::readLine(unsigned line)
 	    return (text);
 	  }
     else
-	    throw File_Close("std::string stb::File::readLine(unsigned)", __FILE__);
+	    throw File_Exception("File is close", "std::string stb::File::readLine(unsigned)", __FILE__);
   }
   else
-    throw File_Invalid_Argument("std::string stb::File::readLine(unsigned)", __FILE__);
+    throw File_Exception("Invalid argument", "std::string stb::File::readLine(unsigned)", __FILE__);
 }
 
 
@@ -79,7 +73,7 @@ std::vector<std::string> stb::File::readLine(unsigned line, unsigned n)
     return text;
   }
   else
-    throw File_Close("std::vector<std::string> stb::File::readLine(unsigned, unsigned)", __FILE__);
+    throw File_Exception("File is close", "std::vector<std::string> stb::File::readLine(unsigned, unsigned)", __FILE__);
 }
 
 

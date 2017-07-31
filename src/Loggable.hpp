@@ -57,43 +57,6 @@ namespace stb
 
 
 
-  class Loggable_Exception : public Loggable
-  {
-  //fonctions amies
-
-  public:
-    //constructeurs
-    explicit Loggable_Exception(std::string const& logPath = defaultLogPath) noexcept;
-
-    //destructeur
-    virtual ~Loggable_Exception() noexcept;
-
-    //méthodes statiques et swap
-    static void setDefaultLogPath(std::string const& logPath);
-    static std::string getDefaultLogPath();
-    
-    //méthodes
-    virtual void log() const noexcept = 0;
-
-    //mutateurs
-
-    //accesseurs
-
-    //opérateurs méthodes ( =, (), [], +=, -=, *=, /=, %=)
-
-  protected:
-    //attributs
-    
-    static std::string defaultLogPath;
-  };
-  //opérateurs non méthodes (++, --, +, -, *, /, %, ==, !=, <, >, <=, >=, <<, >>)
-
-
-
-  //////////////////////////////////////////////////////////////////////////
-
-
-
   class Loggable_Error : public Loggable
   {
   //fonctions amies

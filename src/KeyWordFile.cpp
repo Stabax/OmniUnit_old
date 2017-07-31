@@ -52,7 +52,7 @@ unsigned stb::KeyWordFile::findKeyword(std::string const &keyword , char const &
 	  return (0);
   }
   else
-    throw File_Close("unsigned stb::KeyWordFile::findKeyword(std::string const&, char const&)", __FILE__);
+    throw File_Exception("File is close", "unsigned stb::KeyWordFile::findKeyword(std::string const&, char const&)", __FILE__);
 }
 
 
@@ -81,7 +81,7 @@ std::string stb::KeyWordFile::readKeywordValue(std::string const &keyword, char 
 	    return (std::string(""));
   }
   else
-    throw File_Close("std::string stb::KeyWordFile::readKeywordValue(std::string const&, char const&)", __FILE__);
+    throw File_Exception("File is close", "std::string stb::KeyWordFile::readKeywordValue(std::string const&, char const&)", __FILE__);
 }
 
 

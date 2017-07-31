@@ -21,7 +21,6 @@ les constructeurs par mouvement et affectation par mouvement doivent être noexc
 
 toujours tester si parser != ''
 
-GKWFile doit avoir une methode retournant un vecteur sur tout le contenu du groupe
+documenter le doxygene
 
-nombre de sous groupes dans un groupe (récursir et non récursif ?)
-liste des sous groupes dans un groupe
+étendre asio (réseau) (créer des commandes préconstruites pour faire des HandCheck ou autre) et faire en sorte que les gens puissent créer leur commandes

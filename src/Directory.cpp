@@ -3,20 +3,7 @@
 #include "Directory.hh"
 
 
-stb::Directory_Exception::Directory_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
-
-stb::Directory_Path_Too_Long::Directory_Path_Too_Long(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
-
-stb::Directory_Permission_Denied::Directory_Permission_Denied(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
-
-stb::Directory_Unlinked::Directory_Unlinked(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
-
-stb::Directory_Unable_Access::Directory_Unable_Access(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
-
-stb::Directory_Read_Only::Directory_Read_Only(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Directory_Exception(senderFunction, senderFile, logPath){}
-
-
-
+stb::Directory_Exception::Directory_Exception(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const& logPath) noexcept : Exception(reason, senderFunction, senderFile, logPath){}
 
 
 stb::Directory::Directory(std::string const& path) : Directory_Item(path), _dir(nullptr)
@@ -41,7 +28,7 @@ bool stb::Directory::exist(std::string const& path)
     exist = false;
   if(chdir(currentDir) == 0)
     return (exist);
-  throw Directory_Unable_Access("bool stb::Directory::exist(std::string const&)", __FILE__);
+  throw Directory_Exception("Unable to access directory", "bool stb::Directory::exist(std::string const&)", __FILE__);
 }
 
 
@@ -51,13 +38,13 @@ char* stb::Directory::getDirPath()
   if(path == nullptr)
   {
     if(errno == ERANGE || errno == ENAMETOOLONG)
-      throw Directory_Path_Too_Long("char* stb::Directory::getDirPath()", __FILE__);
+      throw Directory_Exception("Directory Path exeeds PATH_MAX macro", "char* stb::Directory::getDirPath()", __FILE__);
     else if(errno == EACCES)
-      throw Directory_Permission_Denied("char* stb::Directory::getDirPath()", __FILE__);
+      throw Directory_Exception("Permission to work with directory DENIED", "char* stb::Directory::getDirPath()", __FILE__);
     else if(errno == ENOENT)
-      throw Directory_Unlinked("char* stb::Directory::getDirPath()", __FILE__);
+      throw Directory_Exception("Directory is unlinked", "char* stb::Directory::getDirPath()", __FILE__);
     else
-      throw Directory_Exception("char* stb::Directory::getDirPath()", __FILE__);
+      throw Directory_Exception("Unknown issue", "char* stb::Directory::getDirPath()", __FILE__);
   }
   return path;
 

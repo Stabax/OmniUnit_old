@@ -5,26 +5,7 @@
 
 
 
-stb::File_Exception::File_Exception(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Read_Only::File_Read_Only(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Read_Only_Mode::File_Read_Only_Mode(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Permission_Denied::File_Permission_Denied(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Unlinked::File_Unlinked(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Invalid_Argument::File_Invalid_Argument(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Exist::File_Exist(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_Open::File_Open(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-stb::File_End_Reached::File_End_Reached(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : File_Exception(senderFunction, senderFile, logPath){}
-
-
-
+stb::File_Exception::File_Exception(std::string const& reason, std::string const& senderFunction, std::string const& senderFile, std::string const& logPath) noexcept : Exception(reason, senderFunction, senderFile, logPath){}
 
 
 mode_t stb::Basic_File::defaultMode = m755;
@@ -54,7 +35,7 @@ bool stb::Basic_File::exist(std::string const& path)
   if(errno == ENOENT)
     return false;
   else if(errno == EACCES)
-    throw File_Permission_Denied("stb::Basic_File::exist(std::string const&)", __FILE__);
+    throw File_Exception("Permission to work with file DENIED", "stb::Basic_File::exist(std::string const&)", __FILE__);
   else
     return true;
 }
@@ -76,14 +57,14 @@ void stb::Basic_File::create(std::string const& path, mode_t mode)
       //TESTER CHMOD
     }
     else if(err == EROFS)
-      throw Directory_Read_Only("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+      throw Directory_Exception("Directory is read-only", "stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
     else if(err == EACCES)
-      throw Directory_Permission_Denied("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+      throw Directory_Exception("Permission to work with directory DENIED", "stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
     else
-      throw File_Exception("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+      throw File_Exception("Unknown issue", "stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
   } 
   else
-    throw File_Exist("stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
+    throw File_Exception("File already exists", "stb::Basic_File::create(std::string const&, mode_t)", __FILE__);
 }
 
 
@@ -104,11 +85,11 @@ std::fstream* stb::Basic_File::newFile(std::string const& path, mode_t mode)
   if(file != nullptr)
     return file;
   else if(errno == EROFS)
-      throw File_Read_Only("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+      throw File_Exception("File is read-only", "std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
   else if(errno == EACCES)
-    throw File_Permission_Denied("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+    throw File_Exception("Permission to work with file DENIED", "std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
   else
-    throw File_Exception("std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
+    throw File_Exception("Unknown issue", "std::fstream* stb::Basic_File::newFile(std::string const&, mode_t)", __FILE__);
 }
 
 
@@ -237,10 +218,10 @@ void stb::Basic_File::rename(std::string const& name)
       }
     }
     else
-      throw File_Invalid_Argument("stb::Basic_File::rename(std::string const&)", __FILE__);
+      throw File_Exception("Invalid argument", "stb::Basic_File::rename(std::string const&)", __FILE__);
   }
   else
-    throw File_Open("stb::Basic_File::rename(std::string const&)", __FILE__);
+    throw File_Exception("File is open and need to be close", "stb::Basic_File::rename(std::string const&)", __FILE__);
 }
 
 
@@ -260,7 +241,7 @@ void stb::Basic_File::move(std::string const& dir)
       }
     }    
   }
-  throw File_Open("stb::Basic_File::move(std::string const&)", __FILE__);
+  throw File_Exception("File is open and need to be close", "stb::Basic_File::move(std::string const&)", __FILE__);
 }
 
 
@@ -272,5 +253,5 @@ void stb::Basic_File::remove() const
     {}
   }
   else
-    throw File_Open("stb::Basic_File::rename(std::string const&)", __FILE__);
+    throw File_Exception("File is open and need to be close", "stb::Basic_File::rename(std::string const&)", __FILE__);
 }

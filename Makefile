@@ -21,7 +21,6 @@ SRCS =  $(SRCDIR)/main.cpp \
   $(SRCDIR)/Basic_File.cpp	\
 	$(SRCDIR)/File.cpp  		\
 	$(SRCDIR)/KeyWordFile.cpp  		\
-	$(SRCDIR)/GroupedKeyWordFile.cpp 	\
 	$(SRCDIR)/time.cpp  \
   $(SRCDIR)/Timer.cpp  \
   $(SRCDIR)/Counter.cpp \

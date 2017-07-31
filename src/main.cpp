@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Directory.hh"
-#include "GroupedKeyWordFile.hh"
+#include "KeyWordFile.hh"
 #include "Counter.hh"
 #include "Error.hh"
 
@@ -13,7 +13,7 @@ int main()
 try
 {
 
-
+/*
   stb::GKWFile file("txt.txt");
   std::cout << file.findBegGroup("1")<<'\n';
   std::cout << file.findEndGroup("1")<<'\n';
@@ -24,6 +24,7 @@ try
   
   std::cout << file.findBegGroup({"1", "2", "3"})<<'\n';
   std::cout << file.findEndGroup({"1", "2", "3"})<<'\n';
+*/
 /*
   do
   {

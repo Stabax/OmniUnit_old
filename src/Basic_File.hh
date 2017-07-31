@@ -20,76 +20,13 @@
 namespace stb
 {
 
-//========================================================================================
-//========================================================================================
-
-//DEFINITION DES EXCEPTIONS
-
   class File_Exception : public Exception
   {
     public:
-    File_Exception(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Unknown file Exception";}
+    File_Exception(std::string const& reason, std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
   };
 
-  class File_Read_Only : public File_Exception
-  {
-    public:
-    File_Read_Only(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File is read-only";}
-  };
 
-  class File_Read_Only_Mode : public File_Exception
-  {
-    public:
-    File_Read_Only_Mode(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File is open in read-only mode";}
-  };
-  
-  class File_Permission_Denied : public File_Exception
-  {
-    public:
-    File_Permission_Denied(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Permission to work with file DENIED";}
-  };
-
-  class File_Unlinked : public File_Exception
-  {
-    public:
-    File_Unlinked(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File is unlinked";}
-  };
-
-  class File_Invalid_Argument : public File_Exception
-  {
-    public:
-    File_Invalid_Argument(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Invalid argument";}
-  };
-
-  class File_Exist : public File_Exception
-  {
-    public:
-    File_Exist(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File already exists";}
-  };
-
-  class File_Open : public File_Exception
-  {
-    public:
-    File_Open(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File is open and need to be close";}
-  };
-
-  class File_End_Reached : public File_Exception
-  {
-    public:
-    File_End_Reached(std::string const& senderFunction, std::string const& senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Cannot read requested line : end of file has been reached";}
-  };
-
-//========================================================================================
-//========================================================================================
 
 
 

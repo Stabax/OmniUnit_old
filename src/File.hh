@@ -17,17 +17,6 @@
 
 namespace stb
 {
-  class File_Close : public File_Exception
-  {
-    public:
-    File_Close(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "File is close";}
-  };
-
-
-
-
-  
   class File : public Basic_File
   {
   //raison de changement : modification de std::fstream

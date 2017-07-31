@@ -36,43 +36,7 @@ namespace stb
   class Directory_Exception : public Exception
   {
     public:
-    Directory_Exception(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Unknown Directory Exception";}
-  };
-
-  class Directory_Path_Too_Long : public Directory_Exception
-  {
-    public:
-    Directory_Path_Too_Long(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Directory Path exeeds PATH_MAX macro";}
-  };
-
-  class Directory_Permission_Denied : public Directory_Exception
-  {
-    public:
-    Directory_Permission_Denied(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Permission to work with directory DENIED";}
-  };
-
-  class Directory_Unlinked : public Directory_Exception
-  {
-    public:
-    Directory_Unlinked(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Directory is unlinked";}
-  };
-
-  class Directory_Unable_Access : public Directory_Exception
-  {
-    public:
-    Directory_Unable_Access(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Unable to access directory";}
-  };
-
-  class Directory_Read_Only : public Directory_Exception
-  {
-    public:
-    Directory_Read_Only(std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
-    virtual const char* what() const noexcept {return "Directory is read-only";}
+    Directory_Exception(std::string const &reason, std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath) noexcept;
   };
 
 

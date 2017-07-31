@@ -26,7 +26,6 @@ namespace stb
 
     explicit Error(unsigned const& line, std::string const& sourcePath = defaultSourcePath);
     explicit Error(std::string const& keyword, char const &parser, std::string const& sourcePath = defaultSourcePath);
-    explicit Error(std::string const& group, std::string const &keyword, char const &parser, std::string const& sourcePath = defaultSourcePath);
 
     //destructeur
     virtual ~Error();
@@ -35,7 +34,6 @@ namespace stb
   protected:
     static std::string loadReason(unsigned const &line, std::string const &path);
     static std::string loadReason(std::string const &keyword, char const &parser, std::string const &path);
-    static std::string loadReason(std::string const& group, std::string const& keyword, char const &parser, std::string const &path);
   public:
     static void setDefaultSourcePath(std::string const &path);
     static std::string getDefaultSourcePath();
@@ -77,7 +75,6 @@ namespace stb
 
     explicit Detailed_Error(unsigned const& line, std::string const &senderFunction, std::string const &senderFile, std::string const& sourcePath = defaultSourcePath);
     explicit Detailed_Error(std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath = defaultSourcePath);
-    explicit Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath = defaultSourcePath);
 
     //destructeur
 
@@ -121,15 +118,12 @@ namespace stb
     explicit Log_Error(std::string const& reason, std::string const& logPath = defaultLogPath);
     explicit Log_Error(unsigned const& line);
     explicit Log_Error(std::string const& keyword, char const &parser);
-    explicit Log_Error(std::string const& group, std::string const &keyword, char const &parser);
 
     explicit Log_Error(unsigned const& line, file const& type, std::string const& path);
     explicit Log_Error(std::string const& keyword, char const &parser, file const& type, std::string const& path);
-    explicit Log_Error(std::string const& group, std::string const &keyword, char const &parser, file const& type, std::string const& path);
 
     explicit Log_Error(unsigned const& line, std::string const& sourcePath, std::string const& logPath);
     explicit Log_Error(std::string const& keyword, char const &parser, std::string const& sourcePath, std::string const& logPath);
-    explicit Log_Error(std::string const& group, std::string const &keyword, char const &parser, std::string const& sourcePath, std::string const& logPath);
     
     //destructeur
     
@@ -167,15 +161,12 @@ namespace stb
     explicit Log_Detailed_Error(std::string const& reason, std::string const &senderFunction, std::string const &senderFile, std::string const& logPath = defaultLogPath);
     explicit Log_Detailed_Error(unsigned const& line, std::string const &senderFunction, std::string const &senderFile);
     explicit Log_Detailed_Error(std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser);
-    explicit Log_Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser);
 
     explicit Log_Detailed_Error(unsigned const& line, std::string const &senderFunction, std::string const &senderFile, file const& type, std::string const& path);
     explicit Log_Detailed_Error(std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, file const& type, std::string const& path);
-    explicit Log_Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, file const& type, std::string const& path);
 
     explicit Log_Detailed_Error(unsigned const& line, std::string const &senderFunction, std::string const &senderFile, std::string const& sourcePath, std::string const& logPath);
     explicit Log_Detailed_Error(std::string const& keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath, std::string const& logPath);
-    explicit Log_Detailed_Error(std::string const& group, std::string const &keyword, std::string const &senderFunction, std::string const &senderFile, char const &parser, std::string const& sourcePath, std::string const& logPath);
 
     //destructeur
 
