@@ -82,7 +82,7 @@ test: testtime testfile
 testtime: $(TESTTIMEOBJS)
 	$(CC) -o $(BINDIR)/testtime -L$(BINDIR) $(TESTTIMEOBJS) $(CXXFLAGS) $(LIBFLAGS)
 
-testfile: $(TESTFILE)
+testfile: $(TESTFILEOBJS)
 	$(CC) -o $(BINDIR)/testfile -L$(BINDIR) $(TESTFILEOBJS) $(CXXFLAGS) $(LIBFLAGS)
 
 
@@ -90,11 +90,14 @@ testfile: $(TESTFILE)
 
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS)
 
-fclean: clean
+cleantest:
+	$(RM) $(TESTTIMEOBJS) $(TESTFILEOBJS)
+
+fclean: clean cleantest
 	$(RM) $(BINDIR)/$(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all filesystem time test testtime testfile clean cleantest fclean re
