@@ -11,6 +11,8 @@
 
 #if !defined (_WIN16) && !defined (_WIN32) && !defined (_WIN64)
 
+#include <fcntl.h>
+
 #define m000 
 #define m001 S_IXOTH
 #define m002 S_IWOTH

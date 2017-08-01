@@ -15,7 +15,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <vector>
-//#include <sys/stat.h>
+#include <sys/stat.h>
 
 #include "Directory_Item.hpp"
 #include "Exception.hpp"
