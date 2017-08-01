@@ -41,7 +41,7 @@ FSSRCS =	$(SRCDIR)/Directory_Item.cpp  	\
 
 FSOBJS = $(FSSRCS:.cpp=.o)
 
-TIMESRCS =	$(SRCDIR)/time.cpp  		\
+TIMESRCS =	$(SRCDIR)/Date.cpp  		\
 		$(SRCDIR)/Timer.cpp  		\
 		$(SRCDIR)/Counter.cpp
 

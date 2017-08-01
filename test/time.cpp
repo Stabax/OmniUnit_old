@@ -1,5 +1,5 @@
 
-#include "../src/Timer.hh"
+#include "Timer.hh"
 
 int main()
 {
