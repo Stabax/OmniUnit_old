@@ -10,7 +10,7 @@ TESTDIR = test
 
 CXXFLAGS = -std=c++11 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -s -O2 -Os -Wl,--no-as-needed -I$(INCDIR)
 
-SHAREDFLAGS = -shared -fPIC
+SHAREDFLAGS = -shared
 
 #-Werror ==> les warning se transforment en erreur
 # -Wunreachable-code ==> warning si un bout de code n'est jamais exétuté
@@ -50,7 +50,7 @@ TIME_SRCS =	$(SRCDIR)/Date.cpp  		\
 		$(SRCDIR)/Timer.cpp  		\
 		$(SRCDIR)/Counter.cpp
 
-TIME_OBJS = $(TIMESRCS:.cpp=.o)
+TIME_OBJS = $(TIME_SRCS:.cpp=.o)
 
 
 
@@ -59,7 +59,7 @@ EXC_SRCS =	$(SRCDIR)/Loggable.cpp  	\
 		$(SRCDIR)/Exception.cpp  	\
 		$(SRCDIR)/Hasher.cpp
 
-EXC_OBJS = $(EXCSRCS:.cpp=.o)
+EXC_OBJS = $(EXC_SRCS:.cpp=.o)
 
 
 
@@ -78,13 +78,13 @@ TEST_FILE_OBJS = $(TEST_FILE_SRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(FS_OBJS) $(TIME_OBJS) $(EXC_OBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(FS_OBJS) $(TIME_OBJS) $(EXC_OBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 filesystem: $(FS_OBJS) $(EXC_OBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(FS_OBJS) $(EXC_OBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 time: $(TIME_OBJS) $(EXC_OBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(TIME_OBJS) $(EXC_OBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 
 
