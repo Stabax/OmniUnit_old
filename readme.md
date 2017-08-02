@@ -11,7 +11,7 @@ FILE-SYSTEM :
 -A Directory class to manage them easily : display their content, move/create/rename/remove them, change their permissions, move through the tree...
 -A File classe to manage text files : write and erase some specific lines, move/create/rename/remove the file, change its permissions...
 -A Serialized-File in which there are data simply stored as key/value structure, convenient for settings or little saves storage.
--A base classe you should inherit for objetcts that are directory entry (such as sounds, music, pucture, video, symbolic link, executable ...).
+-A base class you should inherit from for objects that are directory entry (such as sounds, music, pucture, video, symbolic link, executable ...).
 
 ERROR :
 -A basic error representation that hold text.
@@ -32,6 +32,4 @@ UPCOMMING FEATURES :
 -Hash methods (like SHA256, SHA512, SHA1, bit shift, text lengh...).
 -Better file system support (optimisations and enhancements).
 -Copy/past into/from clipboard.
--Sound module (light filtration methods).
--Menu class for standard output (console, tty...).
-
+-PC monitor (stats of RAM, CPU, GPU, etc)

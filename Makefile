@@ -8,7 +8,9 @@ SRCDIR = src
 
 TESTDIR = test
 
-CXXFLAGS = -std=c++11 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -s -O2 -Os -Wl,--no-as-needed -I$(INCDIR) -shared -fPIC
+CXXFLAGS = -std=c++11 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -s -O2 -Os -Wl,--no-as-needed -I$(INCDIR)
+
+SHAREDFLAGS = -shared -fPIC
 
 #-Werror ==> les warning se transforment en erreur
 # -Wunreachable-code ==> warning si un bout de code n'est jamais exétuté
@@ -56,8 +58,10 @@ EXCSRCS =	$(SRCDIR)/Loggable.cpp  	\
 EXCOBJS = $(EXCSRCS:.cpp=.o)
 
 TESTTIMESRC =    $(TESTDIR)/time.cpp
-
 TESTTIMEOBJS = $(TESTTIMESRC:.cpp=.o)
+
+TESTFILESRC =    $(TESTDIR)/file.cpp
+TESTFILEOBJS = $(TESTFILESRC:.cpp=.o)
 
 
 
@@ -66,13 +70,13 @@ TESTTIMEOBJS = $(TESTTIMESRC:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(FSOBJS) $(TIMEOBJS) $(EXCOBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 filesystem: $(FSOBJS) $(EXCOBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(EXCOBJS) $(CXXFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 time: $(TIMEOBJS) $(EXCOBJS)
-	$(CC) -o $(BINDIR)/$(NAME) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS)
+	$(CC) -o $(BINDIR)/$(NAME) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 
 
