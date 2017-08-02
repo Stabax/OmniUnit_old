@@ -36,32 +36,40 @@ endif
 
 
 
-FSSRCS =	$(SRCDIR)/Directory_Item.cpp  	\
+FS_SRCS =	$(SRCDIR)/Directory_Item.cpp  	\
 		$(SRCDIR)/Directory.cpp  	\
 		$(SRCDIR)/Basic_File.cpp	\
 		$(SRCDIR)/File.cpp  		\
 		$(SRCDIR)/KeyWordFile.cpp
 
-FSOBJS = $(FSSRCS:.cpp=.o)
+FS_OBJS = $(FS_SRCS:.cpp=.o)
 
-TIMESRCS =	$(SRCDIR)/Date.cpp  		\
+
+
+TIME_SRCS =	$(SRCDIR)/Date.cpp  		\
 		$(SRCDIR)/Timer.cpp  		\
 		$(SRCDIR)/Counter.cpp
 
-TIMEOBJS = $(TIMESRCS:.cpp=.o)
+TIME_OBJS = $(TIMESRCS:.cpp=.o)
 
-EXCSRCS =	$(SRCDIR)/Loggable.cpp  	\
+
+
+EXC_SRCS =	$(SRCDIR)/Loggable.cpp  	\
 		$(SRCDIR)/Error.cpp 		\
 		$(SRCDIR)/Exception.cpp  	\
 		$(SRCDIR)/Hasher.cpp
 
-EXCOBJS = $(EXCSRCS:.cpp=.o)
+EXC_OBJS = $(EXCSRCS:.cpp=.o)
 
-TESTTIMESRC =    $(TESTDIR)/time.cpp
-TESTTIMEOBJS = $(TESTTIMESRC:.cpp=.o)
 
-TESTFILESRC =    $(TESTDIR)/file.cpp
-TESTFILEOBJS = $(TESTFILESRC:.cpp=.o)
+
+
+
+TEST_TIME_SRC =    $(TESTDIR)/time.cpp
+TEST_TIME_OBJS = $(TEST_TIME_SRC:.cpp=.o)
+
+TEST_FILE_SRC =    $(TESTDIR)/file.cpp
+TEST_FILE_OBJS = $(TEST_FILE_SRC:.cpp=.o)
 
 
 
@@ -69,13 +77,13 @@ TESTFILEOBJS = $(TESTFILESRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(FSOBJS) $(TIMEOBJS) $(EXCOBJS)
+$(NAME): $(FS_OBJS) $(TIME_OBJS) $(EXC_OBJS)
 	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
-filesystem: $(FSOBJS) $(EXCOBJS)
+filesystem: $(FS_OBJS) $(EXC_OBJS)
 	$(CC) -o $(BINDIR)/$(NAME) $(FSOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
-time: $(TIMEOBJS) $(EXCOBJS)
+time: $(TIME_OBJS) $(EXC_OBJS)
 	$(CC) -o $(BINDIR)/$(NAME) $(TIMEOBJS) $(EXCOBJS) $(CXXFLAGS) $(SHAREDFLAGS)
 
 
@@ -84,21 +92,21 @@ time: $(TIMEOBJS) $(EXCOBJS)
 
 test: testtime testfile
 
-testtime: $(TESTTIMEOBJS)
-	$(CC) -o $(BINDIR)/testtime -L$(BINDIR) $(TESTTIMEOBJS) $(CXXFLAGS) $(LIBFLAGS)
+testtime: $(TEST_TIME_OBJS)
+	$(CC) -o $(BINDIR)/testtime -L$(BINDIR) $(TEST_TIME_OBJS) $(CXXFLAGS) $(LIBFLAGS)
 
-testfile: $(TESTFILEOBJS)
-	$(CC) -o $(BINDIR)/testfile -L$(BINDIR) $(TESTFILEOBJS) $(CXXFLAGS) $(LIBFLAGS)
+testfile: $(TEST_FILE_OBJS)
+	$(CC) -o $(BINDIR)/testfile -L$(BINDIR) $(TEST_FILE_OBJS) $(CXXFLAGS) $(LIBFLAGS)
 
 
 
 
 
 clean:
-	$(RM) $(FSOBJS) $(TIMEOBJS) $(EXCOBJS)
+	$(RM) $(FS_OBJS) $(TIME_OBJS) $(EXC_OBJS)
 
 cleantest:
-	$(RM) $(TESTTIMEOBJS) $(TESTFILEOBJS)
+	$(RM) $(TEST_TIME_OBJS) $(TEST_FILE_OBJS)
 
 fclean: clean cleantest
 	$(RM) $(BINDIR)/$(NAME)
