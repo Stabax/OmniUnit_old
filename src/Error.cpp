@@ -2,7 +2,7 @@
 
 #include "Error.hh"
 #include "KeyWordFile.hh"
-#include "Date.h"
+#include "Date.hh"
 
 
 std::string stb::Error::defaultSourcePath = "error.src";

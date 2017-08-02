@@ -60,7 +60,7 @@ TESTTIMESRC =    $(TESTDIR)/time.cpp
 TESTTIMEOBJS = $(TESTTIMESRC:.cpp=.o)
 
 
--Werror
+
 
 
 all: $(NAME)

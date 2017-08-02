@@ -1,4 +1,4 @@
-STBLIB is a easy useful toolkit library for C++ language.
+STBLIB is an easy useful toolkit library for C++ language.
 It enable you to start your projects faster.
 
 This awesome library provides these features :

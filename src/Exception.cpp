@@ -2,7 +2,7 @@
 
 #include "Exception.hpp"
 #include "File.hh"
-#include "Date.h"
+#include "Date.hh"
 
 
 std::string stb::Exception::defaultLogPath = "exception.log";

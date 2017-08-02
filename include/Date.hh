@@ -1,4 +1,4 @@
-//Date.h
+//Date.hh
 
 /*
 *Ce header contient:
@@ -7,8 +7,8 @@
 */
 
 
-#ifndef TIME_H_
-#define TIME_H_
+#ifndef TIME_HH_
+#define TIME_HH_
 
 #include <ctime>
 #include <thread>
@@ -16,20 +16,11 @@
 
 #include "conversion.h"
 #include "Exception.hpp"
+#include "timeTypes.h"
 
 
 namespace stb
 {
-
-  typedef std::ratio<1, 1> second;
-  typedef std::ratio<60, 1> minute;
-  typedef std::ratio<60*60, 1> hour;
-  typedef std::ratio<60*60*24, 1> day;
-  typedef std::ratio<60*60*24*7, 1> week;
-  typedef std::ratio<60*60*24*30, 1> month;
-  typedef std::ratio<60*60*24*365, 1> year;
-
-
 
   class Date_Exception : public Exception
   {
@@ -54,7 +45,9 @@ namespace stb
 
     //méthodes statiques
     static void setTimeLag(int hour); //enregistre le décalage horraire (en heure) par rapport à l'heure GMT
+    protected:
     static struct tm* getTm(location type);
+    public:
     static std::string time(location type = location::local); //retourne l'heure actuelle
     static std::string date(location type = location::local); //retourne la date actuelle
 
@@ -86,20 +79,6 @@ namespace stb
     static int timeLag; //contient le décalage horraire en heure par rapport à l'heure GMT
   };
 
-  //ratio peut être stb::hour stb::minute stb::second std::milli, std::micro, std::nano ...
-  template<typename ratio, typename durationType>
-  void sleep(durationType const& duration)
-  {
-    std::this_thread::sleep_for(std::chrono::duration<long long, ratio>(duration));
-  }
-
-  //permet de sleep en envoyant une durée définie par la lib standard
-  template<typename durationType>
-  void sleep(durationType const& duration)
-  {
-    std::this_thread::sleep_for(duration);
-  }
-
 }//namespace
 
-#endif //TIME_H_
+#endif //TIME_HH_
