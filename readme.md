@@ -1,11 +1,11 @@
 # Contributors
 
-  -Stabax Corp.
-  -Baxlan
+  * Stabax Corp.
+  * Baxlan
 
 #about
 
-Stblib is a header only library for C++ permitting to manipulate time :Timers, Countdown and Dates, for now.
+Stblib is a header only library for C++ permitting to manipulate time : Timers, Countdown and Dates, for now.
 
 # License
 
@@ -38,7 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Dependencies
 
-  -None
+  * None
 
 # Get Library
 
