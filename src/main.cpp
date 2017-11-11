@@ -9,10 +9,10 @@ int main()
   stb::sleep<stb::second>(2);
   std::cout << Tim.get<std::micro>() << '\n';
 
-  std::cout << "Date : " << stb::Date::date(stb::Date::location::local) << '\n';
-  std::cout << "Time : " << stb::Date::time(stb::Date::location::local) << '\n';
+  std::cout << "Date : " << stb::Date::date(stb::Date::local) << '\n';
+  std::cout << "Time : " << stb::Date::time(stb::Date::local) << '\n';
 
-  stb::Counter Count;
+  stb::Countdown Count;
   Count.add<stb::minute>(1);
   Count.start();
 

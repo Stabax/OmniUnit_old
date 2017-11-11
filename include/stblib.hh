@@ -52,7 +52,7 @@ namespace stb
   {
   public:
 
-    enum class location {local, gmt, timeZone};
+    enum location {local, gmt, timeZone};
 
     Date() = delete;
 
@@ -137,7 +137,7 @@ namespace stb
   {
   public:
 
-    friend class Counter;
+    friend class Countdown;
 
     explicit Timer() :
     _Begin(std::chrono::high_resolution_clock::now()),
@@ -266,11 +266,11 @@ namespace stb
 
 
 
-  class Counter
+  class Countdown
   {
   public:
 
-    explicit Counter() :
+    explicit Countdown() :
      _End(std::chrono::high_resolution_clock::now()),
      _Timer()
      {
@@ -344,7 +344,7 @@ namespace stb
     std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _End;
     Timer _Timer;
   };
-  
+
 }//namespace stb
 
 #endif //STBLIB_HH_
