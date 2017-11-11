@@ -29,7 +29,6 @@ namespace stb
 
 
 
-  //ratio could be stb::hour, stb::minute, stb::second, std::milli, std::micro, std::nano...
   //durationType is implicitly deduced.
   template<typename ratio, typename durationType>
   void sleep(durationType const& duration)
@@ -52,7 +51,7 @@ namespace stb
   {
   public:
 
-    enum location {local, gmt, timeZone};
+    enum location {local, gmt, timezone};
 
     Date() = delete;
 
@@ -61,34 +60,35 @@ namespace stb
       timeLag = hours * 3600;
     }
 
-    static std::string time(location type = location::local)
+    static std::string time(location place = location::local)
     {
-      struct tm* instant = getTm(type);
+      struct tm* instant = getTm(place);
       std::string toReturn;
       toReturn += std::to_string(instant->tm_hour);
       toReturn += ":";
       toReturn += std::to_string(instant->tm_min);
       toReturn += ":";
       toReturn += std::to_string(instant->tm_sec);
-      return (toReturn);
+      return toReturn;
     }
 
-    static std::string date(location type = location::local)
+    static std::string date(location place = location::local)
     {
-      struct tm* instant = getTm(type);
+      struct tm* instant = getTm(place);
       std::string toReturn;
       toReturn += std::to_string(instant->tm_mday);
       toReturn += "/";
       toReturn += std::to_string(instant->tm_mon+1);
       toReturn += "/";
       toReturn += std::to_string(instant->tm_year+1900);
-      return (toReturn);
+      return toReturn;
     }
 
+    //unit must be one of the typedef on std::ratio defined in the namespace stb
     template<typename unit>
-    static int time(location type = location::local) //ne retourne qu'une valeur (seconde OU minutes OU heure OU jour, etc...)
+    static int get(location place)
     {
-      struct tm* instant = getTm(type);
+      struct tm* instant = getTm(place);
       if(typeid(unit) == typeid(second))
         return (instant->tm_sec);
       else if(typeid(unit) ==typeid(minute))
@@ -115,7 +115,7 @@ namespace stb
         throw std::string("Unable to get current time");
       if(type == location::gmt)
         return (gmtime(&seconds));
-      else if(type == location::timeZone)
+      else if(type == location::timezone)
       {
         seconds += timeLag;
         return (gmtime(&seconds));
@@ -152,8 +152,7 @@ namespace stb
     template<typename ratio = second>
     unsigned long long get() const
     {
-      return static_cast<unsigned long long>(getDuration<std::chrono::duration<long long, ratio>>().count()); //on multiplie par 10^9 pour avoir des secondes, qui sont modifiées par le ratio std::ratio
-      //le type long long est signé car std::chrono::nano est signé (on s'aligne)
+      return static_cast<unsigned long long>(getDuration<std::chrono::duration<long long, ratio>>().count());
     }
 
     template<typename unit = std::chrono::seconds>
@@ -210,8 +209,6 @@ namespace stb
         _addedTime -= std::chrono::duration<unsigned long long, ratio>(current);
     }
 
-
-
     template<typename unit = std::chrono::seconds>
     void addDuration(unit const& time)
     {
@@ -239,8 +236,8 @@ namespace stb
       start();
     }
 
-
   protected:
+
     std::chrono::nanoseconds getNanoDuration() const
     {
       if(! _isPaused)

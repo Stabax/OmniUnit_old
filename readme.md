@@ -1,13 +1,15 @@
-# Contributors
+#Stblib Documentation
+
+## Contributors
 
   * Stabax Corp.
   * Baxlan
 
-# about
+## about
 
 Stblib is a header only library for C++ permitting to manipulate time : Timers, Countdown and Dates, for now.
 
-# License
+## License
 
 This library is released under BSD License Copyright 2017 Stabax Corp.
 
@@ -36,22 +38,22 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Dependencies
+## Dependencies
 
   * None
 
-# Get Library
+## Get Library
 
-Clone latest revision of engine :
+Clone latest revision of library :
 
 git clone http://bitbucket.org/Baxlan/stblib.git
 
-# Use library
+## Use library
 
 Stblib is a header only library. Simply include it in your sources and use it.
 Look at the getting started related page.
 
-# Trello
+## Trello
 
-If you are interested by the development of the library and its futures versions :
+If you are interested by the development of the library and its future versions :
 https://trello.com/b/ceG9w8T6/stblib
