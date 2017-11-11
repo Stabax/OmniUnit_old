@@ -3,7 +3,7 @@
   * Stabax Corp.
   * Baxlan
 
-#about
+# about
 
 Stblib is a header only library for C++ permitting to manipulate time : Timers, Countdown and Dates, for now.
 
