@@ -7,11 +7,11 @@ So, most these functions needs a template parameter to know the unit of the dura
 
 example :
 
-    stb::Timer Tim;
-    Tim.start();
+    stb::Timer tim;
+    tim.start();
 
-    Tim.get<std::micro>();  //returns the time elapsed since start() in microseconds
-    Tim.get<stb::minute>(); //returns the time elapsed since start() in minutes
+    tim.get<std::micro>();  //returns the time elapsed since start() in microseconds
+    tim.get<stb::minute>(); //returns the time elapsed since start() in minutes
 
     stb::Date::get<stb::week>(stb::Date::gmt); //return the week of the year according to gmt time
 
@@ -25,8 +25,6 @@ The standard library provides typedef on most useful std::ratios :\n
         typedef std::ratio<1, 1000*1000*1000>  nano;
         typedef std::ratio<1, 1000*1000>       micro;
         typedef std::ratio<1, 1000>            milli;
-        typedef std::ratio<1000, 1>            kilo;
-        typedef std::ratio<1000*1000, 1>       mega;
     }
 
 Some other ratios are defined in the Stblib, :\n
@@ -45,9 +43,9 @@ Some other ratios are defined in the Stblib, :\n
 
 Of course, functions in Stblib can use your own std::ratio :
 
-    stb::Timer Tim;
-    Tim.start();
-    Tim.get< std::ratio<1, 2> >(); //returns the time elapsed since start() in half-seconds
+    stb::Timer tim;
+    tim.start();
+    tim.get< std::ratio<1, 2> >(); //returns the time elapsed since start() in half-seconds
 
 ## Using sleep
 
@@ -88,7 +86,7 @@ Stblib defines its own sleep functions which can take a std::duration or an inte
 
     count.subtractDuration(std::chrono::seconds(4);  //remove 4 seconds
 
-    unsigned long long i = count.get<std::milli>();
+    int i = count.get<std::milli>();
     while(i > 0)                              
     {                                 //while the Countdown is unfinished,
       stb::sleep<std::milli>(500);    //print the remaining time in milliseconds

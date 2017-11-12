@@ -1,5 +1,3 @@
-#Stblib Documentation
-
 ## Contributors
 
   * Stabax Corp.

@@ -16,7 +16,7 @@ int main()
   Count.add<stb::minute>(1);
   Count.start();
 
-  unsigned long long i = Count.get<std::milli>();
+  int i = Count.get<std::milli>();
   while(i > 0)
   {
     stb::sleep<std::milli>(500);
