@@ -1,8 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classstb_1_1Directory__Item.html" title="stb::Directory_Item" alt="" coords="5,31,149,57"/>
-<area shape="rect" id="node2" href="$classstb_1_1Basic__File.html" title="stb::Basic_File" alt="" coords="197,5,308,32"/>
-<area shape="rect" id="node6" href="$classstb_1_1Directory.html" title="stb::Directory" alt="" coords="199,56,307,83"/>
-<area shape="rect" id="node3" href="$classstb_1_1File.html" title="stb::File" alt="" coords="356,5,427,32"/>
-<area shape="rect" id="node4" href="$classstb_1_1KeyWordFile.html" title="stb::KeyWordFile" alt="" coords="475,5,597,32"/>
-<area shape="rect" id="node5" href="$classstb_1_1GroupedKeyWordFile.html" title="stb::GroupedKeyWordFile" alt="" coords="645,5,824,32"/>
-</map>

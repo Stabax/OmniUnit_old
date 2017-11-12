@@ -89,7 +89,11 @@ class Date
 {
 public:
 
-  enum location {local, gmt, timezone};
+  enum class location {local, gmt, timezone};
+
+  static const location local = location::local;
+  static const location gmt = location::gmt;
+  static const location timezone = location::timezone;
 
   Date() = delete;
 
@@ -143,8 +147,6 @@ public:
       throw Date_exception("Invalid ratio (unit), use the ratio defined in stb:: instead.");
   }
 
-  static std::string dateTime(location type = location::local) noexcept; //retourne la date et l'heure. noexcept car cette fonction est utilisée dans les classes d'exceptions
-
 protected:
   static struct tm* getTm(location type)
   {
@@ -161,8 +163,6 @@ protected:
     else
       return (localtime(&seconds));
   }
-
-protected:
 
   static int timeLag;
 };
@@ -188,16 +188,16 @@ public:
   {
   }
 
-  template<typename ratio, typename returnType = int>
-  returnType get() const
+  template<typename ratio, typename IntegerReturnType = unsigned>
+  IntegerReturnType get() const
   {
-    return static_cast<returnType>(getDuration<std::chrono::duration<returnType, ratio>>().count());
+    return static_cast<IntegerReturnType>(getDuration<std::chrono::duration<unsigned long long, ratio>>().count());
   }
 
-  template<typename unit>
-  unit getDuration() const
+  template<typename durationType>
+  durationType getDuration() const
   {
-    return std::chrono::duration_cast<unit>(getNanoDuration());
+    return std::chrono::duration_cast<durationType>(getNanoDuration());
   }
 
   void start()
@@ -232,32 +232,36 @@ public:
     _isStopped = true;
   }
 
-  template<typename ratio, typename durationType>
-  void add(durationType time)
+  //IntegerType is implicitly deduced.
+  template<typename ratio, typename IntegerType>
+  void add(IntegerType time)
   {
-    _addedTime += std::chrono::duration<long long, ratio>(time);
+    _addedTime += std::chrono::duration<unsigned long long, ratio>(time);
   }
 
-  template<typename ratio, typename durationType>
-  void subtract(durationType time)
-  {
-    long long current = get<ratio, long long>();
-    if(time < current)
-      _addedTime -= std::chrono::duration<long long, ratio>(time);
-    else
-      _addedTime -= std::chrono::duration<long long, ratio>(current);
-  }
-
-  template<typename unit>
-  void addDuration(unit const& time)
+  //durationType is implicitly deduced.
+  template<typename durationType>
+  void add(durationType const& time)
   {
     _addedTime += time;
   }
 
-  template<typename unit>
-  void subtractDuration(unit const& time)
+  //IntegerType is implicitly deduced.
+  template<typename ratio, typename IntegerType>
+  void subtract(IntegerType time)
   {
-    unit current = get<unit>();
+    unsigned long long current = get<ratio, unsigned long long>();
+    if(time < current)
+      _addedTime -= std::chrono::duration<unsigned long long, ratio>(time);
+    else
+      _addedTime -= std::chrono::duration<unsigned long long, ratio>(current);
+  }
+
+  //durationType is implicitly deduced.
+  template<typename durationType>
+  void subtract(durationType const& time)
+  {
+    durationType current = get<durationType>();
     if(time < current)
       _addedTime -= time;
     else
@@ -312,41 +316,47 @@ public:
    {
    }
 
-  template<typename ratio, typename returnType = int>
-  returnType get() const
+  template<typename ratio, typename IntegerReturnType = unsigned>
+  IntegerReturnType get() const
   {
-    return static_cast<returnType>(getDuration<std::chrono::duration<returnType, ratio>>().count());
-  }
-
-  template<typename unit>
-  unit getDuration() const
-  {
-    return std::chrono::duration_cast<unit>(getNanoDuration());
-  }
-
-  template<typename ratio, typename durationType>
-  void add(durationType duration)
-  {
-    _End = _End + std::chrono::duration<long long, ratio>(duration);
-  }
-
-  template<typename ratio, typename durationType>
-  void subtract(durationType duration)
-  {
-    _End = _End - std::chrono::duration<long long, ratio>(duration);
+    return static_cast<IntegerReturnType>(getDuration<std::chrono::duration<unsigned long long, ratio>>().count());
   }
 
   template<typename durationType>
-  void addDuration(durationType const& duration)
+  durationType getDuration() const
   {
-     _End = _End + duration;
+    return std::chrono::duration_cast<durationType>(getNanoDuration());
   }
+
+  //IntegerType is implicitly deduced.
+  template<typename ratio, typename IntegerType>
+  void add(IntegerType duration)
+  {
+    _End = _End + std::chrono::duration<unsigned long long, ratio>(duration);
+  }
+
+  //durationType is implicitly deduced.
   template<typename durationType>
-  void subtractDuration(durationType const& duration)
+  void add(durationType const& duration)
+  {
+    _End = _End + duration;
+  }
+
+  //IntegerType is implicitly deduced.
+  template<typename ratio, typename IntegerType>
+  void subtract(IntegerType duration)
+  {
+    _End = _End - std::chrono::duration<unsigned long long, ratio>(duration);
+  }
+
+  //durationType is implicitly deduced.
+  template<typename durationType>
+  void subtract(durationType const& duration)
   {
     _End = _End - duration;
   }
 
+  //timePointType is implicitly deduced.
   template<typename timePointType>
   void setEnd(timePointType const& timePoint)
   {
@@ -385,9 +395,9 @@ protected:
 
 
 
-//durationType is implicitly deduced.
-template<typename ratio, typename durationType>
-void sleep(durationType const& duration)
+//IntegerType is implicitly deduced.
+template<typename ratio, typename IntegerType>
+void sleep(IntegerType duration)
 {
   std::this_thread::sleep_for(std::chrono::duration<long long, ratio>(duration));
 }

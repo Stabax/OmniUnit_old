@@ -13,14 +13,19 @@ int main()
   std::cout << "Time : " << stb::Date::time(stb::Date::local) << '\n';
 
   stb::Countdown Count;
-  Count.add<stb::minute>(1);
+  Count.add(std::chrono::seconds(1));
   Count.start();
 
-  int i = Count.get<std::milli>();
+  unsigned i = Count.get<std::milli>();
   while(i > 0)
   {
     stb::sleep<std::milli>(500);
     i = Count.get<std::micro>();
     std::cout << i << std::endl;
   }
+
+  Count.add<stb::second>(4);
+  Count.add(std::chrono::seconds(4));
+  stb::sleep(Count);
+
 }

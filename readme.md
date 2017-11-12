@@ -1,7 +1,8 @@
+
 ## Contributors
 
-  * Stabax Corp.
-  * Baxlan
+* Stabax Corp.
+* Baxlan
 
 ## about
 
@@ -38,11 +39,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Dependencies
 
-  * None
+* None
 
 ## Get Library
 
-Clone latest revision of library :
+Clone latest revision :
 
 git clone http://bitbucket.org/Baxlan/stblib.git
 

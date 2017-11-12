@@ -1,6 +1,6 @@
 # Getting started
 
-## Unit
+## Units
 
 Stblib is a time library, which mean that some functions take or return a duration.
 So, most these functions needs a template parameter to know the unit of the duration (minute ? second ? millisecond ? ...).
@@ -17,14 +17,14 @@ example :
 
 This template parameter is a std::ratio. Those used in the previous example are typedef defined in the standard library and the Stblib library.
 
-The standard library provides typedef on most useful std::ratios :\n
+The standard library provides typedef on most useful ratios :\n
 (non-exhaustive list)
 
     namespace std //Be careful, it is standard namespace
     {
-        typedef std::ratio<1, 1000*1000*1000>  nano;
-        typedef std::ratio<1, 1000*1000>       micro;
-        typedef std::ratio<1, 1000>            milli;
+        typedef ratio<1, 1000*1000*1000>  nano;
+        typedef ratio<1, 1000*1000>       micro;
+        typedef ratio<1, 1000>            milli;
     }
 
 Some other ratios are defined in the Stblib, :\n
@@ -47,20 +47,24 @@ Of course, functions in Stblib can use your own std::ratio :
     tim.start();
     tim.get< std::ratio<1, 2> >(); //returns the time elapsed since start() in half-seconds
 
+Most of functions taking a duration like previously can also take a std::chrono::duration (see below). Check the existing typedefs in the standard library. You can of course use your own std::chrono::duration type.
+
 ## Using sleep
 
-Stblib defines its own sleep functions which can take a std::duration or an integer :
+Stblib defines its own sleep functions to stop a thread, which can take :
 
     stb::sleep<std::milli>(10); //stops the current thread for 10 milliseconds
     stb::sleep<stb::hour>(2);   //stops the current thread for 2 hours
 
-    stb::sleep<stb::seconds>(3);         //both these functions stop the thread for 3 seconds, but the
-    stb::sleep(std::chrono::seconds(3)); //first one take an integer, and the second one take a std::chrono::duration
-    //(Look at the standard documentation to have all existing typedef on std::chrono::duration)
+    stb::sleep(std::chrono::seconds(3)); //stops the current thread for 3 seconds by taking a std::chrono::duration
+
+    stb::Timer tim;
+    tim.start();
+    stb::sleep(tim); //sleep for the time elapsed since start()
 
 ## Using Timer
 
-    Timer tim;
+    stb::Timer tim;
     tim.start();
 
     //returns an integer representing elapsed time since start() in milliseconds
@@ -68,11 +72,9 @@ Stblib defines its own sleep functions which can take a std::duration or an inte
 
     //returns a std::chrono::duration representing elapsed time since start() in milliseconds
     tim.getDuration<std::chrono::milliseconds>();
-    //(Look at the standard documentation to have all existing typedef on std::chrono::duration)
 
-    tim.add<stb::minute>(3);                        //add 3 minutes to the elapsed time
-    tim.addDuration(std::chrono::nanoseconds(16));  //add 16 nanoseconds to the elapsed time
-    //subtraction exists for both versions
+    tim.add<stb::minute>(3);                 //add 3 minutes to the elapsed time
+    tim.add(std::chrono::nanoseconds(16));   //add 16 nanoseconds to the elapsed time
 
     tim.clear(); //remove all time added or subtracted
     tim.stop();  //set pause and set the elapsed time to 0
@@ -81,12 +83,12 @@ Stblib defines its own sleep functions which can take a std::duration or an inte
 ## Using Countdown
 
     stb::Countdown count;
-    count.add<stb::minute>(1);  //set the Countdown to 1 minute
-    count.start();              //start the Countdown
+    count.add<stb::minute>(1);           //set the Countdown to 1 minute
+    count.add(std::chrono::seconds(4));  //add 4 seconds
 
-    count.subtractDuration(std::chrono::seconds(4);  //remove 4 seconds
+    count.start();
 
-    int i = count.get<std::milli>();
+    unsigned i = count.get<std::milli>();
     while(i > 0)                              
     {                                 //while the Countdown is unfinished,
       stb::sleep<std::milli>(500);    //print the remaining time in milliseconds
