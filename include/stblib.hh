@@ -44,7 +44,7 @@ class exception : public std::exception
 public:
 
   exception(std::string const& msg, std::string const& name):
-  _msg("[stblib.exception : " + name + msg + "]")
+  _msg("[stblib.exception - " + name + " : " + msg + "]")
   {
   }
 
@@ -73,6 +73,8 @@ public:
 
 
 
+
+
 typedef std::ratio<1, 1> second;
 typedef std::ratio<60, 1> minute;
 typedef std::ratio<60*60, 1> hour;
@@ -89,11 +91,11 @@ class Date
 {
 public:
 
-  enum class location {local, gmt, timezone};
+  enum class Location {local, gmt, timezone};
 
-  static const location local = location::local;
-  static const location gmt = location::gmt;
-  static const location timezone = location::timezone;
+  static const Location local = Location::local;
+  static const Location gmt = Location::gmt;
+  static const Location timezone = Location::timezone;
 
   Date() = delete;
 
@@ -102,7 +104,7 @@ public:
     timeLag = hours * 3600;
   }
 
-  static std::string time(location place = location::local)
+  static std::string time(Location place = Location::gmt)
   {
     struct tm* instant = getTm(place);
     std::string toReturn;
@@ -114,7 +116,7 @@ public:
     return toReturn;
   }
 
-  static std::string date(location place = location::local)
+  static std::string date(Location place = Location::gmt)
   {
     struct tm* instant = getTm(place);
     std::string toReturn;
@@ -128,7 +130,7 @@ public:
 
   //unit must be one of the typedef on std::ratio defined in the namespace stb
   template<typename unit>
-  static int get(location place)
+  static int get(Location place = Location::gmt)
   {
     struct tm* instant = getTm(place);
     if(typeid(unit) == typeid(second))
@@ -148,14 +150,14 @@ public:
   }
 
 protected:
-  static struct tm* getTm(location type)
+  static tm* getTm(Location place)
   {
     time_t seconds = std::time(nullptr);
     if(seconds == -1)
       throw Date_exception("Unable to get time");
-    if(type == location::gmt)
+    if(place == Location::gmt)
       return (gmtime(&seconds));
-    else if(type == location::timezone)
+    else if(place == Location::timezone)
     {
       seconds += timeLag;
       return (gmtime(&seconds));
@@ -183,8 +185,7 @@ public:
   _BeginPause(_Begin),
   _PausedTime(0),
   _addedTime(0),
-  _isPaused(true),
-  _isStopped(true)
+  _state(State::stopped)
   {
   }
 
@@ -202,26 +203,25 @@ public:
 
   void start()
   {
-    if(_isPaused && ! _isStopped)
+    if(_state == State::paused)
     {
       _PausedTime += (std::chrono::high_resolution_clock::now() - _BeginPause);
-      _isPaused = false;
+      _state = State::active;
     }
-    if(_isStopped)
+    if(_state == State::stopped)
     {
       _Begin = std::chrono::high_resolution_clock::now();
       _PausedTime = std::chrono::nanoseconds::zero();
-      _isStopped = false;
-      _isPaused = false;
+      _state = State::active;
       clear();
     }
   }
 
   void pause()
   {
-    if(! _isPaused)
+    if(_state == State::active)
     {
-      _isPaused = true;
+      _state = State::paused;
       _BeginPause = std::chrono::high_resolution_clock::now();
     }
   }
@@ -229,7 +229,7 @@ public:
   void stop()
   {
     pause();
-    _isStopped = true;
+    _state = State::stopped;
   }
 
   //IntegerType is implicitly deduced.
@@ -281,9 +281,11 @@ public:
 
 protected:
 
+  enum class State {active, paused, stopped};
+
   std::chrono::nanoseconds getNanoDuration() const
   {
-    if(! _isPaused)
+    if(_state != State::paused)
       return ((std::chrono::high_resolution_clock::now() - _Begin) - _PausedTime) + _addedTime;
     else
     {
@@ -293,13 +295,15 @@ protected:
     }
   }
 
-
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin; //point du premier start() suivant le dernier stop()
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause; //point du dernier pause()
-  std::chrono::nanoseconds _PausedTime; //stock le temps total passé en pause() depuis le dernier stop()
-  std::chrono::nanoseconds _addedTime; //temps ajouté / retiré (add ou substract)
-  bool _isPaused;
-  bool _isStopped;
+  //Point of the first start() following the last stop
+  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin;
+  //Point of last pause
+  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause;
+  //total time elapsed in pause since last stop
+  std::chrono::nanoseconds _PausedTime;
+  //added/subtracted time
+  std::chrono::nanoseconds _addedTime;
+  State _state;
 };
 
 

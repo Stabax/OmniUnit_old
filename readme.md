@@ -1,3 +1,4 @@
+# Stblib Documentation
 
 ## Contributors
 
@@ -37,15 +38,11 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-## Dependencies
-
-* None
-
 ## Get Library
 
 Clone latest revision :
 
-git clone http://bitbucket.org/Baxlan/stblib.git
+    git clone http://bitbucket.org/Baxlan/stblib.git
 
 ## Use library
 
