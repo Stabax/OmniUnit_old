@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef STBLIB_HH_
 #define STBLIB_HH_
 
+#include "units.hh"
 #include <chrono>     // duration, high_resolution_clock, time_point
 #include <ctime>      // gmtime, localtime, time, tm
 #include <string>     // string, to_string
@@ -36,6 +37,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace stb
 {
+//=============================================================================
+//=============================================================================
+// EXCEPTIONS DEFINITION ======================================================
+//=============================================================================
+//=============================================================================
 
 
 
@@ -75,15 +81,11 @@ public:
 
 
 
-typedef std::ratio<1, 1> second;
-typedef std::ratio<60, 1> minute;
-typedef std::ratio<60*60, 1> hour;
-typedef std::ratio<60*60*24, 1> day;
-typedef std::ratio<60*60*24*7, 1> week;
-typedef std::ratio<60*60*24*30, 1> month;
-typedef std::ratio<60*60*24*365, 1> year;
-
-
+//=============================================================================
+//=============================================================================
+// DATES CLASS ================================================================
+//=============================================================================
+//=============================================================================
 
 
 
@@ -130,23 +132,10 @@ public:
 
   //unit must be one of the typedef on std::ratio defined in the namespace stb
   template<typename unit>
-  static int get(Location place = Location::gmt)
+  static int get(Location place)
   {
-    struct tm* instant = getTm(place);
-    if(typeid(unit) == typeid(second))
-      return (instant->tm_sec);
-    else if(typeid(unit) ==typeid(minute))
-      return (instant->tm_min);
-    else if(typeid(unit) == typeid(hour))
-      return (instant->tm_hour);
-    else if(typeid(unit) == typeid(day))
-      return (instant->tm_mday);
-    else if(typeid(unit) == typeid(month))
-      return (instant->tm_mon + 1);
-    else if(typeid(unit) == typeid(year))
-      return (instant->tm_year + 1900);
-    else
-      throw Date_exception("Invalid ratio (unit), use the ratio defined in stb:: instead.");
+    place = place; //without this, cannot compile (unused place)
+    throw Date_exception("Invalid duration type used, only second, minute, hour, week, month and year are allowed.");
   }
 
 protected:
@@ -170,7 +159,57 @@ protected:
 };
 int Date::timeLag = 0;
 
+//cannot compile if specialization in defined inside the class body
+template<>
+int Date::get<second>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_sec);
+}
+template<>
+int Date::get<minute>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_min);
+}
+template<>
+int Date::get<hour>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_hour);
+}
+template<>
+int Date::get<day>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_mday);
+}
+template<>
+int Date::get<month>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_mon + 1);
+}
+template<>
+int Date::get<year>(Location place)
+{
+  struct tm* instant = getTm(place);
+  return (instant->tm_year + 1900);
+}
 
+
+
+
+
+//=============================================================================
+//=============================================================================
+// TIMERS CLASS ===============================================================
+//=============================================================================
+//=============================================================================
+
+
+
+// TIMER DEFINITION ===========================================================
 
 
 
@@ -189,16 +228,15 @@ public:
   {
   }
 
-  template<typename ratio, typename IntegerReturnType = unsigned>
-  IntegerReturnType get() const
+  virtual ~Timer()
   {
-    return static_cast<IntegerReturnType>(getDuration<std::chrono::duration<unsigned long long, ratio>>().count());
   }
 
   template<typename durationType>
-  durationType getDuration() const
+  durationType get() const
   {
-    return std::chrono::duration_cast<durationType>(getNanoDuration());
+    //std:: qualifier needed to avoid ambiguity
+    return stb::duration_cast<durationType>(getNano());
   }
 
   void start()
@@ -211,7 +249,7 @@ public:
     if(_state == State::stopped)
     {
       _Begin = std::chrono::high_resolution_clock::now();
-      _PausedTime = std::chrono::nanoseconds::zero();
+      _PausedTime = nanosecond_f::zero();
       _state = State::active;
       clear();
     }
@@ -232,29 +270,11 @@ public:
     _state = State::stopped;
   }
 
-  //IntegerType is implicitly deduced.
-  template<typename ratio, typename IntegerType>
-  void add(IntegerType time)
-  {
-    _addedTime += std::chrono::duration<unsigned long long, ratio>(time);
-  }
-
   //durationType is implicitly deduced.
   template<typename durationType>
   void add(durationType const& time)
   {
     _addedTime += time;
-  }
-
-  //IntegerType is implicitly deduced.
-  template<typename ratio, typename IntegerType>
-  void subtract(IntegerType time)
-  {
-    unsigned long long current = get<ratio, unsigned long long>();
-    if(time < current)
-      _addedTime -= std::chrono::duration<unsigned long long, ratio>(time);
-    else
-      _addedTime -= std::chrono::duration<unsigned long long, ratio>(current);
   }
 
   //durationType is implicitly deduced.
@@ -270,7 +290,7 @@ public:
 
   void clear()
   {
-    _addedTime = std::chrono::nanoseconds::zero();
+    _addedTime = nanosecond_f::zero();
   }
 
   void reset()
@@ -283,30 +303,34 @@ protected:
 
   enum class State {active, paused, stopped};
 
-  std::chrono::nanoseconds getNanoDuration() const
+  virtual nanosecond_f getNano() const
   {
-    if(_state != State::paused)
-      return ((std::chrono::high_resolution_clock::now() - _Begin) - _PausedTime) + _addedTime;
-    else
-    {
-      std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> Now = std::chrono::high_resolution_clock::now();
-      std::chrono::nanoseconds CurrentPausedTime = Now - _BeginPause;
-      return ((Now - _Begin) - (_PausedTime + CurrentPausedTime) + _addedTime);
-    }
+    if(_state == State::stopped)
+      return nanosecond_f::zero();
+    nanosecond_f CurrentPausedTime = nanosecond_f::zero();
+    std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> Now = std::chrono::high_resolution_clock::now();
+    if(_state == State::paused)
+      CurrentPausedTime = Now - _BeginPause;
+    return ((Now - _Begin) - (_PausedTime + CurrentPausedTime) + _addedTime);
+
   }
 
   //Point of the first start() following the last stop
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _Begin;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _Begin;
   //Point of last pause
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _BeginPause;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _BeginPause;
   //total time elapsed in pause since last stop
-  std::chrono::nanoseconds _PausedTime;
+  nanosecond_f _PausedTime;
   //added/subtracted time
-  std::chrono::nanoseconds _addedTime;
+  nanosecond_f _addedTime;
   State _state;
 };
 
 
+
+
+
+// COUNTDOWN DEFINITION =======================================================
 
 
 
@@ -320,23 +344,10 @@ public:
    {
    }
 
-  template<typename ratio, typename IntegerReturnType = unsigned>
-  IntegerReturnType get() const
-  {
-    return static_cast<IntegerReturnType>(getDuration<std::chrono::duration<unsigned long long, ratio>>().count());
-  }
-
   template<typename durationType>
-  durationType getDuration() const
+  durationType get() const
   {
-    return std::chrono::duration_cast<durationType>(getNanoDuration());
-  }
-
-  //IntegerType is implicitly deduced.
-  template<typename ratio, typename IntegerType>
-  void add(IntegerType duration)
-  {
-    _End = _End + std::chrono::duration<unsigned long long, ratio>(duration);
+    return std::chrono::duration_cast<durationType>(getNano());
   }
 
   //durationType is implicitly deduced.
@@ -344,13 +355,6 @@ public:
   void add(durationType const& duration)
   {
     _End = _End + duration;
-  }
-
-  //IntegerType is implicitly deduced.
-  template<typename ratio, typename IntegerType>
-  void subtract(IntegerType duration)
-  {
-    _End = _End - std::chrono::duration<unsigned long long, ratio>(duration);
   }
 
   //durationType is implicitly deduced.
@@ -385,13 +389,13 @@ public:
   }
 
 protected:
-  std::chrono::nanoseconds getNanoDuration() const
+  nanosecond_f getNano() const
   {
-    std::chrono::nanoseconds current = (_End - _Timer._Begin) - _Timer.getNanoDuration();
-    return current.count() < 0 ? std::chrono::nanoseconds::zero() : current;
+    nanosecond_f current = (_End - _Timer._Begin) - _Timer.getNano();
+    return current.count() < 0 ? nanosecond_f::zero() : current;
   }
 
-  std::chrono::time_point<std::chrono::high_resolution_clock, std::chrono::nanoseconds> _End;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _End;
   Timer _Timer;
 };
 
@@ -399,12 +403,9 @@ protected:
 
 
 
-//IntegerType is implicitly deduced.
-template<typename ratio, typename IntegerType>
-void sleep(IntegerType duration)
-{
-  std::this_thread::sleep_for(std::chrono::duration<long long, ratio>(duration));
-}
+// SLEEP OVERLOADS ============================================================
+
+
 
 //durationType is implicitly deduced.
 template<typename durationType>
@@ -415,13 +416,50 @@ void sleep(durationType const& duration)
 
 void sleep(Timer const& tim)
 {
-  std::this_thread::sleep_for(tim.getDuration<std::chrono::nanoseconds>());
+  std::this_thread::sleep_for(tim.get<nanosecond_f>());
 }
 
 void sleep(Countdown const& count)
 {
-  std::this_thread::sleep_for(count.getDuration<std::chrono::nanoseconds>());
+  std::this_thread::sleep_for(count.get<nanosecond_f>());
 }
+
+
+
+
+
+//=============================================================================
+//=============================================================================
+// RELATIVITY =================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+// RELATIVE TIMER DEFINITION ==================================================
+
+
+
+class RelativeTimer : public Timer
+{
+public:
+
+  RelativeTimer(double gamma):
+  _gamma(gamma)
+  {
+  }
+
+protected:
+
+  virtual nanosecond_f getNano() const
+  {
+    return Timer::getNano() * _gamma;
+  }
+
+  double _gamma;
+};
+
+
 
 
 

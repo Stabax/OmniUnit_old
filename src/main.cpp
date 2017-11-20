@@ -1,31 +1,17 @@
 
-#include "stblib.hh"
+#include "stblib/stblib.hh"
 #include <iostream>
+#include <limits>
 
 int main()
 {
-  stb::Timer Tim;
-  Tim.start();
-  stb::sleep<stb::second>(2);
-  std::cout << Tim.get<std::micro>() << '\n';
 
-  std::cout << "Date : " << stb::Date::date(stb::Date::local) << '\n';
-  std::cout << "Time : " << stb::Date::time(stb::Date::local) << '\n';
+  stb::kilometerPerSecond_f a(230);
+  stb::kilometerPerHour_f b = stb::speed_cast<stb::kilometerPerHour_f>(a);
 
-  stb::Countdown Count;
-  Count.add(std::chrono::seconds(1));
-  Count.start();
+  //a = a * 2.0;
 
-  unsigned i = Count.get<std::milli>();
-  while(i > 0)
-  {
-    stb::sleep<std::milli>(500);
-    i = Count.get<std::micro>();
-    std::cout << i << std::endl;
-  }
+  std::cout << a.count() << '\n' << b.count() << '\n';
 
-  Count.add<stb::second>(4);
-  Count.add(std::chrono::seconds(4));
-  stb::sleep(Count);
-
+return 0;
 }
