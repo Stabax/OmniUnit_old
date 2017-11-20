@@ -453,7 +453,7 @@ protected:
 
   virtual nanosecond_f getNano() const
   {
-    return Timer::getNano() * _gamma;
+    return _gamma * Timer::getNano();
   }
 
   double _gamma;

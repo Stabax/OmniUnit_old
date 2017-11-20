@@ -6,12 +6,15 @@
 int main()
 {
 
-  stb::kilometerPerSecond_f a(230);
-  stb::kilometerPerHour_f b = stb::speed_cast<stb::kilometerPerHour_f>(a);
+  stb::kilometerPerHour_f a(50);
+  stb::meterPerSecond b = stb::speed_cast<stb::meterPerSecond>(a);
+  //stb::meterPerSecond c(50);
+  //float y = a / 2;
 
-  //a = a * 2.0;
+  //std::cout << y << '\n';
 
-  std::cout << a.count() << '\n' << b.count() << '\n';
 
+  stb::second_f h(1);
+  h = h * 2;
 return 0;
 }

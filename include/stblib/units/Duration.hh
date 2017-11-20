@@ -29,7 +29,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DURATION_HH_
 #define DURATION_HH_
 
-#include <chrono>   // duration
+#include <chrono>    // duration
+#include "Unit.hpp" // Unit
 
 namespace stb
 {
@@ -47,6 +48,30 @@ namespace stb
 template<typename Rep, typename Period = std::ratio<1>>
 using Duration = std::chrono::duration<Rep, Period>;
 
+
+/*
+template<typename Rep, typename Period = std::ratio<1>>
+class Dur : public std::chrono::duration<Rep, Period>, public Unit<Rep, Period>
+{
+public:
+
+  Dur(Rep count):
+  std::chrono::duration<Rep, Period>(count)
+  {
+  }
+
+  //allow conversion std::chrono::duration ==> stb::Duration
+  template <typename _rep, typename _period>
+  Dur& operator=(std::chrono::duration<_rep, _period> const& Obj)
+  {
+    __r = std::chrono::duration_cast<Dur>(Obj).count();
+    return *this;
+  }
+
+
+protected:
+};
+*/
 
 template<typename toUnit, typename Rep, typename Period>
 constexpr toUnit duration_cast(Duration<Rep, Period> const& duration)
