@@ -189,8 +189,8 @@ public:
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value
   && (treat_as_floating_point<Rep>::value || !treat_as_floating_point<_Rep>::value)>::type>
-  constexpr explicit Speed(_Rep const& count):
-  Unit<Rep, Period>(static_cast<Rep>(count))
+  constexpr explicit Speed(_Rep const& countArg):
+  Unit<Rep, Period>(static_cast<Rep>(countArg))
   {
   }
 

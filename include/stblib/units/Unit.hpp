@@ -45,7 +45,7 @@ template<typename Rep1, typename Rep2>
 class common_rep_type<Rep1, Rep2, true>
 {
 public:
-  
+
   typedef typename std::common_type<Rep1, Rep2>::type type;
 };
 
@@ -78,8 +78,8 @@ class Unit
 {
 public:
 
-  Unit(Rep const& count):
-  _count(count)
+  Unit(Rep const& countArg):
+  _count(countArg)
   {
   }
 
