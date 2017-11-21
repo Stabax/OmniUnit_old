@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "units/Duration.hh"
 #include "units/Speed.hh"
+#include "units/Length.hh"
 
 namespace stb
 {

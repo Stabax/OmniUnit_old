@@ -1,4 +1,4 @@
-//Speed.hh
+//Length.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,8 +26,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef SPEED_HH_
-#define SPEED_HH_
+#ifndef LENGTH_HH_
+#define LENGTH_HH_
 
 #include "Unit.hpp" // Unit
 
@@ -38,7 +38,7 @@ namespace stb
 
 //previous declaration needed to define cast and treat_as_flating_point
 template<typename Rep, typename Period>
-class Speed;
+class Length;
 
 
 
@@ -52,12 +52,12 @@ class Speed;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class Speed_cast_impl
+class length_cast_impl
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Speed<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Length<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
 
@@ -68,12 +68,12 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, true, true>
+class length_cast_impl<toUnit, new_ratio, common_rep, true, true>
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Speed<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Length<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(Obj.count()));
@@ -82,12 +82,12 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, true, false>
+class length_cast_impl<toUnit, new_ratio, common_rep, true, false>
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Speed<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Length<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(
@@ -97,13 +97,13 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, false, true>
+class length_cast_impl<toUnit, new_ratio, common_rep, false, true>
 {
 public:
 
   template<typename Rep, typename Period>
   static constexpr toUnit
-  cast(Speed<Rep, Period> const& Obj)
+  cast(Length<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(
@@ -113,26 +113,26 @@ public:
 
 
 template<typename falseType>
-class is_Speed : public std::false_type
+class is_Length : public std::false_type
 {
 };
 
 
 template<typename Rep, typename Period>
-class is_Speed<Speed<Rep, Period>> : public std::true_type
+class is_Length<Length<Rep, Period>> : public std::true_type
 {
 };
 
 
 template<typename toUnit, typename Rep, typename Period>
-constexpr typename std::enable_if<is_Speed<toUnit>::value, toUnit>::type
-speed_cast(const Speed<Rep, Period>& Obj)
+constexpr typename std::enable_if<is_Length<toUnit>::value, toUnit>::type
+length_cast(const Length<Rep, Period>& Obj)
 {
   typedef typename toUnit::period period;
   typedef typename toUnit::rep rep;
   typedef std::ratio_divide<Period, period> new_ratio;
   typedef typename std::common_type<rep, Rep, intmax_t>::type common_rep;
-  typedef  Speed_cast_impl<toUnit, new_ratio,
+  typedef  length_cast_impl<toUnit, new_ratio,
   common_rep, new_ratio::num == 1, new_ratio::den == 1> type;
   return type::cast(Obj);
 }
@@ -150,7 +150,7 @@ speed_cast(const Speed<Rep, Period>& Obj)
 
 
 template<typename Rep, typename Period = std::ratio<1>>
-class Speed : public Unit<Rep, Period>
+class Length : public Unit<Rep, Period>
 {
 public:
 
@@ -158,19 +158,19 @@ public:
   typedef Period period;
 
 
-  static_assert(! is_Speed<Rep>::value, "rep cannot be a Speed");
+  static_assert(! is_Length<Rep>::value, "rep cannot be a Length");
   static_assert(is_ratio<Period>::value,
   "period must be a specialization of ratio");
   static_assert(Period::num > 0, "period must be positive");
 
 
-  constexpr Speed() = default;
-  Speed(Speed const&) = default;
+  constexpr Length() = default;
+  Length(Length const&) = default;
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value
   && (treat_as_floating_point<Rep>::value || !treat_as_floating_point<_Rep>::value)>::type>
-  constexpr explicit Speed(_Rep const& countArg):
+  constexpr explicit Length(_Rep const& countArg):
   Unit<Rep, Period>(static_cast<Rep>(countArg))
   {
   }
@@ -178,70 +178,70 @@ public:
 
   template<typename _Rep, typename _Period, typename = typename std::enable_if<treat_as_floating_point<Rep>::value
   || (std::ratio_divide<_Period, Period>::den == 1 && !treat_as_floating_point<_Rep>::value)>::type>
-  constexpr Speed(Speed<_Rep, _Period> const& Obj):
-  Unit<Rep, Period>(speed_cast<Speed>(Obj).count())
+  constexpr Length(Length<_Rep, _Period> const& Obj):
+  Unit<Rep, Period>(length_cast<Length>(Obj).count())
   {
   }
 
 
-  ~Speed() = default;
-  Speed& operator=(Speed const&) = default;
+  ~Length() = default;
+  Length& operator=(Length const&) = default;
 
 
-  static constexpr Speed zero()
+  static constexpr Length zero()
   {
-    return Speed(0);
+    return Length(0);
   }
 
 
-  Speed& operator++()
+  Length& operator++()
   {
     ++Unit<Rep, Period>::_count;
     return *this;
   }
 
 
-  Speed operator++(int)
+  Length operator++(int)
   {
-    return Speed(Unit<Rep, Period>::_count++);
+    return Length(Unit<Rep, Period>::_count++);
   }
 
 
-  Speed& operator--()
+  Length& operator--()
   {
     --Unit<Rep, Period>::_count;
     return *this;
   }
 
 
-  Speed operator--(int)
+  Length operator--(int)
   {
-    return Speed(Unit<Rep, Period>::_count--);
+    return Length(Unit<Rep, Period>::_count--);
   }
 
 
-  Speed& operator+=(Speed const& Obj)
+  Length& operator+=(Length const& Obj)
   {
     Unit<Rep, Period>::_count += Obj.count();
     return *this;
   }
 
 
-  Speed& operator-=(Speed const& Obj)
+  Length& operator-=(Length const& Obj)
   {
     Unit<Rep, Period>::_count -= Obj.count();
     return *this;
   }
 
 
-  Speed& operator*=(Rep coef)
+  Length& operator*=(Rep coef)
   {
     Unit<Rep, Period>::_count *= coef;
     return *this;
   }
 
 
-  Speed& operator/=(Rep coef)
+  Length& operator/=(Rep coef)
   {
     Unit<Rep, Period>::_count /= coef;
     return *this;
@@ -249,7 +249,7 @@ public:
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Speed&>::type
+  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Length&>::type
   operator%=(Rep const& coef)
   {
     Unit<Rep, Period>::_count %= coef;
@@ -258,8 +258,8 @@ public:
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Speed&>::type
-  operator%=(Speed const& Obj)
+  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Length&>::type
+  operator%=(Length const& Obj)
   {
     Unit<Rep, Period>::_count %= Obj.count();
     return *this;
@@ -279,119 +279,119 @@ public:
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type
-operator+ (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type
+operator+ (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(type(Obj1).count() + type(Obj2).count());
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type
-operator- (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type
+operator- (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(type(Obj1).count() - type(Obj1).count());
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Speed<typename common_rep_type<Rep, coefType>::type, Period>
-operator* (Speed<Rep, Period> const& Obj, coefType const& coef)
+constexpr Length<typename common_rep_type<Rep, coefType>::type, Period>
+operator* (Length<Rep, Period> const& Obj, coefType const& coef)
 {
   typedef typename std::common_type<Rep, coefType>::type common;
-  typedef Speed<common, Period> type;
+  typedef Length<common, Period> type;
   return type(type(Obj).count() * coef);
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Speed<typename common_rep_type<Rep, coefType>::type, Period>
-operator* (coefType const& coef, Speed<Rep, Period> const& Obj)
+constexpr Length<typename common_rep_type<Rep, coefType>::type, Period>
+operator* (coefType const& coef, Length<Rep, Period> const& Obj)
 {
   return Obj * coef;
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Speed<typename common_rep_type<Rep, typename
-std::enable_if<!is_Speed<coefType>::value, coefType>::type>::type, Period>
-operator/ (Speed<Rep, Period> const& Obj, coefType const& coef)
+constexpr Length<typename common_rep_type<Rep, typename
+std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
+operator/ (Length<Rep, Period> const& Obj, coefType const& coef)
 {
   typedef typename std::common_type<Rep, coefType>::type common;
-  typedef Speed<common, Period> type;
+  typedef Length<common, Period> type;
   return type(type(Obj).count() / coef);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Rep1, Rep2>::type
-operator/ (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+operator/ (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(Obj1).count() / type(Obj2).count();
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Speed<typename common_rep_type<Rep, typename
-std::enable_if<!is_Speed<coefType>::value, coefType>::type>::type, Period>
-operator% (Speed<Rep, Period> const& Obj, coefType const& coef)
+constexpr Length<typename common_rep_type<Rep, typename
+std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
+operator% (Length<Rep, Period> const& Obj, coefType const& coef)
 {
-  typedef Speed<typename std::common_type<Rep, coefType>::type, Period> type;
+  typedef Length<typename std::common_type<Rep, coefType>::type, Period> type;
   return type(type(Obj).count() % coef);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type
-operator% (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type
+operator% (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(type(Obj1).count() % type(Obj2).count());
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator==(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator==(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(Obj1).count() == type(Obj2).count();
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator!=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator!=(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
   return !(Obj1 == Obj2);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator<(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator<(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(Obj1).count() < type(Obj2).count();
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator<=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator<=(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
   return !(Obj2 < Obj1);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator>(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator>(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
   return Obj2 < Obj1;
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator>=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+constexpr bool operator>=(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
   return ! (Obj1 < Obj2);
 }
@@ -408,13 +408,87 @@ constexpr bool operator>=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> c
 
 
 
-typedef Speed<long long, std::ratio<1000, 3600>>    kilometerPerHour;
-typedef Speed<long long, std::ratio<1, 1>>          meterPerSecond;
-typedef Speed<long long, std::ratio<1000, 1>>       kilometerPerSecond;
+typedef Length<long long, std::atto>                        attometer;
+typedef Length<long long, std::femto>                       femtometer;
+typedef femtometer                                          fermi;
+typedef Length<long long, std::pico>                        picometer;
+typedef Length<long long,
+std::__ratio_multiply<std::nano, std::ratio<1, 10>>::type>  angstrom;
+typedef angstrom                                            Angstrom;
+typedef Length<long long, std::nano>                        nanometer;
+typedef Length<long long, std::micro>                       micrometer;
+typedef Length<long long, std::milli>                       millimeter;
+typedef Length<long long, std::centi>                       centimeter;
+typedef Length<long long, std::ratio<1, 1>>                 meter;
+typedef Length<long long, std::kilo>                        kilometer;
+typedef Length<long long, std::mega>                        megameter;
+typedef Length<long long, std::ratio<299792458, 1>>         lightsecond;
+typedef Length<long long, std::giga>                        gigameter;
+typedef Length<long long,
+std::__ratio_multiply<std::ratio<299792458, 1>,
+std::ratio<60, 1>>::type>                                   lightminute;
+typedef Length<long long, std::ratio<149597870700, 1>>      astronomicalUnit;
+typedef Length<long long, std::tera>                        terameter;
+typedef Length<long long, std::peta>                        petameter;
+typedef Length<long long,
+std::__ratio_multiply<lightminute::period,
+std::ratio<60*24*36525, 100>>::type>                        lightyear;
+//value of parsec is approximated because of pi...
+typedef Length<long long,
+std::__ratio_multiply<lightyear::period,
+std::ratio<32616, 10000>>::type>                            parsec;
+typedef Length<long long, std::exa>                         exameter;
+//these units involve overflow error
+/*
+typedef Length<long long,
+std::__ratio_multiply<parsec::period, std::kilo>::type>     kiloparsec;
+typedef Length<long long,
+std::__ratio_multiply<parsec::period, std::mega>::type>     megaparsec;
+typedef Length<long long,
+std::__ratio_multiply<parsec::period, std::giga>::type>     gigaparsec;
+*/
 
-typedef Speed<float, std::ratio<1000, 3600>>    kilometerPerHour_f;
-typedef Speed<float, std::ratio<1, 1>>          meterPerSecond_f;
-typedef Speed<float, std::ratio<1000, 1>>       kilometerPerSecond_f;
+
+
+typedef Length<float, std::atto>                            attometer_f;
+typedef Length<float, std::femto>                           femtometer_f;
+typedef femtometer_f                                        fermi_f;
+typedef Length<float, std::pico>                            picometer_f;
+typedef Length<float,
+std::__ratio_multiply<std::nano, std::ratio<1, 10>>::type>  angstrom_f;
+typedef angstrom                                            Angstrom_f;
+typedef Length<float, std::nano>                            nanometer_f;
+typedef Length<float, std::micro>                           micrometer_f;
+typedef Length<float, std::milli>                           millimeter_f;
+typedef Length<float, std::centi>                           centimeter_f;
+typedef Length<float, std::ratio<1, 1>>                     meter_f;
+typedef Length<float, std::kilo>                            kilometer_f;
+typedef Length<float, std::mega>                            megameter_f;
+typedef Length<float, std::ratio<299792458, 1>>             lightsecond_f;
+typedef Length<float, std::giga>                            gigameter_f;
+typedef Length<float,
+std::__ratio_multiply<std::ratio<299792458, 1>,
+std::ratio<60, 1>>::type>                                   lightminute_f;
+typedef Length<float, std::ratio<149597870700, 1>>          astronomicalUnit_f;
+typedef Length<float, std::tera>                            terameter_f;
+typedef Length<float, std::peta>                            petameter_f;
+typedef Length<float,
+std::__ratio_multiply<lightminute::period,
+std::ratio<60*24*36525, 100>>::type>                        lightyear_f;
+//value of parsec is approximated because of pi...
+typedef Length<float,
+std::__ratio_multiply<lightyear::period,
+std::ratio<32616, 10000>>::type>                            parsec_f;
+typedef Length<float, std::exa>                             exameter_f;
+//these units involve overflow error
+/*
+typedef Length<float,
+std::__ratio_multiply<parsec::period, std::kilo>::type>     kiloparsec_f;
+typedef Length<float,
+std::__ratio_multiply<parsec::period, std::mega>::type>     megaparsec_f;
+typedef Length<float,
+std::__ratio_multiply<parsec::period, std::giga>::type>     gigaparsec_f;
+*/
 
 
 
@@ -428,60 +502,17 @@ typedef Speed<float, std::ratio<1000, 1>>       kilometerPerSecond_f;
 
 
 
-
-
 namespace constant
 {
 
+//Planck Lenght
+const attometer_f lp(0.00000000000000001616);
 
-
-//Speed of lux through void
-const meterPerSecond cRounded(300000000);
-const meterPerSecond c(299792458);
-
-//Speed of sound, in normal pressure and temperature conditions
-const meterPerSecond cAir(340);
-const meterPerSecond cWater(1480);
-const meterPerSecond cIce(3200);
-const meterPerSecond cGlass(5300);
-const meterPerSecond cSteel(5700);
-const meterPerSecond cLead(1200);
-const meterPerSecond cTitanium(4950);
-const meterPerSecond cConcrete(3100);
-const meterPerSecond cGranite(6200);
-const meterPerSecond cPeridotite(7700);
-
-//Speed at the earth's equator
-const kilometerPerHour vEquator(1670);
-
-//Speeds in the sun system
-const kilometerPerHour vMercury(172800);
-const kilometerPerHour vVenus(126000);
-const kilometerPerHour vEarth(104400);
-const kilometerPerHour vMars(86400);
-const kilometerPerHour vJupiter(46400);
-const kilometerPerHour vSaturn(36000);
-const kilometerPerHour vUranus(25200);
-const kilometerPerHour vNeptune(18000);
-
-const kilometerPerHour vMoon(3680); //around the earth
-
-//intestellar Speeds
-//const kilometerPerHour vSun_aCentauri(828000);
-//const kilometerPerHour vSun_Sirius(828000);
-//const kilometerPerHour vSun_Eridiani(828000);
-const kilometerPerSecond vSun_MilkyWay(230);
-
-//intergalactic Speeds
-const kilometerPerSecond vMilkyWay_Andromeda(120);
-const kilometerPerSecond vMilkyWay_LocalGoup(65);
-const kilometerPerSecond vLocalGroup_LocalSuperCluster(627);
-const kilometerPerSecond vLocalSuperCluster_GreatAttractor(368);
-const kilometerPerSecond vLocalSuperCluster_Laniakea = vLocalSuperCluster_GreatAttractor;
 
 
 
 }//namespace constant
+
 
 
 }//namespace stb
@@ -506,7 +537,7 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 
 template<typename CT, typename Period1, typename Period2>
-class Speed_common_type_wrapper
+class Length_common_type_wrapper
 {
 private:
 
@@ -518,12 +549,12 @@ private:
 
 public:
 
-  typedef std::__success_type<stb::Speed<cr, r>> type;
+  typedef std::__success_type<stb::Length<cr, r>> type;
 };
 
 
 template<typename Period1, typename Period2>
-class Speed_common_type_wrapper<std::__failure_type, Period1, Period2>
+class Length_common_type_wrapper<std::__failure_type, Period1, Period2>
 {
 public:
 
@@ -532,8 +563,8 @@ public:
 
 
 template<typename Rep1, typename Period1, typename Rep2, typename Period2>
-class common_type<stb::Speed<Rep1, Period1>, stb::Speed<Rep2, Period2>>
-        : public Speed_common_type_wrapper<typename std::__member_type_wrapper<
+class common_type<stb::Length<Rep1, Period1>, stb::Length<Rep2, Period2>>
+        : public Length_common_type_wrapper<typename std::__member_type_wrapper<
         std::common_type<Rep1, Rep2>>::type, Period1, Period2>::type
 {
 };
@@ -547,4 +578,4 @@ class common_type<stb::Speed<Rep1, Period1>, stb::Speed<Rep2, Period2>>
 
 
 
-#endif //SPEED_HH_
+#endif //LENGTH_HH_

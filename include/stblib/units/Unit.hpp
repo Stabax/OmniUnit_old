@@ -62,6 +62,12 @@ class is_ratio<std::ratio<Num, Den>> : public std::true_type
 };
 
 
+template<typename Rep>
+struct treat_as_floating_point : std::is_floating_point<Rep>
+{
+};
+
+
 
 
 
