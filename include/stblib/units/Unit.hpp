@@ -29,8 +29,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef UNIT_HPP_
 #define UNIT_HPP_
 
+#include <type_traits> // is_convertible, common_type, is_floating_point, true_type
+                       // false_type
+#include <ratio>       // ratio, intmax_t, __ratio_divide, __ratio_multiply
+#include <limits>      // numeric_limits
+
 namespace stb
 {
+
+
 
 
 

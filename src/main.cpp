@@ -1,14 +1,17 @@
 
-#include "stblib/stblib.hh"
+#include "stblib/units/temp_Duration.hh"
 #include <iostream>
 
 int main()
 {
 
-  stb::astronomicalUnit a(1);
-  stb::lightminute_f b = stb::length_cast<stb::lightminute_f>(a);
+  stb::Duration<float, std::ratio<1, 1>> a(10);
 
-  std::cout << b.count() <<'\n';
+  std::chrono::duration<float, std::ratio<1, 1>> b(10);
+
+  auto c = b + a;
+
+  std::cout << c.count() << '\n';
 
 return 0;
 }

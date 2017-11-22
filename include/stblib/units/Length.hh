@@ -427,7 +427,7 @@ typedef Length<long long, std::giga>                        gigameter;
 typedef Length<long long,
 std::__ratio_multiply<std::ratio<299792458, 1>,
 std::ratio<60, 1>>::type>                                   lightminute;
-typedef Length<long long, std::ratio<149597870700, 1>>      astronomicalUnit;
+typedef Length<long long, std::ratio<149597870700, 1>>      astronomical_unit;
 typedef Length<long long, std::tera>                        terameter;
 typedef Length<long long, std::peta>                        petameter;
 typedef Length<long long,
@@ -469,7 +469,7 @@ typedef Length<float, std::giga>                            gigameter_f;
 typedef Length<float,
 std::__ratio_multiply<std::ratio<299792458, 1>,
 std::ratio<60, 1>>::type>                                   lightminute_f;
-typedef Length<float, std::ratio<149597870700, 1>>          astronomicalUnit_f;
+typedef Length<float, std::ratio<149597870700, 1>>          astronomical_unit_f;
 typedef Length<float, std::tera>                            terameter_f;
 typedef Length<float, std::peta>                            petameter_f;
 typedef Length<float,
