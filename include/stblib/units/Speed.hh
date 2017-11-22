@@ -512,13 +512,13 @@ private:
 
   typedef std::__static_gcd<Period1::num, Period2::num> gcd_num;
   typedef std::__static_gcd<Period1::den, Period2::den> gcd_den;
-  typedef typename CT::type cr;
+  typedef typename CT::type common_rep;
   typedef std::ratio<gcd_num::value,
-    (Period1::den / gcd_den::value) * Period2::den> r;
+    (Period1::den / gcd_den::value) * Period2::den> new_ratio;
 
 public:
 
-  typedef std::__success_type<stb::Speed<cr, r>> type;
+  typedef std::__success_type<stb::Speed<common_rep, new_ratio>> type;
 };
 
 
