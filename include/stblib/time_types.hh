@@ -1,4 +1,4 @@
-//stblib.hh
+//time_types.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,10 +26,11 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef STBLIB_HH_
-#define STBLIB_HH_
+#ifndef TIME_TYPES_HH_
+#define TIME_TYPES_HH_
 
 #include "units.hh"
+#include "units/exception.hh"
 #include <chrono>     // duration, high_resolution_clock, time_point
 #include <ctime>      // gmtime, localtime, time, tm
 #include <string>     // string, to_string
@@ -37,47 +38,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace stb
 {
-//=============================================================================
-//=============================================================================
-// EXCEPTIONS DEFINITION ======================================================
-//=============================================================================
-//=============================================================================
-
-
-
-class exception : public std::exception
-{
-public:
-
-  exception(std::string const& msg, std::string const& name):
-  _msg("[stblib.exception - " + name + " : " + msg + "]")
-  {
-  }
-
-  virtual const char* what() const noexcept
-  {
-    return _msg.c_str();
-  }
-
-protected:
-  std::string const _msg;
-};
-
-
-
-
-
-class Date_exception : public exception
-{
-public:
-
-  Date_exception(std::string const& msg):
-  exception(msg, "Date_exception")
-  {
-  }
-};
-
-
 
 
 
@@ -135,7 +95,7 @@ public:
   static int get(Location place)
   {
     place = place; //without this, cannot compile (unused place)
-    throw Date_exception("Invalid duration type used, only second, minute, hour, week, month and year are allowed.");
+    throw Date_exception("Only stb::second, stb::minute, stb::hour, stb::week, stb::month and stb::year are allowed.");
   }
 
 protected:
@@ -428,41 +388,7 @@ void sleep(Countdown const& count)
 
 
 
-//=============================================================================
-//=============================================================================
-// RELATIVITY =================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-// RELATIVE TIMER DEFINITION ==================================================
-
-
-
-class RelativeTimer : public Timer
-{
-public:
-
-  RelativeTimer(double gamma):
-  _gamma(gamma)
-  {
-  }
-
-protected:
-
-  virtual nanosecond getNano() const
-  {
-    return _gamma * Timer::getNano();
-  }
-
-  double _gamma;
-};
-
-
-
-
 
 }//namespace stb
 
-#endif //STBLIB_HH_
+#endif //TIME_TYPES_HH_

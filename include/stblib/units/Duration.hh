@@ -29,7 +29,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DURATION_HH_
 #define DURATION_HH_
 
-#include "Unit.hpp" // Unit
+#include "Unit.hpp"
+#include "exception.hh"
 #include <chrono>   //duration
 
 namespace stb
@@ -268,6 +269,8 @@ public:
 
   Duration& operator/=(Rep const& coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count /= coef;
     std::chrono::duration<Rep, Period>::operator/=(coef);
     return *this;
@@ -278,6 +281,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Duration&>::type
   operator%=(Rep const& coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= coef;
     std::chrono::duration<Rep, Period>::operator%=(coef);
     return *this;
@@ -288,6 +293,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Duration&>::type
   operator%=(Duration const& Obj)
   {
+    if(Obj.count() == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= Obj.count();
     std::chrono::duration<Rep, Period>::operator%=(Obj);
     return *this;
@@ -347,6 +354,8 @@ constexpr Duration<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Duration<coefType>::value, coefType>::type>::type, Period>
 operator/ (Duration<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Rep, coefType>::type common;
   typedef Duration<common, Period> type;
   return type(type(Obj).count() / coef);
@@ -357,6 +366,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Rep1, Rep2>::type
 operator/ (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
   return type(Obj1).count() / type(Obj2).count();
 }
@@ -367,6 +378,8 @@ constexpr Duration<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Duration<coefType>::value, coefType>::type>::type, Period>
 operator% (Duration<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef Duration<typename std::common_type<Rep, coefType>::type, Period> type;
   return type(type(Obj).count() % coef);
 }
@@ -376,6 +389,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type
 operator% (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
   return type(type(Obj1).count() % type(Obj2).count());
 }
@@ -483,13 +498,13 @@ namespace constant
 
 
 //age of the universe
-const megayear t0(1373);
+const gigayear t0(13.798); //+-37
 
 //age of the sun system and its planets
-const megayear tSunSystem(454);
+const gigayear tSunSystem(4.568);
 
 //Planck time
-const attosecond tp(0.00000000000000000000000005391);
+const attosecond tp(0.0000000000000000000000000539106); //+-32
 
 //some radioactive decay constants
 //TO DO

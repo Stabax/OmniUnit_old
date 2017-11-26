@@ -243,6 +243,8 @@ public:
 
   Length& operator/=(Rep coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count /= coef;
     return *this;
   }
@@ -252,6 +254,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Length&>::type
   operator%=(Rep const& coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= coef;
     return *this;
   }
@@ -261,6 +265,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Length&>::type
   operator%=(Length const& Obj)
   {
+    if(Obj.count() == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= Obj.count();
     return *this;
   }
@@ -319,6 +325,8 @@ constexpr Length<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
 operator/ (Length<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Rep, coefType>::type common;
   typedef Length<common, Period> type;
   return type(type(Obj).count() / coef);
@@ -329,6 +337,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Rep1, Rep2>::type
 operator/ (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(Obj1).count() / type(Obj2).count();
 }
@@ -339,6 +349,8 @@ constexpr Length<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
 operator% (Length<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef Length<typename std::common_type<Rep, coefType>::type, Period> type;
   return type(type(Obj).count() % coef);
 }
@@ -348,6 +360,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type
 operator% (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
   return type(type(Obj1).count() % type(Obj2).count());
 }
@@ -408,15 +422,18 @@ constexpr bool operator>=(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2>
 
 
 
+template<typename Rep, typename period = std::ratio<1>>
+using Ray = Length<Rep, period>;
+
+
+
 
 
 typedef Length<float, std::atto>                            attometer;
 typedef Length<float, std::femto>                           femtometer;
-typedef femtometer                                          fermi;
 typedef Length<float, std::pico>                            picometer;
 typedef Length<float,
 std::__ratio_multiply<std::nano, std::ratio<1, 10>>::type>  angstrom;
-typedef angstrom                                            Angstrom;
 typedef Length<float, std::nano>                            nanometer;
 typedef Length<float, std::micro>                           micrometer;
 typedef Length<float, std::milli>                           millimeter;
@@ -466,8 +483,47 @@ namespace constant
 {
 
 //Planck Lenght
-const attometer lp(0.00000000000000001616);
+const attometer Lp(0.00000000000000001616299); //+-38
 
+//Bohr ray
+const angstrom Rb(0.52917721092); //+-17
+
+//planets ray
+const kilometer Rsun(695700);
+const kilometer Rmercury(695700);
+const kilometer Rvenus(695700);
+const kilometer Rearth(6371);
+const kilometer Rmoon(1737);
+const kilometer Rmars(3390);
+const kilometer Rjupiter(69911);
+const kilometer Rsaturn(58232);
+const kilometer Ruranus(25362);
+const kilometer Rneptune(24622);
+
+//distance with the sun
+const kilometer Lmercury(57910000);
+const kilometer Lvenus(108200000);
+const kilometer Learth(149600000);
+const kilometer Lmars(227900000);
+const kilometer Ljupiter(778500000);
+const kilometer Lsaturn(1429000000);
+const kilometer Luranus(2871000000);
+const kilometer Lneptune(4498000000);
+
+//distance earth-moon
+const lightsecond Lmoon(1.25);
+
+//distance sun-milkyway
+const lightyear Lsun(30000);
+
+//ray of the milkyway
+const lightyear Rmilkyway(60000);
+
+//thickness of the milky way
+const lightyear Dmilkyway(1000);
+
+//distance milkyway-andromeda
+const parsec Landromeda(778000); //+-17000
 
 
 

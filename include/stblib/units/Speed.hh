@@ -243,6 +243,8 @@ public:
 
   Speed& operator/=(Rep coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count /= coef;
     return *this;
   }
@@ -252,6 +254,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Speed&>::type
   operator%=(Rep const& coef)
   {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= coef;
     return *this;
   }
@@ -261,6 +265,8 @@ public:
   typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Speed&>::type
   operator%=(Speed const& Obj)
   {
+    if(Obj.count() == 0)
+      throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= Obj.count();
     return *this;
   }
@@ -319,6 +325,8 @@ constexpr Speed<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Speed<coefType>::value, coefType>::type>::type, Period>
 operator/ (Speed<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Rep, coefType>::type common;
   typedef Speed<common, Period> type;
   return type(type(Obj).count() / coef);
@@ -329,6 +337,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Rep1, Rep2>::type
 operator/ (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
   return type(Obj1).count() / type(Obj2).count();
 }
@@ -339,6 +349,8 @@ constexpr Speed<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Speed<coefType>::value, coefType>::type>::type, Period>
 operator% (Speed<Rep, Period> const& Obj, coefType const& coef)
 {
+  if(coef == 0)
+    throw Unit_exception("Divide by 0.");
   typedef Speed<typename std::common_type<Rep, coefType>::type, Period> type;
   return type(type(Obj).count() % coef);
 }
@@ -348,6 +360,8 @@ template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type
 operator% (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
 {
+  if(Obj2.count() == 0)
+    throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
   return type(type(Obj1).count() % type(Obj2).count());
 }
@@ -408,9 +422,9 @@ constexpr bool operator>=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> c
 
 
 
-typedef Speed<float, std::ratio<1000, 3600>>    kilometerPerHour;
-typedef Speed<float, std::ratio<1, 1>>          meterPerSecond;
-typedef Speed<float, std::ratio<1000, 1>>       kilometerPerSecond;
+typedef Speed<float, std::ratio<1000, 3600>>    kilometer_hour;
+typedef Speed<float, std::ratio<1, 1>>          meter_second;
+typedef Speed<float, std::ratio<1000, 1>>       kilometer_second;
 
 
 
@@ -432,48 +446,38 @@ namespace constant
 
 
 //Speed of lux through void
-const meterPerSecond cRounded(300000000);
-const meterPerSecond c(299792458);
+const meter_second cRounded(300000000);
+const meter_second c(299792458);
 
-//Speed of sound, in normal pressure and temperature conditions
-const meterPerSecond cAir(340);
-const meterPerSecond cWater(1480);
-const meterPerSecond cIce(3200);
-const meterPerSecond cGlass(5300);
-const meterPerSecond cSteel(5700);
-const meterPerSecond cLead(1200);
-const meterPerSecond cTitanium(4950);
-const meterPerSecond cConcrete(3100);
-const meterPerSecond cGranite(6200);
-const meterPerSecond cPeridotite(7700);
+//Speed of sound, at normal pressure and temperature conditions
+const meter_second cAir(340);
+const meter_second cWater(1480);
+const meter_second cSteel(5700);
+const meter_second cLead(1200);
+const meter_second cGranite(6200);
+const meter_second cPeridotite(7700);
 
 //Speed at the earth's equator
-const kilometerPerHour vEquator(1670);
+const kilometer_hour vEquator(1670);
 
-//Speeds in the sun system
-const kilometerPerHour vMercury(172800);
-const kilometerPerHour vVenus(126000);
-const kilometerPerHour vEarth(104400);
-const kilometerPerHour vMars(86400);
-const kilometerPerHour vJupiter(46400);
-const kilometerPerHour vSaturn(36000);
-const kilometerPerHour vUranus(25200);
-const kilometerPerHour vNeptune(18000);
+//Speed of planets around the sun
+const kilometer_hour vMercury(172800);
+const kilometer_hour vVenus(126000);
+const kilometer_hour vEarth(104400);
+const kilometer_hour vMars(86400);
+const kilometer_hour vJupiter(46400);
+const kilometer_hour vSaturn(36000);
+const kilometer_hour vUranus(25200);
+const kilometer_hour vNeptune(18000);
 
-const kilometerPerHour vMoon(3680); //around the earth
+//Speed of the moon around the earth
+const kilometer_hour vMoon(3680);
 
-//intestellar Speeds
-//const kilometerPerHour vSun_aCentauri(828000);
-//const kilometerPerHour vSun_Sirius(828000);
-//const kilometerPerHour vSun_Eridiani(828000);
-const kilometerPerSecond vSun_MilkyWay(230);
+//Speed of sun the system around the milkyway
+const kilometer_second vSun(230);
 
-//intergalactic Speeds
-const kilometerPerSecond vMilkyWay_Andromeda(120);
-const kilometerPerSecond vMilkyWay_LocalGoup(65);
-const kilometerPerSecond vLocalGroup_LocalSuperCluster(627);
-const kilometerPerSecond vLocalSuperCluster_GreatAttractor(368);
-const kilometerPerSecond vLocalSuperCluster_Laniakea = vLocalSuperCluster_GreatAttractor;
+//Speed of the milkyway toward andromeda
+const kilometer_second vAndromeda(120);
 
 
 
