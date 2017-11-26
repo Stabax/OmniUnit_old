@@ -36,7 +36,7 @@ namespace stb
 
 
 
-//previous declaration needed to define cast and treat_as_flating_point
+//previous declaration needed to define cast
 template<typename Rep, typename Period>
 class Length;
 
@@ -52,7 +52,7 @@ class Length;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class length_cast_impl
+class length_cast_impl : public casting_class
 {
 public:
 
@@ -68,7 +68,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, true, true>
+class length_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_class
 {
 public:
 
@@ -82,7 +82,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, true, false>
+class length_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_class
 {
 public:
 
@@ -97,7 +97,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, false, true>
+class length_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_class
 {
 public:
 
@@ -159,7 +159,7 @@ public:
 
 
   static_assert(! is_Length<Rep>::value, "rep cannot be a Length");
-  static_assert(is_ratio<Period>::value,
+  static_assert(std::chrono::__is_ratio<Period>::value,
   "period must be a specialization of ratio");
   static_assert(Period::num > 0, "period must be positive");
 
@@ -169,15 +169,15 @@ public:
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value
-  && (treat_as_floating_point<Rep>::value || !treat_as_floating_point<_Rep>::value)>::type>
+  && (std::chrono::treat_as_floating_point<Rep>::value || !std::chrono::treat_as_floating_point<_Rep>::value)>::type>
   constexpr explicit Length(_Rep const& countArg):
   Unit<Rep, Period>(static_cast<Rep>(countArg))
   {
   }
 
 
-  template<typename _Rep, typename _Period, typename = typename std::enable_if<treat_as_floating_point<Rep>::value
-  || (std::ratio_divide<_Period, Period>::den == 1 && !treat_as_floating_point<_Rep>::value)>::type>
+  template<typename _Rep, typename _Period, typename = typename std::enable_if<std::chrono::treat_as_floating_point<Rep>::value
+  || (std::ratio_divide<_Period, Period>::den == 1 && !std::chrono::treat_as_floating_point<_Rep>::value)>::type>
   constexpr Length(Length<_Rep, _Period> const& Obj):
   Unit<Rep, Period>(length_cast<Length>(Obj).count())
   {
@@ -249,7 +249,7 @@ public:
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Length&>::type
+  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Length&>::type
   operator%=(Rep const& coef)
   {
     Unit<Rep, Period>::_count %= coef;
@@ -258,7 +258,7 @@ public:
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!treat_as_floating_point<_Rep>::value, Length&>::type
+  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Length&>::type
   operator%=(Length const& Obj)
   {
     Unit<Rep, Period>::_count %= Obj.count();
@@ -297,7 +297,7 @@ operator- (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Length<typename common_rep_type<Rep, coefType>::type, Period>
+constexpr Length<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
 operator* (Length<Rep, Period> const& Obj, coefType const& coef)
 {
   typedef typename std::common_type<Rep, coefType>::type common;
@@ -307,7 +307,7 @@ operator* (Length<Rep, Period> const& Obj, coefType const& coef)
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Length<typename common_rep_type<Rep, coefType>::type, Period>
+constexpr Length<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
 operator* (coefType const& coef, Length<Rep, Period> const& Obj)
 {
   return Obj * coef;
@@ -315,7 +315,7 @@ operator* (coefType const& coef, Length<Rep, Period> const& Obj)
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Length<typename common_rep_type<Rep, typename
+constexpr Length<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
 operator/ (Length<Rep, Period> const& Obj, coefType const& coef)
 {
@@ -335,7 +335,7 @@ operator/ (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Length<typename common_rep_type<Rep, typename
+constexpr Length<typename std::chrono::__common_rep_type<Rep, typename
 std::enable_if<!is_Length<coefType>::value, coefType>::type>::type, Period>
 operator% (Length<Rep, Period> const& Obj, coefType const& coef)
 {

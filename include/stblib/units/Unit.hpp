@@ -33,48 +33,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                        // false_type
 #include <ratio>       // ratio, intmax_t, __ratio_divide, __ratio_multiply
 #include <limits>      // numeric_limits
+#include <chrono>
 
 namespace stb
 {
 
 
 
-
-
-template<typename Rep1, typename Rep2, bool = std::is_convertible<Rep2,
-typename std::common_type<Rep1, Rep2>::type>::value>
-class common_rep_type
+class casting_class
 {
+  //this class only exists to group all casting class in inheritance tree
 };
-
-
-template<typename Rep1, typename Rep2>
-class common_rep_type<Rep1, Rep2, true>
-{
-public:
-
-  typedef typename std::common_type<Rep1, Rep2>::type type;
-};
-
-
-template<typename Tp>
-class is_ratio : public std::false_type
-{
-};
-
-
-template<intmax_t Num, intmax_t Den>
-class is_ratio<std::ratio<Num, Den>> : public std::true_type
-{
-};
-
-
-template<typename Rep>
-struct treat_as_floating_point : std::is_floating_point<Rep>
-{
-};
-
-
 
 
 
