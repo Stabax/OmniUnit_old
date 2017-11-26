@@ -52,7 +52,7 @@ class Speed;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class Speed_cast_impl : public casting_class
+class Speed_cast_impl : public casting_type_trait
 {
 public:
 
@@ -68,7 +68,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_class
+class Speed_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_type_trait
 {
 public:
 
@@ -82,7 +82,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_class
+class Speed_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_type_trait
 {
 public:
 
@@ -97,7 +97,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class Speed_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_class
+class Speed_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_type_trait
 {
 public:
 
@@ -292,7 +292,7 @@ constexpr typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::t
 operator- (Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
 {
   typedef typename std::common_type<Speed<Rep1,Period1>, Speed<Rep2,Period2>>::type type;
-  return type(type(Obj1).count() - type(Obj1).count());
+  return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
@@ -408,13 +408,9 @@ constexpr bool operator>=(Speed<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> c
 
 
 
-typedef Speed<long long, std::ratio<1000, 3600>>    kilometerPerHour;
-typedef Speed<long long, std::ratio<1, 1>>          meterPerSecond;
-typedef Speed<long long, std::ratio<1000, 1>>       kilometerPerSecond;
-
-typedef Speed<float, std::ratio<1000, 3600>>    kilometerPerHour_f;
-typedef Speed<float, std::ratio<1, 1>>          meterPerSecond_f;
-typedef Speed<float, std::ratio<1000, 1>>       kilometerPerSecond_f;
+typedef Speed<float, std::ratio<1000, 3600>>    kilometerPerHour;
+typedef Speed<float, std::ratio<1, 1>>          meterPerSecond;
+typedef Speed<float, std::ratio<1000, 1>>       kilometerPerSecond;
 
 
 

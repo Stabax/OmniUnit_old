@@ -52,7 +52,7 @@ class Length;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class length_cast_impl : public casting_class
+class length_cast_impl : public casting_type_trait
 {
 public:
 
@@ -68,7 +68,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_class
+class length_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_type_trait
 {
 public:
 
@@ -82,7 +82,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_class
+class length_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_type_trait
 {
 public:
 
@@ -97,7 +97,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class length_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_class
+class length_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_type_trait
 {
 public:
 
@@ -292,7 +292,7 @@ constexpr typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>:
 operator- (Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2> const& Obj2)
 {
   typedef typename std::common_type<Length<Rep1,Period1>, Length<Rep2,Period2>>::type type;
-  return type(type(Obj1).count() - type(Obj1).count());
+  return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
@@ -408,86 +408,46 @@ constexpr bool operator>=(Length<Rep1,Period1> const& Obj1, Length<Rep2,Period2>
 
 
 
-typedef Length<long long, std::atto>                        attometer;
-typedef Length<long long, std::femto>                       femtometer;
+
+
+typedef Length<float, std::atto>                            attometer;
+typedef Length<float, std::femto>                           femtometer;
 typedef femtometer                                          fermi;
-typedef Length<long long, std::pico>                        picometer;
-typedef Length<long long,
+typedef Length<float, std::pico>                            picometer;
+typedef Length<float,
 std::__ratio_multiply<std::nano, std::ratio<1, 10>>::type>  angstrom;
 typedef angstrom                                            Angstrom;
-typedef Length<long long, std::nano>                        nanometer;
-typedef Length<long long, std::micro>                       micrometer;
-typedef Length<long long, std::milli>                       millimeter;
-typedef Length<long long, std::centi>                       centimeter;
-typedef Length<long long, std::ratio<1, 1>>                 meter;
-typedef Length<long long, std::kilo>                        kilometer;
-typedef Length<long long, std::mega>                        megameter;
-typedef Length<long long, std::ratio<299792458, 1>>         lightsecond;
-typedef Length<long long, std::giga>                        gigameter;
-typedef Length<long long,
+typedef Length<float, std::nano>                            nanometer;
+typedef Length<float, std::micro>                           micrometer;
+typedef Length<float, std::milli>                           millimeter;
+typedef Length<float, std::centi>                           centimeter;
+typedef Length<float, std::ratio<1, 1>>                     meter;
+typedef Length<float, std::kilo>                            kilometer;
+typedef Length<float, std::mega>                            megameter;
+typedef Length<float, std::ratio<299792458, 1>>             lightsecond;
+typedef Length<float, std::giga>                            gigameter;
+typedef Length<float,
 std::__ratio_multiply<std::ratio<299792458, 1>,
 std::ratio<60, 1>>::type>                                   lightminute;
-typedef Length<long long, std::ratio<149597870700, 1>>      astronomical_unit;
-typedef Length<long long, std::tera>                        terameter;
-typedef Length<long long, std::peta>                        petameter;
-typedef Length<long long,
+typedef Length<float, std::ratio<149597870700, 1>>          astronomical_unit;
+typedef Length<float, std::tera>                            terameter;
+typedef Length<float, std::peta>                            petameter;
+typedef Length<float,
 std::__ratio_multiply<lightminute::period,
 std::ratio<60*24*36525, 100>>::type>                        lightyear;
 //value of parsec is approximated because of pi...
-typedef Length<long long,
+typedef Length<float,
 std::__ratio_multiply<lightyear::period,
 std::ratio<32616, 10000>>::type>                            parsec;
-typedef Length<long long, std::exa>                         exameter;
+typedef Length<float, std::exa>                             exameter;
 //these units involve overflow error
 /*
-typedef Length<long long,
+typedef Length<float,
 std::__ratio_multiply<parsec::period, std::kilo>::type>     kiloparsec;
-typedef Length<long long,
+typedef Length<float,
 std::__ratio_multiply<parsec::period, std::mega>::type>     megaparsec;
-typedef Length<long long,
+typedef Length<float,
 std::__ratio_multiply<parsec::period, std::giga>::type>     gigaparsec;
-*/
-
-
-
-typedef Length<float, std::atto>                            attometer_f;
-typedef Length<float, std::femto>                           femtometer_f;
-typedef femtometer_f                                        fermi_f;
-typedef Length<float, std::pico>                            picometer_f;
-typedef Length<float,
-std::__ratio_multiply<std::nano, std::ratio<1, 10>>::type>  angstrom_f;
-typedef angstrom                                            Angstrom_f;
-typedef Length<float, std::nano>                            nanometer_f;
-typedef Length<float, std::micro>                           micrometer_f;
-typedef Length<float, std::milli>                           millimeter_f;
-typedef Length<float, std::centi>                           centimeter_f;
-typedef Length<float, std::ratio<1, 1>>                     meter_f;
-typedef Length<float, std::kilo>                            kilometer_f;
-typedef Length<float, std::mega>                            megameter_f;
-typedef Length<float, std::ratio<299792458, 1>>             lightsecond_f;
-typedef Length<float, std::giga>                            gigameter_f;
-typedef Length<float,
-std::__ratio_multiply<std::ratio<299792458, 1>,
-std::ratio<60, 1>>::type>                                   lightminute_f;
-typedef Length<float, std::ratio<149597870700, 1>>          astronomical_unit_f;
-typedef Length<float, std::tera>                            terameter_f;
-typedef Length<float, std::peta>                            petameter_f;
-typedef Length<float,
-std::__ratio_multiply<lightminute::period,
-std::ratio<60*24*36525, 100>>::type>                        lightyear_f;
-//value of parsec is approximated because of pi...
-typedef Length<float,
-std::__ratio_multiply<lightyear::period,
-std::ratio<32616, 10000>>::type>                            parsec_f;
-typedef Length<float, std::exa>                             exameter_f;
-//these units involve overflow error
-/*
-typedef Length<float,
-std::__ratio_multiply<parsec::period, std::kilo>::type>     kiloparsec_f;
-typedef Length<float,
-std::__ratio_multiply<parsec::period, std::mega>::type>     megaparsec_f;
-typedef Length<float,
-std::__ratio_multiply<parsec::period, std::giga>::type>     gigaparsec_f;
 */
 
 
@@ -506,7 +466,7 @@ namespace constant
 {
 
 //Planck Lenght
-const attometer_f lp(0.00000000000000001616);
+const attometer lp(0.00000000000000001616);
 
 
 

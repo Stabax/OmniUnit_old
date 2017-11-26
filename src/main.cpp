@@ -1,16 +1,15 @@
 
-#include "stblib/units.hh"
+#include "stblib/stblib.hh"
 #include <iostream>
 
 
 int main()
 {
-  stb::Duration<float, std::ratio<1, 1>> a(10);
-  a = std::chrono::seconds(3) * 2;
-  std::chrono::duration<float, std::ratio<1, 1>> b(a);
+  stb::hour a(3);
 
+  stb::kilometerPerHour b(100);
 
-  //stb::millisecond c(a);
+  std::cout << (a * b).count() << '\n';
 
 return 0;
 }

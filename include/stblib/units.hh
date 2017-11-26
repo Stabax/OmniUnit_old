@@ -36,16 +36,79 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace stb
 {
 
-/*
 
-  template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-  constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type
-  operator+ (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
-  {
-    typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
-    return type(type(Obj1).count() + type(Obj2).count());
-  }
-*/
+//=============================================================================
+//=============================================================================
+// LENGTH =====================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+// First unit... no composition
+
+
+
+//=============================================================================
+//=============================================================================
+// DURATION ===================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+// Second unit... need a third
+
+
+
+//=============================================================================
+//=============================================================================
+// SPEED ==================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template <typename Rep1, typename Period1, typename Rep2, typename Period2>
+constexpr Speed<typename std::common_type<Rep1, Rep2>::type, typename std::__ratio_divide<Period1, Period2>::type>
+operator/ (Length<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+{
+  typedef typename std::common_type<Rep1, Rep2>::type type;
+  return Speed<type, typename std::__ratio_divide<Period1, Period2>::type>(Obj1.count() / Obj2.count());
+}
+
+
+template <typename Rep1, typename Period1, typename Rep2, typename Period2>
+constexpr Length<typename std::common_type<Rep1, Rep2>::type, typename std::__ratio_multiply<Period1, Period2>::type>
+operator* (Speed<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+{
+  typedef typename std::common_type<Rep1, Rep2>::type type;
+  return Length<type, typename std::__ratio_multiply<Period1, Period2>::type>(Obj1.count() * Obj2.count());
+}
+
+
+template <typename Rep1, typename Period1, typename Rep2, typename Period2>
+constexpr Length<typename std::common_type<Rep1, Rep2>::type, typename std::__ratio_multiply<Period1, Period2>::type>
+operator* (Duration<Rep1,Period1> const& Obj1, Speed<Rep2,Period2> const& Obj2)
+{
+  typedef typename std::common_type<Rep1, Rep2>::type type;
+  return Length<type, typename std::__ratio_multiply<Period1, Period2>::type>(Obj1.count() * Obj2.count());
+}
+
+
+//=============================================================================
+//=============================================================================
+// FREQUENCY ==================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+//=============================================================================
+//=============================================================================
+// SPACIALFREQUENCY ===========================================================
+//=============================================================================
+//=============================================================================
 
 
 

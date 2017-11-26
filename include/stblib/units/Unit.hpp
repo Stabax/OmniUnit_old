@@ -33,14 +33,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                        // false_type
 #include <ratio>       // ratio, intmax_t, __ratio_divide, __ratio_multiply
 #include <limits>      // numeric_limits
-#include <chrono>
+#include <chrono>      // treat_as_floating_point, is_ratio,
 
 namespace stb
 {
 
 
 
-class casting_class
+class casting_type_trait
 {
   //this class only exists to group all casting class in inheritance tree
 };

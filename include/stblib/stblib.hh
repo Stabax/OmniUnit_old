@@ -249,7 +249,7 @@ public:
     if(_state == State::stopped)
     {
       _Begin = std::chrono::high_resolution_clock::now();
-      _PausedTime = nanosecond_f::zero();
+      _PausedTime = nanosecond::zero();
       _state = State::active;
       clear();
     }
@@ -290,7 +290,7 @@ public:
 
   void clear()
   {
-    _addedTime = nanosecond_f::zero();
+    _addedTime = nanosecond::zero();
   }
 
   void reset()
@@ -303,12 +303,12 @@ protected:
 
   enum class State {active, paused, stopped};
 
-  virtual nanosecond_f getNano() const
+  virtual nanosecond getNano() const
   {
     if(_state == State::stopped)
-      return nanosecond_f::zero();
-    nanosecond_f CurrentPausedTime = nanosecond_f::zero();
-    std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> Now = std::chrono::high_resolution_clock::now();
+      return nanosecond::zero();
+    nanosecond CurrentPausedTime = nanosecond::zero();
+    std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond> Now = std::chrono::high_resolution_clock::now();
     if(_state == State::paused)
       CurrentPausedTime = Now - _BeginPause;
     return ((Now - _Begin) - (_PausedTime + CurrentPausedTime) + _addedTime);
@@ -316,13 +316,13 @@ protected:
   }
 
   //Point of the first start() following the last stop
-  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _Begin;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond> _Begin;
   //Point of last pause
-  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _BeginPause;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond> _BeginPause;
   //total time elapsed in pause since last stop
-  nanosecond_f _PausedTime;
+  nanosecond _PausedTime;
   //added/subtracted time
-  nanosecond_f _addedTime;
+  nanosecond _addedTime;
   State _state;
 };
 
@@ -347,7 +347,7 @@ public:
   template<typename durationType>
   durationType get() const
   {
-    return std::chrono::duration_cast<durationType>(getNano());
+    return duration_cast<durationType>(getNano());
   }
 
   //durationType is implicitly deduced.
@@ -389,13 +389,13 @@ public:
   }
 
 protected:
-  nanosecond_f getNano() const
+  nanosecond getNano() const
   {
-    nanosecond_f current = (_End - _Timer._Begin) - _Timer.getNano();
-    return current.count() < 0 ? nanosecond_f::zero() : current;
+    nanosecond current = (_End - _Timer._Begin) - _Timer.getNano();
+    return current.count() < 0 ? nanosecond::zero() : current;
   }
 
-  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond_f> _End;
+  std::chrono::time_point<std::chrono::high_resolution_clock, nanosecond> _End;
   Timer _Timer;
 };
 
@@ -416,12 +416,12 @@ void sleep(durationType const& duration)
 
 void sleep(Timer const& tim)
 {
-  std::this_thread::sleep_for(tim.get<nanosecond_f>());
+  std::this_thread::sleep_for(tim.get<nanosecond>());
 }
 
 void sleep(Countdown const& count)
 {
-  std::this_thread::sleep_for(count.get<nanosecond_f>());
+  std::this_thread::sleep_for(count.get<nanosecond>());
 }
 
 
@@ -451,7 +451,7 @@ public:
 
 protected:
 
-  virtual nanosecond_f getNano() const
+  virtual nanosecond getNano() const
   {
     return _gamma * Timer::getNano();
   }

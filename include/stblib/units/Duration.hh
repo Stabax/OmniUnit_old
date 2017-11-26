@@ -53,7 +53,7 @@ class Duration;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class duration_cast_impl : public casting_class
+class duration_cast_impl : public casting_type_trait
 {
 public:
 
@@ -69,7 +69,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_class
+class duration_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_type_trait
 {
 public:
 
@@ -83,7 +83,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_class
+class duration_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_type_trait
 {
 public:
 
@@ -98,7 +98,7 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_class
+class duration_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_type_trait
 {
 public:
 
@@ -320,7 +320,7 @@ constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period
 operator- (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
 {
   typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
-  return type(type(Obj1).count() - type(Obj1).count());
+  return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
@@ -441,51 +441,29 @@ using Period = Duration<Rep, period>;
 
 
 
-typedef Duration<long long, std::atto>                      attosecond;
-typedef Duration<long long, std::femto>                     femtosecond;
-typedef Duration<long long, std::pico>                      picosecond;
-typedef Duration<long long, std::nano>                      nanosecond;
-typedef Duration<long long, std::micro>                     microsecond;
-typedef Duration<long long, std::milli>                     millisecond;
-typedef Duration<long long, std::ratio<1, 1>>               second;
-typedef Duration<long long, std::ratio<60, 1>>              minute;
-typedef Duration<long long, std::ratio<3600, 1>>            hour;
-typedef Duration<long long, std::ratio<3600*24, 1>>         day;
-typedef Duration<long long, std::ratio<3600*24*7, 1>>       week;
-typedef Duration<long long, std::ratio<3600*24*30, 1>>      month;
-typedef Duration<long long,
-std::__ratio_multiply<std::ratio<3600*24, 1>,
-std::ratio<36525, 100>>::type>                              year;
-typedef Duration<long long,
-std::__ratio_multiply<year::period, std::kilo>::type>       kiloyear;
-typedef Duration<long long,
-std::__ratio_multiply<year::period, std::mega>::type>       megayear;
-typedef Duration<long long,
-std::__ratio_multiply<year::period, std::giga>::type>       gigayear;
 
 
-
-typedef Duration<float, std::atto>                      attosecond_f;
-typedef Duration<float, std::femto>                     femtosecond_f;
-typedef Duration<float, std::pico>                      picosecond_f;
-typedef Duration<float, std::nano>                      nanosecond_f;
-typedef Duration<float, std::micro>                     microsecond_f;
-typedef Duration<float, std::milli>                     millisecond_f;
-typedef Duration<float, std::ratio<1, 1>>               second_f;
-typedef Duration<float, std::ratio<60, 1>>              minute_f;
-typedef Duration<float, std::ratio<3600, 1>>            hour_f;
-typedef Duration<float, std::ratio<3600*24, 1>>         day_f;
-typedef Duration<float, std::ratio<3600*24*7, 1>>       week_f;
-typedef Duration<float, std::ratio<3600*24*30, 1>>      month_f;
+typedef Duration<float, std::atto>                      attosecond;
+typedef Duration<float, std::femto>                     femtosecond;
+typedef Duration<float, std::pico>                      picosecond;
+typedef Duration<float, std::nano>                      nanosecond;
+typedef Duration<float, std::micro>                     microsecond;
+typedef Duration<float, std::milli>                     millisecond;
+typedef Duration<float, std::ratio<1, 1>>               second;
+typedef Duration<float, std::ratio<60, 1>>              minute;
+typedef Duration<float, std::ratio<3600, 1>>            hour;
+typedef Duration<float, std::ratio<3600*24, 1>>         day;
+typedef Duration<float, std::ratio<3600*24*7, 1>>       week;
+typedef Duration<float, std::ratio<3600*24*30, 1>>      month;
 typedef Duration<float,
 std::__ratio_multiply<std::ratio<3600*24, 1>,
-std::ratio<36525, 100>>::type>                          year_f;
+std::ratio<36525, 100>>::type>                          year;
 typedef Duration<float,
-std::__ratio_multiply<year::period, std::kilo>::type>   kiloyear_f;
+std::__ratio_multiply<year::period, std::kilo>::type>   kiloyear;
 typedef Duration<float,
-std::__ratio_multiply<year::period, std::mega>::type>   megayear_f;
+std::__ratio_multiply<year::period, std::mega>::type>   megayear;
 typedef Duration<float,
-std::__ratio_multiply<year::period, std::giga>::type>   gigayear_f;
+std::__ratio_multiply<year::period, std::giga>::type>   gigayear;
 
 
 
@@ -511,7 +489,7 @@ const megayear t0(1373);
 const megayear tSunSystem(454);
 
 //Planck time
-const attosecond_f tp(0.00000000000000000000000005391);
+const attosecond tp(0.00000000000000000000000005391);
 
 //some radioactive decay constants
 //TO DO
