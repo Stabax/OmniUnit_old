@@ -5,11 +5,19 @@
 
 int main()
 {
-  stb::hour a(3);
 
-  stb::kilometer_hour b(100);
+  stb::RelativeTimer a(1);
+  stb::RelativeTimer b(2);
 
-  std::cout << (a * b).count() << '\n';
+  a -= stb::second(10);
 
+  a.start();
+  b.start();
+
+  for(unsigned i = 0; i < 5; ++i)
+  {
+    std::cout << a.get<stb::millisecond>().count() << "   " << b.get<stb::millisecond>().count() << std::endl;
+    stb::sleep(stb::second(0.5));
+  }
 return 0;
 }

@@ -2,7 +2,7 @@ CC = g++
 
 RM = rm -rf
 
-CXXFLAGS = -g -std=c++11 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -O2 -Os -Wl,--no-as-needed -I$(INCDIR)
+CXXFLAGS = -g -std=c++14 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -O2 -Os -Wl,--no-as-needed -I$(INCDIR)
 
 #-s annule -g
 #-Wunreachable-code ==> warning si un bout de code n'est jamais exétuté
