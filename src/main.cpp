@@ -1,23 +1,26 @@
 
-#include "stblib/relativity.hh"
 #include <iostream>
+#include "stblib/ratio.hh"
+
+
+bool equal(double const& a, double const& b)
+{
+ return (b >= a && b <= a);
+}
 
 
 int main()
 {
 
-  stb::RelativeTimer a(1);
-  stb::RelativeTimer b(2);
+std::cout << stb::ratio<num, den>::value <<'\n';
+std::cout << stb::ratio<num, den>::num <<'\n';
+std::cout << stb::ratio<num, den>::den <<'\n';
+using newR = stb::ratio_divide<stb::ratio_multiply<stb::ratio<num, den>, stb::ratio<num, den>>::type, stb::ratio<num, den>>::type;
+std::cout << newR::value << '\n';
+std::cout << newR::num <<'\n';
+std::cout << newR::den <<'\n';
 
-  a -= stb::second(10);
 
-  a.start();
-  b.start();
 
-  for(unsigned i = 0; i < 5; ++i)
-  {
-    std::cout << a.get<stb::millisecond>().count() << "   " << b.get<stb::millisecond>().count() << std::endl;
-    stb::sleep(stb::second(0.5));
-  }
 return 0;
 }

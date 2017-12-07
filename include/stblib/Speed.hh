@@ -29,6 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef SPEED_HH_
 #define SPEED_HH_
 
+/***************************
+* DIMENSIONS OF THIS UNIT :
+* [L]/[T]
+***************************/
+
 #include "Unit.hpp" // Unit
 
 namespace stb

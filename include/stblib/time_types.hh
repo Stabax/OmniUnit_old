@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIME_TYPES_HH_
 
 #include "units.hh"
-#include "units/exception.hh"
+#include "exception.hh"
 #include <chrono>     // duration, steady_clock, time_point
 #include <ctime>      // gmtime, localtime, time, tm
 #include <string>     // string, to_string

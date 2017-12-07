@@ -2,7 +2,7 @@ CC = g++
 
 RM = rm -rf
 
-CXXFLAGS = -g -std=c++14 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -O2 -Os -Wl,--no-as-needed -I$(INCDIR)
+CXXFLAGS = -g -std=c++14 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -O2 -Os -Wl,--no-as-needed -I$(INCDIR) -Winline
 
 #-s annule -g
 #-Wunreachable-code ==> warning si un bout de code n'est jamais exétuté
@@ -10,6 +10,7 @@ CXXFLAGS = -g -std=c++14 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef
 #-m8-bit -m16-bit -m32-bit ===> l'alignement des variables se fait sur 8, 16 ou 32 bits (32 par défaut)
 #-flto ===> supprime les erreurs de vtable quand des méthodes virtuelles sont déclarées(.h) mais non implémentées(.cpp) (vtable = VMT = virtual method table)
 #-DNDEBUG désactive les assetions
+#-ftemplate-depth=   ====> augmente la limite de récursion des templates (900 par défaut)
 
 NAME = test
 

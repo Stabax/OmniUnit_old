@@ -29,6 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef LENGTH_HH_
 #define LENGTH_HH_
 
+/***************************
+* DIMENSIONS OF THIS UNIT :
+* [L]
+***************************/
+
 #include "Unit.hpp" // Unit
 
 namespace stb

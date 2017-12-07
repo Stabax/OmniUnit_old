@@ -1,4 +1,4 @@
-//Duration.hh
+//Mass.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,21 +26,24 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DURATION_HH_
-#define DURATION_HH_
+#ifndef Mass_HH_
+#define Mass_HH_
 
-#include "Unit.hpp"
-#include "exception.hh"
-#include <chrono>   //duration
+/***************************
+* DIMENSIONS OF THIS UNIT :
+* [M]
+***************************/
+
+#include "Unit.hpp" // Unit
 
 namespace stb
 {
 
 
 
-//previous declaration needed to define cas
+//previous declaration needed to define cast
 template<typename Rep, typename Period>
-class Duration;
+class Mass;
 
 
 
@@ -54,12 +57,12 @@ class Duration;
 
 template<typename toUnit, typename new_ratio, typename common_rep,
 bool NumIsOne = false, bool DenIsOne = false>
-class duration_cast_impl : public casting_type_trait
+class mass_cast_impl : public casting_type_trait
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Duration<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Mass<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
 
@@ -70,12 +73,12 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_type_trait
+class mass_cast_impl<toUnit, new_ratio, common_rep, true, true> : public casting_type_trait
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Duration<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Mass<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(Obj.count()));
@@ -84,12 +87,12 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_type_trait
+class mass_cast_impl<toUnit, new_ratio, common_rep, true, false> : public casting_type_trait
 {
 public:
 
   template<typename Rep, typename Period>
-  static constexpr toUnit cast(Duration<Rep, Period> const& Obj)
+  static constexpr toUnit cast(Mass<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(
@@ -99,13 +102,13 @@ public:
 
 
 template<typename toUnit, typename new_ratio, typename common_rep>
-class duration_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_type_trait
+class mass_cast_impl<toUnit, new_ratio, common_rep, false, true> : public casting_type_trait
 {
 public:
 
   template<typename Rep, typename Period>
   static constexpr toUnit
-  cast(Duration<Rep, Period> const& Obj)
+  cast(Mass<Rep, Period> const& Obj)
   {
     typedef typename toUnit::rep rep;
     return toUnit(static_cast<rep>(
@@ -115,26 +118,26 @@ public:
 
 
 template<typename falseType>
-class is_Duration : public std::false_type
+class is_Mass : public std::false_type
 {
 };
 
 
 template<typename Rep, typename Period>
-class is_Duration<Duration<Rep, Period>> : public std::true_type
+class is_Mass<Mass<Rep, Period>> : public std::true_type
 {
 };
 
 
 template<typename toUnit, typename Rep, typename Period>
-constexpr typename std::enable_if<is_Duration<toUnit>::value, toUnit>::type
-duration_cast(const Duration<Rep, Period>& Obj)
+constexpr typename std::enable_if<is_Mass<toUnit>::value, toUnit>::type
+mass_cast(const Mass<Rep, Period>& Obj)
 {
   typedef typename toUnit::period period;
   typedef typename toUnit::rep rep;
   typedef std::ratio_divide<Period, period> new_ratio;
   typedef typename std::common_type<rep, Rep, intmax_t>::type common_rep;
-  typedef  duration_cast_impl<toUnit, new_ratio,
+  typedef  mass_cast_impl<toUnit, new_ratio,
   common_rep, new_ratio::num == 1, new_ratio::den == 1> type;
   return type::cast(Obj);
 }
@@ -152,7 +155,7 @@ duration_cast(const Duration<Rep, Period>& Obj)
 
 
 template<typename Rep, typename Period = std::ratio<1>>
-class Duration : public Unit<Rep, Period>, public std::chrono::duration<Rep, Period>
+class Mass : public Unit<Rep, Period>
 {
 public:
 
@@ -160,143 +163,116 @@ public:
   typedef Period period;
 
 
-  static_assert(! is_Duration<Rep>::value, "rep cannot be a Duration");
+  static_assert(! is_Mass<Rep>::value, "rep cannot be a Mass");
   static_assert(std::chrono::__is_ratio<Period>::value,
   "period must be a specialization of ratio");
   static_assert(Period::num > 0, "period must be positive");
 
 
-  constexpr Duration() = default;
-  Duration(Duration const&) = default;
+  constexpr Mass() = default;
+  Mass(Mass const&) = default;
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value
   && (std::chrono::treat_as_floating_point<Rep>::value || !std::chrono::treat_as_floating_point<_Rep>::value)>::type>
-  constexpr explicit Duration(_Rep const& countArg):
-  Unit<Rep, Period>(static_cast<Rep>(countArg)),
-  std::chrono::duration<Rep, Period>(static_cast<Rep>(countArg))
+  constexpr explicit Mass(_Rep const& countArg):
+  Unit<Rep, Period>(static_cast<Rep>(countArg))
   {
   }
 
 
   template<typename _Rep, typename _Period, typename = typename std::enable_if<std::chrono::treat_as_floating_point<Rep>::value
   || (std::ratio_divide<_Period, Period>::den == 1 && !std::chrono::treat_as_floating_point<_Rep>::value)>::type>
-  constexpr Duration(Duration<_Rep, _Period> const& Obj):
-  Unit<Rep, Period>(duration_cast<Duration>(Obj).count()),
-  std::chrono::duration<Rep, Period>(Obj)
+  constexpr Mass(Mass<_Rep, _Period> const& Obj):
+  Unit<Rep, Period>(mass_cast<Mass>(Obj).count())
   {
   }
 
 
-  template<typename _Rep, typename _Period, typename = typename std::enable_if<std::chrono::treat_as_floating_point<Rep>::value
-  || (std::ratio_divide<_Period, Period>::den == 1 && !std::chrono::treat_as_floating_point<_Rep>::value)>::type>
-  constexpr Duration(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit<Rep, Period>(std::chrono::duration_cast<std::chrono::duration<Rep, Period>>(Obj).count()),
-  std::chrono::duration<Rep, Period>(Obj)
+  ~Mass() = default;
+  Mass& operator=(Mass const&) = default;
+
+
+  static constexpr Mass zero()
   {
+    return Mass(0);
   }
 
 
-  ~Duration() = default;
-  Duration& operator=(Duration const&) = default;
-
-
-  constexpr Rep count() const
-  {
-    return Unit<Rep, Period>::_count;
-  }
-
-
-  static constexpr Duration zero()
-  {
-    return Duration(0);
-  }
-
-
-  Duration& operator++()
+  Mass& operator++()
   {
     ++Unit<Rep, Period>::_count;
-    std::chrono::duration<Rep, Period>::operator++();
     return *this;
   }
 
 
-  Duration operator++(int)
+  Mass operator++(int)
   {
-    std::chrono::duration<Rep, Period>::operator++(0);
-    return Duration(Unit<Rep, Period>::_count++);
+    return Mass(Unit<Rep, Period>::_count++);
   }
 
 
-  Duration& operator--()
+  Mass& operator--()
   {
     --Unit<Rep, Period>::_count;
-    std::chrono::duration<Rep, Period>::operator--();
     return *this;
   }
 
 
-  Duration operator--(int)
+  Mass operator--(int)
   {
-    std::chrono::duration<Rep, Period>::operator--(0);
-    return Duration(Unit<Rep, Period>::_count--);
+    return Mass(Unit<Rep, Period>::_count--);
   }
 
 
-  Duration& operator+=(Duration const& Obj)
+  Mass& operator+=(Mass const& Obj)
   {
     Unit<Rep, Period>::_count += Obj.count();
-    std::chrono::duration<Rep, Period>::operator+=(Obj);
     return *this;
   }
 
 
-  Duration& operator-=(Duration const& Obj)
+  Mass& operator-=(Mass const& Obj)
   {
     Unit<Rep, Period>::_count -= Obj.count();
-    std::chrono::duration<Rep, Period>::operator-=(Obj);
     return *this;
   }
 
 
-  Duration& operator*=(Rep const& coef)
+  Mass& operator*=(Rep coef)
   {
     Unit<Rep, Period>::_count *= coef;
-    std::chrono::duration<Rep, Period>::operator*=(coef);
     return *this;
   }
 
 
-  Duration& operator/=(Rep const& coef)
+  Mass& operator/=(Rep coef)
   {
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count /= coef;
-    std::chrono::duration<Rep, Period>::operator/=(coef);
     return *this;
   }
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Duration&>::type
+  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Mass&>::type
   operator%=(Rep const& coef)
   {
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= coef;
-    std::chrono::duration<Rep, Period>::operator%=(coef);
     return *this;
   }
 
 
   template <typename _Rep = Rep>
-  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Duration&>::type
-  operator%=(Duration const& Obj)
+  typename std::enable_if<!std::chrono::treat_as_floating_point<_Rep>::value, Mass&>::type
+  operator%=(Mass const& Obj)
   {
     if(Obj.count() == 0)
       throw Unit_exception("Divide by 0.");
     Unit<Rep, Period>::_count %= Obj.count();
-    std::chrono::duration<Rep, Period>::operator%=(Obj);
     return *this;
   }
 };
@@ -314,127 +290,127 @@ public:
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type
-operator+ (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type
+operator+ (Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(type(Obj1).count() + type(Obj2).count());
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type
-operator- (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type
+operator- (Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Duration<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
-operator* (Duration<Rep, Period> const& Obj, coefType const& coef)
+constexpr Mass<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
+operator* (Mass<Rep, Period> const& Obj, coefType const& coef)
 {
   typedef typename std::common_type<Rep, coefType>::type common;
-  typedef Duration<common, Period> type;
+  typedef Mass<common, Period> type;
   return type(type(Obj).count() * coef);
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Duration<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
-operator* (coefType const& coef, Duration<Rep, Period> const& Obj)
+constexpr Mass<typename std::chrono::__common_rep_type<Rep, coefType>::type, Period>
+operator* (coefType const& coef, Mass<Rep, Period> const& Obj)
 {
   return Obj * coef;
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Duration<typename std::chrono::__common_rep_type<Rep, typename
-std::enable_if<!is_Duration<coefType>::value, coefType>::type>::type, Period>
-operator/ (Duration<Rep, Period> const& Obj, coefType const& coef)
+constexpr Mass<typename std::chrono::__common_rep_type<Rep, typename
+std::enable_if<!is_Mass<coefType>::value, coefType>::type>::type, Period>
+operator/ (Mass<Rep, Period> const& Obj, coefType const& coef)
 {
   if(coef == 0)
     throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Rep, coefType>::type common;
-  typedef Duration<common, Period> type;
+  typedef Mass<common, Period> type;
   return type(type(Obj).count() / coef);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Rep1, Rep2>::type
-operator/ (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+operator/ (Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   if(Obj2.count() == 0)
     throw Unit_exception("Divide by 0.");
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(Obj1).count() / type(Obj2).count();
 }
 
 
 template <typename Rep, typename Period, typename coefType>
-constexpr Duration<typename std::chrono::__common_rep_type<Rep, typename
-std::enable_if<!is_Duration<coefType>::value, coefType>::type>::type, Period>
-operator% (Duration<Rep, Period> const& Obj, coefType const& coef)
+constexpr Mass<typename std::chrono::__common_rep_type<Rep, typename
+std::enable_if<!is_Mass<coefType>::value, coefType>::type>::type, Period>
+operator% (Mass<Rep, Period> const& Obj, coefType const& coef)
 {
   if(coef == 0)
     throw Unit_exception("Divide by 0.");
-  typedef Duration<typename std::common_type<Rep, coefType>::type, Period> type;
+  typedef Mass<typename std::common_type<Rep, coefType>::type, Period> type;
   return type(type(Obj).count() % coef);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type
-operator% (Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type
+operator% (Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   if(Obj2.count() == 0)
     throw Unit_exception("Divide by 0.");
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(type(Obj1).count() % type(Obj2).count());
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator==(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator==(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(Obj1).count() == type(Obj2).count();
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator!=(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator!=(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   return !(Obj1 == Obj2);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator<(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator<(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
-  typedef typename std::common_type<Duration<Rep1,Period1>, Duration<Rep2,Period2>>::type type;
+  typedef typename std::common_type<Mass<Rep1,Period1>, Mass<Rep2,Period2>>::type type;
   return type(Obj1).count() < type(Obj2).count();
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator<=(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator<=(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   return !(Obj2 < Obj1);
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator>(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator>(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   return Obj2 < Obj1;
 }
 
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr bool operator>=(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Period2> const& Obj2)
+constexpr bool operator>=(Mass<Rep1,Period1> const& Obj1, Mass<Rep2,Period2> const& Obj2)
 {
   return ! (Obj1 < Obj2);
 }
@@ -451,34 +427,22 @@ constexpr bool operator>=(Duration<Rep1,Period1> const& Obj1, Duration<Rep2,Peri
 
 
 
-template<typename Rep, typename period = std::ratio<1>>
-using Period = Duration<Rep, period>;
 
-
-
-
-
-typedef Duration<float, std::atto>                      attosecond;
-typedef Duration<float, std::femto>                     femtosecond;
-typedef Duration<float, std::pico>                      picosecond;
-typedef Duration<float, std::nano>                      nanosecond;
-typedef Duration<float, std::micro>                     microsecond;
-typedef Duration<float, std::milli>                     millisecond;
-typedef Duration<float, std::ratio<1, 1>>               second;
-typedef Duration<float, std::ratio<60, 1>>              minute;
-typedef Duration<float, std::ratio<3600, 1>>            hour;
-typedef Duration<float, std::ratio<3600*24, 1>>         day;
-typedef Duration<float, std::ratio<3600*24*7, 1>>       week;
-typedef Duration<float, std::ratio<3600*24*30, 1>>      month;
-typedef Duration<float,
-std::__ratio_multiply<std::ratio<3600*24, 1>,
-std::ratio<36525, 100>>::type>                          year;
-typedef Duration<float,
-std::__ratio_multiply<year::period, std::kilo>::type>   kiloyear;
-typedef Duration<float,
-std::__ratio_multiply<year::period, std::mega>::type>   megayear;
-typedef Duration<float,
-std::__ratio_multiply<year::period, std::giga>::type>   gigayear;
+//typedef Mass<float, std::ratio<1, 10e-36>>                            ev;
+typedef Mass<float, std::atto>                            femtogram;
+typedef Mass<float, std::femto>                           picogram;
+typedef Mass<float, std::pico>                            nanogram;
+typedef Mass<float, std::nano>                            microgram;
+typedef Mass<float, std::micro>                           milligram;
+typedef Mass<float, std::milli>                           gram;
+typedef Mass<float, std::ratio<1, 1>>                     kilogram;
+typedef Mass<float, std::kilo>                            megagram;
+typedef megagram                                          ton;
+typedef Mass<float, std::mega>                            gigagram;
+typedef Mass<float, std::giga>                            teragram;
+typedef Mass<float, std::tera>                            petagram;
+typedef Mass<float, std::peta>                            exagram;
+typedef Mass<float, std::exa>                             zettagram;
 
 
 
@@ -486,7 +450,7 @@ std::__ratio_multiply<year::period, std::giga>::type>   gigayear;
 
 //=============================================================================
 //=============================================================================
-// DURATION CONSTANT ==========================================================
+// CONSTANT ===================================================================
 //=============================================================================
 //=============================================================================
 
@@ -497,21 +461,11 @@ namespace constant
 
 
 
-//age of the universe
-const gigayear t0(13.798); //+-37
-
-//age of the sun system and its planets
-const gigayear tSunSystem(4.568);
-
-//Planck time
-const attosecond tp(0.0000000000000000000000000539106); //+-32
-
-//some radioactive decay constants
-//TO DO
-
 
 
 }//namespace constant
+
+
 
 }//namespace stb
 
@@ -535,7 +489,7 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 
 template<typename CT, typename Period1, typename Period2>
-class Duration_common_type_wrapper
+class Mass_common_type_wrapper
 {
 private:
 
@@ -547,12 +501,12 @@ private:
 
 public:
 
-  typedef std::__success_type<stb::Duration<common_rep, new_ratio>> type;
+  typedef std::__success_type<stb::Mass<common_rep, new_ratio>> type;
 };
 
 
 template<typename Period1, typename Period2>
-class Duration_common_type_wrapper<std::__failure_type, Period1, Period2>
+class Mass_common_type_wrapper<std::__failure_type, Period1, Period2>
 {
 public:
 
@@ -561,8 +515,8 @@ public:
 
 
 template<typename Rep1, typename Period1, typename Rep2, typename Period2>
-class common_type<stb::Duration<Rep1, Period1>, stb::Duration<Rep2, Period2>>
-        : public Duration_common_type_wrapper<typename std::__member_type_wrapper<
+class common_type<stb::Mass<Rep1, Period1>, stb::Mass<Rep2, Period2>>
+        : public Mass_common_type_wrapper<typename std::__member_type_wrapper<
         std::common_type<Rep1, Rep2>>::type, Period1, Period2>::type
 {
 };
@@ -576,4 +530,4 @@ class common_type<stb::Duration<Rep1, Period1>, stb::Duration<Rep2, Period2>>
 
 
 
-#endif //DURATION_HH_
+#endif //Mass_HH_

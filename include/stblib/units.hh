@@ -29,9 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef UNIT_HH_
 #define UNIT_HH_
 
-#include "units/Duration.hh"
-#include "units/Speed.hh"
-#include "units/Length.hh"
+#include "Duration.hh"
+#include "Speed.hh"
+#include "Length.hh"
+#include "Mass.hh"
+#include "Energy.hh"
 
 namespace stb
 {

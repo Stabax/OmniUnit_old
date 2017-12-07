@@ -55,6 +55,10 @@ public:
   {
   }
 
+  virtual ~exception()
+  {
+  }
+
   virtual const char* what() const noexcept
   {
     return _msg.c_str();
@@ -76,6 +80,10 @@ public:
   exception(msg, "Date_exception")
   {
   }
+
+  virtual ~Date_exception()
+  {
+  }
 };
 
 
@@ -88,6 +96,10 @@ public:
 
   Unit_exception(std::string const& msg):
   exception(msg, "Unit_exception")
+  {
+  }
+
+  virtual ~Unit_exception()
   {
   }
 };
