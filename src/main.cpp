@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "stblib/ratio.hh"
+#include "stblib/units.hh"
 
 
 bool equal(double const& a, double const& b)
@@ -12,15 +12,8 @@ bool equal(double const& a, double const& b)
 int main()
 {
 
-std::cout << stb::ratio<num, den>::value <<'\n';
-std::cout << stb::ratio<num, den>::num <<'\n';
-std::cout << stb::ratio<num, den>::den <<'\n';
-using newR = stb::ratio_divide<stb::ratio_multiply<stb::ratio<num, den>, stb::ratio<num, den>>::type, stb::ratio<num, den>>::type;
-std::cout << newR::value << '\n';
-std::cout << newR::num <<'\n';
-std::cout << newR::den <<'\n';
-
-
+//std::cout << stb::Unit_cast<stb::meter<float>>(stb::gigaparsec<float>(1)).count() << '\n';
+std::cout << stb::Unit_cast<stb::second<float>>(stb::hour<float>(1)).count() << '\n';
 
 return 0;
 }

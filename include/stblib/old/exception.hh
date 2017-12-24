@@ -1,4 +1,4 @@
-//Unit.hpp
+//exception.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,75 +26,86 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef UNIT_HPP_
-#define UNIT_HPP_
 
-#include <type_traits> // is_convertible, common_type, is_floating_point, true_type
-                       // false_type
-#include <ratio>       // ratio, intmax_t, __ratio_divide, __ratio_multiply
-#include <limits>      // numeric_limits
-#include <chrono>      // treat_as_floating_point, is_ratio,
+#ifndef EXCEPTION_HH_
+#define EXCEPTION_HH_
+
+#include <exception>
+#include <string>
 
 namespace stb
 {
 
 
 
-class casting_type_trait
-{
-  //this class only exists to group all casting class in inheritance tree
-};
-
-
-
 //=============================================================================
 //=============================================================================
-// DEFINITION =================================================================
+// EXCEPTIONS DEFINITION ======================================================
 //=============================================================================
 //=============================================================================
 
 
 
-template<typename Rep, typename Period>
-class Unit
+class exception : public std::exception
 {
 public:
 
-  Unit(Rep const& countArg):
-  _count(countArg)
+  exception(std::string const& msg, std::string const& name):
+  _msg("[stblib.exception - " + name + " : " + msg + "]")
   {
   }
 
-
-  constexpr Rep count() const
+  virtual ~exception()
   {
-    return _count;
   }
 
-
-  static constexpr Rep max()
+  virtual const char* what() const noexcept
   {
-    return std::numeric_limits<Rep>::max();
-  }
-
-
-  static constexpr Rep min()
-  {
-    return std::numeric_limits<Rep>::lowest();
+    return _msg.c_str();
   }
 
 protected:
-
-  Rep _count;
+  std::string const _msg;
 };
 
 
 
-} // namespace stb
+
+
+class Date_exception : public exception
+{
+public:
+
+  Date_exception(std::string const& msg):
+  exception(msg, "Date_exception")
+  {
+  }
+
+  virtual ~Date_exception()
+  {
+  }
+};
 
 
 
 
 
+class Unit_exception : public exception
+{
+public:
 
-#endif //UNIT_HPP_
+  Unit_exception(std::string const& msg):
+  exception(msg, "Unit_exception")
+  {
+  }
+
+  virtual ~Unit_exception()
+  {
+  }
+};
+
+
+
+}//namespace stb
+
+#endif //EXCEPTION_HH_
