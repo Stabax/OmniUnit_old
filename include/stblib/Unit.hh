@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <string>
 #include <type_traits>
+#include <chrono>
 #include "ratio.hh"
 #include "exception.hh"
 
@@ -70,17 +71,16 @@ struct Dimension
     if(mass != 0)
       dim += ("[M" + std::to_string(mass) + "]");
     if(time != 0)
-      dim += ("[T" + std::to_string(time) + "]");
+      dim += ("[Tm" + std::to_string(time) + "]");
     if(current != 0)
       dim += ("[I" + std::to_string(current) + "]");
     if(temperature != 0)
-      dim += ("[0" + std::to_string(temperature) + "]");
+      dim += ("[Tp" + std::to_string(temperature) + "]");
     if(quantity != 0)
       dim += ("[N" + std::to_string(quantity) + "]");
     if(luminosity != 0)
       dim += ("[J" + std::to_string(luminosity) + "]");
-    if(length == 0 && mass == 0 && time == 0 && current == 0 &&
-    temperature == 0 && quantity == 0 && luminosity == 0)
+    if(dim.length() == 0)
       dim = "[/]";
 
     return dim;
@@ -174,7 +174,7 @@ template<typename _Dimension, typename Rep, typename Period>
 class Unit
 {
 public:
-  typedef _Dimension dimension;
+  typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
 
@@ -200,6 +200,205 @@ public:
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
+  Unit(Unit_cast<Unit>(Obj).count())
+  {
+  }
+
+
+  ~Unit() = default;
+  Unit& operator=(Unit const&) = default;
+
+
+  static constexpr Unit zero()
+  {
+    return Unit(0);
+  }
+
+
+  constexpr Rep count() const
+  {
+    return _count;
+  }
+
+
+  static constexpr Rep max()
+  {
+    return std::numeric_limits<Rep>::max();
+  }
+
+
+  static constexpr Rep min()
+  {
+    return std::numeric_limits<Rep>::lowest();
+  }
+
+
+  constexpr std::string dimension()
+  {
+    return dim::dimension();
+  }
+
+
+  Unit& operator++()
+  {
+    ++_count;
+    return *this;
+  }
+
+
+  Unit operator++(int)
+  {
+    return Unit(_count++);
+  }
+
+
+  Unit& operator--()
+  {
+    --_count;
+    return *this;
+  }
+
+
+  Unit operator--(int)
+  {
+    return Unit(_count--);
+  }
+
+
+  Unit& operator+=(Unit const& Obj)
+  {
+    _count += Obj.count();
+    return *this;
+  }
+
+
+  Unit& operator-=(Unit const& Obj)
+  {
+    _count -= Obj.count();
+    return *this;
+  }
+
+
+  template<typename _Rep>
+  Unit& operator*=(_Rep const& coef)
+  {
+    _count *= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    return *this;
+  }
+
+
+  template<typename _Rep, typename _Period>
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  {
+    _count *= Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    return *this;
+  }
+
+
+  template<typename _Rep>
+  Unit& operator/=(_Rep const& coef)
+  {
+    if(coef >= 0 && coef <= 0)
+      throw Unit_exception("Divide by 0.");
+    _count /= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    return *this;
+  }
+
+
+  template<typename _Rep, typename _Period>
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  {
+    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    if(count >= 0 && count <= 0)
+      throw Unit_exception("Divide by 0.");
+    _count /= count;
+    return *this;
+  }
+
+
+  template <typename _Rep>
+  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
+  operator%=(_Rep const& coef)
+  {
+    if(coef == 0)
+      throw Unit_exception("Divide by 0.");
+    _count %= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    return *this;
+  }
+
+
+  template<typename _Rep, typename _Period>
+  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
+  operator%=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  {
+    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    if(count == 0)
+      throw Unit_exception("Divide by 0.");
+    _count %= count;
+    return *this;
+  }
+
+
+protected:
+  Rep _count;
+  const std::string _dimension;
+};
+
+
+//=============================================================================
+//=============================================================================
+// UNIT SPECIALIZATION FOR DURATION ===========================================
+//=============================================================================
+//=============================================================================
+
+
+// this specialization is needed to provide converter with std::chrono::duration
+
+
+
+template<typename Rep, typename Period>
+class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period>
+{
+
+protected:
+  typedef Dimension<0,0,1,0,0,0,0> _Dimension;
+
+
+public:
+  typedef _Dimension dimension;
+  typedef Rep rep;
+  typedef Period period;
+
+
+  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
+  static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
+  "Second template argument of class stb::Unit should be a floating point or an inegral type.");
+  static_assert(is_ratio<Period>::value, "Third template argument of class stb::Unit should be a std::ratio.");
+
+
+  constexpr Unit() = default;
+  Unit(Unit const&) = default;
+
+
+  template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
+  constexpr Unit(_Rep const& countArg):
+  _count(static_cast<Rep>(countArg)),
+  _dimension(Dimension<_Dimension::length, _Dimension::mass,
+  _Dimension::time, _Dimension::current, _Dimension::temperature,
+  _Dimension::quantity, _Dimension::luminosity>::dimension())
+  {
+  }
+
+
+  template<typename __Dimension, typename _Rep, typename _Period>
+  constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
+  Unit(Unit_cast<Unit>(Obj).count())
+  {
+  }
+
+
+  template<typename _Rep, typename _Period>
+  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
   Unit(Unit_cast<Unit>(Obj).count())
   {
   }
@@ -337,9 +536,6 @@ protected:
   Rep _count;
   const std::string _dimension;
 };
-
-
-
 
 
 //=============================================================================
