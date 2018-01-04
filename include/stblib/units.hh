@@ -593,20 +593,7 @@ using yottakelvin = Unit<Temperature, Rep, yotta>;
 
 
 
-// TEMPERATURE CONVERTER ======================================================
 
-enum class temp_unit {kelvin, celsius, fahrenheit};
-
-template <typename Ratio, typename Rep>
-Unit<Temperature, Rep, Ratio> convertTemperature(temp_unit const& unit, Rep value)
-{
-  if(unit == temp_unit::celsius)
-    value += static_cast<Rep>(273.15);
-  else if(unit == temp_unit::fahrenheit)
-    value = static_cast<Rep>((5/9) * (value + 459.67));
-
-  return Unit<Temperature, Rep, Ratio>(value);
-}
 
 //=============================================================================
 //=============================================================================

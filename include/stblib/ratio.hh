@@ -31,12 +31,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <limits>
 #include <cmath>
+#include <ratio>
 
 namespace stb
 {
-
-
-
 //=============================================================================
 //=============================================================================
 // GCD =====================================================================
@@ -89,6 +87,8 @@ struct is_ratio<ratio<Num, Den>> : public std::true_type
 {
 };
 
+
+
 //=============================================================================
 //=============================================================================
 // RATIO ARITHMETIC ===========================================================
@@ -117,6 +117,50 @@ class ratio_divide
   static constexpr double den = (ratio1::den * ratio2::num) /gcd;
 public:
   typedef ratio<num, den> type;
+};
+
+
+
+//=============================================================================
+//=============================================================================
+// RATIO CONVERTER STD/STB ===========================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template<typename falseType>
+struct is_std_ratio : std::false_type
+{
+};
+
+
+template<intmax_t Num, intmax_t Den>
+struct is_std_ratio<std::ratio<Num, Den>> : public std::true_type
+{
+};
+
+
+template<typename _stdRatio>
+struct ratio_converter_std_stb
+{
+  static_assert(is_std_ratio<_stdRatio>::value, "Need std::ratio in ratio_converter_std_stb.");
+
+  static constexpr double num = static_cast<double>(_stdRatio::num);
+  static constexpr double den = static_cast<double>(_stdRatio::den);
+
+  typedef ratio<num, den> type;
+};
+
+
+template<typename _stbRatio>
+struct ratio_converter_stb_std
+{
+  static_assert(is_ratio<_stbRatio>::value, "Need stb::ratio in ratio_converter_stb_std.");
+  static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
+  static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
+
+  typedef std::ratio<static_cast<intmax_t>(_stbRatio::num), static_cast<intmax_t>(_stbRatio::den)> type;
 };
 
 
@@ -212,6 +256,7 @@ static constexpr double E79 = 10000000000000000000000000000000000000000000000000
 static constexpr double E80 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 
 
+
 //=============================================================================
 //=============================================================================
 // RATIO TYPEDEF ==============================================================
@@ -241,8 +286,6 @@ typedef ratio<E15, E0> peta;
 typedef ratio<E18, E0> exa;
 typedef ratio<E21, E0> zetta;
 typedef ratio<E24, E0> yotta;
-
-
 
 }
 

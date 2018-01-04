@@ -12,11 +12,9 @@ bool equal(double const& a, double const& b)
 int main()
 {
 
-//std::cout << stb::Unit_cast<stb::meter<float>>(stb::gigaparsec<float>(1)).count() << '\n';
-//std::cout << stb::Unit_cast<stb::second<float>>(stb::hour<float>(1)).count() << '\n';
+std::chrono::duration<float, std::ratio<1,1>> a(3);
+stb::second<unsigned long long> b = a;
 
-auto a = stb::convertTemperature<stb::base>(stb::temp_unit::fahrenheit, 96);
-
-std::cout << a.count() << '\n';
+std::cout << b.count() << '\n';
 return 0;
 }

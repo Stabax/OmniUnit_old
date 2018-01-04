@@ -181,7 +181,7 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_ratio<Period>::value, "Third template argument of class stb::Unit should be a std::ratio.");
+  static_assert(is_ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::ratio.");
 
 
   constexpr Unit() = default;
@@ -373,7 +373,7 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_ratio<Period>::value, "Third template argument of class stb::Unit should be a std::ratio.");
+  static_assert(is_ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::ratio.");
 
 
   constexpr Unit() = default;
@@ -399,13 +399,30 @@ public:
 
   template<typename _Rep, typename _Period>
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit_cast<Unit>(Obj).count())
+  Unit(Unit<dimension, _Rep, typename ratio_converter_std_stb<_Period>::type>(Obj.count()))
   {
   }
 
 
   ~Unit() = default;
   Unit& operator=(Unit const&) = default;
+
+
+  template<typename _Rep, typename _Period>
+  Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
+  {
+    _count = Unit(Obj).count();
+    return *this;
+  }
+
+
+  template<typename _Rep, typename _Period>
+  operator std::chrono::duration<_Rep, _Period>()
+  {
+    return std::chrono::duration<_Rep, _Period>
+    (Unit_cast<Unit<dimension, _Rep,
+    typename ratio_converter_std_stb<_Period>::type>>(*this).count());
+  }
 
 
   static constexpr Unit zero()
