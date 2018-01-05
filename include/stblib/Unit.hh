@@ -38,12 +38,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace stb
 {
-
-
-
 //=============================================================================
 //=============================================================================
-// DIMENSION DEFINITION =======================================================
+// DIMENSION ==================================================================
 //=============================================================================
 //=============================================================================
 
@@ -105,17 +102,17 @@ temperature, quantity, luminosity>> : public std::true_type
 template <typename dim1, typename dim2>
 struct areSameDimension
 {
+  static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value, "Dimensions are different.");
+
   static constexpr bool value =
-  dim1::length == dim2::length &&
+  (dim1::length == dim2::length &&
   dim1::mass == dim2::mass &&
   dim1::time == dim2::time &&
   dim1::current == dim2::current &&
   dim1::temperature == dim2::temperature &&
   dim1::quantity == dim2::quantity &&
-  dim1::luminosity == dim2::luminosity ? true : false;
+  dim1::luminosity == dim2::luminosity) ? true : false;
 };
-
-
 
 
 
@@ -596,6 +593,26 @@ template <typename Dimension, typename Rep, typename Period, typename coefType>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
 std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
 operator* (coefType const& coef, Unit<Dimension, Rep, Period> const& Obj)
+{
+  return Obj * coef;
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
+constexpr Unit<_Dimension, typename std::common_type<Rep, typename
+std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
+operator* (Unit<_Dimension, Rep, Period> const& Obj,
+Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef)
+{
+  return Obj * Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(coef).count();
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
+constexpr Unit<_Dimension, typename std::common_type<Rep, typename
+std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
+operator* (Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef,
+Unit<_Dimension, Rep, Period> const& Obj)
 {
   return Obj * coef;
 }

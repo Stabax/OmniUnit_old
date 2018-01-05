@@ -11,10 +11,10 @@ bool equal(double const& a, double const& b)
 
 int main()
 {
+  stb::second<float> a(1);
+  stb::millisecond<float> b(1);
+  a += b;
 
-std::chrono::duration<float, std::ratio<1,1>> a(3);
-stb::second<unsigned long long> b = a;
-
-std::cout << b.count() << '\n';
+  std::cout << a.count() << '\n';
 return 0;
 }
