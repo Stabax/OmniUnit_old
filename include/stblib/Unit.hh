@@ -511,7 +511,6 @@ public:
     return *this;
   }
 
-
   template<typename _Rep, typename _Period>
   Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
@@ -585,7 +584,7 @@ operator* (Unit<Dimension, Rep, Period> const& Obj, coefType const& coef)
 {
   typedef typename std::common_type<Rep, coefType>::type common;
   typedef Unit<Dimension, common, Period> type;
-  return type(type(Obj).count() * coef);
+  return type(type(Obj).count() * static_cast<common>(coef));
 }
 
 
@@ -627,8 +626,40 @@ operator/ (Unit<Dimension, Rep, Period> const& Obj, coefType const& coef)
     throw Unit_exception("Divide by 0.");
   typedef typename std::common_type<Rep, coefType>::type common;
   typedef Unit<Dimension, common, Period> type;
-  return type(type(Obj).count() / coef);
+  return type(type(Obj).count() / static_cast<common>(coef));
 }
+
+
+template <typename Dimension, typename Rep, typename Period, typename coefType>
+constexpr Unit<Dimension, typename std::common_type<Rep, typename
+std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
+operator/ (coefType const& coef, Unit<Dimension, Rep, Period> const& Obj)
+{
+  return Obj * coef;
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
+constexpr Unit<_Dimension, typename std::common_type<Rep, typename
+std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
+operator/ (Unit<_Dimension, Rep, Period> const& Obj,
+Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef)
+{
+  if(coef.count() >= 0 && coef.count() <= 0)
+    throw Unit_exception("Divide by 0.");
+  return Obj / Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(coef).count();
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
+constexpr Unit<_Dimension, typename std::common_type<Rep, typename
+std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
+operator/ (Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef,
+Unit<_Dimension, Rep, Period> const& Obj)
+{
+  return Obj / coef;
+}
+
 
 /*
 template <typename Dimension, typename Rep, typename Period, typename coefType>
