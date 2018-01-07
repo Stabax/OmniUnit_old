@@ -98,11 +98,11 @@ struct is_ratio<ratio<Num, Den>> : public std::true_type
 
 
 template <typename ratio1, typename ratio2>
-struct ratio_multiply
+class ratio_multiply
 {
-  static constexpr double gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
-  static constexpr double num = (ratio1::num * ratio2::num) / gcd;
-  static constexpr double den = (ratio1::den * ratio2::den) / gcd;
+  static constexpr double _gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
+  static constexpr double num = (ratio1::num * ratio2::num) / _gcd;
+  static constexpr double den = (ratio1::den * ratio2::den) / _gcd;
 public:
   typedef ratio<num, den> type;
 };
@@ -112,9 +112,9 @@ template <typename ratio1, typename ratio2>
 class ratio_divide
 {
   static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
-  static constexpr double gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
-  static constexpr double num = (ratio1::num * ratio2::den) / gcd;
-  static constexpr double den = (ratio1::den * ratio2::num) /gcd;
+  static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
+  static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
+  static constexpr double den = (ratio1::den * ratio2::num) /_gcd;
 public:
   typedef ratio<num, den> type;
 };
