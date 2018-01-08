@@ -37,21 +37,31 @@ namespace stb
 {
 //=============================================================================
 //=============================================================================
-// GCD =====================================================================
+// GCD / IS_VALID =========================================================
 //=============================================================================
 //=============================================================================
 
 
 
-inline constexpr double gcd(double a, double b)
+constexpr double gcd(double a, double b)
 {
-  double r = 0;
-  while (b > 0) {
-    r = std::remainder(a, b);
+  double tempo = 0;
+  while (b > 0)
+  {
+    tempo = a - (std::floor(a/b) * b);;
     a = b;
-    b = r;
+    b = tempo;
   }
   return a;
+}
+
+
+//Test if a number is a positive integer
+template <typename T>
+constexpr bool is_valid(T number)
+{
+  T res = number - std::floor(number);
+  return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
 
 
@@ -68,6 +78,8 @@ template<double const& _Num, double const& _Den>
 struct ratio
 {
   static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
+  static_assert(is_valid(_Num), "numerator may not have decimals and may be positive");
+  static_assert(is_valid(_Den), "denominator may not have decimals and may be positive");
 
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);
@@ -112,6 +124,7 @@ template <typename ratio1, typename ratio2>
 class ratio_divide
 {
   static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
+  
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
   static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
   static constexpr double den = (ratio1::den * ratio2::num) /_gcd;
@@ -123,7 +136,7 @@ public:
 
 //=============================================================================
 //=============================================================================
-// RATIO CONVERTER STD/STB ===========================================================
+// RATIO CONVERTER STD/STB ====================================================
 //=============================================================================
 //=============================================================================
 
