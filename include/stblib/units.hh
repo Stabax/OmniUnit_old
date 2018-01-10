@@ -54,30 +54,17 @@ static constexpr double monthsIn1Year = 12.; // s
 static constexpr double secondsIn1YearE2 = 36525. * 24. *3600.; // s
 static constexpr double distanceSunEarth = 149597870700.; //m
 static constexpr double parsecDef = 648000.;
-static constexpr double atomic_massDefE9 = 1660538921.; //kg
-static constexpr double evPerC2DefE8     =  178266191.; //kg
-static constexpr double solar_massDefE4     =  19884.; //kg * 10^26
+static constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
+static constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
+static constexpr double solar_massDefE4     =  19884.; //kg * 10^30
 
 typedef ratio<piE36, E36> pi;
 typedef ratio<secondsIn1YearE2, E2> secondsIn1Year;
 typedef ratio_divide<ratio<parsecDef, E0>, pi>::type parsecDefinition;
-typedef ratio<atomic_massDefE9, E9> atomic_massDefinition;
+typedef ratio_multiply<ratio<atomic_massDefE9, E9>, ratio<E0, E27>>::type atomic_massDefinition;
 typedef ratio_multiply<ratio<evPerC2DefE8, E8>, ratio<E0, E36>>::type evPerC2Definition;
-typedef ratio_multiply<ratio<solar_massDefE4, E4>, ratio<E26, E0>>::type solar_massDefinition;
+typedef ratio_multiply<ratio<solar_massDefE4, E4>, ratio<E30, E0>>::type solar_massDefinition;
 typedef ratio_divide<secondsIn1Year, ratio<monthsIn1Year, E0>>::type secondsIn1Month;
-
-
-
-
-//=============================================================================
-//=============================================================================
-// Scalar =====================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-typedef Dimension<0, 0, 0, 0, 0, 0, 0> Scalar;
 
 
 

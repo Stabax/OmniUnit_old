@@ -2,7 +2,7 @@
 
 ## Contributors
 
-* Stabax Corp.
+* Stabax Ltd.
 * Baxlan
 
 ## about

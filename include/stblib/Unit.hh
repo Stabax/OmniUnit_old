@@ -57,31 +57,6 @@ struct Dimension
   static constexpr int temperature = _temperature;
   static constexpr int quantity = _quantity;
   static constexpr int luminosity = _luminosity;
-
-
-  static constexpr std::string dimension()
-  {
-    std::string dim = "";
-
-    if(length != 0)
-      dim += ("[L" + std::to_string(length) + "]");
-    if(mass != 0)
-      dim += ("[M" + std::to_string(mass) + "]");
-    if(time != 0)
-      dim += ("[Tm" + std::to_string(time) + "]");
-    if(current != 0)
-      dim += ("[I" + std::to_string(current) + "]");
-    if(temperature != 0)
-      dim += ("[Tp" + std::to_string(temperature) + "]");
-    if(quantity != 0)
-      dim += ("[N" + std::to_string(quantity) + "]");
-    if(luminosity != 0)
-      dim += ("[J" + std::to_string(luminosity) + "]");
-    if(dim.length() == 0)
-      dim = "[/]";
-
-    return dim;
-  }
 };
 
 
@@ -99,21 +74,33 @@ temperature, quantity, luminosity>> : public std::true_type
 };
 
 
-template <typename dim1, typename dim2>
-struct areSameDimension
+//it is useless to make this function part of class Dimension static constexpr
+//because std::string is not a litteral : the function cannot be interpreted at
+//compile time, so class Dimension can neither.
+template<typename dimension>
+typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimension_str()
 {
-  static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value, "Dimensions are different.");
+  std::string dim = "";
 
-  static constexpr bool value =
-  (dim1::length == dim2::length &&
-  dim1::mass == dim2::mass &&
-  dim1::time == dim2::time &&
-  dim1::current == dim2::current &&
-  dim1::temperature == dim2::temperature &&
-  dim1::quantity == dim2::quantity &&
-  dim1::luminosity == dim2::luminosity) ? true : false;
-};
+  if(dimension::length != 0)
+    dim += ("[L" + std::to_string(dimension::length) + "]");
+  if(dimension::mass != 0)
+    dim += ("[M" + std::to_string(dimension::mass) + "]");
+  if(dimension::time != 0)
+    dim += ("[Tm" + std::to_string(dimension::time) + "]");
+  if(dimension::current != 0)
+    dim += ("[I" + std::to_string(dimension::current) + "]");
+  if(dimension::temperature != 0)
+    dim += ("[Tp" + std::to_string(dimension::temperature) + "]");
+  if(dimension::quantity != 0)
+    dim += ("[N" + std::to_string(dimension::quantity) + "]");
+  if(dimension::luminosity != 0)
+    dim += ("[J" + std::to_string(dimension::luminosity) + "]");
+  if(dim.length() == 0)
+    dim = "[/]";
 
+  return dim;
+}
 
 
 //=============================================================================
@@ -144,14 +131,12 @@ template<typename toUnit, typename Dimension, typename Rep, typename Period>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
 Unit_cast(const Unit<Dimension, Rep, Period>& Obj)
 {
-  static_assert(areSameDimension<typename toUnit::dimension, Dimension>::value, "Cannot cast different dimensions.");
+  static_assert(std::is_same<typename toUnit::dimension, Dimension>::value, "Cannot cast different dimensions.");
 
-  typedef typename toUnit::period period;
-  typedef typename toUnit::rep rep;
-  typedef typename ratio_divide<Period, period>::type new_ratio;
-  typedef typename std::common_type<rep, Rep, double>::type common_rep;
+  typedef typename ratio_divide<Period, typename toUnit::period>::type new_ratio;
+  typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
 
-  return toUnit(static_cast<rep>(static_cast<common_rep>(Obj.count())
+  return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
     * static_cast<common_rep>(new_ratio::num) / static_cast<common_rep>(new_ratio::den)));
 }
 
@@ -188,9 +173,7 @@ public:
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
   constexpr Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
-  _dimension(Dimension<_Dimension::length, _Dimension::mass,
-  _Dimension::time, _Dimension::current, _Dimension::temperature,
-  _Dimension::quantity, _Dimension::luminosity>::dimension())
+  _dimension(dimension_str<dim>())
   {
   }
 
@@ -232,7 +215,7 @@ public:
 
   constexpr std::string dimension()
   {
-    return dim::dimension();
+    return dimension_str<dim>();
   }
 
 
@@ -362,7 +345,7 @@ protected:
 
 
 public:
-  typedef _Dimension dimension;
+  typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
 
@@ -380,9 +363,7 @@ public:
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
   constexpr Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
-  _dimension(Dimension<_Dimension::length, _Dimension::mass,
-  _Dimension::time, _Dimension::current, _Dimension::temperature,
-  _Dimension::quantity, _Dimension::luminosity>::dimension())
+  _dimension(dimension_str<dim>())
   {
   }
 
@@ -396,7 +377,7 @@ public:
 
   template<typename _Rep, typename _Period>
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dimension, _Rep, typename ratio_converter_std_stb<_Period>::type>(Obj.count()))
+  Unit(Unit<dim, _Rep, typename ratio_converter_std_stb<_Period>::type>(Obj.count()))
   {
   }
 
@@ -417,7 +398,7 @@ public:
   operator std::chrono::duration<_Rep, _Period>()
   {
     return std::chrono::duration<_Rep, _Period>
-    (Unit_cast<Unit<dimension, _Rep,
+    (Unit_cast<Unit<dim, _Rep,
     typename ratio_converter_std_stb<_Period>::type>>(*this).count());
   }
 
@@ -443,6 +424,12 @@ public:
   static constexpr Rep min()
   {
     return std::numeric_limits<Rep>::lowest();
+  }
+
+
+  constexpr std::string dimension()
+  {
+    return dimension_str<dim>();
   }
 
 
@@ -486,10 +473,10 @@ public:
   }
 
 
-  template<typename _Rep>
-  Unit& operator*=(_Rep const& coef)
+  template<typename T>
+  Unit& operator*=(T const& coef)
   {
-    _count *= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    _count *= static_cast<typename std::common_type<Rep, T>::type>(coef);
     return *this;
   }
 
@@ -553,7 +540,7 @@ protected:
 
 //=============================================================================
 //=============================================================================
-// OPERATORS ==================================================================
+// ARITHMERIC OPERATORS WITH LITTERALS ========================================
 //=============================================================================
 //=============================================================================
 
@@ -577,102 +564,69 @@ operator- (Unit<Dimension, Rep1, Period1> const& Obj1, Unit<Dimension, Rep2, Per
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename coefType>
+template <typename Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
-operator* (Unit<Dimension, Rep, Period> const& Obj, coefType const& coef)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
+operator* (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
 {
-  typedef typename std::common_type<Rep, coefType>::type common;
+  typedef typename std::common_type<Rep, T>::type common;
   typedef Unit<Dimension, common, Period> type;
   return type(type(Obj).count() * static_cast<common>(coef));
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename coefType>
+template <typename Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
-operator* (coefType const& coef, Unit<Dimension, Rep, Period> const& Obj)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
+operator* (T const& coef, Unit<Dimension, Rep, Period> const& Obj)
 {
   return Obj * coef;
 }
 
 
-template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
-constexpr Unit<_Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
-operator* (Unit<_Dimension, Rep, Period> const& Obj,
-Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef)
-{
-  return Obj * Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(coef).count();
-}
-
-
-template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
-constexpr Unit<_Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
-operator* (Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef,
-Unit<_Dimension, Rep, Period> const& Obj)
-{
-  return Obj * coef;
-}
-
-
-template <typename Dimension, typename Rep, typename Period, typename coefType>
+template <typename Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
-operator/ (Unit<Dimension, Rep, Period> const& Obj, coefType const& coef)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
+operator/ (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
 {
   if(coef >= 0 && coef <= 0)
     throw Unit_exception("Divide by 0.");
-  typedef typename std::common_type<Rep, coefType>::type common;
+  typedef typename std::common_type<Rep, T>::type common;
   typedef Unit<Dimension, common, Period> type;
   return type(type(Obj).count() / static_cast<common>(coef));
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename coefType>
+template <typename Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
-operator/ (coefType const& coef, Unit<Dimension, Rep, Period> const& Obj)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
+operator/ (T const& coef, Unit<Dimension, Rep, Period> const& Obj)
 {
   return Obj * coef;
 }
 
 
-template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
-constexpr Unit<_Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
-operator/ (Unit<_Dimension, Rep, Period> const& Obj,
-Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef)
-{
-  if(coef.count() >= 0 && coef.count() <= 0)
-    throw Unit_exception("Divide by 0.");
-  return Obj / Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(coef).count();
-}
-
-
-template <typename _Dimension, typename Rep, typename Period, typename Rep2, typename Period2>
-constexpr Unit<_Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<Rep2>::value, Rep2>::type>::type, Period>
-operator/ (Unit<Dimension<0,0,0,0,0,0,0>, Rep2, Period2> const& coef,
-Unit<_Dimension, Rep, Period> const& Obj)
-{
-  return Obj / coef;
-}
-
-
-/*
-template <typename Dimension, typename Rep, typename Period, typename coefType>
+template <typename Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<coefType>::value, coefType>::type>::type, Period>
-operator% (Unit<Dimension, Rep, Period> const& Obj, coefType const& coef)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
+operator% (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
 {
   if(coef >= 0 && coef <= 0)
     throw Unit_exception("Divide by 0.");
-  typedef Unit<Dimension, typename std::common_type<Rep, coefType>::type, Period> type;
-  return type(type(Obj).count() % coef);
+  typedef Unit<Dimension, typename std::common_type<Rep, T>::type, Period> type;
+  return type(modulo(type(Obj).count(), coef));
 }
 
+
+
+
+/*
+
+//=============================================================================
+//=============================================================================
+// ARITHMERIC OPERATORS WITH UNITS ============================================
+//=============================================================================
+//=============================================================================
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr typename std::common_type<Unit<Rep1,Period1>, Unit<Rep2,Period2>>::type
@@ -684,6 +638,11 @@ operator% (Unit<Rep1,Period1> const& Obj1, Unit<Rep2,Period2> const& Obj2)
   return type(type(Obj1).count() % type(Obj2).count());
 }
 
+//=============================================================================
+//=============================================================================
+// COMPARISON OPERATORS =======================================================
+//=============================================================================
+//=============================================================================
 
 template <typename Rep1, typename Period1, typename Rep2, typename Period2>
 constexpr bool operator==(Unit<Rep1,Period1> const& Obj1, Unit<Rep2,Period2> const& Obj2)

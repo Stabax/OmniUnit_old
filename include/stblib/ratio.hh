@@ -37,10 +37,22 @@ namespace stb
 {
 //=============================================================================
 //=============================================================================
-// GCD / IS_VALID =========================================================
+// UTILITIES ==================================================================
 //=============================================================================
 //=============================================================================
 
+
+template <typename T, typename U>
+constexpr typename std::common_type<
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
+typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
+modulo(T const& a, U const& b)
+{
+  typedef typename std::common_type<T, U>::type common;
+  common a2 = static_cast<common>(a);
+  common b2 = static_cast<common>(b);
+  return a2 - (std::floor(a2/b2) * b2);
+}
 
 
 constexpr double gcd(double a, double b)
@@ -48,7 +60,7 @@ constexpr double gcd(double a, double b)
   double tempo = 0;
   while (b > 0)
   {
-    tempo = a - (std::floor(a/b) * b);;
+    tempo = modulo(a, b);
     a = b;
     b = tempo;
   }
@@ -124,7 +136,7 @@ template <typename ratio1, typename ratio2>
 class ratio_divide
 {
   static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
-  
+
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
   static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
   static constexpr double den = (ratio1::den * ratio2::num) /_gcd;

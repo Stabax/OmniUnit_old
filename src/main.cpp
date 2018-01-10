@@ -12,9 +12,9 @@ bool equal(double const& a, double const& b)
 int main()
 {
   stb::megaparsec<float> a(2);
-  //auto c = a/2;
+  auto c = a%2;
 
-  std::cout << a.count() << '\n';
+  std::cout << a.dimension() << '\n';
 
 return 0;
 }
