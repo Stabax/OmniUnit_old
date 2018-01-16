@@ -48,31 +48,40 @@ typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
 typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
 modulo(T const& a, U const& b)
 {
+  //static_assert(b < 0 || b > 0, "Division by 0.");
   typedef typename std::common_type<T, U>::type common;
   common a2 = static_cast<common>(a);
   common b2 = static_cast<common>(b);
-  return a2 - (std::floor(a2/b2) * b2);
+  return a2 - (static_cast<common>(std::floor(a2/b2)) * b2);
 }
 
 
-constexpr double gcd(double a, double b)
+template <typename T, typename U>
+constexpr typename std::common_type<
+typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
+typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
+gcd(T const& a, U const& b)
 {
+  typedef typename std::common_type<T, U>::type common;
+  common a2 = static_cast<common>(a);
+  common b2 = static_cast<common>(b);
+
   double tempo = 0;
-  while (b > 0)
+  while (b2 > 0)
   {
-    tempo = modulo(a, b);
-    a = b;
-    b = tempo;
+    tempo = modulo(a2, b2);
+    a2 = b2;
+    b2 = tempo;
   }
-  return a;
+  return a2;
 }
 
 
 //Test if a number is a positive integer
-template <typename T>
-constexpr bool is_valid(T number)
+template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
+constexpr bool is_valid(T const& number)
 {
-  T res = number - std::floor(number);
+  T res = number - static_cast<T>(std::floor(number));
   return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
 
@@ -101,13 +110,13 @@ struct ratio
 
 
 template<typename falseType>
-struct is_ratio : std::false_type
+struct is_stb_ratio : std::false_type
 {
 };
 
 
 template<double const& Num, double const& Den>
-struct is_ratio<ratio<Num, Den>> : public std::true_type
+struct is_stb_ratio<ratio<Num, Den>> : public std::true_type
 {
 };
 
@@ -167,7 +176,7 @@ struct is_std_ratio<std::ratio<Num, Den>> : public std::true_type
 
 
 template<typename _stdRatio>
-struct ratio_converter_std_stb
+struct ratio_std_to_stb
 {
   static_assert(is_std_ratio<_stdRatio>::value, "Need std::ratio in ratio_converter_std_stb.");
 
@@ -179,9 +188,9 @@ struct ratio_converter_std_stb
 
 
 template<typename _stbRatio>
-struct ratio_converter_stb_std
+struct ratio_stb_to_std
 {
-  static_assert(is_ratio<_stbRatio>::value, "Need stb::ratio in ratio_converter_stb_std.");
+  static_assert(is_stb_ratio<_stbRatio>::value, "Need stb::ratio in ratio_converter_stb_std.");
   static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
   static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
 

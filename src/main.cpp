@@ -13,6 +13,8 @@ int main()
 {
   stb::megaparsec<float> a(2);
   auto c = a%2;
+  stb::modulo(0, 1);
+  stb::is_valid(0);
 
   std::cout << a.dimension() << '\n';
 
