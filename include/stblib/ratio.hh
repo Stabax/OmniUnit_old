@@ -32,61 +32,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <limits>
 #include <cmath>
 #include <ratio>
+#include "utilities.hh"
 
 namespace stb
 {
-//=============================================================================
-//=============================================================================
-// UTILITIES ==================================================================
-//=============================================================================
-//=============================================================================
-
-
-template <typename T, typename U>
-constexpr typename std::common_type<
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
-typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
-modulo(T const& a, U const& b)
-{
-  //static_assert(b < 0 || b > 0, "Division by 0.");
-  typedef typename std::common_type<T, U>::type common;
-  common a2 = static_cast<common>(a);
-  common b2 = static_cast<common>(b);
-  return a2 - (static_cast<common>(std::floor(a2/b2)) * b2);
-}
-
-
-template <typename T, typename U>
-constexpr typename std::common_type<
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
-typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
-gcd(T const& a, U const& b)
-{
-  typedef typename std::common_type<T, U>::type common;
-  common a2 = static_cast<common>(a);
-  common b2 = static_cast<common>(b);
-
-  double tempo = 0;
-  while (b2 > 0)
-  {
-    tempo = modulo(a2, b2);
-    a2 = b2;
-    b2 = tempo;
-  }
-  return a2;
-}
-
-
-//Test if a number is a positive integer
-template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
-constexpr bool is_valid(T const& number)
-{
-  T res = number - static_cast<T>(std::floor(number));
-  return (res >=0 && res <=0 && number >= 0) ? true : false;
-}
-
-
-
 //=============================================================================
 //=============================================================================
 // RATIO DEFINITION ===========================================================
@@ -99,8 +48,8 @@ template<double const& _Num, double const& _Den>
 struct ratio
 {
   static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
-  static_assert(is_valid(_Num), "numerator may not have decimals and may be positive");
-  static_assert(is_valid(_Den), "denominator may not have decimals and may be positive");
+  static_assert(is_positive_integer(_Num), "numerator may not have decimals and may be positive");
+  static_assert(is_positive_integer(_Den), "denominator may not have decimals and may be positive");
 
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);

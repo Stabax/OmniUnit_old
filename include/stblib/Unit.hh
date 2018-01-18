@@ -34,110 +34,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>
 #include "ratio.hh"
 #include "exception.hh"
+#include "Dimension.hh"
 
 
 namespace stb
 {
-//=============================================================================
-//=============================================================================
-// DIMENSION ==================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-template<int _length, int _mass, int _time, int _current,
-int _temperature, int _quantity, int _luminosity>
-struct Dimension
-{
-  static constexpr int length = _length;
-  static constexpr int mass = _mass;
-  static constexpr int time = _time;
-  static constexpr int current = _current;
-  static constexpr int temperature = _temperature;
-  static constexpr int quantity = _quantity;
-  static constexpr int luminosity = _luminosity;
-};
-
-
-template<typename falseType>
-struct is_Dimension : std::false_type
-{
-};
-
-
-template<int length, int mass, int time, int current,
-int temperature, int quantity, int luminosity>
-struct is_Dimension<Dimension<length, mass, time, current,
-temperature, quantity, luminosity>> : public std::true_type
-{
-};
-
-
-template <typename dim1, typename dim2>
-struct Dimension_multiply
-{
-  static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value,
-  "Bad type, need a stb::Dimension.");
-
-  typedef Dimension<
-  dim1::length + dim2::length,
-  dim1::mass + dim2::mass,
-  dim1::time + dim2::time,
-  dim1::current + dim2::current,
-  dim1::temperature + dim2::temperature,
-  dim1::quantity + dim2::quantity,
-  dim1::luminosity + dim2::luminosity
-  > type;
-};
-
-
-template <typename dim1, typename dim2>
-struct Dimension_divide
-{
-  static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value,
-  "Bad type, need a stb::Dimension.");
-
-  typedef Dimension<
-  dim1::length - dim2::length,
-  dim1::mass - dim2::mass,
-  dim1::time - dim2::time,
-  dim1::current - dim2::current,
-  dim1::temperature - dim2::temperature,
-  dim1::quantity - dim2::quantity,
-  dim1::luminosity - dim2::luminosity> type;
-};
-
-
-//it is useless to make this function part of the class Dimension (static constexpr)
-//because std::string is not a litteral : the function cannot be interpreted at
-//compile time, so class Dimension could neither.
-template<typename dimension>
-typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimension_str()
-{
-  std::string dim = "";
-
-  if(dimension::length != 0)
-    dim += ("[L" + std::to_string(dimension::length) + "]");
-  if(dimension::mass != 0)
-    dim += ("[M" + std::to_string(dimension::mass) + "]");
-  if(dimension::time != 0)
-    dim += ("[Tm" + std::to_string(dimension::time) + "]");
-  if(dimension::current != 0)
-    dim += ("[I" + std::to_string(dimension::current) + "]");
-  if(dimension::temperature != 0)
-    dim += ("[Tp" + std::to_string(dimension::temperature) + "]");
-  if(dimension::quantity != 0)
-    dim += ("[N" + std::to_string(dimension::quantity) + "]");
-  if(dimension::luminosity != 0)
-    dim += ("[J" + std::to_string(dimension::luminosity) + "]");
-  if(dim.length() == 0)
-    dim = "[/]";
-
-  return dim;
-}
-
-
 //=============================================================================
 //=============================================================================
 // UNIT CAST ==================================================================
@@ -174,8 +75,6 @@ Unit_cast(const Unit<Dimension, Rep, Period>& Obj)
   return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
     * static_cast<common_rep>(new_ratio::num) / static_cast<common_rep>(new_ratio::den)));
 }
-
-
 
 
 
@@ -814,7 +713,7 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
-  
+
   return ! (Obj1 < Obj2);
 }
 
