@@ -65,19 +65,19 @@ namespace stb
   using milligram = Unit<Mass, Rep, micro>;
 
   template <typename Rep>
-  using centigram = Unit<Mass, Rep, ratio<E0, E5>>;
+  using centigram = Unit<Mass, Rep, Ratio<E0, E5>>;
 
   template <typename Rep>
-  using decigram = Unit<Mass, Rep, ratio<E0, E4>>;
+  using decigram = Unit<Mass, Rep, Ratio<E0, E4>>;
 
   template <typename Rep>
   using gram = Unit<Mass, Rep, milli>;
 
   template <typename Rep>
-  using decagram = Unit<Mass, Rep, ratio<E0, E2>>;
+  using decagram = Unit<Mass, Rep, Ratio<E0, E2>>;
 
   template <typename Rep>
-  using hectogram = Unit<Mass, Rep, ratio<E0, E1>>;
+  using hectogram = Unit<Mass, Rep, Ratio<E0, E1>>;
 
   template <typename Rep>
   using kilogram = Unit<Mass, Rep, base>;
@@ -108,42 +108,42 @@ namespace stb
 
 
   template <typename Rep>
-  using atomic_mass = Unit<Mass, Rep, typename ratio_multiply<
-  atomic_massDefinition, ratio<E0, E27>>::type>;
+  using atomic_mass = Unit<Mass, Rep, typename Ratio_multiply<
+  atomic_massDefinition, Ratio<E0, E27>>::type>;
 
   template <typename Rep>
   using evPerC2 = Unit<Mass, Rep, evPerC2Definition>;
 
   template <typename Rep>
-  using millievPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using millievPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, milli>::type>;
 
   template <typename Rep>
-  using microevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using microevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, micro>::type>;
 
   template <typename Rep>
-  using nanoevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using nanoevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, nano>::type>;
 
   template <typename Rep>
-  using kiloevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, kilo>::type>;
 
   template <typename Rep>
-  using megaevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using megaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, mega>::type>;
 
   template <typename Rep>
-  using gigaevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using gigaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, giga>::type>;
 
   template <typename Rep>
-  using teraevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using teraevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, tera>::type>;
 
   template <typename Rep>
-  using petaevPerC2 = Unit<Mass, Rep, typename ratio_multiply<
+  using petaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
   typename evPerC2<Rep>::period, peta>::type>;
 
 
@@ -154,7 +154,7 @@ namespace stb
   using solar_mass = Unit<Mass, Rep, solar_massDefinition>;
 
 
-  
+
 }
 
 #endif //MASS_HH_

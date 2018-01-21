@@ -1,4 +1,4 @@
-//time_types.hh
+//timer.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,21 +26,15 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TIME_TYPES_HH_
-#define TIME_TYPES_HH_
+#ifndef TIMER_HH_
+#define TIMER_HH_
 
-#include "units.hh"
-#include "exception.hh"
-#include <chrono>     // duration, steady_clock, time_point
-#include <ctime>      // gmtime, localtime, time, tm
-#include <string>     // string, to_string
-#include <thread>     // sleep_for, sleep_until
+#include "units/duration.hh"
 #include <memory>     // unique_ptr
+
+
 namespace stb
 {
-
-
-
 //=============================================================================
 //=============================================================================
 // TIMER ======================================================================
@@ -102,7 +96,7 @@ public:
   void stop()
   {
     _Begin = std::chrono::steady_clock::now();
-    _PausedTime = nanosecond::zero();
+    _PausedTime = std::chrono::nanoseconds::zero();
     clear();
     _state = State::stopped;
   }
@@ -110,7 +104,7 @@ public:
 
   void clear()
   {
-    _addedTime = nanosecond::zero();
+    _addedTime = std::chrono::nanoseconds::zero();
   }
 
 
@@ -122,7 +116,7 @@ public:
 
 
   template <typename Rep, typename Period>
-  Timer& operator+=(Duration<Rep, Period> const& duration)
+  Timer& operator+=(Unit<Duration, Rep, Period> const& duration)
   {
     _addedTime += duration;
     return *this;
@@ -130,9 +124,9 @@ public:
 
 
   template <typename Rep, typename Period>
-  Timer& operator-=(Duration<Rep, Period> const& duration)
+  Timer& operator-=(Unit<Duration, Rep, Period> const& duration)
   {
-    Duration<Rep, Period> current = get<Duration<Rep, Period>>();
+    Unit<Duration, Rep, Period> current = get<Unit<Duration, Rep, Period>>();
     if(duration < current)
       _addedTime -= duration;
     else
@@ -145,10 +139,10 @@ protected:
 
   enum class State {active, paused, stopped};
 
-  virtual nanosecond getNano() const
+  virtual std::chrono::nanoseconds getNano() const
   {
-    nanosecond CurrentPausedTime = nanosecond::zero();
-    std::chrono::time_point<std::chrono::steady_clock, nanosecond> Now = std::chrono::steady_clock::now();
+    std::chrono::nanoseconds CurrentPausedTime = std::chrono::nanoseconds::zero();
+    std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> Now = std::chrono::steady_clock::now();
     if(_state == State::paused)
       CurrentPausedTime = Now - _BeginPause;
     return ((Now - _Begin) - (_PausedTime + CurrentPausedTime) + _addedTime);
@@ -156,40 +150,40 @@ protected:
   }
 
   //Point of the first start() following the last stop
-  std::chrono::time_point<std::chrono::steady_clock, nanosecond> _Begin;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> _Begin;
   //Point of last pause
-  std::chrono::time_point<std::chrono::steady_clock, nanosecond> _BeginPause;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> _BeginPause;
   //total time elapsed in pause since last stop
-  nanosecond _PausedTime;
+  std::chrono::nanoseconds _PausedTime;
   //added/subtracted time
-  nanosecond _addedTime;
+  std::chrono::nanoseconds _addedTime;
   State _state;
 };
 
 
 template <typename Rep, typename Period>
-Timer operator+(Timer const& tim, Duration<Rep, Period> const& duration)
+Timer operator+(Timer const& tim, Unit<Duration, Rep, Period> const& duration)
 {
   return tim += duration;
 }
 
 
 template <typename Rep, typename Period>
-Timer operator+(Duration<Rep, Period> const& duration, Timer const& tim)
+Timer operator+(Unit<Duration, Rep, Period> const& duration, Timer const& tim)
 {
   return tim += duration;
 }
 
 
 template <typename Rep, typename Period>
-Timer operator-(Timer const& tim, Duration<Rep, Period> const& duration)
+Timer operator-(Timer const& tim, Unit<Duration, Rep, Period> const& duration)
 {
   return tim -= duration;
 }
 
 
 template <typename Rep, typename Period>
-Timer operator-(Duration<Rep, Period> const& duration, Timer const& tim)
+Timer operator-(Unit<Duration, Rep, Period> const& duration, Timer const& tim)
 {
   return tim -= duration;
 }
@@ -218,14 +212,14 @@ public:
 
 
   template <typename Rep, typename Period>
-  explicit Countdown(Duration<Rep, Period> const& duration) :
+  explicit Countdown(Unit<Duration, Rep, Period> const& duration) :
   _End(std::chrono::steady_clock::now() + duration),
   _Timer(std::make_unique<Timer>())
   {
   }
 
 
-  explicit Countdown(std::chrono::time_point<std::chrono::steady_clock, nanosecond> const& timpoint) :
+  explicit Countdown(std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> const& timpoint) :
   _End(timpoint),
   _Timer(std::make_unique<Timer>())
   {
@@ -243,14 +237,14 @@ protected:
 
 
   template <typename Rep, typename Period>
-  explicit Countdown(Duration<Rep, Period> const& duration, Timer const& tim) :
+  explicit Countdown(Unit<Duration, Rep, Period> const& duration, Timer const& tim) :
   _End(std::chrono::steady_clock::now() + duration),
   _Timer(std::make_unique<Timer>(tim))
   {
   }
 
 
-  explicit Countdown(std::chrono::time_point<std::chrono::steady_clock, nanosecond> const& timpoint, Timer const& tim) :
+  explicit Countdown(std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> const& timpoint, Timer const& tim) :
   _End(timpoint),
   _Timer(std::make_unique<Timer>(tim))
   {
@@ -303,177 +297,18 @@ public:
   }
 
 protected:
-  nanosecond getNano() const
+  std::chrono::nanoseconds getNano() const
   {
     return (_End - _Timer->_Begin) - _Timer->getNano();
   }
 
-  std::chrono::time_point<std::chrono::steady_clock, nanosecond> _End;
+  std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> _End;
   //_Timer is a pointer in order to use polymorphism
   std::unique_ptr<Timer> _Timer;
 };
 
 
 
-
-
-//=============================================================================
-//=============================================================================
-// DATE  ======================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-class Date
-{
-public:
-
-  enum class Location {local, gmt, timezone};
-
-  static const Location local = Location::local;
-  static const Location gmt = Location::gmt;
-  static const Location timezone = Location::timezone;
-
-  Date() = delete;
-
-  static void setTimeLag(int hours)
-  {
-    timeLag = hours * 3600;
-  }
-
-  static std::string time(Location place = Location::gmt)
-  {
-    struct tm* instant = getTm(place);
-    std::string toReturn;
-    toReturn += std::to_string(instant->tm_hour);
-    toReturn += ":";
-    toReturn += std::to_string(instant->tm_min);
-    toReturn += ":";
-    toReturn += std::to_string(instant->tm_sec);
-    return toReturn;
-  }
-
-  static std::string date(Location place = Location::gmt)
-  {
-    struct tm* instant = getTm(place);
-    std::string toReturn;
-    toReturn += std::to_string(instant->tm_mday);
-    toReturn += "/";
-    toReturn += std::to_string(instant->tm_mon+1);
-    toReturn += "/";
-    toReturn += std::to_string(instant->tm_year+1900);
-    return toReturn;
-  }
-
-  //unit must be one of the typedef on std::ratio defined in the namespace stb
-  template<typename unit>
-  static int get(Location place)
-  {
-    place = place; //without this, cannot compile (unused place)
-    throw Date_exception("Only stb::second, stb::minute, stb::hour, stb::week, stb::month and stb::year are allowed.");
-  }
-
-protected:
-  static tm* getTm(Location place)
-  {
-    time_t seconds = std::time(nullptr);
-    if(seconds == -1)
-      throw Date_exception("Unable to get time");
-    if(place == Location::gmt)
-      return (gmtime(&seconds));
-    else if(place == Location::timezone)
-    {
-      seconds += timeLag;
-      return (gmtime(&seconds));
-    }
-    else
-      return (localtime(&seconds));
-  }
-
-  static int timeLag;
-};
-int Date::timeLag = 0;
-
-//cannot compile if specialization in defined inside the class body
-template<>
-int Date::get<second>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_sec);
-}
-template<>
-int Date::get<minute>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_min);
-}
-template<>
-int Date::get<hour>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_hour);
-}
-template<>
-int Date::get<day>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_mday);
-}
-template<>
-int Date::get<month>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_mon + 1);
-}
-template<>
-int Date::get<year>(Location place)
-{
-  struct tm* instant = getTm(place);
-  return (instant->tm_year + 1900);
-}
-
-
-
-
-
-//=============================================================================
-//=============================================================================
-// SLEEP  =====================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-//durationType is implicitly deduced.
-template<typename durationType>
-void sleep(durationType const& duration)
-{
-  std::this_thread::sleep_for(duration);
-}
-
-
-void sleep(Timer const& tim)
-{
-  std::this_thread::sleep_for(tim.get<nanosecond>());
-}
-
-
-void sleep(Countdown const& count)
-{
-  std::this_thread::sleep_for(count.get<nanosecond>());
-}
-
-/*
-TO DO
-void sleep(Countdown const& Date)
-{
-
-}
-*/
-
-
-
 }//namespace stb
 
-#endif //TIME_TYPES_HH_
+#endif //TIMER_HH_

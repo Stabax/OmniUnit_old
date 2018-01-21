@@ -41,6 +41,21 @@ namespace stb
 
 
 
+  template <typename toRep, typename toPeriod, typename Rep, typename Period>
+  duration_cast(Unit<Duration, Rep, Period> const& Obj)
+  {
+    return Unit_cast<Unit<Duration, toRep, toPeriod>>(Obj);
+  }
+
+
+  template <typename toUnit, typename Rep, typename Period>
+  duration_cast(Unit<Duration, Rep, Period> const& Obj)
+  {
+    return Unit_cast<toUnit>(Obj);
+  }
+
+
+
   template <typename Rep>
   using yoctosecond = Unit<Duration, Rep, yocto>;
 
@@ -109,16 +124,16 @@ namespace stb
 
 
   template <typename Rep>
-  using minute = Unit<Duration, Rep, ratio<secondsIn1Min, E0>>;
+  using minute = Unit<Duration, Rep, Ratio<secondsIn1Min, E0>>;
 
   template <typename Rep>
-  using hour = Unit<Duration, Rep, ratio<secondsIn1Hour, E0>>;
+  using hour = Unit<Duration, Rep, Ratio<secondsIn1Hour, E0>>;
 
   template <typename Rep>
-  using day = Unit<Duration, Rep, ratio<secondsIn1Day, E0>>;
+  using day = Unit<Duration, Rep, Ratio<secondsIn1Day, E0>>;
 
   template <typename Rep>
-  using week = Unit<Duration, Rep, ratio<secondsIn1Week, E0>>;
+  using week = Unit<Duration, Rep, Ratio<secondsIn1Week, E0>>;
 
   template <typename Rep>
   using month = Unit<Duration, Rep, secondsIn1Month>;
@@ -127,15 +142,15 @@ namespace stb
   using year = Unit<Duration, Rep, secondsIn1Year>;
 
   template <typename Rep>
-  using kiloyear = Unit<Duration, Rep, typename ratio_multiply<
+  using kiloyear = Unit<Duration, Rep, typename Ratio_multiply<
   typename year<Rep>::period, kilo>::type>;
 
   template <typename Rep>
-  using megayear = Unit<Duration, Rep, typename ratio_multiply<
+  using megayear = Unit<Duration, Rep, typename Ratio_multiply<
   typename year<Rep>::period, mega>::type>;
 
   template <typename Rep>
-  using gigayear = Unit<Duration, Rep, typename ratio_multiply<
+  using gigayear = Unit<Duration, Rep, typename Ratio_multiply<
   typename year<Rep>::period, giga>::type>;
 
 

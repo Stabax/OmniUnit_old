@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef CONSTANTS_FOR_UNITS_HH_
 #define CONSTANTS_FOR_UNITS_HH_
 
-#include "../ratio.hh"
+#include "../Ratio.hh"
 
 namespace stb
 {
@@ -52,13 +52,13 @@ namespace stb
 
 
 
-  typedef ratio<piE36, E36> pi;
-  typedef ratio<secondsIn1YearE2, E2> secondsIn1Year;
-  typedef ratio_divide<ratio<parsecDef, E0>, pi>::type parsecDefinition;
-  typedef ratio_multiply<ratio<atomic_massDefE9, E9>, ratio<E0, E27>>::type atomic_massDefinition;
-  typedef ratio_multiply<ratio<evPerC2DefE8, E8>, ratio<E0, E36>>::type evPerC2Definition;
-  typedef ratio_multiply<ratio<solar_massDefE4, E4>, ratio<E30, E0>>::type solar_massDefinition;
-  typedef ratio_divide<secondsIn1Year, ratio<monthsIn1Year, E0>>::type secondsIn1Month;
+  typedef Ratio<piE36, E36> pi;
+  typedef Ratio<secondsIn1YearE2, E2> secondsIn1Year;
+  typedef Ratio_divide<Ratio<parsecDef, E0>, pi>::type parsecDefinition;
+  typedef Ratio_multiply<Ratio<atomic_massDefE9, E9>, Ratio<E0, E27>>::type atomic_massDefinition;
+  typedef Ratio_multiply<Ratio<evPerC2DefE8, E8>, Ratio<E0, E36>>::type evPerC2Definition;
+  typedef Ratio_multiply<Ratio<solar_massDefE4, E4>, Ratio<E30, E0>>::type solar_massDefinition;
+  typedef Ratio_divide<secondsIn1Year, Ratio<monthsIn1Year, E0>>::type secondsIn1Month;
 
 
 

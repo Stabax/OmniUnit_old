@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <thread>
+
 #include "stblib/units/length.hh"
 #include "stblib/units/mass.hh"
 #include "stblib/units/duration.hh"
@@ -8,19 +10,32 @@
 #include "stblib/units/quantity.hh"
 #include "stblib/units/luminosity.hh"
 
-bool equal(double const& a, double const& b)
+#include "stblib/Timer.hh"
+#include "stblib/Date.hh"
+
+template< class Rep, class Period >
+void foo(const std::chrono::duration<Rep, Period>& sleep_duration )
 {
- return (b >= a && b <= a);
+  std::cout << sleep_duration.count() << '\n';
 }
 
 
 int main()
 {
-  stb::megaparsec<float> a(2);
-  auto c = a%2;
-  stb::modulo(0, 1);
+  stb::nanosecond<float> a(0);
+  stb::Timer Tim;
+  Tim.start();
 
-  std::cout << a.dimension() << '\n';
+  foo(a);
+
+/*
+  while(a < stb::second<int>(10))
+  {
+    std::this_thread::sleep_for(stb::second<int>(1))
+    a = Timer.get();
+    std::cout << a.dimension() << '\n';
+  }
+*/
 
 return 0;
 }

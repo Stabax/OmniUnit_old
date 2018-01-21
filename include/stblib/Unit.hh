@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <type_traits>
 #include <chrono>
-#include "ratio.hh"
+#include "Ratio.hh"
 #include "exception.hh"
 #include "Dimension.hh"
 
@@ -67,13 +67,13 @@ template<typename toUnit, typename Dimension, typename Rep, typename Period>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
 Unit_cast(const Unit<Dimension, Rep, Period>& Obj)
 {
-  static_assert(std::is_same<typename toUnit::dimension, Dimension>::value, "Cannot cast different dimensions.");
+  static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
-  typedef typename ratio_divide<Period, typename toUnit::period>::type new_ratio;
+  typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
   typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
 
   return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
-    * static_cast<common_rep>(new_ratio::num) / static_cast<common_rep>(new_ratio::den)));
+    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
 }
 
 
@@ -97,7 +97,7 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::ratio.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::Ratio.");
 
 
   constexpr Unit() = default;
@@ -261,7 +261,7 @@ protected:
 
 //=============================================================================
 //=============================================================================
-// UNIT SPECIALIZATION FOR DURATION ===========================================
+// UNIT SPECIALIZATION FOR duration ===========================================
 //=============================================================================
 //=============================================================================
 
@@ -287,7 +287,7 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::ratio.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::Ratio.");
 
 
   constexpr Unit() = default;
@@ -311,7 +311,7 @@ public:
 
   template<typename _Rep, typename _Period>
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dim, _Rep, typename ratio_std_to_stb<_Period>::type>(Obj.count()))
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count()))
   {
   }
 
@@ -329,11 +329,11 @@ public:
 
 
   template<typename _Rep, typename _Period>
-  operator std::chrono::duration<_Rep, _Period>()
+  operator std::chrono::duration<_Rep, _Period>() const
   {
     return std::chrono::duration<_Rep, _Period>
     (Unit_cast<Unit<dim, _Rep,
-    typename ratio_std_to_stb<_Period>::type>>(*this).count());
+    typename Ratio_std_to_stb<_Period>::type>>(*this).count());
   }
 
 
@@ -556,12 +556,12 @@ template <typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
 constexpr Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename ratio_multiply<Period1, Period2>::type>
+typename Ratio_multiply<Period1, Period2>::type>
 operator* (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_multiply<Dimension1, Dimension2>::type newDim;
-  typedef typename ratio_multiply<Period1, Period2>::type newPeriod;
+  typedef typename Ratio_multiply<Period1, Period2>::type newPeriod;
   typedef Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(Obj1).count() * static_cast<common>(Obj2));
@@ -572,7 +572,7 @@ template <typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
 constexpr Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename ratio_divide<Period1, Period2>::type>
+typename Ratio_divide<Period1, Period2>::type>
 operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(Obj2.count() >= 0 && Obj2.count() <= 0)
@@ -580,7 +580,7 @@ operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, P
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_divide<Dimension1, Dimension2>::type newDim;
-  typedef typename ratio_divide<Period1, Period2>::type newPeriod;
+  typedef typename Ratio_divide<Period1, Period2>::type newPeriod;
   typedef Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(Obj1).count() / static_cast<common>(Obj2));
@@ -591,7 +591,7 @@ template <typename _Dimension, typename Rep, typename Period, typename T>
 constexpr Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0>, _Dimension>::type,
 typename std::common_type<Rep, typename
 std::enable_if<!is_Unit<T>::value, T>::type>::type,
-typename ratio_divide<ratio<E0, E0>, Period>::type>
+typename Ratio_divide<Ratio<E0, E0>, Period>::type>
 operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
@@ -599,7 +599,7 @@ operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 
   typedef typename std::common_type<Rep, T>::type common;
   typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0>, _Dimension>::type newDim;
-  typedef typename ratio_divide<ratio<E0, E0>, Period>::type newPeriod;
+  typedef typename Ratio_divide<Ratio<E0, E0>, Period>::type newPeriod;
   typedef Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(coef) / static_cast<common>(Obj).count());
@@ -740,23 +740,22 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 
 
-template<typename CT, typename Period1, typename Period2>
-class Unit_common_type_wrapper
+template<typename Dimension, typename Common, typename Period1, typename Period2>
+struct Unit_common_type_wrapper
 {
 private:
-
-  static constexpr double gcd_num = gcd(Period1::num, Period2::num);
-  static constexpr double gcd_den = gcd(Period1::den, Period2::den);
-  typedef typename CT::type common_rep;
-  typedef stb::ratio<gcd_num, (Period1::den / gcd_den) * Period2::den> new_ratio;
-
+  static constexpr double gcd_num = stb::gcd(Period1::num, Period2::num);
+  static constexpr double gcd_den = stb::gcd(Period1::den, Period2::den);
+  static constexpr double new_den = (Period1::den / gcd_den) * Period2::den;
+  typedef typename Common::type common;
+  typedef stb::Ratio<gcd_num, new_den> new_Ratio;
 public:
-  typedef std::__success_type<stb::Unit<typename CT::dimension, common_rep, new_ratio>> type;
+  typedef std::__success_type<stb::Unit<Dimension, common, new_Ratio>> type;
 };
 
 
-template<typename Period1, typename Period2>
-class Unit_common_type_wrapper<std::__failure_type, Period1, Period2>
+template<typename Dimension, typename Period1, typename Period2>
+struct Unit_common_type_wrapper<Dimension, std::__failure_type, Period1, Period2>
 {
 public:
   typedef std::__failure_type type;
@@ -765,17 +764,17 @@ public:
 
 template<typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
-class common_type<stb::Unit<Dimension1, Rep1, Period1>, stb::Unit<Dimension2, Rep2, Period2>>
-: public Unit_common_type_wrapper<typename std::__member_type_wrapper<
-std::common_type<Rep1, Rep2>>::type, Period1, Period2>::type
+struct common_type<stb::Unit<Dimension1, Rep1, Period1>, stb::Unit<Dimension2, Rep2, Period2>>
+: public Unit_common_type_wrapper<
+typename std::enable_if<std::is_same<Dimension1, Dimension2>::value, Dimension1>::type,
+typename std::__member_type_wrapper<std::common_type<Rep1, Rep2>>::type,
+Period1, Period2>::type
 {
 };
 
 
 
 }//namespace std
-
-
 
 
 

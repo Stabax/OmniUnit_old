@@ -1,4 +1,4 @@
-//ratio.hh
+//Ratio.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,26 +26,26 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef RATIO_HH_
-#define RATIO_HH_
+#ifndef Ratio_HH_
+#define Ratio_HH_
 
 #include <limits>
 #include <cmath>
-#include <ratio>
+#include <Ratio>
 #include "utilities.hh"
 
 namespace stb
 {
 //=============================================================================
 //=============================================================================
-// RATIO DEFINITION ===========================================================
+// Ratio DEFINITION ===========================================================
 //=============================================================================
 //=============================================================================
 
 
 
 template<double const& _Num, double const& _Den>
-struct ratio
+struct Ratio
 {
   static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
   static_assert(is_positive_integer(_Num), "numerator may not have decimals and may be positive");
@@ -54,18 +54,18 @@ struct ratio
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);
   static constexpr double value = num / den;
-  typedef ratio<num, den> type;
+  typedef Ratio<num, den> type;
 };
 
 
 template<typename falseType>
-struct is_stb_ratio : std::false_type
+struct is_stb_Ratio : std::false_type
 {
 };
 
 
 template<double const& Num, double const& Den>
-struct is_stb_ratio<ratio<Num, Den>> : public std::true_type
+struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 {
 };
 
@@ -73,73 +73,73 @@ struct is_stb_ratio<ratio<Num, Den>> : public std::true_type
 
 //=============================================================================
 //=============================================================================
-// RATIO ARITHMETIC ===========================================================
+// Ratio ARITHMETIC ===========================================================
 //=============================================================================
 //=============================================================================
 
 
 
-template <typename ratio1, typename ratio2>
-class ratio_multiply
+template <typename Ratio1, typename Ratio2>
+class Ratio_multiply
 {
-  static constexpr double _gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
-  static constexpr double num = (ratio1::num * ratio2::num) / _gcd;
-  static constexpr double den = (ratio1::den * ratio2::den) / _gcd;
+  static constexpr double _gcd = gcd(Ratio1::num * Ratio2::num, Ratio1::den * Ratio2::den);
+  static constexpr double num = (Ratio1::num * Ratio2::num) / _gcd;
+  static constexpr double den = (Ratio1::den * Ratio2::den) / _gcd;
 public:
-  typedef ratio<num, den> type;
+  typedef Ratio<num, den> type;
 };
 
 
-template <typename ratio1, typename ratio2>
-class ratio_divide
+template <typename Ratio1, typename Ratio2>
+class Ratio_divide
 {
-  static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
+  static_assert(Ratio2::num > 0 || Ratio2::num < 0, "denominator cannot be zero.");
 
-  static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
-  static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
-  static constexpr double den = (ratio1::den * ratio2::num) /_gcd;
+  static constexpr double _gcd = gcd(Ratio1::num * Ratio2::den, Ratio1::den * Ratio2::num);
+  static constexpr double num = (Ratio1::num * Ratio2::den) / _gcd;
+  static constexpr double den = (Ratio1::den * Ratio2::num) /_gcd;
 public:
-  typedef ratio<num, den> type;
+  typedef Ratio<num, den> type;
 };
 
 
 
 //=============================================================================
 //=============================================================================
-// RATIO CONVERTER STD/STB ====================================================
+// Ratio CONVERTER STD/STB ====================================================
 //=============================================================================
 //=============================================================================
 
 
 
 template<typename falseType>
-struct is_std_ratio : std::false_type
+struct is_std_Ratio : std::false_type
 {
 };
 
 
 template<intmax_t Num, intmax_t Den>
-struct is_std_ratio<std::ratio<Num, Den>> : public std::true_type
+struct is_std_Ratio<std::ratio<Num, Den>> : public std::true_type
 {
 };
 
 
 template<typename _stdRatio>
-struct ratio_std_to_stb
+struct Ratio_std_to_stb
 {
-  static_assert(is_std_ratio<_stdRatio>::value, "Need std::ratio in ratio_converter_std_stb.");
+  static_assert(is_std_Ratio<_stdRatio>::value, "Need std::ratio in Ratio_converter_std_stb.");
 
   static constexpr double num = static_cast<double>(_stdRatio::num);
   static constexpr double den = static_cast<double>(_stdRatio::den);
 
-  typedef ratio<num, den> type;
+  typedef Ratio<num, den> type;
 };
 
 
 template<typename _stbRatio>
-struct ratio_stb_to_std
+struct Ratio_stb_to_std
 {
-  static_assert(is_stb_ratio<_stbRatio>::value, "Need stb::ratio in ratio_converter_stb_std.");
+  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::Ratio in Ratio_converter_stb_std.");
   static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
   static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
 
@@ -242,34 +242,34 @@ static constexpr double E80 = 10000000000000000000000000000000000000000000000000
 
 //=============================================================================
 //=============================================================================
-// RATIO TYPEDEF ==============================================================
+// Ratio TYPEDEF ==============================================================
 //=============================================================================
 //=============================================================================
 
 
 
-typedef ratio<E0, E24> yocto;
-typedef ratio<E0, E21> zepto;
-typedef ratio<E0, E18> atto;
-typedef ratio<E0, E15> femto;
-typedef ratio<E0, E12> pico;
-typedef ratio<E0, E9> nano;
-typedef ratio<E0, E6> micro;
-typedef ratio<E0, E3> milli;
-typedef ratio<E0, E2> centi;
-typedef ratio<E0, E1> deci;
-typedef ratio<E0, E0> base;
-typedef ratio<E1, E0> deca;
-typedef ratio<E2, E0> hecto;
-typedef ratio<E3, E0> kilo;
-typedef ratio<E6, E0> mega;
-typedef ratio<E9, E0> giga;
-typedef ratio<E12, E0> tera;
-typedef ratio<E15, E0> peta;
-typedef ratio<E18, E0> exa;
-typedef ratio<E21, E0> zetta;
-typedef ratio<E24, E0> yotta;
+typedef Ratio<E0, E24> yocto;
+typedef Ratio<E0, E21> zepto;
+typedef Ratio<E0, E18> atto;
+typedef Ratio<E0, E15> femto;
+typedef Ratio<E0, E12> pico;
+typedef Ratio<E0, E9> nano;
+typedef Ratio<E0, E6> micro;
+typedef Ratio<E0, E3> milli;
+typedef Ratio<E0, E2> centi;
+typedef Ratio<E0, E1> deci;
+typedef Ratio<E0, E0> base;
+typedef Ratio<E1, E0> deca;
+typedef Ratio<E2, E0> hecto;
+typedef Ratio<E3, E0> kilo;
+typedef Ratio<E6, E0> mega;
+typedef Ratio<E9, E0> giga;
+typedef Ratio<E12, E0> tera;
+typedef Ratio<E15, E0> peta;
+typedef Ratio<E18, E0> exa;
+typedef Ratio<E21, E0> zetta;
+typedef Ratio<E24, E0> yotta;
 
 }
 
-#endif //RATIO_HH_
+#endif //Ratio_HH_

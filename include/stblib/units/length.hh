@@ -109,36 +109,36 @@ namespace stb
 
 
   template <typename Rep>
-  using angstrom = Unit<Length, Rep, ratio<E0, E10>>;
+  using angstrom = Unit<Length, Rep, Ratio<E0, E10>>;
 
   template <typename Rep>
-  using astronomical_unit = Unit<Length, Rep, ratio<distanceSunEarth, E0>>;
+  using astronomical_unit = Unit<Length, Rep, Ratio<distanceSunEarth, E0>>;
 
   template <typename Rep>
-  using lightsecond = Unit<Length, Rep, ratio<distanceTraveledByLightIn1Sec, E10>>;
+  using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightIn1Sec, E10>>;
 
   template <typename Rep>
-  using lightminute = Unit<Length, Rep, typename ratio_multiply<
-  typename lightsecond<Rep>::period, ratio<secondsIn1Min, E0>>::type>;
+  using lightminute = Unit<Length, Rep, typename Ratio_multiply<
+  typename lightsecond<Rep>::period, Ratio<secondsIn1Min, E0>>::type>;
 
   template <typename Rep>
-  using lightyear = Unit<Length, Rep, typename ratio_multiply<
+  using lightyear = Unit<Length, Rep, typename Ratio_multiply<
   typename lightsecond<Rep>::period, secondsIn1Year>::type>;
 
   template <typename Rep>
-  using parsec = Unit<Length, Rep, typename ratio_multiply<
+  using parsec = Unit<Length, Rep, typename Ratio_multiply<
   typename astronomical_unit<Rep>::period, parsecDefinition>::type>;
 
   template <typename Rep>
-  using kiloparsec = Unit<Length, Rep, typename ratio_multiply<
+  using kiloparsec = Unit<Length, Rep, typename Ratio_multiply<
   typename parsec<Rep>::period, kilo>::type>;
 
   template <typename Rep>
-  using megaparsec = Unit<Length, Rep, typename ratio_multiply<
+  using megaparsec = Unit<Length, Rep, typename Ratio_multiply<
   typename parsec<Rep>::period, mega>::type>;
 
   template <typename Rep>
-  using gigaparsec = Unit<Length, Rep, typename ratio_multiply<
+  using gigaparsec = Unit<Length, Rep, typename Ratio_multiply<
   typename parsec<Rep>::period, giga>::type>;
 
 
