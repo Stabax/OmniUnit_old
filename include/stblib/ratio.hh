@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <limits>
 #include <cmath>
-#include <Ratio>
+#include <ratio>
 #include "utilities.hh"
 
 namespace stb

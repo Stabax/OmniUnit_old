@@ -41,17 +41,38 @@ namespace stb
 
 
 
-  template <typename toRep, typename toPeriod, typename Rep, typename Period>
-  duration_cast(Unit<Duration, Rep, Period> const& Obj)
+  //cast stb::duration to another stb::duration
+  template <typename toRep, typename toPeriod, typename Rep, typename Period,
+  typename = typename std::enable_if<is_stb_Ratio<toPeriod>::value, toPeriod>::type>
+  constexpr Unit<Duration, toRep, toPeriod> duration_cast(Unit<Duration, Rep, Period> const& Obj)
   {
-    return Unit_cast<Unit<Duration, toRep, toPeriod>>(Obj);
+    return unit_cast<Unit<Duration, toRep, toPeriod>>(Obj);
   }
 
 
-  template <typename toUnit, typename Rep, typename Period>
+  //cast stb::duration to std::chrono::duration
+  template <typename toRep, typename toPeriod, typename Rep, typename Period,
+  typename = typename std::enable_if<is_std_Ratio<toPeriod>::value, toPeriod>::type>
+  constexpr std::chrono::duration<toRep, toPeriod>
   duration_cast(Unit<Duration, Rep, Period> const& Obj)
   {
-    return Unit_cast<toUnit>(Obj);
+    return std::chrono::duration<toRep, toPeriod>(Obj);
+  }
+
+
+  //cast stb::duration to toUnit
+  template <typename toUnit, typename Rep, typename Period>
+  toUnit duration_cast(Unit<Duration, Rep, Period> const& Obj)
+  {
+    return unit_cast<toUnit>(Obj);
+  }
+
+
+  //cast std::chrono::duration to toUnit
+  template <typename toUnit, typename Rep, typename Period>
+  toUnit duration_cast(std::chrono::duration<Rep, Period> const& Obj)
+  {
+    return unit_cast<toUnit>(Obj);
   }
 
 

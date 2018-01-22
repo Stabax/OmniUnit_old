@@ -13,29 +13,27 @@
 #include "stblib/Timer.hh"
 #include "stblib/Date.hh"
 
-template< class Rep, class Period >
-void foo(const std::chrono::duration<Rep, Period>& sleep_duration )
-{
-  std::cout << sleep_duration.count() << '\n';
-}
-
 
 int main()
 {
-  stb::nanosecond<float> a(0);
+
+  stb::second<long long> a(1000000);
+  std::chrono::nanoseconds b(0);
+
+  auto c = stb::duration_cast<int, std::kilo>(a);
+
+
   stb::Timer Tim;
   Tim.start();
 
-  foo(a);
-
-/*
-  while(a < stb::second<int>(10))
+  while(a < stb::second<long long>(10))
   {
-    std::this_thread::sleep_for(stb::second<int>(1))
-    a = Timer.get();
-    std::cout << a.dimension() << '\n';
+    std::this_thread::sleep_for(std::chrono::nanoseconds(stb::second<int>(1)));
+    a = Tim.get<>();
+    std::cout << a.count() << std::endl;
   }
-*/
+
+  std::cout << c.count() << std::endl;
 
 return 0;
 }

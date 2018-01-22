@@ -64,10 +64,10 @@ public:
   }
 
 
-  template<typename durationType>
+  template<typename durationType = second<long long>>
   durationType get() const
   {
-    return duration_cast<durationType>(getNano());
+    return stb::duration_cast<durationType>(getNano());
   }
 
 
@@ -303,7 +303,7 @@ protected:
   }
 
   std::chrono::time_point<std::chrono::steady_clock, std::chrono::nanoseconds> _End;
-  //_Timer is a pointer in order to use polymorphism
+  //_Timer is a pointer in order to use polymorphism (with RelativeTimer)
   std::unique_ptr<Timer> _Timer;
 };
 

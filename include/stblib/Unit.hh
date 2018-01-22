@@ -32,6 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <type_traits>
 #include <chrono>
+
 #include "Ratio.hh"
 #include "exception.hh"
 #include "Dimension.hh"
@@ -65,7 +66,7 @@ struct is_Unit<Unit<Dimension, Rep, Period>> : public std::true_type
 
 template<typename toUnit, typename Dimension, typename Rep, typename Period>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
-Unit_cast(const Unit<Dimension, Rep, Period>& Obj)
+unit_cast(const Unit<Dimension, Rep, Period>& Obj)
 {
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
@@ -114,13 +115,18 @@ public:
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(Unit_cast<Unit>(Obj).count())
+  Unit(unit_cast<Unit>(Obj).count())
   {
   }
 
 
   ~Unit() = default;
-  Unit& operator=(Unit const&) = default;
+
+  Unit& operator=(Unit const& Obj)
+  {
+    _count = Obj._count;
+    return *this;
+  }
 
 
   static constexpr Unit zero()
@@ -204,7 +210,7 @@ public:
   template<typename _Rep, typename _Period>
   Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    _count *= Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     return *this;
   }
 
@@ -222,7 +228,7 @@ public:
   template<typename _Rep, typename _Period>
   Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count >= 0 && count <= 0)
       throw Unit_exception("Divide by 0.");
     _count /= count;
@@ -245,7 +251,7 @@ public:
   typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
   operator%=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
     _count %= count;
@@ -261,7 +267,7 @@ protected:
 
 //=============================================================================
 //=============================================================================
-// UNIT SPECIALIZATION FOR duration ===========================================
+// UNIT SPECIALIZATION FOR DURATION ===========================================
 //=============================================================================
 //=============================================================================
 
@@ -304,7 +310,7 @@ public:
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(Unit_cast<Unit>(Obj).count())
+  Unit(unit_cast<Unit>(Obj).count())
   {
   }
 
@@ -317,7 +323,13 @@ public:
 
 
   ~Unit() = default;
-  Unit& operator=(Unit const&) = default;
+
+
+  Unit& operator=(Unit const& Obj)
+  {
+    _count = Obj._count;
+    return *this;
+  }
 
 
   template<typename _Rep, typename _Period>
@@ -332,7 +344,7 @@ public:
   operator std::chrono::duration<_Rep, _Period>() const
   {
     return std::chrono::duration<_Rep, _Period>
-    (Unit_cast<Unit<dim, _Rep,
+    (unit_cast<Unit<dim, _Rep,
     typename Ratio_std_to_stb<_Period>::type>>(*this).count());
   }
 
@@ -418,7 +430,7 @@ public:
   template<typename _Rep, typename _Period>
   Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    _count *= Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     return *this;
   }
 
@@ -435,7 +447,7 @@ public:
   template<typename _Rep, typename _Period>
   Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count >= 0 && count <= 0)
       throw Unit_exception("Divide by 0.");
     _count /= count;
@@ -458,7 +470,7 @@ public:
   typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
   operator%=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = Unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
     _count %= count;
@@ -470,6 +482,88 @@ protected:
   Rep _count;
   const std::string _dimension;
 };
+
+
+
+//=============================================================================
+//=============================================================================
+// UNIT_CAST OVERLOAD FOR DURATION SPECIALIZATION =============================
+//=============================================================================
+//=============================================================================
+
+
+
+//the purpose is to make aviable unit_cast between stb::duration and std::chrono::duration
+
+
+
+//wrapper for function partial specialization emulation
+//allow to replace partial specialization (which doesn't exist for functions) by an overload
+template <typename T>
+struct partial_specialization_wrapper
+{
+};
+
+
+//called if toUnit equals stb::duration
+//cast stb::duration to another stb::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>>,
+Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+{
+  return unit_cast<toUnit>(Obj);
+}
+
+
+//called if toUnit equals std::chrono::duration
+//cast stb::duration to std::chrono::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+{
+  return toUnit(Obj);
+}
+
+
+//cast stb::duration to toUnit
+template <typename toUnit, typename Rep, typename Period>
+constexpr toUnit unit_cast(Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+{
+  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+}
+
+
+//called if toUnit equals stb::duration
+//cast std::chrono::duration to stb::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>>,
+std::chrono::duration<Rep, Period> const& Obj)
+{
+  return toUnit(Obj);
+}
+
+
+//called if toUnit equals std::chrono::duration
+//cast std::chrono::duration to another std::chrono::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+std::chrono::duration<Rep, Period> const& Obj)
+{
+  return std::chrono::duration_cast<toUnit>(Obj);
+}
+
+
+//cast stb::duration to toUnit
+template <typename toUnit, typename Rep, typename Period>
+constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
+{
+  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+}
+
 
 
 //=============================================================================
