@@ -1,23 +1,19 @@
-# Stblib Documentation
+# Stblib overview
 
 ## Contributors
 
-* Stabax® Ltd.
+* Stabax® Ltd. (http://stabax.org/)
 * Baxlan
 
 ## About
 
-Stblib (aka Stabax® Library) is a HEADER ONLY library for modern C++.
+Stblib is a HEADER ONLY library for modern C++.
+
 
 The library has two purposes :
-* Provide strong types to represent units, such as time, intensity, length, speed ...
-  and permit easy calculation between them, taking uncertainties into account.
-* Provide a large and accurate time management, through timers, countdowns and dates.
-  A scale to change the time flow, and a relativity support to get either the proper time
-  or the observer's time are available.
-  Timers and countdowns have an accuracy of 10^-9 second (1 nanosecond).
 
-See more projects on the Stabax® website : http://stabax.org/
+* Provide strong types to represent units, such as time, intensity, length, speed ... and allow easy calculation between them, taking uncertainties into account. Creating new units is easy.
+* Provide a solid and accurate time management module. This module implements timers, countdowns and dates with relativity support and scalable time flow. The time module has an accuracy near to the nanosecond.
 
 ## Why do you need this library ?
 
@@ -25,65 +21,58 @@ See more projects on the Stabax® website : http://stabax.org/
 
 ## Get Library
 
-Clone latest revision :
+Clone the latest revision :
 
     git clone http://bitbucket.org/stabaxltd/stblib.git
 
 ## Use library
 
-Copy the stblib folder into your project's include folder if any
-(or into your project's source folder instead).
-Simply include the files you need in your sources files and use the features !
-Look at the getting started related page.
+Simply include the desired header files in your sources.
+Look at the getting started related page to learn how to use the features.
+
+/!\\ IMPORTANT NOTE : your compiler must support **c++14**.
 
 ## Fast examples
 
-  #include "stblib/units/length.hh"
-  #include "stblib/units/duration.hh"
-  #include "stblib/units/speed.hh"
-  #include "stblib/units/force.hh"
+    #include "stblib/units/length.hh"
+    #include "stblib/units/duration.hh"
+    #include "stblib/units/speed.hh"
+    #include <iostream>
 
-  #include <iostream>
+    //a and b represent 3000 meters in different ways
+    stb::millimeter<int> a(3000000);  //3000000 is handled by an integer
+    stb::kilometer<float> b(3);       //3 is handled by a float
 
+    stb::centimeterPerSecond<double> d = a / stb::second<int>(3);
+    //OK, length/duration returns a speed.
 
-  //a and b represent 3000 meters in different ways
-  stb::millimeter<int> a(3000000);  //3000000 is handled by an integer
-  stb::kilometer<float> b(3);       //3 is handled by a float
-
-  stb::newton<unsigned> c = a       //ERROR, assignation between force and length
-
-  stb::centimeterPerSecond<double> d = a / stb::second<int>(3);
-  //OK, (length / duration) returns a speed.
-
-  std::cout << d.count() << '\n';   //prints 100000
+    std::cout << d.count() << '\n';   //prints 100000
 
 As you can you can see, every thinkable conversion are done implicitly.
-Let's see how to use time.
+Let's see how to use time module :
 
-  #include "Timer.hh"
-  #include "Date.hh"
+    #include "Timer.hh"
+    #include "Date.hh"
+    #include <iostream>
 
-  #include "iostream"
+    //prints the current gmt hour
+    std::cout << stb::Date::get(stb::Date::hour, stb::Date::gmt) << '\n';
+    //prints the current month of your machine
+    std::cout << stb::Date::get(stb::Date::month, stb::Date::local) << '\n';
 
-
-  //prints the current gmt hour
-  std::cout << stb::Date::get(stb::Date::hour, stb::Date::gmt) << '\n';
-  //prints the current month of your machine
-  std::cout << stb::Date::get(stb::Date::month, stb::Date::local) << '\n';
-
-  stb::Timer tim;
-  tim.start();
-  //prints the time elapsed since start() in nanoseconds
-  std::cout << tim.get<stb::nanoseconds<long long>>() << '\n';
+    stb::Timer tim;
+    tim.start();
+    //prints the time elapsed since start() in nanoseconds
+    std::cout << tim.get<stb::nanoseconds<long long>>() << '\n';
 
 ## Trello
 
-If you are interested by the development of the library and its future versions :
+If you are interested by the next versions of the library, check the workflow at :
 https://trello.com/b/ceG9w8T6/stblib
 
 ## License
 
-This library is released under BSD License Copyright 2017 Stabax Corp.
+This library is released under BSD License Copyright 2017 Stabax Ltd.
 
 Copyright (c) 1998, Regents of the University of California
 All rights reserved.
