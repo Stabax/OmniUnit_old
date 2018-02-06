@@ -5,25 +5,27 @@
 OmniUnit is a modular HEADER ONLY library for modern C++.
 
 * The main purpose of OmniUnit is to provide strong types to represent physical unit, with implicit conversions and compile-time dimensional analysis.
-* OmniUnit is also a context to provide some header-only modules which use these units. See the provided modules in the sections below.
+* OmniUnit provide some header-only modules which use these units. See the provided modules in the sections below.
 
-The library has NO dependencies.
 
-OmniUnit requires **C++14**
-Doesn't compile on Visual Studio because of constant-expressions.
-Compile on gcc 6.2.0 and higher.
+OmniUnit requires **C++14**.
+
+Doesn't compile on Visual Studio because of constexpr.
+
+Compile on gcc 6.2.0 or later.
+
 
 Please, give feedback to know on what compiler the project works or not.
 
 ## Features : Why choose this unit library ?
 
-It does exist some others library to represent and handle physical units.
-Here's why you may use OmniUnit :
+It does exist some others library to represent and handle physical units. Here's why you should use OmniUnit :
 
 * You can represent physical units with strong types instead of literals. It is useful to avoid ambiguities in function overloads and to handle correctly your values.
-* Units conversion is fully supported and is implicit : millimeter var = meter(3) + inches(5) is absolutely legal.
-* Dimension check is done at compile-time. length/time returns a speed. If you write gram = meter(2)/second(1), there is a compilation error. Thus there is no runtime issues.
-* All physical units are supported. If one isn't implemented, you can easily create your own only with typedef. Implicit conversion will automatically be supported for your new unit and dimension check at compile time is always available.
+* Units conversion is fully supported and is implicit : millimeter = meter + inches is absolutely legal.
+* Dimension check is done at compile-time. length/time returns a speed. If you write gram = meter/second, there is a compilation error. Thus there cannot be runtime issue.
+* Uncertainties on values can be handled. If any, propagation of uncertainties through functions or unit composition/conversion is implicitly calculated.
+* All physical units are supported. If one isn't implemented, you can easily create your own only with typedef. Implicit conversion will automatically be supported for your new unit, and dimension check at compile time is always available.
 * Units are fully compliant with decimal prefixes (kilo, milli, nano...) but also your defined prefixes ! Indeed, you can create your own with a simple typedef.
 * This library offers some header-only modules which use units. See below.
 
@@ -32,9 +34,6 @@ Here's why you may use OmniUnit :
 ### ChronoScale
 
 This module provides timers, countdowns and dates with relativity support and scalable time flow. timers accuracy is near the nanosecond.
-
-
-
 
 ## Use library
 
