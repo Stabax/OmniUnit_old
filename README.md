@@ -1,6 +1,6 @@
-# OmniUnit overview
+# OmniUnit overview #
 
-## About
+## About ##
 
 OmniUnit is a modular HEADER ONLY library for modern C++.
 
@@ -17,7 +17,7 @@ Compiles on gcc 6.2.0 or later.
 
 Please, give feedback to know on what compiler the project works or not.
 
-## Features : Why choose this unit library ?
+## Features : Why choose this unit library ? ##
 
 It does exist some others library to represent and handle physical units. Here's why you should use OmniUnit :
 
@@ -29,17 +29,17 @@ It does exist some others library to represent and handle physical units. Here's
 * Units are fully compliant with decimal prefixes (kilo, milli, nano...) but also with your defined prefixes ! You can indeed create your own with a simple typedef.
 * This library offers some header-only modules which use units. See below.
 
-## Modules
+## Modules ##
 
-### ChronoScale
+### ChronoScale ###
 
 This module provides timers, countdowns and dates with relativity support and scalable time flow. timers accuracy is near the nanosecond.
 
-## Documentation
+## Documentation ##
 
 See the full documentation here : http://stabax.org/doc/omniunit
 
-## Use library
+## Use library ##
 
 To get the library, clone the latest revision :
 
@@ -48,7 +48,7 @@ To get the library, clone the latest revision :
 Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources and start using the features.
 
 
-## Fast and basic example
+## Fast and basic example ##
 
     #include "omniunit/omniunit.hh"
     #include <iostream>
@@ -63,17 +63,17 @@ Then copy the include/omniunit folder into your project folder and simply includ
 
 As you can you can see, every thinkable conversion are done implicitly.
 
-## Contributors
+## Contributors ##
 
 * Stabax® Ltd. (http://stabax.org/)
 * Baxlan
 
-## Trello
+## Trello ##
 
 If you are interested by the next versions of the library, check the workflow at :
 https://trello.com/b/ceG9w8T6/stblib
 
-## License
+## License ##
 
 This library is released under BSD License Copyright 2017 Stabax Ltd.
 
