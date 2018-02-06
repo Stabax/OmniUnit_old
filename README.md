@@ -4,7 +4,7 @@
 
 OmniUnit is a modular HEADER ONLY library for modern C++.
 
-* The main purpose of OmniUnit is to provide strong types to represent physical unit, with implicit conversions and compile-time dimensional analysis.
+* The main purpose of OmniUnit is to provide strong types to represent physical units, with implicit conversions and compile-time dimensional analysis.
 * OmniUnit provide some header-only modules which use these units. See the provided modules in the sections below.
 
 
@@ -12,7 +12,7 @@ OmniUnit requires **C++14**.
 
 Doesn't compile on Visual Studio because of constexpr.
 
-Compile on gcc 6.2.0 or later.
+Compiles on gcc 6.2.0 or later.
 
 
 Please, give feedback to know on what compiler the project works or not.
@@ -26,7 +26,7 @@ It does exist some others library to represent and handle physical units. Here's
 * Dimension check is done at compile-time. length/time returns a speed. If you write gram = meter/second, there is a compilation error. Thus there cannot be runtime issue.
 * Uncertainties on values can be handled. If any, propagation of uncertainties through functions or unit composition/conversion is implicitly calculated.
 * All physical units are supported. If one isn't implemented, you can easily create your own only with typedef. Implicit conversion will automatically be supported for your new unit, and dimension check at compile time is always available.
-* Units are fully compliant with decimal prefixes (kilo, milli, nano...) but also your defined prefixes ! Indeed, you can create your own with a simple typedef.
+* Units are fully compliant with decimal prefixes (kilo, milli, nano...) but also with your defined prefixes ! You can indeed create your own with a simple typedef.
 * This library offers some header-only modules which use units. See below.
 
 ## Modules
@@ -35,15 +35,17 @@ It does exist some others library to represent and handle physical units. Here's
 
 This module provides timers, countdowns and dates with relativity support and scalable time flow. timers accuracy is near the nanosecond.
 
+## Documentation
+
+See the full documentation here : http://stabax.org/doc/omniunit
+
 ## Use library
 
 To get the library, clone the latest revision :
 
     git clone http://bitbucket.org/stabaxltd/stblib.git
 
-Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources.
-
-Look at the getting started related page to learn how to use the features.
+Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources and start using the features.
 
 
 ## Fast and basic example
