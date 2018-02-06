@@ -1,69 +1,71 @@
-# Stblib overview
-
-## Contributors
-
-* Stabax® Ltd. (http://stabax.org/)
-* Baxlan
+# OmniUnit overview
 
 ## About
 
-Stblib is a HEADER ONLY library for modern C++.
+OmniUnit is a modular HEADER ONLY library for modern C++.
+
+* The main purpose of OmniUnit is to provide strong types to represent physical unit, with implicit conversions and compile-time dimensional analysis.
+* OmniUnit is also a context to provide some header-only modules which use these units. See the provided modules in the sections below.
+
+The library has NO dependencies.
+
+OmniUnit requires **C++14**
+Doesn't compile on Visual Studio because of constant-expressions.
+Compile on gcc 6.2.0 and higher.
+
+Please, give feedback to know on what compiler the project works or not.
+
+## Features : Why choose this unit library ?
+
+It does exist some others library to represent and handle physical units.
+Here's why you may use OmniUnit :
+
+* You can represent physical units with strong types instead of literals. It is useful to avoid ambiguities in function overloads and to handle correctly your values.
+* Units conversion is fully supported and is implicit : millimeter var = meter(3) + inches(5) is absolutely legal.
+* Dimension check is done at compile-time. length/time returns a speed. If you write gram = meter(2)/second(1), there is a compilation error. Thus there is no runtime issues.
+* All physical units are supported. If one isn't implemented, you can easily create your own only with typedef. Implicit conversion will automatically be supported for your new unit and dimension check at compile time is always available.
+* Units are fully compliant with decimal prefixes (kilo, milli, nano...) but also your defined prefixes ! Indeed, you can create your own with a simple typedef.
+* This library offers some header-only modules which use units. See below.
+
+## Modules
+
+### ChronoScale
+
+This module provides timers, countdowns and dates with relativity support and scalable time flow. timers accuracy is near the nanosecond.
 
 
-The library has two purposes :
 
-* Provide strong types to represent units, such as time, intensity, length, speed ... and allow easy calculation between them, taking uncertainties into account. Creating new units is easy.
-* Provide a solid and accurate time management module. This module implements timers, countdowns and dates with relativity support and scalable time flow. The time module has an accuracy near to the nanosecond.
-
-## Why do you need this library ?
-
-
-
-## Get Library
-
-Clone the latest revision :
-
-    git clone http://bitbucket.org/stabaxltd/stblib.git
 
 ## Use library
 
-Simply include the desired header files in your sources.
+To get the library, clone the latest revision :
+
+    git clone http://bitbucket.org/stabaxltd/stblib.git
+
+Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources.
+
 Look at the getting started related page to learn how to use the features.
 
-/!\\ IMPORTANT NOTE : your compiler must support **c++14**.
 
-## Fast examples
+## Fast and basic example
 
-    #include "stblib/units/length.hh"
-    #include "stblib/units/duration.hh"
-    #include "stblib/units/speed.hh"
+    #include "omniunit/omniunit.hh"
     #include <iostream>
 
     //a and b represent 3000 meters in different ways
     stb::millimeter<int> a(3000000);  //3000000 is handled by an integer
     stb::kilometer<float> b(3);       //3 is handled by a float
 
-    stb::centimeterPerSecond<double> d = a / stb::second<int>(3);
-    //OK, length/duration returns a speed.
+    stb::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
 
     std::cout << d.count() << '\n';   //prints 100000
 
 As you can you can see, every thinkable conversion are done implicitly.
-Let's see how to use time module :
 
-    #include "Timer.hh"
-    #include "Date.hh"
-    #include <iostream>
+## Contributors
 
-    //prints the current gmt hour
-    std::cout << stb::Date::get(stb::Date::hour, stb::Date::gmt) << '\n';
-    //prints the current month of your machine
-    std::cout << stb::Date::get(stb::Date::month, stb::Date::local) << '\n';
-
-    stb::Timer tim;
-    tim.start();
-    //prints the time elapsed since start() in nanoseconds
-    std::cout << tim.get<stb::nanoseconds<long long>>() << '\n';
+* Stabax® Ltd. (http://stabax.org/)
+* Baxlan
 
 ## Trello
 
