@@ -152,7 +152,8 @@ typename evPerC2<Rep>::period, peta>::type>;
 
 
 
-
+template <typename Rep>
+using ton = megagram<Rep>;
 
 template <typename Rep>
 using solar_mass = Unit<Mass, Rep, solar_massDefinition>;

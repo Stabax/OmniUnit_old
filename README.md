@@ -15,7 +15,7 @@ Doesn't compile on Visual Studio because of constexpr.
 Compiles on gcc 6.2.0 or later.
 
 
-Please, give feedback to know on what compiler the project works or not.
+Please, send me feedback to know on what compiler the project works or not.
 
 ## Features : Why choose this unit library ? ##
 
@@ -53,19 +53,24 @@ Then copy the include/omniunit folder into your project folder and simply includ
     #include "omniunit/omniunit.hh"
     #include <iostream>
 
-    //a and b represent 3000 meters in different ways
-    stb::millimeter<int> a(3000000);  //3000000 is handled by an integer
-    stb::kilometer<float> b(3);       //3 is handled by a float
+    int main()
+    {
+      //a and b represent 3000 meters in different ways
+      stb::millimeter<int> a(3000000);  //3000000 is handled by an integer
+      stb::kilometer<float> b(3);       //3 is handled by a float
 
-    stb::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
+      stb::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
 
-    std::cout << d.count() << '\n';   //prints 100000
+      std::cout << d.count() << '\n';   //prints 100000
+      
+    return 0;
+    }
 
 As you can you can see, every thinkable conversion are done implicitly.
 
 ## Contributors ##
 
-* Stabax® Ltd. (http://stabax.org/)
+* Stabax (http://stabax.org/)
 * Baxlan
 
 ## Trello ##
@@ -75,7 +80,7 @@ https://trello.com/b/ceG9w8T6/stblib
 
 ## License ##
 
-This library is released under BSD License Copyright 2017 Stabax Ltd.
+This library is released under BSD License Copyright 2018 Stabax.
 
 Copyright (c) 1998, Regents of the University of California
 All rights reserved.
