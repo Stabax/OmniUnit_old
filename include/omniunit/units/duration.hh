@@ -48,7 +48,8 @@ typedef Dimension<0, 0, 1, 0, 0, 0, 0> Duration;
 //cast stb::duration to another stb::duration
 template <typename toRep, typename toPeriod, typename Rep, typename Period,
 typename = typename std::enable_if<is_stb_Ratio<toPeriod>::value, toPeriod>::type>
-constexpr Unit<Duration, toRep, toPeriod> duration_cast(Unit<Duration, Rep, Period> const& Obj)
+constexpr Unit<Duration, toRep, toPeriod>
+duration_cast(Unit<Duration, Rep, Period> const& Obj)
 {
   return unit_cast<Unit<Duration, toRep, toPeriod>>(Obj);
 }

@@ -122,7 +122,6 @@ modulo(T const& a, U const& b)
 }
 
 
-
 //there is a standard gcd in c++17. It's too recent.
 template <typename T, typename U>
 constexpr typename std::common_type<
@@ -145,13 +144,20 @@ gcd(T const& a, U const& b)
 }
 
 
-
 template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 constexpr bool is_positive_integer(T const& number)
 {
   T res = number - static_cast<T>(std::floor(number));
   return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
+
+
+//wrapper for function partial specialization emulation
+//allow to replace partial specialization (which doesn't exist for functions) by an overload
+template <typename T>
+struct partial_specialization_wrapper
+{
+};
 
 
 
@@ -957,14 +963,6 @@ protected:
 
 
 
-//wrapper for function partial specialization emulation
-//allow to replace partial specialization (which doesn't exist for functions) by an overload
-template <typename T>
-struct partial_specialization_wrapper
-{
-};
-
-
 //called if toUnit equals stb::duration
 //cast stb::duration to another stb::duration
 template <typename toUnit, typename Rep, typename Period>
@@ -1017,7 +1015,7 @@ std::chrono::duration<Rep, Period> const& Obj)
 }
 
 
-//cast stb::duration to toUnit
+//cast std::chrono::duration to toUnit
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 {
