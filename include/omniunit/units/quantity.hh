@@ -110,6 +110,10 @@ using yottamol = Unit<Quantity, Rep, yotta>;
 
 
 
+template <typename Rep>
+using rawQuantity = Unit<Quantity, Rep, rawQuantityDefinition>;
+
+
 } //namespace omni
 
 

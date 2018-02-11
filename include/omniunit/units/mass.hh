@@ -127,10 +127,6 @@ using microevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, micro>::type>;
 
 template <typename Rep>
-using nanoevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, nano>::type>;
-
-template <typename Rep>
 using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, kilo>::type>;
 
@@ -145,10 +141,6 @@ typename evPerC2<Rep>::period, giga>::type>;
 template <typename Rep>
 using teraevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, tera>::type>;
-
-template <typename Rep>
-using petaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, peta>::type>;
 
 
 

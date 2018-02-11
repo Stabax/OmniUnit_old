@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UNITS_HH_
 
 #include "duration.hh"
-#include "intensity.hh"
+#include "electric_intensity.hh"
 #include "length.hh"
 #include "luminosity.hh"
 #include "mass.hh"

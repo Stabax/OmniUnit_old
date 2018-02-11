@@ -110,6 +110,71 @@ using yottacandela = Unit<Luminosity, Rep, yotta>;
 
 
 
+template <typename Rep>
+using yoctolumen = yoctocandela<Rep>;
+
+template <typename Rep>
+using zeptolumen = zeptocandela<Rep>;
+
+template <typename Rep>
+using attolumen = attocandela<Rep>;
+
+template <typename Rep>
+using femtolumen = femtocandela<Rep>;
+
+template <typename Rep>
+using picolumen = picocandela<Rep>;
+
+template <typename Rep>
+using nanolumen = nanocandela<Rep>;
+
+template <typename Rep>
+using microlumen = microcandela<Rep>;
+
+template <typename Rep>
+using millilumen = millicandela<Rep>;
+
+template <typename Rep>
+using centilumen = centicandela<Rep>;
+
+template <typename Rep>
+using decilumen = decicandela<Rep>;
+
+template <typename Rep>
+using lumen = candela<Rep>;
+
+template <typename Rep>
+using decalumen = decacandela<Rep>;
+
+template <typename Rep>
+using hectolumen = hectocandela<Rep>;
+
+template <typename Rep>
+using kilolumen = kilocandela<Rep>;
+
+template <typename Rep>
+using megalumen = megacandela<Rep>;
+
+template <typename Rep>
+using gigalumen = gigacandela<Rep>;
+
+template <typename Rep>
+using teralumen = teracandela<Rep>;
+
+template <typename Rep>
+using petalumen = petacandela<Rep>;
+
+template <typename Rep>
+using exalumen = exacandela<Rep>;
+
+template <typename Rep>
+using zettalumen = zettacandela<Rep>;
+
+template <typename Rep>
+using yottalumen = yottacandela<Rep>;
+
+
+
 } //namespace omni
 
 

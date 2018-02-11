@@ -26,6 +26,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+//easter eggs
+#ifdef WESTERN_SPY
+#error "OmniUnit doesn't treat with western spy !"
+#endif
 
 #ifndef OMNIUNIT_HH_
 #define OMNIUNIT_HH_

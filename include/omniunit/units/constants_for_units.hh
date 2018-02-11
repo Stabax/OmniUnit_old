@@ -52,6 +52,7 @@ static constexpr double parsecDef = 648000.;
 static constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
 static constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
 static constexpr double solar_massDefE4     =  19884.; //kg * 10^30
+static constexpr double avogadroE9 = 6022140857; //10^23
 
 
 
@@ -62,6 +63,8 @@ typedef Ratio_multiply<Ratio<atomic_massDefE9, E9>, Ratio<E0, E27>>::type atomic
 typedef Ratio_multiply<Ratio<evPerC2DefE8, E8>, Ratio<E0, E36>>::type evPerC2Definition;
 typedef Ratio_multiply<Ratio<solar_massDefE4, E4>, Ratio<E30, E0>>::type solar_massDefinition;
 typedef Ratio_divide<secondsIn1Year, Ratio<monthsIn1Year, E0>>::type secondsIn1Month;
+typedef Ratio_multiply<Ratio<avogadroE9, E9>, Ratio<E23, E0>>::type avogadro;
+typedef Ratio_divide<Ratio<E0, E0>, avogadro>::type rawQuantityDefinition;
 
 
 
