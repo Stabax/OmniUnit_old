@@ -8,12 +8,9 @@ OmniUnit is a modular HEADER ONLY library for modern C++.
 * OmniUnit provide some header-only modules which use these units. See the provided modules in the sections below.
 
 
-OmniUnit requires **C++14**.
-
-Doesn't compile on Visual Studio because of constexpr.
-
-Compiles on gcc 6.2.0 or later.
-
+OmniUnit requires **C++14**.\n
+Doesn't compile on Visual Studio because of constexpr.\n
+Compiles on gcc 6.2.0 or later.\n
 
 Please, send me feedback to know on what compiler the project works or not.
 
@@ -62,7 +59,7 @@ Then copy the include/omniunit folder into your project folder and simply includ
       stb::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
 
       std::cout << d.count() << '\n';   //prints 100000
-      
+
     return 0;
     }
 
