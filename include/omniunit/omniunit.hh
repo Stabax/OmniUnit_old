@@ -168,113 +168,6 @@ struct partial_specialization_wrapper
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== RATIO DEFINITION ========================================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-template<double const& _Num, double const& _Den>
-struct Ratio
-{
-  static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
-  static_assert(is_positive_integer(_Num), "numerator may not have decimals and may be positive");
-  static_assert(is_positive_integer(_Den), "denominator may not have decimals and may be positive");
-
-  static constexpr double num = _Num / gcd(_Num, _Den);
-  static constexpr double den = _Den / gcd(_Num, _Den);
-  static constexpr double value = num / den;
-  typedef Ratio<num, den> type;
-};
-
-
-template<typename falseType>
-struct is_stb_Ratio : std::false_type
-{
-};
-
-
-template<double const& Num, double const& Den>
-struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
-{
-};
-
-
-template <typename Ratio1, typename Ratio2>
-class Ratio_multiply
-{
-  static constexpr double _gcd = gcd(Ratio1::num * Ratio2::num, Ratio1::den * Ratio2::den);
-  static constexpr double num = (Ratio1::num * Ratio2::num) / _gcd;
-  static constexpr double den = (Ratio1::den * Ratio2::den) / _gcd;
-public:
-  typedef Ratio<num, den> type;
-};
-
-
-template <typename Ratio1, typename Ratio2>
-class Ratio_divide
-{
-  static_assert(Ratio2::num > 0 || Ratio2::num < 0, "denominator cannot be zero.");
-
-  static constexpr double _gcd = gcd(Ratio1::num * Ratio2::den, Ratio1::den * Ratio2::num);
-  static constexpr double num = (Ratio1::num * Ratio2::den) / _gcd;
-  static constexpr double den = (Ratio1::den * Ratio2::num) /_gcd;
-public:
-  typedef Ratio<num, den> type;
-};
-
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== RATIO CONVERTER STD/STB =================================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-template<typename falseType>
-struct is_std_Ratio : std::false_type
-{
-};
-
-
-template<intmax_t Num, intmax_t Den>
-struct is_std_Ratio<std::ratio<Num, Den>> : public std::true_type
-{
-};
-
-
-template<typename _stdRatio>
-struct Ratio_std_to_stb
-{
-  static_assert(is_std_Ratio<_stdRatio>::value, "Need std::ratio in Ratio_converter_std_stb.");
-
-  static constexpr double num = static_cast<double>(_stdRatio::num);
-  static constexpr double den = static_cast<double>(_stdRatio::den);
-
-  typedef Ratio<num, den> type;
-};
-
-
-template<typename _stbRatio>
-struct Ratio_stb_to_std
-{
-  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::Ratio in Ratio_converter_stb_std.");
-  static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
-  static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
-
-  typedef std::ratio<static_cast<intmax_t>(_stbRatio::num), static_cast<intmax_t>(_stbRatio::den)> type;
-};
-
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
 //=== STATIC CONSTEXPR POWER OF TEN DEFINITION ================================
 //=============================================================================
 //=============================================================================
@@ -363,6 +256,176 @@ static constexpr double E77 = 10000000000000000000000000000000000000000000000000
 static constexpr double E78 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 static constexpr double E79 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 static constexpr double E80 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== RATIO DEFINITION ========================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template<double const& _Num, double const& _Den>
+struct Ratio
+{
+  static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
+  static_assert(is_positive_integer(_Num), "numerator may not have decimals and may be positive");
+  static_assert(is_positive_integer(_Den), "denominator may not have decimals and may be positive");
+
+  static constexpr double num = _Num / gcd(_Num, _Den);
+  static constexpr double den = _Den / gcd(_Num, _Den);
+  static constexpr double value = num / den;
+  typedef Ratio<num, den> type;
+};
+
+
+template<typename falseType>
+struct is_stb_Ratio : std::false_type
+{
+};
+
+
+template<double const& Num, double const& Den>
+struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
+{
+};
+
+
+template <typename ratio>
+struct Ratio_invert
+{
+  static_assert(ratio::num > 0 || ratio::num < 0, "denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value , "Bad type, need a stb::omni::Ratio");
+
+  typedef Ratio<ratio::den, ratio::num> type;
+};
+
+
+template <typename ratio1, typename ratio2>
+class Ratio_multiply
+{
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio");
+
+  static constexpr double _gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
+  static constexpr double num = (ratio1::num * ratio2::num) / _gcd;
+  static constexpr double den = (ratio1::den * ratio2::den) / _gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+template <typename ratio, double const& val>
+class Ratio_times_value
+{
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+
+  static constexpr double _gcd = gcd(ratio::num * val, ratio::den);
+  static constexpr double num = (ratio::num * val) / _gcd;
+  static constexpr double den = ratio::den / _gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+template <double const& val, typename ratio>
+struct value_times_Ratio
+{
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+
+  typedef typename Ratio_times_value<ratio, val>::type type;
+};
+
+
+template <typename ratio1, typename ratio2>
+class Ratio_divide
+{
+  static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio");
+
+  static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
+  static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
+  static constexpr double den = (ratio1::den * ratio2::num) /_gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+template <typename ratio, double const& val>
+class Ratio_over_value
+{
+  static_assert(val > 0 || val < 0, "denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+
+  static constexpr double _gcd = gcd(ratio::num, ratio::den * val);
+  static constexpr double num = ratio::num / _gcd;
+  static constexpr double den = (ratio::den * val) /_gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+template <double const& val, typename ratio>
+class value_over_Ratio
+{
+  static_assert(ratio::num > 0 || ratio::num < 0, "denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+
+  static constexpr double _gcd = gcd(val * ratio::den, ratio::num);
+  static constexpr double num = (val * ratio::den) / _gcd;
+  static constexpr double den = (ratio::den * val) /_gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== RATIO CONVERTER STD/STB =================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template<typename falseType>
+struct is_std_Ratio : std::false_type
+{
+};
+
+
+template<intmax_t Num, intmax_t Den>
+struct is_std_Ratio<std::ratio<Num, Den>> : public std::true_type
+{
+};
+
+
+template<typename _stdRatio>
+struct Ratio_std_to_stb
+{
+  static_assert(is_std_Ratio<_stdRatio>::value, "Need std::ratio in Ratio_converter_std_stb.");
+
+  static constexpr double num = static_cast<double>(_stdRatio::num);
+  static constexpr double den = static_cast<double>(_stdRatio::den);
+
+  typedef Ratio<num, den> type;
+};
+
+
+template<typename _stbRatio>
+struct Ratio_stb_to_std
+{
+  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::Ratio in Ratio_converter_stb_std.");
+  static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
+  static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
+
+  typedef std::ratio<static_cast<intmax_t>(_stbRatio::num), static_cast<intmax_t>(_stbRatio::den)> type;
+};
 
 
 
@@ -653,6 +716,12 @@ public:
   }
 
 
+  Unit operator-()
+  {
+    return Unit(-_count);
+  }
+
+
   Unit& operator+=(Unit const& Obj)
   {
     _count += Obj.count();
@@ -872,6 +941,12 @@ public:
   Unit operator--(int)
   {
     return Unit(_count--);
+  }
+
+
+  Unit operator-()
+  {
+    return Unit(-_count);
   }
 
 
