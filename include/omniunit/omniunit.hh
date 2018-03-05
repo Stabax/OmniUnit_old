@@ -175,6 +175,7 @@ struct partial_specialization_wrapper
 
 
 
+static constexpr double zero = 0.;
 static constexpr double E0  = 1.;
 static constexpr double E1  = 10.;
 static constexpr double E2  = 100.;
@@ -272,9 +273,9 @@ static constexpr double E80 = 10000000000000000000000000000000000000000000000000
 template<double const& _Num, double const& _Den>
 struct Ratio
 {
-  static_assert(_Den > 0 || _Den < 0, "denominator cannot be zero.");
-  static_assert(is_positive_integer(_Num), "numerator may not have decimals and may be positive");
-  static_assert(is_positive_integer(_Den), "denominator may not have decimals and may be positive");
+  static_assert(_Den > 0 || _Den < 0, "Denominator cannot be zero.");
+  static_assert(is_positive_integer(_Num), "Numerator may not have decimals and may be positive.");
+  static_assert(is_positive_integer(_Den), "Nenominator may not have decimals and may be positive.");
 
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);
@@ -298,8 +299,8 @@ struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 template <typename ratio>
 struct Ratio_invert
 {
-  static_assert(ratio::num > 0 || ratio::num < 0, "denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value , "Bad type, need a stb::omni::Ratio");
+  static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value , "Bad type, need a stb::omni::Ratio.");
 
   typedef Ratio<ratio::den, ratio::num> type;
 };
@@ -308,7 +309,7 @@ struct Ratio_invert
 template <typename ratio1, typename ratio2>
 class Ratio_multiply
 {
-  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
   static constexpr double num = (ratio1::num * ratio2::num) / _gcd;
@@ -321,7 +322,7 @@ public:
 template <typename ratio, double const& val>
 class Ratio_times_value
 {
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
 
   static constexpr double _gcd = gcd(ratio::num * val, ratio::den);
   static constexpr double num = (ratio::num * val) / _gcd;
@@ -334,7 +335,7 @@ public:
 template <double const& val, typename ratio>
 struct value_times_Ratio
 {
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
 
   typedef typename Ratio_times_value<ratio, val>::type type;
 };
@@ -343,8 +344,8 @@ struct value_times_Ratio
 template <typename ratio1, typename ratio2>
 class Ratio_divide
 {
-  static_assert(ratio2::num > 0 || ratio2::num < 0, "denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(ratio2::num > 0 || ratio2::num < 0, "Denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
   static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
@@ -357,8 +358,8 @@ public:
 template <typename ratio, double const& val>
 class Ratio_over_value
 {
-  static_assert(val > 0 || val < 0, "denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(val > 0 || val < 0, "Denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
 
   static constexpr double _gcd = gcd(ratio::num, ratio::den * val);
   static constexpr double num = ratio::num / _gcd;
@@ -371,8 +372,8 @@ public:
 template <double const& val, typename ratio>
 class value_over_Ratio
 {
-  static_assert(ratio::num > 0 || ratio::num < 0, "denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio");
+  static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
+  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
 
   static constexpr double _gcd = gcd(val * ratio::den, ratio::num);
   static constexpr double num = (val * ratio::den) / _gcd;
@@ -420,7 +421,7 @@ struct Ratio_std_to_stb
 template<typename _stbRatio>
 struct Ratio_stb_to_std
 {
-  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::Ratio in Ratio_converter_stb_std.");
+  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::omni::Ratio in Ratio_converter_stb_std.");
   static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
   static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
 
@@ -505,7 +506,7 @@ template <typename dim1, typename dim2>
 struct Dimension_multiply
 {
   static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value,
-  "Bad type, need a stb::Dimension.");
+  "Bad type, need a stb::omni::Dimension.");
 
   typedef Dimension<
   dim1::length + dim2::length,
@@ -577,7 +578,8 @@ typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimen
 
 
 //forward declaration
-template<typename _Dimension, typename Rep, typename Period>
+//template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero, typename PeriodOrigin = base>
+template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero, typename PeriodOrigin = base>
 class Unit;
 
 
@@ -587,20 +589,22 @@ struct is_Unit : std::false_type
 };
 
 
-template<typename Dimension, typename Rep, typename Period>
-struct is_Unit<Unit<Dimension, Rep, Period>> : public std::true_type
+template<typename Dimension, typename Rep, typename Period, double const& Origin>
+struct is_Unit<Unit<Dimension, Rep, Period, Origin>> : public std::true_type
 {
 };
 
 
-template<typename toUnit, typename Dimension, typename Rep, typename Period>
+template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
-unit_cast(const Unit<Dimension, Rep, Period>& Obj)
+unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 {
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
   typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
+
+
 
   return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
     * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
@@ -618,18 +622,24 @@ unit_cast(const Unit<Dimension, Rep, Period>& Obj)
 
 
 
-template<typename _Dimension, typename Rep, typename Period>
+//Origin = how much kelvin have I to add to obtain one current unit ?
+// Kelvin : 0, milliKelvin : 0, Celcius : 273.15, milliCelcius ? 273.15
+
+template<typename _Dimension, typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
 class Unit
 {
 public:
   typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
+  static constexpr double origin = Origin;
+  typedef PeriodOrigin perOrigin;
 
-  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
+  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::omni::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
-  "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::Ratio.");
+  "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
+  static_assert(is_stb_Ratio<PeriodOrigin>::value, "Fifth template argument of class stb::omni::Unit should be a stb::Ratio.");
 
 
   constexpr Unit() = default;
@@ -815,8 +825,8 @@ protected:
 
 
 
-template<typename Rep, typename Period>
-class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period>
+template<typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
+class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin, PeriodOrigin>
 {
 
 protected:
@@ -829,11 +839,11 @@ public:
   typedef Period period;
 
 
-  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::Dimension.");
+  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::omni::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
-  "Second template argument of class stb::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::Unit should be a stb::Ratio.");
-
+  "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
+  static_assert(is_stb_Ratio<PeriodOrigin>::value, "Fifth template argument of class stb::omni::Unit should be a stb::Ratio.");
 
   constexpr Unit() = default;
   Unit(Unit const&) = default;
@@ -1428,7 +1438,7 @@ Period1, Period2>::type
 
 } //namespace std
 
-#include "units/units.hh"
+//#include "units/units.hh"
 
 
 
