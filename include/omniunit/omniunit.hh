@@ -1059,7 +1059,7 @@ constexpr Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename to
 unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>>,
 Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
 {
-  return unit_cast<toUnit>(Obj);
+  return unit_cast<toUnit, Dimension<0, 0, 1, 0, 0, 0, 0>>(Obj);
 }
 
 
@@ -1438,7 +1438,7 @@ Period1, Period2>::type
 
 } //namespace std
 
-//#include "units/units.hh"
+#include "units/units.hh"
 
 
 

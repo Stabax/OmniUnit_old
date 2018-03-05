@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef CHRONOSCALE_HH_
 #define CHRONOSCALE_HH_
 
-#include "../omniunit.hh"
+#include "omniunit.hh"
 
 #include <ctime>   // gmtime, localtime, time, tm
 #include <memory>  // unique_ptr

@@ -1,12 +1,15 @@
 
 #include "omniunit/omniunit.hh"
-//#include <iostream>
+#include "omniunit/chronoscale.hh"
+
+#include <iostream>
 
 
 int main()
 {
-
-  //auto a = stb::omni::Ratio_divide<stb::omni::Ratio<stb::omni::E0, stb::omni::E0>, stb::omni::E0>::type;
+  stb::omni::Timer tim;
+  tim.start();
+  std::cout << tim.get<stb::omni::microsecond<unsigned>>().count() << '\n';
 
 return 0;
 }
