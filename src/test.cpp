@@ -3,13 +3,17 @@
 #include "omniunit/chronoscale.hh"
 
 #include <iostream>
+#include <thread>
 
 
 int main()
 {
+
   stb::omni::Timer tim;
   tim.start();
-  std::cout << tim.get<stb::omni::microsecond<unsigned>>().count() << '\n';
+  std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  std::cout << tim.get<stb::omni::millisecond<float>>().count() << '\n';
+
 
 return 0;
 }

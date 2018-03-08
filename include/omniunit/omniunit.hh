@@ -615,15 +615,60 @@ unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
+//=== DEVIATION CALCULATION ===================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+enum class Probability {none, uniform, triangular, triangular_asym, normal, arcsinus, uniform_gap};
+
+
+template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
+float getDeviation(Unit<_Dimension, float, Period, Origin, PeriodOrigin> variation, Probability law)
+{
+  if(law == Probability::none)
+    return variation;
+  else if(law == Probability::uniform)
+    return variation / std::sqrt(3.);
+  else if(law == Probability::triangular)
+    return variation / std::sqrt(6.);
+  else if(law == Probability::triangular_asym)
+    return variation / (3. * std::sqrt(2.)); // what about the average ?
+  else if(law == Probability::arcsinus)
+    return variation / std::sqrt(2.);
+  else if(law == Probability::normal)
+    return variation / 3.;
+  else if(law == Probability::uniform_gap)
+    return variation / (2. * std::sqrt(3.));
+}
+
+/*
+template <typename T>
+float getAverage(T container)
+{
+
+}
+
+
+template <typename T>
+float getUncertainty(T container)
+{
+
+}
+*/
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
 //=== UNIT DEFINITION =========================================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
 
 
-
-//Origin = how much kelvin have I to add to obtain one current unit ?
-// Kelvin : 0, milliKelvin : 0, Celcius : 273.15, milliCelcius ? 273.15
 
 template<typename _Dimension, typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
 class Unit
@@ -647,16 +692,17 @@ public:
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
-  constexpr Unit(_Rep const& countArg):
+  constexpr Unit(_Rep const& countArg, float error = 0):
   _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>())
+  _dimension(dimension_str<dim>()),
+  _error(error)
   {
   }
 
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count())
+  Unit(unit_cast<Unit>(Obj).count(), Obj.uncertainty())
   {
   }
 
@@ -679,6 +725,12 @@ public:
   constexpr Rep count() const
   {
     return _count;
+  }
+
+
+  float uncertainty() const
+  {
+    return _error;
   }
 
 
@@ -809,6 +861,7 @@ public:
 protected:
   Rep _count;
   const std::string _dimension;
+  float _error; //uncertainty in percent (%)
 };
 
 
@@ -850,23 +903,24 @@ public:
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
-  constexpr Unit(_Rep const& countArg):
+  constexpr Unit(_Rep const& countArg, float error = 0):
   _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>())
+  _dimension(dimension_str<dim>()),
+  _error(error)
   {
   }
 
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count())
+  Unit(unit_cast<Unit>(Obj).count(), Obj.uncertainty())
   {
   }
 
 
   template<typename _Rep, typename _Period>
-  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count()))
+  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj, float error = 0):
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count(), error))
   {
   }
 
@@ -907,6 +961,12 @@ public:
   constexpr Rep count() const
   {
     return _count;
+  }
+
+
+  float uncertainty() const
+  {
+    return _error;
   }
 
 
@@ -1036,6 +1096,7 @@ public:
 protected:
   Rep _count;
   const std::string _dimension;
+  float _error; //uncertainty in percent (%)
 };
 
 
