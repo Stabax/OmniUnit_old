@@ -570,6 +570,28 @@ typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimen
 //=============================================================================
 //=============================================================================
 //=============================================================================
+//=== PROPAGATION OF UNCERTAINTIES ============================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+struct PropagationUncertainties
+{
+  enum class Method {linear, quadratic};
+  constexpr static Method linear = Method::linear;
+  constexpr static Method quadratic = Method::quadratic;
+
+  static Method sum;
+  static Method product;
+};
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
 //=== UNIT CAST ===============================================================
 //=============================================================================
 //=============================================================================
@@ -644,6 +666,7 @@ float getDeviation(Unit<_Dimension, float, Period, Origin, PeriodOrigin> variati
     return variation / (2. * std::sqrt(3.));
 }
 
+
 /*
 template <typename T>
 float getAverage(T container)
@@ -712,6 +735,7 @@ public:
   Unit& operator=(Unit const& Obj)
   {
     _count = Obj._count;
+    _error = Obj._error;
     return *this;
   }
 
@@ -898,6 +922,7 @@ public:
   static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
   static_assert(is_stb_Ratio<PeriodOrigin>::value, "Fifth template argument of class stb::omni::Unit should be a stb::Ratio.");
 
+
   constexpr Unit() = default;
   Unit(Unit const&) = default;
 
@@ -931,6 +956,7 @@ public:
   Unit& operator=(Unit const& Obj)
   {
     _count = Obj._count;
+    _error = Obj._error;
     return *this;
   }
 
@@ -939,6 +965,7 @@ public:
   Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
     _count = Unit(Obj).count();
+    _error = 0;
     return *this;
   }
 
@@ -1091,6 +1118,7 @@ public:
     _count %= count;
     return *this;
   }
+
 
 
 protected:
