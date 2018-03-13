@@ -45,133 +45,184 @@ typedef Dimension<0, 0, 0, 0, 0, 0, 1> Luminosity;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctocandela = Unit<Luminosity, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptocandela = Unit<Luminosity, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attocandela = Unit<Luminosity, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtocandela = Unit<Luminosity, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picocandela = Unit<Luminosity, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanocandela = Unit<Luminosity, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microcandela = Unit<Luminosity, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millicandela = Unit<Luminosity, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centicandela = Unit<Luminosity, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decicandela = Unit<Luminosity, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using candela = Unit<Luminosity, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decacandela = Unit<Luminosity, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectocandela = Unit<Luminosity, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilocandela = Unit<Luminosity, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megacandela = Unit<Luminosity, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigacandela = Unit<Luminosity, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teracandela = Unit<Luminosity, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petacandela = Unit<Luminosity, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exacandela = Unit<Luminosity, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettacandela = Unit<Luminosity, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottacandela = Unit<Luminosity, Rep, yotta>;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctolumen = yoctocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptolumen = zeptocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attolumen = attocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtolumen = femtocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picolumen = picocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanolumen = nanocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microlumen = microcandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millilumen = millicandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centilumen = centicandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decilumen = decicandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using lumen = candela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decalumen = decacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectolumen = hectocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilolumen = kilocandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megalumen = megacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigalumen = gigacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teralumen = teracandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petalumen = petacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exalumen = exacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettalumen = zettacandela<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottalumen = yottacandela<Rep>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptocandela<> zeptocandela;
+typedef femtocandela<>  femtocandela;
+typedef picocandela<> picocandela;
+typedef nanocandela<> nanocandela;
+typedef microcandela<> microcandela;
+typedef millicandela<> millicandela;
+typedef centicandela<> centicandela;
+typedef decicandela<> decicandela;
+typedef candela<> candela;
+typedef decacandela<> decacandela;
+typedef hectocandela<> hectocandela;
+typedef kilocandela<> kilocandela;
+typedef megacandela<> megacandela;
+typedef gigacandela<> gigacandela;
+typedef teracandela<> teracandela;
+typedef petacandela<> petacandela;
+typedef exacandela<> exacandela;
+typedef zettacandela<> zettacandela;
+typedef yottacandela<> yottacandela;
+
+typedef zeptolumen<> zeptolumen;
+typedef femtolumen<>  femtolumen;
+typedef picolumen<> picolumen;
+typedef nanolumen<> nanolumen;
+typedef microlumen<> microlumen;
+typedef millilumen<> millilumen;
+typedef centilumen<> centilumen;
+typedef decilumen<> decilumen;
+typedef lumen<> lumen;
+typedef decalumen<> decalumen;
+typedef hectolumen<> hectolumen;
+typedef kilolumen<> kilolumen;
+typedef megalumen<> megalumen;
+typedef gigalumen<> gigalumen;
+typedef teralumen<> teralumen;
+typedef petalumen<> petalumen;
+typedef exalumen<> exalumen;
+typedef zettalumen<> zettalumen;
+typedef yottalumen<> yottalumen;
+
+
+
+} // namespace default
 
 
 

@@ -45,73 +45,107 @@ typedef Dimension<0, 0, 0, 0, 0, 1, 0> Quantity;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctomol = Unit<Quantity, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptomol = Unit<Quantity, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attomol = Unit<Quantity, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtomol = Unit<Quantity, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picomol = Unit<Quantity, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanomol = Unit<Quantity, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using micromol = Unit<Quantity, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millimol = Unit<Quantity, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centimol = Unit<Quantity, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decimol = Unit<Quantity, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using mol = Unit<Quantity, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decamol = Unit<Quantity, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectomol = Unit<Quantity, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilomol = Unit<Quantity, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megamol = Unit<Quantity, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigamol = Unit<Quantity, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teramol = Unit<Quantity, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petamol = Unit<Quantity, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using examol = Unit<Quantity, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettamol = Unit<Quantity, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottamol = Unit<Quantity, Rep, yotta>;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using rawQuantity = Unit<Quantity, Rep, rawQuantityDefinition>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptomol<> zeptomol;
+typedef femtomol<>  femtomol;
+typedef picomol<> picomol;
+typedef nanomol<> nanomol;
+typedef micromol<> micromol;
+typedef millimol<> millimol;
+typedef centimol<> centimol;
+typedef decimol<> decimol;
+typedef mol<> mol;
+typedef decamol<> decamol;
+typedef hectomol<> hectomol;
+typedef kilomol<> kilomol;
+typedef megamol<> megamol;
+typedef gigamol<> gigamol;
+typedef teramol<> teramol;
+typedef petamol<> petamol;
+typedef examol<> examol;
+typedef zettamol<> zettamol;
+typedef yottamol<> yottamol;
+
+typedef rawQuantity<> rawQuantity;
+
+
+
+} // namespace default
+
 
 
 } //namespace omni

@@ -47,107 +47,107 @@ typedef Dimension<0, 1, 0, 0, 0, 0, 0> Mass;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptogram = Unit<Mass, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attogram = Unit<Mass, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtogram = Unit<Mass, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picogram = Unit<Mass, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanogram = Unit<Mass, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microgram = Unit<Mass, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using milligram = Unit<Mass, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centigram = Unit<Mass, Rep, Ratio<E0, E5>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decigram = Unit<Mass, Rep, Ratio<E0, E4>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gram = Unit<Mass, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decagram = Unit<Mass, Rep, Ratio<E0, E2>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectogram = Unit<Mass, Rep, Ratio<E0, E1>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilogram = Unit<Mass, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megagram = Unit<Mass, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigagram = Unit<Mass, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teragram = Unit<Mass, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petagram = Unit<Mass, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exagram = Unit<Mass, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettagram = Unit<Mass, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottagram = Unit<Mass, Rep, zetta>;
 
 
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using atomic_mass = Unit<Mass, Rep, typename Ratio_multiply<
 atomic_massDefinition, Ratio<E0, E27>>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using evPerC2 = Unit<Mass, Rep, evPerC2Definition>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millievPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, milli>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, micro>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, kilo>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, mega>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, giga>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teraevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
 typename evPerC2<Rep>::period, tera>::type>;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using ton = megagram<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using solar_mass = Unit<Mass, Rep, solar_massDefinition>;
 
 
@@ -156,13 +156,63 @@ using solar_mass = Unit<Mass, Rep, solar_massDefinition>;
 
 static constexpr double twelve = 12.;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using meug = gram<Rep>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zedou = Unit<Mass, Rep, Ratio<twelve, E3>>;
 
 #endif
+
+
+
+namespace def
+{
+
+
+
+typedef zeptogram<> zeptogram;
+typedef femtogram<>  femtogram;
+typedef picogram<> picogram;
+typedef nanogram<> nanogram;
+typedef microgram<> microgram;
+typedef milligram<> milligram;
+typedef centigram<> centigram;
+typedef decigram<> decigram;
+typedef gram<> gram;
+typedef decagram<> decagram;
+typedef hectogram<> hectogram;
+typedef kilogram<> kilogram;
+typedef megagram<> megagram;
+typedef gigagram<> gigagram;
+typedef teragram<> teragram;
+typedef petagram<> petagram;
+typedef exagram<> exagram;
+typedef zettagram<> zettagram;
+typedef yottagram<> yottagram;
+
+typedef atomic_mass<> atomic_mass;
+
+typedef evPerC2<> evPerC2;
+typedef millievPerC2<> millievPerC2;
+typedef microevPerC2<> microevPerC2;
+typedef kiloevPerC2<> kiloevPerC2;
+typedef megaevPerC2<> megaevPerC2;
+typedef gigaevPerC2<> gigaevPerC2;
+typedef teraevPerC2<> teraevPerC2;
+
+typedef ton<> ton;
+typedef solar_mass<> solar_mass;
+
+#ifdef GOPNIK
+typedef meug<> meug;
+typedef zedou<> zedou;
+#endif
+
+
+
+} // namespace default
+
 
 
 } //namespace omni

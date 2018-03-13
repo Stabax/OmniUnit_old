@@ -11,13 +11,13 @@ namespace omni = stb::omni;
 int main()
 {
 
-  stb::omni::Timer tim;
+  omni::Timer tim;
   tim.start();
   std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  std::cout << tim.get<stb::omni::millisecond<float>>() << '\n';
+  std::cout << tim.get<omni::def::millisecond>() << '\n';
 
-  omni::zedou<float> a(30);
-  std::cout<< omni::meug<float>(a) << '\n';
+  omni::def::zedou a(30);
+  std::cout<< omni::def::meug(a) << '\n';
 
 
 return 0;

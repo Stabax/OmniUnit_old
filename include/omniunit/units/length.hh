@@ -45,105 +45,146 @@ typedef Dimension<1, 0, 0, 0, 0, 0, 0> Length;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctometer = Unit<Length, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptometer = Unit<Length, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attometer = Unit<Length, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtometer = Unit<Length, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picometer = Unit<Length, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanometer = Unit<Length, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using micrometer = Unit<Length, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millimeter = Unit<Length, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centimeter = Unit<Length, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decimeter = Unit<Length, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using meter = Unit<Length, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decameter = Unit<Length, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectometer = Unit<Length, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilometer = Unit<Length, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megameter = Unit<Length, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigameter = Unit<Length, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using terameter = Unit<Length, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petameter = Unit<Length, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exameter = Unit<Length, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettameter = Unit<Length, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottameter = Unit<Length, Rep, yotta>;
 
 
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using angstrom = Unit<Length, Rep, Ratio<E0, E10>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using astronomical_unit = Unit<Length, Rep, Ratio<distanceSunEarth, E0>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightIn1Sec, E10>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightminute = Unit<Length, Rep, typename Ratio_multiply<
 typename lightsecond<Rep>::period, Ratio<secondsIn1Min, E0>>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightyear = Unit<Length, Rep, typename Ratio_multiply<
 typename lightsecond<Rep>::period, secondsIn1Year>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using parsec = Unit<Length, Rep, typename Ratio_multiply<
 typename astronomical_unit<Rep>::period, parsecDefinition>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloparsec = Unit<Length, Rep, typename Ratio_multiply<
 typename parsec<Rep>::period, kilo>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megaparsec = Unit<Length, Rep, typename Ratio_multiply<
 typename parsec<Rep>::period, mega>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigaparsec = Unit<Length, Rep, typename Ratio_multiply<
 typename parsec<Rep>::period, giga>::type>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptometer<> zeptometer;
+typedef femtometer<>  femtometer;
+typedef picometer<> picometer;
+typedef nanometer<> nanometer;
+typedef micrometer<> micrometer;
+typedef millimeter<> millimeter;
+typedef centimeter<> centimeter;
+typedef decimeter<> decimeter;
+typedef meter<> meter;
+typedef decameter<> decameter;
+typedef hectometer<> hectometer;
+typedef kilometer<> kilometer;
+typedef megameter<> megameter;
+typedef gigameter<> gigameter;
+typedef terameter<> terameter;
+typedef petameter<> petameter;
+typedef exameter<> exameter;
+typedef zettameter<> zettameter;
+typedef yottameter<> yottameter;
+
+typedef angstrom<> angstrom;
+typedef astronomical_unit<> astronomical_unit;
+typedef lightsecond<> lightsecond;
+typedef lightminute<> lightminute;
+typedef lightyear<> lightyear;
+typedef parsec<> parsec;
+typedef kiloparsec<> kiloparsec;
+typedef megaparsec<> megaparsec;
+typedef gigaparsec<> gigaparsec;
+
+
+
+} // namespace default
 
 
 

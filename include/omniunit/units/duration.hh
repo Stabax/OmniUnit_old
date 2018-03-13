@@ -82,102 +82,143 @@ toUnit duration_cast(std::chrono::duration<Rep, Period> const& Obj)
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctosecond = Unit<Duration, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptosecond = Unit<Duration, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attosecond = Unit<Duration, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtosecond = Unit<Duration, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picosecond = Unit<Duration, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanosecond = Unit<Duration, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microsecond = Unit<Duration, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millisecond = Unit<Duration, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centisecond = Unit<Duration, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decisecond = Unit<Duration, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using second = Unit<Duration, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decasecond = Unit<Duration, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectosecond = Unit<Duration, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilosecond = Unit<Duration, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megasecond = Unit<Duration, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigasecond = Unit<Duration, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using terasecond = Unit<Duration, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petasecond = Unit<Duration, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exasecond = Unit<Duration, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettasecond = Unit<Duration, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottasecond = Unit<Duration, Rep, yotta>;
 
 
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using minute = Unit<Duration, Rep, Ratio<secondsIn1Min, E0>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hour = Unit<Duration, Rep, Ratio<secondsIn1Hour, E0>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using day = Unit<Duration, Rep, Ratio<secondsIn1Day, E0>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using week = Unit<Duration, Rep, Ratio<secondsIn1Week, E0>>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using month = Unit<Duration, Rep, secondsIn1Month>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using year = Unit<Duration, Rep, secondsIn1Year>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloyear = Unit<Duration, Rep, typename Ratio_multiply<
 typename year<Rep>::period, kilo>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megayear = Unit<Duration, Rep, typename Ratio_multiply<
 typename year<Rep>::period, mega>::type>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigayear = Unit<Duration, Rep, typename Ratio_multiply<
 typename year<Rep>::period, giga>::type>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptosecond<> zeptosecond;
+typedef femtosecond<>  femtosecond;
+typedef picosecond<> picosecond;
+typedef nanosecond<> nanosecond;
+typedef microsecond<> microsecond;
+typedef millisecond<> millisecond;
+typedef centisecond<> centisecond;
+typedef decisecond<> decisecond;
+typedef second<> second;
+typedef decasecond<> decasecond;
+typedef hectosecond<> hectosecond;
+typedef kilosecond<> kilosecond;
+typedef megasecond<> megasecond;
+typedef gigasecond<> gigasecond;
+typedef terasecond<> terasecond;
+typedef petasecond<> petasecond;
+typedef exasecond<> exasecond;
+typedef zettasecond<> zettasecond;
+typedef yottasecond<> yottasecond;
+
+typedef minute<> minute;
+typedef hour<> hour;
+typedef day<> day;
+typedef week<> week;
+typedef month<> month;
+typedef year<> year;
+typedef kiloyear<> kiloyear;
+typedef megayear<> megayear;
+typedef gigayear<> gigayear;
+
+
+
+}
 
 
 

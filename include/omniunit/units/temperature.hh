@@ -45,68 +45,99 @@ typedef Dimension<0, 0, 0, 0, 1, 0, 0> Temperature;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctokelvin = Unit<Temperature, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptokelvin = Unit<Temperature, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attokelvin = Unit<Temperature, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtokelvin = Unit<Temperature, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picokelvin = Unit<Temperature, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanokelvin = Unit<Temperature, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microkelvin = Unit<Temperature, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millikelvin = Unit<Temperature, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centikelvin = Unit<Temperature, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decikelvin = Unit<Temperature, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kelvin = Unit<Temperature, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decakelvin = Unit<Temperature, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectokelvin = Unit<Temperature, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilokelvin = Unit<Temperature, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megakelvin = Unit<Temperature, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigakelvin = Unit<Temperature, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using terakelvin = Unit<Temperature, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petakelvin = Unit<Temperature, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exakelvin = Unit<Temperature, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettakelvin = Unit<Temperature, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottakelvin = Unit<Temperature, Rep, yotta>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptokelvin<> zeptokelvin;
+typedef femtokelvin<>  femtokelvin;
+typedef picokelvin<> picokelvin;
+typedef nanokelvin<> nanokelvin;
+typedef microkelvin<> microkelvin;
+typedef millikelvin<> millikelvin;
+typedef centikelvin<> centikelvin;
+typedef decikelvin<> decikelvin;
+typedef kelvin<> kelvin;
+typedef decakelvin<> decakelvin;
+typedef hectokelvin<> hectokelvin;
+typedef kilokelvin<> kilokelvin;
+typedef megakelvin<> megakelvin;
+typedef gigakelvin<> gigakelvin;
+typedef terakelvin<> terakelvin;
+typedef petakelvin<> petakelvin;
+typedef exakelvin<> exakelvin;
+typedef zettakelvin<> zettakelvin;
+typedef yottakelvin<> yottakelvin;
+
+
+
+} // namespace default
 
 
 

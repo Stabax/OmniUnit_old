@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INTENSITY_HH_
 #define INTENSITY_HH_
 
-#include"constants_for_units.hh"
+#include "constants_for_units.hh"
 
 namespace stb
 {
@@ -45,68 +45,99 @@ typedef Dimension<0, 0, 0, 1, 0, 0, 0> ElectricIntensity;
 
 
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yoctoampere = Unit<ElectricIntensity, Rep, yocto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zeptoampere = Unit<ElectricIntensity, Rep, zepto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using attoampere = Unit<ElectricIntensity, Rep, atto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using femtoampere = Unit<ElectricIntensity, Rep, femto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using picoampere = Unit<ElectricIntensity, Rep, pico>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using nanoampere = Unit<ElectricIntensity, Rep, nano>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using microampere = Unit<ElectricIntensity, Rep, micro>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using milliampere = Unit<ElectricIntensity, Rep, milli>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using centiampere = Unit<ElectricIntensity, Rep, centi>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using deciampere = Unit<ElectricIntensity, Rep, deci>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using ampere = Unit<ElectricIntensity, Rep, base>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decaampere = Unit<ElectricIntensity, Rep, deca>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using hectoampere = Unit<ElectricIntensity, Rep, hecto>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloampere = Unit<ElectricIntensity, Rep, kilo>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using megaampere = Unit<ElectricIntensity, Rep, mega>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigaampere = Unit<ElectricIntensity, Rep, giga>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using teraampere = Unit<ElectricIntensity, Rep, tera>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using petaampere = Unit<ElectricIntensity, Rep, peta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using exaampere = Unit<ElectricIntensity, Rep, exa>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using zettaampere = Unit<ElectricIntensity, Rep, zetta>;
 
-template <typename Rep>
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using yottaampere = Unit<ElectricIntensity, Rep, yotta>;
+
+
+
+namespace def
+{
+
+
+
+typedef zeptoampere<> zeptoampere;
+typedef femtoampere<>  femtoampere;
+typedef picoampere<> picoampere;
+typedef nanoampere<> nanoampere;
+typedef microampere<> microampere;
+typedef milliampere<> milliampere;
+typedef centiampere<> centiampere;
+typedef deciampere<> deciampere;
+typedef ampere<> ampere;
+typedef decaampere<> decaampere;
+typedef hectoampere<> hectoampere;
+typedef kiloampere<> kiloampere;
+typedef megaampere<> megaampere;
+typedef gigaampere<> gigaampere;
+typedef teraampere<> teraampere;
+typedef petaampere<> petaampere;
+typedef exaampere<> exaampere;
+typedef zettaampere<> zettaampere;
+typedef yottaampere<> yottaampere;
+
+
+
+} // namespace default
 
 
 
