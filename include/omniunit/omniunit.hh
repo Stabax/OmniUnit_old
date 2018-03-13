@@ -271,12 +271,12 @@ static constexpr double E80 = 10000000000000000000000000000000000000000000000000
 
 
 
-template<double const& _Num, double const& _Den>
+template<double const& _Num, double const& _Den = E0>
 struct Ratio
 {
   static_assert(_Den > 0 || _Den < 0, "Denominator cannot be zero.");
   static_assert(is_positive_integer(_Num), "Numerator may not have decimals and may be positive.");
-  static_assert(is_positive_integer(_Den), "Nenominator may not have decimals and may be positive.");
+  static_assert(is_positive_integer(_Den), "Denominator may not have decimals and may be positive.");
 
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);
@@ -295,6 +295,17 @@ template<double const& Num, double const& Den>
 struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 {
 };
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== RATIO ARITHMETIC ========================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
 
 
 template <typename ratio>
@@ -324,6 +335,7 @@ template <typename ratio, double const& val>
 class Ratio_times_value
 {
   static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_positive_integer(val), "Value in stb::omni::Ratio_times_value may not have decimals and may be positive.");
 
   static constexpr double _gcd = gcd(ratio::num * val, ratio::den);
   static constexpr double num = (ratio::num * val) / _gcd;
@@ -337,6 +349,7 @@ template <double const& val, typename ratio>
 struct value_times_Ratio
 {
   static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_positive_integer(val), "Value in stb::omni::value_times_Ratio may not have decimals and may be positive.");
 
   typedef typename Ratio_times_value<ratio, val>::type type;
 };
@@ -361,6 +374,8 @@ class Ratio_over_value
 {
   static_assert(val > 0 || val < 0, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_positive_integer(val), "Value in stb::omni::Ratio_over_value may not have decimals and may be positive.");
+
 
   static constexpr double _gcd = gcd(ratio::num, ratio::den * val);
   static constexpr double num = ratio::num / _gcd;
@@ -375,6 +390,8 @@ class value_over_Ratio
 {
   static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_positive_integer(val), "Value in stb::omni::value_over_Ratio may not have decimals and may be positive.");
+
 
   static constexpr double _gcd = gcd(val * ratio::den, ratio::num);
   static constexpr double num = (val * ratio::den) / _gcd;
@@ -1550,6 +1567,12 @@ Period1, Period2>::type
 
 
 } //namespace std
+
+
+
+#ifndef OMNI_DEFAULT_TYPE
+#define OMNI_DEFAULT_TYPE float
+#endif
 
 #include "units/units.hh"
 

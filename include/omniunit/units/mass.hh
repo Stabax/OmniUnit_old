@@ -152,6 +152,19 @@ using solar_mass = Unit<Mass, Rep, solar_massDefinition>;
 
 
 
+#ifdef GOPNIK
+
+static constexpr double twelve = 12.;
+
+template <typename Rep>
+using meug = gram<Rep>;
+
+template <typename Rep>
+using zedou = Unit<Mass, Rep, Ratio<twelve, E3>>;
+
+#endif
+
+
 } //namespace omni
 
 
