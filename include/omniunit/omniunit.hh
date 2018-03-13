@@ -37,6 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <chrono>     // chrono::duration
 #include <cmath>      // floor
 #include <exception>  // exception
+#include <iostream>   // ostream
 #include <limits>     // numeric_limits
 #include <ratio>      // ratio
 #include <string>     // string
@@ -586,6 +587,11 @@ struct PropagationUncertainties
   static Method sum;
   static Method product;
 };
+typedef PropagationUncertainties PU;
+
+
+PU::Method PU::sum = PU::quadratic;
+PU::Method PU::product = PU::quadratic;
 
 
 
@@ -1463,6 +1469,24 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 //=============================================================================
 //=============================================================================
 
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== STREAM OPERATOR =========================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template <typename Dimension, typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
+std::ostream& operator<<(std::ostream& oss, Unit<Dimension, Rep, Period, Origin, PeriodOrigin> const& Obj)
+{
+  oss << Obj.count();
+  return oss;
+}
 
 
 
