@@ -597,9 +597,11 @@ typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimen
 
 struct PropagationUncertainties
 {
-  enum class Method {linear, quadratic};
+  enum class Method {linear, quadratic, derived, double_variance};
   constexpr static Method linear = Method::linear;
   constexpr static Method quadratic = Method::quadratic;
+  constexpr static Method derived = Method::derived;
+  constexpr static Method double_variance = Method::double_variance;
 
   static Method sum;
   static Method product;
