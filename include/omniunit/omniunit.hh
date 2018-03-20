@@ -953,24 +953,23 @@ public:
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
-  constexpr Unit(_Rep const& countArg, float error = 0):
+  constexpr Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>()),
-  _error(error)
+  _dimension(dimension_str<dim>())
   {
   }
 
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count(), Obj.uncertainty())
+  Unit(unit_cast<Unit>(Obj).count())
   {
   }
 
 
   template<typename _Rep, typename _Period>
-  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj, float error = 0):
-  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count(), error))
+  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count()))
   {
   }
 
@@ -981,7 +980,6 @@ public:
   Unit& operator=(Unit const& Obj)
   {
     _count = Obj._count;
-    _error = Obj._error;
     return *this;
   }
 
@@ -990,7 +988,6 @@ public:
   Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
     _count = Unit(Obj).count();
-    _error = 0;
     return *this;
   }
 
@@ -1013,12 +1010,6 @@ public:
   constexpr Rep count() const
   {
     return _count;
-  }
-
-
-  float uncertainty() const
-  {
-    return _error;
   }
 
 
@@ -1149,7 +1140,6 @@ public:
 protected:
   Rep _count;
   const std::string _dimension;
-  float _error; //uncertainty in percent (%)
 };
 
 
@@ -1647,6 +1637,14 @@ Period1, Period2>::type
 
 #ifndef OMNI_DEFAULT_TYPE
 #define OMNI_DEFAULT_TYPE float
+#endif
+
+#ifndef OMNI_DISABLE_UNCERTAINTIES
+//template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
+//using Unit = 
+#else
+//template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
+//using Unit = 
 #endif
 
 #include "units/units.hh"
