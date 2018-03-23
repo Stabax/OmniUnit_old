@@ -110,6 +110,71 @@ using yottakelvin = Unit<Temperature, Rep, yotta>;
 
 
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using yoctocelsius = Unit<Temperature, Rep, yocto, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using zeptocelsius = Unit<Temperature, Rep, zepto, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using attocelsius = Unit<Temperature, Rep, atto, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using femtocelsius = Unit<Temperature, Rep, femto, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using picocelsius = Unit<Temperature, Rep, pico, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using nanocelsius = Unit<Temperature, Rep, nano, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using microcelsius = Unit<Temperature, Rep, micro, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using millicelsius = Unit<Temperature, Rep, milli, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using centicelsius = Unit<Temperature, Rep, centi, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using decicelsius = Unit<Temperature, Rep, deci, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using celsius = Unit<Temperature, Rep, base, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using decacelsius = Unit<Temperature, Rep, deca, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using hectocelsius = Unit<Temperature, Rep, hecto, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilocelsius = Unit<Temperature, Rep, kilo, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megacelsius = Unit<Temperature, Rep, mega, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigacelsius = Unit<Temperature, Rep, giga, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using teracelsius = Unit<Temperature, Rep, tera, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using petacelsius = Unit<Temperature, Rep, peta, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using exacelsius = Unit<Temperature, Rep, exa, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using zettacelsius = Unit<Temperature, Rep, zetta, celsiusConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using yottacelsius = Unit<Temperature, Rep, yotta, celsiusConstant>;
+
+
+
 namespace def
 {
 
@@ -134,6 +199,28 @@ typedef petakelvin<> petakelvin;
 typedef exakelvin<> exakelvin;
 typedef zettakelvin<> zettakelvin;
 typedef yottakelvin<> yottakelvin;
+
+
+
+typedef zeptocelsius<> zeptocelsius;
+typedef femtocelsius<>  femtocelsius;
+typedef picocelsius<> picocelsius;
+typedef nanocelsius<> nanocelsius;
+typedef microcelsius<> microcelsius;
+typedef millicelsius<> millicelsius;
+typedef centicelsius<> centicelsius;
+typedef decicelsius<> decicelsius;
+typedef celsius<> celsius;
+typedef decacelsius<> decacelsius;
+typedef hectocelsius<> hectocelsius;
+typedef kilocelsius<> kilocelsius;
+typedef megacelsius<> megacelsius;
+typedef gigacelsius<> gigacelsius;
+typedef teracelsius<> teracelsius;
+typedef petacelsius<> petacelsius;
+typedef exacelsius<> exacelsius;
+typedef zettacelsius<> zettacelsius;
+typedef yottacelsius<> yottacelsius;
 
 
 

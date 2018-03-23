@@ -612,13 +612,13 @@ struct is_Unit<Unit<Dimension, Rep, Period, Origin>> : public std::true_type
 {
 };
 
-/*
+
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-double Unit_Origin_Wrapper(Unit<_Dimension, Rep, Period, Origin>)
+inline constexpr double Unit_Origin_getter(Unit<_Dimension, Rep, Period, Origin>)
 {
   return Origin;
 }
-*/
+
 
 template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
@@ -629,12 +629,12 @@ unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
   typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
 
-  //toUnit var(0);
+  toUnit var(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
+    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
 
-  //common_rep originModifier = static_cast<common_rep>((-Origin + toUnit::Origin) * Period::value);
+  common_rep originModifier = static_cast<common_rep>((-Origin + Unit_Origin_getter(var)) * Period::value);
 
-  return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
-    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den) /*+ originModifier*/));
+  return var += originModifier;
 }
 
 
@@ -675,8 +675,8 @@ public:
   }
 
 
-  template<typename __Dimension, typename _Rep, typename _Period>
-  constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
+  template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
+  constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
   Unit(unit_cast<Unit>(Obj).count())
   {
   }
