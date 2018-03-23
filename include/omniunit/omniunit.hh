@@ -557,7 +557,7 @@ struct Dimension_divide
 
 //it is useless to make this function part of the class Dimension (static constexpr)
 //because std::string is not a litteral : the function cannot be interpreted at
-//compile time, so class Dimension could neither.
+//compile time, so class Dimension could neither (i guess...).
 template<typename dimension>
 typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimension_str()
 {
@@ -588,35 +588,6 @@ typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimen
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== PROPAGATION OF UNCERTAINTIES ============================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-struct PropagationUncertainties
-{
-  enum class Method {linear, quadratic, derived, double_variance};
-  constexpr static Method linear = Method::linear;
-  constexpr static Method quadratic = Method::quadratic;
-  constexpr static Method derived = Method::derived;
-  constexpr static Method double_variance = Method::double_variance;
-
-  static Method sum;
-  static Method product;
-};
-typedef PropagationUncertainties PU;
-
-
-PU::Method PU::sum = PU::quadratic;
-PU::Method PU::product = PU::quadratic;
-
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
 //=== UNIT CAST ===============================================================
 //=============================================================================
 //=============================================================================
@@ -625,8 +596,8 @@ PU::Method PU::product = PU::quadratic;
 
 
 //forward declaration
-//template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero, typename PeriodOrigin = base>
-template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero, typename PeriodOrigin = base>
+//origin is given in official unit (ratio<1, 1>)
+template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
 class Unit;
 
 
@@ -641,6 +612,13 @@ struct is_Unit<Unit<Dimension, Rep, Period, Origin>> : public std::true_type
 {
 };
 
+/*
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+double Unit_Origin_Wrapper(Unit<_Dimension, Rep, Period, Origin>)
+{
+  return Origin;
+}
+*/
 
 template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
 constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
@@ -651,61 +629,14 @@ unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
   typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
 
+  //toUnit var(0);
 
+  //common_rep originModifier = static_cast<common_rep>((-Origin + toUnit::Origin) * Period::value);
 
   return toUnit(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
-    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
+    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den) /*+ originModifier*/));
 }
 
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== DEVIATION CALCULATION ===================================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-enum class Probability {none, uniform, triangular, triangular_asym, normal, arcsinus, uniform_gap};
-
-
-template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
-float getDeviation(Unit<_Dimension, float, Period, Origin, PeriodOrigin> variation, Probability law)
-{
-  if(law == Probability::none)
-    return variation;
-  else if(law == Probability::uniform)
-    return variation / std::sqrt(3.);
-  else if(law == Probability::triangular)
-    return variation / std::sqrt(6.);
-  else if(law == Probability::triangular_asym)
-    return variation / (3. * std::sqrt(2.)); // what about the average ?
-  else if(law == Probability::arcsinus)
-    return variation / std::sqrt(2.);
-  else if(law == Probability::normal)
-    return variation / 3.;
-  else if(law == Probability::uniform_gap)
-    return variation / (2. * std::sqrt(3.));
-}
-
-
-/*
-template <typename T>
-float getAverage(T container)
-{
-
-}
-
-
-template <typename T>
-float getUncertainty(T container)
-{
-
-}
-*/
 
 
 //=============================================================================
@@ -718,7 +649,7 @@ float getUncertainty(T container)
 
 
 
-template<typename _Dimension, typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
+template<typename _Dimension, typename Rep, typename Period, double const& Origin>
 class Unit
 {
 public:
@@ -726,31 +657,27 @@ public:
   typedef Rep rep;
   typedef Period period;
   static constexpr double origin = Origin;
-  typedef PeriodOrigin perOrigin;
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::omni::Dimension.");
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
-  static_assert(is_stb_Ratio<PeriodOrigin>::value, "Fifth template argument of class stb::omni::Unit should be a stb::Ratio.");
-
 
   constexpr Unit() = default;
   Unit(Unit const&) = default;
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
-  constexpr Unit(_Rep const& countArg, float error = 0):
+  constexpr Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>()),
-  _error(error)
+  _dimension(dimension_str<dim>())
   {
   }
 
 
   template<typename __Dimension, typename _Rep, typename _Period>
   constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count(), Obj.uncertainty())
+  Unit(unit_cast<Unit>(Obj).count())
   {
   }
 
@@ -760,7 +687,6 @@ public:
   Unit& operator=(Unit const& Obj)
   {
     _count = Obj._count;
-    _error = Obj._error;
     return *this;
   }
 
@@ -774,12 +700,6 @@ public:
   constexpr Rep count() const
   {
     return _count;
-  }
-
-
-  float uncertainty() const
-  {
-    return _error;
   }
 
 
@@ -910,7 +830,6 @@ public:
 protected:
   Rep _count;
   const std::string _dimension;
-  float _error; //uncertainty in percent (%)
 };
 
 
@@ -927,8 +846,8 @@ protected:
 
 
 
-template<typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
-class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin, PeriodOrigin>
+template<typename Rep, typename Period, double const& Origin>
+class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin>
 {
 
 protected:
@@ -945,7 +864,6 @@ public:
   static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
   "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
-  static_assert(is_stb_Ratio<PeriodOrigin>::value, "Fifth template argument of class stb::omni::Unit should be a stb::Ratio.");
 
 
   constexpr Unit() = default;
@@ -1563,14 +1481,110 @@ T pow(float var, Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& expone
 
 
 
-template <typename Dimension, typename Rep, typename Period, double const& Origin, typename PeriodOrigin>
-std::ostream& operator<<(std::ostream& oss, Unit<Dimension, Rep, Period, Origin, PeriodOrigin> const& Obj)
+template <typename Dimension, typename Rep, typename Period, double const& Origin>
+std::ostream& operator<<(std::ostream& oss, Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
   oss << Obj.count();
   return oss;
 }
 
 
+
+
+
+
+#ifdef OMNI_DISABLE_UNCERTAINTIES
+
+
+
+//template <typename _Dimension, typename Period, double const& Origin>
+//using Unit = 
+
+
+
+#else
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== PROPAGATION OF UNCERTAINTIES ============================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+struct PropagationUncertainties
+{
+  enum class Method {linear, quadratic, derived, double_variance};
+  constexpr static Method linear = Method::linear;
+  constexpr static Method quadratic = Method::quadratic;
+  constexpr static Method derived = Method::derived;
+  constexpr static Method double_variance = Method::double_variance;
+
+  static Method sum;
+  static Method product;
+};
+typedef PropagationUncertainties PU;
+
+
+PU::Method PU::sum = PU::quadratic;
+PU::Method PU::product = PU::quadratic;
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== DEVIATION CALCULATION ===================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+enum class Probability {none, uniform, triangular, triangular_asym, normal, arcsinus, uniform_gap};
+
+
+template <typename _Dimension, typename Period, double const& Origin>
+float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Probability law)
+{
+  if(law == Probability::none)
+    return variation;
+  else if(law == Probability::uniform)
+    return variation / std::sqrt(3.);
+  else if(law == Probability::triangular)
+    return variation / std::sqrt(6.);
+  else if(law == Probability::triangular_asym)
+    return variation / (3. * std::sqrt(2.)); // what about the average ?
+  else if(law == Probability::arcsinus)
+    return variation / std::sqrt(2.);
+  else if(law == Probability::normal)
+    return variation / 3.;
+  else if(law == Probability::uniform_gap)
+    return variation / (2. * std::sqrt(3.));
+}
+
+
+/*
+template <typename T>
+float getAverage(T container)
+{
+
+}
+
+
+template <typename T>
+float getUncertainty(T container)
+{
+
+}
+*/
+
+
+
+#endif // OMNI_DISABLE_UNCERTAINTIES
 
 } //namespace omni
 
@@ -1637,15 +1651,7 @@ Period1, Period2>::type
 
 #ifndef OMNI_DEFAULT_TYPE
 #define OMNI_DEFAULT_TYPE float
-#endif
-
-#ifndef OMNI_DISABLE_UNCERTAINTIES
-//template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
-//using Unit = 
-#else
-//template <typename _Dimension, typename Period, double const& Origin, typename PeriodOrigin>
-//using Unit = 
-#endif
+#endif // OMNI_DEFAULT_TYPE
 
 #include "units/units.hh"
 
