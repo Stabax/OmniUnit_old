@@ -19,8 +19,8 @@ int main()
   omni::def::zedou a(30);
   std::cout<< omni::def::meug(a) << '\n';
 
-  omni::def::celsius temp(0);
-  std::cout << omni::kelvin<float>(temp) << '\n';
+  omni::def::kilocelsius temp(0);
+  std::cout << omni::kilokelvin<float>(temp) << '\n';
 
 
 return 0;

@@ -634,7 +634,7 @@ unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 
   common_rep originModifier = static_cast<common_rep>((-Origin + Unit_Origin_getter(var)) * Period::value);
 
-  return var += originModifier;
+  return var += (toUnit(originModifier) /= toUnit::period::value);
 }
 
 
@@ -668,7 +668,7 @@ public:
 
 
   template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
-  constexpr Unit(_Rep const& countArg):
+  constexpr explicit Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
   _dimension(dimension_str<dim>())
   {
@@ -788,7 +788,8 @@ public:
   {
     if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
-    _count /= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
     return *this;
   }
 
@@ -1016,7 +1017,8 @@ public:
   {
     if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
-    _count /= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
     return *this;
   }
 
