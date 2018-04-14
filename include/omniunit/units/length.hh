@@ -41,7 +41,7 @@ namespace omni
 
 
 
-typedef Dimension<1, 0, 0, 0, 0, 0, 0> Length;
+typedef Dimension<1, 0, 0, 0, 0, 0, 0, 0, 0> Length;
 
 
 

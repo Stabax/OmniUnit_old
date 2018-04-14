@@ -47,8 +47,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace stb
 {
 
+
+
 namespace omni
 {
+
+
 
 //=============================================================================
 //=============================================================================
@@ -114,12 +118,11 @@ public:
 
 //modulo at compile time which can handle floating point.
 template <typename T, typename U>
-constexpr typename std::common_type<
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
-typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
+constexpr typename std::common_type<T, U>::type
 modulo(T const& a, U const& b)
 {
   //static_assert(b < 0 || b > 0, "Division by 0.");
+  static_assert(std::is_arithmetic<T>::value && std::is_arithmetic<U>::value, "Arguments should be arithmetic values.");
   typedef typename std::common_type<T, U>::type common;
   common a2 = static_cast<common>(a);
   common b2 = static_cast<common>(b);
@@ -129,11 +132,11 @@ modulo(T const& a, U const& b)
 
 //there is a standard gcd in c++17. It's too recent.
 template <typename T, typename U>
-constexpr typename std::common_type<
-typename std::enable_if<std::is_arithmetic<T>::value, T>::type,
-typename std::enable_if<std::is_arithmetic<U>::value, U>::type>::type
+constexpr typename std::common_type<T, U>::type
 gcd(T const& a, U const& b)
 {
+  static_assert(std::is_arithmetic<T>::value && std::is_arithmetic<U>::value, "Arguments should be arithmetic values.");
+
   typedef typename std::common_type<T, U>::type common;
   common a2 = static_cast<common>(a);
   common b2 = static_cast<common>(b);
@@ -149,16 +152,19 @@ gcd(T const& a, U const& b)
 }
 
 
-template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
+//test if a double has no decimals and is positive
+template <typename T>
 constexpr bool is_positive_integer(T const& number)
 {
+  static_assert(std::is_arithmetic<T>::value, "Arguments should be arithmetic values.");
+
   T res = number - static_cast<T>(std::floor(number));
   return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
 
 
 //wrapper for function partial specialization emulation
-//allow to replace partial specialization (which doesn't exist for functions) by an overload
+//allow to replace partial specialization (which doesn't exist for functions) with an overload
 template <typename T>
 struct partial_specialization_wrapper
 {
@@ -312,7 +318,7 @@ template <typename ratio>
 struct Ratio_invert
 {
   static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value , "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_stb_Ratio<ratio>::value , "Template parameter should be an OmniUnit ratio.");
 
   typedef Ratio<ratio::den, ratio::num> type;
 };
@@ -321,7 +327,7 @@ struct Ratio_invert
 template <typename ratio1, typename ratio2>
 class Ratio_multiply
 {
-  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::num, ratio1::den * ratio2::den);
   static constexpr double num = (ratio1::num * ratio2::num) / _gcd;
@@ -334,8 +340,8 @@ public:
 template <typename ratio, double const& val>
 class Ratio_times_value
 {
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
-  static_assert(is_positive_integer(val), "Value in stb::omni::Ratio_times_value may not have decimals and may be positive.");
+  static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
+  static_assert(is_positive_integer(val), "Second template parameter may not have decimals and may be positive.");
 
   static constexpr double _gcd = gcd(ratio::num * val, ratio::den);
   static constexpr double num = (ratio::num * val) / _gcd;
@@ -348,8 +354,8 @@ public:
 template <double const& val, typename ratio>
 struct value_times_Ratio
 {
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
-  static_assert(is_positive_integer(val), "Value in stb::omni::value_times_Ratio may not have decimals and may be positive.");
+  static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
+  static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
 
   typedef typename Ratio_times_value<ratio, val>::type type;
 };
@@ -359,7 +365,7 @@ template <typename ratio1, typename ratio2>
 class Ratio_divide
 {
   static_assert(ratio2::num > 0 || ratio2::num < 0, "Denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Bad type, need a stb::omni::Ratio.");
+  static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
   static constexpr double num = (ratio1::num * ratio2::den) / _gcd;
@@ -373,8 +379,8 @@ template <typename ratio, double const& val>
 class Ratio_over_value
 {
   static_assert(val > 0 || val < 0, "Denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
-  static_assert(is_positive_integer(val), "Value in stb::omni::Ratio_over_value may not have decimals and may be positive.");
+  static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
+  static_assert(is_positive_integer(val), "Second template parameter may not have decimals and may be positive.");
 
 
   static constexpr double _gcd = gcd(ratio::num, ratio::den * val);
@@ -389,8 +395,8 @@ template <double const& val, typename ratio>
 class value_over_Ratio
 {
   static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
-  static_assert(is_stb_Ratio<ratio>::value, "Bad type, need a stb::omni::Ratio.");
-  static_assert(is_positive_integer(val), "Value in stb::omni::value_over_Ratio may not have decimals and may be positive.");
+  static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
+  static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
 
 
   static constexpr double _gcd = gcd(val * ratio::den, ratio::num);
@@ -425,9 +431,9 @@ struct is_std_Ratio<std::ratio<Num, Den>> : public std::true_type
 
 
 template<typename _stdRatio>
-struct Ratio_std_to_stb
+struct Ratio_std_to_omni
 {
-  static_assert(is_std_Ratio<_stdRatio>::value, "Need std::ratio in Ratio_converter_std_stb.");
+  static_assert(is_std_Ratio<_stdRatio>::value, "Template parameter should be a standard ratio.");
 
   static constexpr double num = static_cast<double>(_stdRatio::num);
   static constexpr double den = static_cast<double>(_stdRatio::den);
@@ -437,9 +443,9 @@ struct Ratio_std_to_stb
 
 
 template<typename _stbRatio>
-struct Ratio_stb_to_std
+struct Ratio_omni_to_std
 {
-  static_assert(is_stb_Ratio<_stbRatio>::value, "Need stb::omni::Ratio in Ratio_converter_stb_std.");
+  static_assert(is_stb_Ratio<_stbRatio>::value, "Template parameter should be an OmniUnit ratio.");
   static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
   static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
 
@@ -493,7 +499,7 @@ typedef Ratio<E24, E0> yotta;
 
 
 template<int _length, int _mass, int _time, int _current,
-int _temperature, int _quantity, int _luminosity>
+int _temperature, int _quantity, int _luminosity, int _angle, int _solid_angle>
 struct Dimension
 {
   static constexpr int length = _length;
@@ -503,6 +509,8 @@ struct Dimension
   static constexpr int temperature = _temperature;
   static constexpr int quantity = _quantity;
   static constexpr int luminosity = _luminosity;
+  static constexpr int angle = _angle;
+  static constexpr int solid_angle = _solid_angle;
 };
 
 
@@ -513,9 +521,9 @@ struct is_Dimension : std::false_type
 
 
 template<int length, int mass, int time, int current,
-int temperature, int quantity, int luminosity>
+int temperature, int quantity, int luminosity, int angle, int solid_angle>
 struct is_Dimension<Dimension<length, mass, time, current,
-temperature, quantity, luminosity>> : public std::true_type
+temperature, quantity, luminosity, angle, solid_angle>> : public std::true_type
 {
 };
 
@@ -524,7 +532,7 @@ template <typename dim1, typename dim2>
 struct Dimension_multiply
 {
   static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value,
-  "Bad type, need a stb::omni::Dimension.");
+  "Template parameters should be dimensions.");
 
   typedef Dimension<
   dim1::length + dim2::length,
@@ -533,7 +541,9 @@ struct Dimension_multiply
   dim1::current + dim2::current,
   dim1::temperature + dim2::temperature,
   dim1::quantity + dim2::quantity,
-  dim1::luminosity + dim2::luminosity
+  dim1::luminosity + dim2::luminosity,
+  dim1::angle + dim2::angle,
+  dim1::solid_angle + dim2::solid_angle
   > type;
 };
 
@@ -542,7 +552,7 @@ template <typename dim1, typename dim2>
 struct Dimension_divide
 {
   static_assert(is_Dimension<dim1>::value && is_Dimension<dim2>::value,
-  "Bad type, need a stb::Dimension.");
+  "Template parameters should be dimensions.");
 
   typedef Dimension<
   dim1::length - dim2::length,
@@ -551,7 +561,10 @@ struct Dimension_divide
   dim1::current - dim2::current,
   dim1::temperature - dim2::temperature,
   dim1::quantity - dim2::quantity,
-  dim1::luminosity - dim2::luminosity> type;
+  dim1::luminosity - dim2::luminosity,
+  dim1::angle - dim2::angle,
+  dim1::solid_angle - dim2::solid_angle
+  > type;
 };
 
 
@@ -577,6 +590,10 @@ typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimen
     dim += ("[N" + std::to_string(dimension::quantity) + "]");
   if(dimension::luminosity != 0)
     dim += ("[J" + std::to_string(dimension::luminosity) + "]");
+  if(dimension::angle != 0)
+  dim += ("[a" + std::to_string(dimension::angle) + "]");
+  if(dimension::solid_angle != 0)
+  dim += ("[sa" + std::to_string(dimension::solid_angle) + "]");
   if(dim.length() == 0)
     dim = "[/]";
 
@@ -632,7 +649,7 @@ unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
   toUnit var(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
     * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
 
-  common_rep originModifier = static_cast<common_rep>((-Origin + Unit_Origin_getter(var)) * Period::value);
+  common_rep originModifier = static_cast<common_rep>(-Origin + Unit_Origin_getter(var));
 
   return var += (toUnit(originModifier) /= toUnit::period::value);
 }
@@ -658,20 +675,20 @@ public:
   typedef Period period;
   static constexpr double origin = Origin;
 
-  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::omni::Dimension.");
-  static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
-  "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
+  static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
+  static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
 
   constexpr Unit() = default;
   Unit(Unit const&) = default;
 
 
-  template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
+  template<typename _Rep>
   constexpr explicit Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
   _dimension(dimension_str<dim>())
   {
+    static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 
@@ -683,6 +700,7 @@ public:
 
 
   ~Unit() = default;
+
 
   Unit& operator=(Unit const& Obj)
   {
@@ -770,15 +788,17 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
-    _count *= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
     return *this;
   }
 
 
   template<typename _Rep, typename _Period>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(Obj.count()));
     return *this;
   }
 
@@ -795,12 +815,13 @@ public:
 
 
   template<typename _Rep, typename _Period>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count >= 0 && count <= 0)
       throw Unit_exception("Divide by 0.");
-    _count /= count;
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(Obj.count()));
     return *this;
   }
 
@@ -818,9 +839,9 @@ public:
 
   template<typename _Rep, typename _Period>
   typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
     _count %= count;
@@ -848,11 +869,11 @@ protected:
 
 
 template<typename Rep, typename Period, double const& Origin>
-class Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin>
+class Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin>
 {
 
 protected:
-  typedef Dimension<0,0,1,0,0,0,0> _Dimension;
+  typedef Dimension<0,0,1,0,0,0,0,0,0> _Dimension;
 
 
 public:
@@ -861,10 +882,9 @@ public:
   typedef Period period;
 
 
-  static_assert(is_Dimension<_Dimension>::value, "First template argument of class stb::Unit sould be a stb::omni::Dimension.");
-  static_assert(std::is_floating_point<Rep>::value || std::is_integral<Rep>::value,
-  "Second template argument of class stb::omni::Unit should be a floating point or an inegral type.");
-  static_assert(is_stb_Ratio<Period>::value, "Third template argument of class stb::omni::Unit should be a stb::Ratio.");
+  static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
+  static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument should be a ratio from OmniUnit.");
 
 
   constexpr Unit() = default;
@@ -888,7 +908,7 @@ public:
 
   template<typename _Rep, typename _Period>
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dim, _Rep, typename Ratio_std_to_stb<_Period>::type>(Obj.count()))
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(Obj.count()))
   {
   }
 
@@ -916,7 +936,7 @@ public:
   {
     return std::chrono::duration<_Rep, _Period>
     (unit_cast<Unit<dim, _Rep,
-    typename Ratio_std_to_stb<_Period>::type>>(*this).count());
+    typename Ratio_std_to_omni<_Period>::type>>(*this).count());
   }
 
 
@@ -1005,9 +1025,9 @@ public:
 
 
   template<typename _Rep, typename _Period>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     return *this;
   }
 
@@ -1023,9 +1043,9 @@ public:
   }
 
   template<typename _Rep, typename _Period>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count >= 0 && count <= 0)
       throw Unit_exception("Divide by 0.");
     _count /= count;
@@ -1046,9 +1066,9 @@ public:
 
   template<typename _Rep, typename _Period>
   typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
     _count %= count;
@@ -1079,11 +1099,11 @@ protected:
 //called if toUnit equals stb::duration
 //cast stb::duration to another stb::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>>,
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
-  return unit_cast<toUnit, Dimension<0, 0, 1, 0, 0, 0, 0>>(Obj);
+  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
 }
 
 
@@ -1092,7 +1112,7 @@ Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
 template <typename toUnit, typename Rep, typename Period>
 constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
 unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return toUnit(Obj);
 }
@@ -1100,7 +1120,7 @@ Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
 
 //cast stb::duration to toUnit
 template <typename toUnit, typename Rep, typename Period>
-constexpr toUnit unit_cast(Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> const& Obj)
+constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
 }
@@ -1109,8 +1129,8 @@ constexpr toUnit unit_cast(Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, Rep, Period> con
 //called if toUnit equals stb::duration
 //cast std::chrono::duration to stb::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0, 0, 1, 0, 0, 0, 0>, typename toUnit::rep, typename toUnit::period>>,
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -1257,7 +1277,7 @@ operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, P
 
 
 template <typename _Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0>, _Dimension>::type,
+constexpr Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
 typename std::common_type<Rep, typename
 std::enable_if<!is_Unit<T>::value, T>::type>::type,
 typename Ratio_divide<Ratio<E0, E0>, Period>::type>
@@ -1267,7 +1287,7 @@ operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
     throw Unit_exception("Divide by 0.");
 
   typedef typename std::common_type<Rep, T>::type common;
-  typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0>, _Dimension>::type newDim;
+  typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
   typedef typename Ratio_divide<Ratio<E0, E0>, Period>::type newPeriod;
   typedef Unit<newDim, common, newPeriod> type;
 
@@ -1276,13 +1296,13 @@ operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 
 
 template <typename _Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<Dimension<0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period>
+constexpr Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period>
 operator% (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
     throw Unit_exception("Divide by 0.");
 
-  typedef Unit<Dimension<0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period> type;
+  typedef Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period> type;
   return type(modulo(coef, Obj.count()));
 }
 
@@ -1401,28 +1421,28 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> exp(Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& Obj)
+Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return std::exp(Obj.count());
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> exp(Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& Obj, float basis)
+Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
 {
   return std::exp(Obj.count() * std::log(basis));
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> log(Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& Obj)
+Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return std::log(Obj.count());
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> log(Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& Obj, float basis)
+Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
 {
   return std::log(Obj.count()) / std::log(basis);
 }
@@ -1440,7 +1460,7 @@ Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> log(Unit<Dimension<0, 0, 0, 0,
 
 
 template <typename Rep, typename Period, typename T = float>
-T pow(float var, Unit<Dimension<0, 0, 0, 0, 0, 0, 0>, Rep, Period> const& exponent)
+T pow(float var, Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& exponent)
 {
   return std::pow(var, exponent.count()); //A REFAIRE
 }
