@@ -130,6 +130,31 @@ modulo(T const& a, U const& b)
 }
 
 
+static constexpr double zero = 0.;
+
+/*
+//The goal is to replace function gcd by type_trait gcd to allow the static_assertion
+//in modulo. However, this doesn't work because modulo is not done at compile time
+//because of std::floor...
+
+template <double const& a, double const& b>
+struct gcd_impl
+{
+  static constexpr double c = modulo(a, b);
+  static constexpr double value = gcd_impl<b, c>::value;
+
+};
+
+
+template <double const& a>
+struct gcd_impl<a, zero>
+{
+  static constexpr double value = a;
+
+};
+*/
+
+
 //there is a standard gcd in c++17. It's too recent.
 template <typename T, typename U>
 constexpr typename std::common_type<T, U>::type
@@ -182,7 +207,6 @@ struct partial_specialization_wrapper
 
 
 
-static constexpr double zero = 0.;
 static constexpr double E0  = 1.;
 static constexpr double E1  = 10.;
 static constexpr double E2  = 100.;
@@ -572,8 +596,10 @@ struct Dimension_divide
 //because std::string is not a litteral : the function cannot be interpreted at
 //compile time, so class Dimension could neither (i guess...).
 template<typename dimension>
-typename std::enable_if<is_Dimension<dimension>::value, std::string>::type dimension_str()
+std::string dimension_str()
 {
+  static_assert(is_Dimension<dimension>::value, "Template parameter should be dimension.");
+  
   std::string dim = "";
 
   if(dimension::length != 0)
@@ -638,9 +664,9 @@ inline constexpr double Unit_Origin_getter(Unit<_Dimension, Rep, Period, Origin>
 
 
 template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
-constexpr typename std::enable_if<is_Unit<toUnit>::value, toUnit>::type
-unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
+constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 {
+  static_assert(is_Unit<toUnit>::value, "First template argument should be a unit");
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
@@ -827,9 +853,9 @@ public:
 
 
   template <typename _Rep>
-  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(_Rep const& coef)
+  Unit& operator%=(_Rep const& coef)
   {
+    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
     _count %= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
@@ -838,9 +864,9 @@ public:
 
 
   template<typename _Rep, typename _Period>
-  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
+    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
@@ -891,11 +917,12 @@ public:
   Unit(Unit const&) = default;
 
 
-  template<typename _Rep, typename = typename std::enable_if<std::is_convertible<_Rep, Rep>::value>>
+  template<typename _Rep>
   constexpr Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg)),
   _dimension(dimension_str<dim>())
   {
+    static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 
@@ -1054,9 +1081,9 @@ public:
 
 
   template <typename _Rep>
-  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(_Rep const& coef)
+  Unit& operator%=(_Rep const& coef)
   {
+    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
     _count %= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
@@ -1065,9 +1092,9 @@ public:
 
 
   template<typename _Rep, typename _Period>
-  typename std::enable_if<! std::is_floating_point<_Rep>::value, Unit&>::type
-  operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
   {
+    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
     if(count == 0)
       throw Unit_exception("Divide by 0.");
