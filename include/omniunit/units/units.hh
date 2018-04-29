@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "duration.hh"
 #include "electric_intensity.hh"
 #include "length.hh"
-#include "luminosity.hh"
+#include "luminous_intensity.hh"
 #include "mass.hh"
 #include "quantity.hh"
 #include "temperature.hh"

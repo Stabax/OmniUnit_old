@@ -1,4 +1,4 @@
-//quantity.hh
+//luminous_intensity.hh
 
 /*
 Copyright (c) 1998, Regents of the University of California All rights
@@ -26,10 +26,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef QUANTITY_HH_
-#define QUANTITY_HH_
+#ifndef LUMINOUS_INTENSITY_HH_
+#define LUMINOUS_INTENSITY_HH_
 
-#include"constants_for_units.hh"
+#include "constants_for_units.hh"
 
 namespace stb
 {
@@ -41,77 +41,73 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 0, 0, 0, 1, 0, 0, 0> Quantity;
+typedef Dimension<0, 0, 0, 0, 0, 0, 1, 0, 0> LuminousIntensity;
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctomol = Unit<Quantity, Rep, yocto>;
+using yoctocandela = Unit<LuminousIntensity, Rep, yocto>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptomol = Unit<Quantity, Rep, zepto>;
+using zeptocandela = Unit<LuminousIntensity, Rep, zepto>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attomol = Unit<Quantity, Rep, atto>;
+using attocandela = Unit<LuminousIntensity, Rep, atto>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtomol = Unit<Quantity, Rep, femto>;
+using femtocandela = Unit<LuminousIntensity, Rep, femto>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picomol = Unit<Quantity, Rep, pico>;
+using picocandela = Unit<LuminousIntensity, Rep, pico>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanomol = Unit<Quantity, Rep, nano>;
+using nanocandela = Unit<LuminousIntensity, Rep, nano>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using micromol = Unit<Quantity, Rep, micro>;
+using microcandela = Unit<LuminousIntensity, Rep, micro>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millimol = Unit<Quantity, Rep, milli>;
+using millicandela = Unit<LuminousIntensity, Rep, milli>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centimol = Unit<Quantity, Rep, centi>;
+using centicandela = Unit<LuminousIntensity, Rep, centi>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decimol = Unit<Quantity, Rep, deci>;
+using decicandela = Unit<LuminousIntensity, Rep, deci>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using mol = Unit<Quantity, Rep, base>;
+using candela = Unit<LuminousIntensity, Rep, base>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decamol = Unit<Quantity, Rep, deca>;
+using decacandela = Unit<LuminousIntensity, Rep, deca>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectomol = Unit<Quantity, Rep, hecto>;
+using hectocandela = Unit<LuminousIntensity, Rep, hecto>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilomol = Unit<Quantity, Rep, kilo>;
+using kilocandela = Unit<LuminousIntensity, Rep, kilo>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megamol = Unit<Quantity, Rep, mega>;
+using megacandela = Unit<LuminousIntensity, Rep, mega>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigamol = Unit<Quantity, Rep, giga>;
+using gigacandela = Unit<LuminousIntensity, Rep, giga>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teramol = Unit<Quantity, Rep, tera>;
+using teracandela = Unit<LuminousIntensity, Rep, tera>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petamol = Unit<Quantity, Rep, peta>;
+using petacandela = Unit<LuminousIntensity, Rep, peta>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using examol = Unit<Quantity, Rep, exa>;
+using exacandela = Unit<LuminousIntensity, Rep, exa>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettamol = Unit<Quantity, Rep, zetta>;
+using zettacandela = Unit<LuminousIntensity, Rep, zetta>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottamol = Unit<Quantity, Rep, yotta>;
+using yottacandela = Unit<LuminousIntensity, Rep, yotta>;
 
-
-
-template <typename Rep = OMNI_DEFAULT_TYPE>
-using unitary_quantity = Unit<Quantity, Rep, unitaryQuantityDefinition>;
 
 
 
@@ -120,27 +116,25 @@ namespace def
 
 
 
-typedef zeptomol<> zeptomol;
-typedef femtomol<>  femtomol;
-typedef picomol<> picomol;
-typedef nanomol<> nanomol;
-typedef micromol<> micromol;
-typedef millimol<> millimol;
-typedef centimol<> centimol;
-typedef decimol<> decimol;
-typedef mol<> mol;
-typedef decamol<> decamol;
-typedef hectomol<> hectomol;
-typedef kilomol<> kilomol;
-typedef megamol<> megamol;
-typedef gigamol<> gigamol;
-typedef teramol<> teramol;
-typedef petamol<> petamol;
-typedef examol<> examol;
-typedef zettamol<> zettamol;
-typedef yottamol<> yottamol;
-
-typedef unitary_quantity<> rawQuantity;
+typedef zeptocandela<> zeptocandela;
+typedef femtocandela<>  femtocandela;
+typedef picocandela<> picocandela;
+typedef nanocandela<> nanocandela;
+typedef microcandela<> microcandela;
+typedef millicandela<> millicandela;
+typedef centicandela<> centicandela;
+typedef decicandela<> decicandela;
+typedef candela<> candela;
+typedef decacandela<> decacandela;
+typedef hectocandela<> hectocandela;
+typedef kilocandela<> kilocandela;
+typedef megacandela<> megacandela;
+typedef gigacandela<> gigacandela;
+typedef teracandela<> teracandela;
+typedef petacandela<> petacandela;
+typedef exacandela<> exacandela;
+typedef zettacandela<> zettacandela;
+typedef yottacandela<> yottacandela;
 
 
 
@@ -154,4 +148,4 @@ typedef unitary_quantity<> rawQuantity;
 
 } //namespace stb
 
-#endif //QUANTITY_HH_
+#endif //LUMINOUS_INTENSITY_HH_

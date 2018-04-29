@@ -22,6 +22,12 @@ int main()
   omni::def::kilocelsius temp(0);
   std::cout << omni::kilokelvin<float>(temp) << '\n';
 
+  //auto b = a * temp;
+  //std::cout << b << b.dimension() <<'\n';
+
+  omni::Unit<omni::Dimension<0,0,0,0,0,0,0,0,0>, int, omni::base, omni::E2> scalar(10);
+  omni::hour<float> h(54);
+  h %= scalar;
 
 return 0;
 }

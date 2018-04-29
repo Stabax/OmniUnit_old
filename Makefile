@@ -1,4 +1,4 @@
-CC = g++
+CXX = g++
 
 RM = rm -rf
 
@@ -29,7 +29,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(BINDIR)/$(NAME) $(CXXFLAGS)
+	$(CXX) $(OBJS) -o $(BINDIR)/$(NAME) $(CXXFLAGS)
 
 clean:
 	$(RM) $(OBJS)

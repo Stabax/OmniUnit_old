@@ -711,8 +711,7 @@ public:
 
   template<typename _Rep>
   constexpr explicit Unit(_Rep const& countArg):
-  _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>())
+  _count(static_cast<Rep>(countArg))
   {
     static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
@@ -820,11 +819,12 @@ public:
   }
 
 
-  template<typename _Rep, typename _Period>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
     typedef typename std::common_type<Rep, _Rep>::type common;
-    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(Obj.count()));
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    _count = static_cast<Rep>(static_cast<common>(_count) * newObj.count());
     return *this;
   }
 
@@ -840,14 +840,14 @@ public:
   }
 
 
-  template<typename _Rep, typename _Period>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
-    if(count >= 0 && count <= 0)
-      throw Unit_exception("Divide by 0.");
     typedef typename std::common_type<Rep, _Rep>::type common;
-    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(Obj.count()));
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    if(newObj.count() >= 0 && newObj.count() <= 0)
+      throw Unit_exception("Divide by 0.");
+    _count = static_cast<Rep>(static_cast<common>(_count) / newObj.count());
     return *this;
   }
 
@@ -855,29 +855,26 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
-    _count %= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    _count = static_cast<Rep>(modulo(_count, coef));
     return *this;
   }
 
 
-  template<typename _Rep, typename _Period>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
-    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
-    if(count == 0)
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base> newObj(Obj);
+    if(newObj.count() == 0) //possible because newObj::rep is integer
       throw Unit_exception("Divide by 0.");
-    _count %= count;
+    _count = static_cast<Rep>(modulo(_count, newObj.count()));
     return *this;
   }
 
 
 protected:
   Rep _count;
-  const std::string _dimension;
 };
 
 
@@ -919,23 +916,22 @@ public:
 
   template<typename _Rep>
   constexpr Unit(_Rep const& countArg):
-  _count(static_cast<Rep>(countArg)),
-  _dimension(dimension_str<dim>())
+  _count(static_cast<Rep>(countArg))
   {
     static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 
-  template<typename __Dimension, typename _Rep, typename _Period>
-  constexpr Unit(Unit<__Dimension, _Rep, _Period> const& Obj):
+  template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
+  constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
   Unit(unit_cast<Unit>(Obj).count())
   {
   }
 
 
-  template<typename _Rep, typename _Period>
+  template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(Obj.count()))
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
   {
   }
 
@@ -950,7 +946,7 @@ public:
   }
 
 
-  template<typename _Rep, typename _Period>
+  template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
     _count = Unit(Obj).count();
@@ -958,12 +954,10 @@ public:
   }
 
 
-  template<typename _Rep, typename _Period>
+  template<typename _Rep, typename _Period> //transform a stb::omni::duration into a std::chrono::duration
   operator std::chrono::duration<_Rep, _Period>() const
   {
-    return std::chrono::duration<_Rep, _Period>
-    (unit_cast<Unit<dim, _Rep,
-    typename Ratio_std_to_omni<_Period>::type>>(*this).count());
+    return std::chrono::duration<_Rep, _Period>(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(*this).count());
   }
 
 
@@ -1043,18 +1037,21 @@ public:
   }
 
 
-  template<typename T>
-  Unit& operator*=(T const& coef)
+  template<typename _Rep>
+  Unit& operator*=(_Rep const& coef)
   {
-    _count *= static_cast<typename std::common_type<Rep, T>::type>(coef);
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
     return *this;
   }
 
 
-  template<typename _Rep, typename _Period>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
-    _count *= unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    _count = static_cast<Rep>(static_cast<common>(_count) * newObj.count());
     return *this;
   }
 
@@ -1069,13 +1066,15 @@ public:
     return *this;
   }
 
-  template<typename _Rep, typename _Period>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
-    if(count >= 0 && count <= 0)
+    typedef typename std::common_type<Rep, _Rep>::type common;
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    if(newObj.count() >= 0 && newObj.count() <= 0)
       throw Unit_exception("Divide by 0.");
-    _count /= count;
+    _count = static_cast<Rep>(static_cast<common>(_count) / newObj.count());
     return *this;
   }
 
@@ -1083,22 +1082,20 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
     if(coef == 0)
       throw Unit_exception("Divide by 0.");
-    _count %= static_cast<typename std::common_type<Rep, _Rep>::type>(coef);
+    _count = static_cast<Rep>(modulo(_count, coef));
     return *this;
   }
 
 
-  template<typename _Rep, typename _Period>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period> const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
-    static_assert(! std::is_floating_point<_Rep>::value, "Argument should be integer.");
-    Rep count = unit_cast<Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period>>(Obj).count();
-    if(count == 0)
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base> newObj(Obj);
+    if(newObj.count() == 0) //possible because newObj::rep is integer
       throw Unit_exception("Divide by 0.");
-    _count %= count;
+    _count = static_cast<Rep>(modulo(_count, newObj.count()));
     return *this;
   }
 
@@ -1106,7 +1103,6 @@ public:
 
 protected:
   Rep _count;
-  const std::string _dimension;
 };
 
 

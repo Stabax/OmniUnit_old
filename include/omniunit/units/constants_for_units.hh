@@ -65,7 +65,7 @@ typedef Ratio_over_value<Ratio<evPerC2DefE8, E8>, E36>::type evPerC2Definition;
 typedef Ratio_times_value<Ratio<solar_massDefE4, E4>, E30>::type solar_massDefinition;
 typedef Ratio_over_value<secondsIn1Year, monthsIn1Year>::type secondsIn1Month;
 typedef Ratio_times_value<Ratio<avogadroE9, E9>, E23>::type avogadro;
-typedef Ratio_invert<avogadro>::type rawQuantityDefinition;
+typedef Ratio_invert<avogadro>::type unitaryQuantityDefinition;
 
 
 
