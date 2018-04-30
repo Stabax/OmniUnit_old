@@ -46,67 +46,67 @@ typedef Dimension<0, 0, 0, 1, 0, 0, 0, 0, 0> ElectricIntensity;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctoampere = Unit<ElectricIntensity, Rep, yocto>;
+using yoctoampere = Unit<ElectricIntensity, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptoampere = Unit<ElectricIntensity, Rep, zepto>;
+using zeptoampere = Unit<ElectricIntensity, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attoampere = Unit<ElectricIntensity, Rep, atto>;
+using attoampere = Unit<ElectricIntensity, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtoampere = Unit<ElectricIntensity, Rep, femto>;
+using femtoampere = Unit<ElectricIntensity, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picoampere = Unit<ElectricIntensity, Rep, pico>;
+using picoampere = Unit<ElectricIntensity, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanoampere = Unit<ElectricIntensity, Rep, nano>;
+using nanoampere = Unit<ElectricIntensity, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microampere = Unit<ElectricIntensity, Rep, micro>;
+using microampere = Unit<ElectricIntensity, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using milliampere = Unit<ElectricIntensity, Rep, milli>;
+using milliampere = Unit<ElectricIntensity, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centiampere = Unit<ElectricIntensity, Rep, centi>;
+using centiampere = Unit<ElectricIntensity, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using deciampere = Unit<ElectricIntensity, Rep, deci>;
+using deciampere = Unit<ElectricIntensity, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using ampere = Unit<ElectricIntensity, Rep, base>;
+using ampere = Unit<ElectricIntensity, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decaampere = Unit<ElectricIntensity, Rep, deca>;
+using decaampere = Unit<ElectricIntensity, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectoampere = Unit<ElectricIntensity, Rep, hecto>;
+using hectoampere = Unit<ElectricIntensity, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kiloampere = Unit<ElectricIntensity, Rep, kilo>;
+using kiloampere = Unit<ElectricIntensity, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megaampere = Unit<ElectricIntensity, Rep, mega>;
+using megaampere = Unit<ElectricIntensity, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigaampere = Unit<ElectricIntensity, Rep, giga>;
+using gigaampere = Unit<ElectricIntensity, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teraampere = Unit<ElectricIntensity, Rep, tera>;
+using teraampere = Unit<ElectricIntensity, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petaampere = Unit<ElectricIntensity, Rep, peta>;
+using petaampere = Unit<ElectricIntensity, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exaampere = Unit<ElectricIntensity, Rep, exa>;
+using exaampere = Unit<ElectricIntensity, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettaampere = Unit<ElectricIntensity, Rep, zetta>;
+using zettaampere = Unit<ElectricIntensity, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottaampere = Unit<ElectricIntensity, Rep, yotta>;
+using yottaampere = Unit<ElectricIntensity, Rep, yotta, zero>;
 
 
 

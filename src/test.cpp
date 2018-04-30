@@ -29,5 +29,11 @@ int main()
   omni::hour<float> h(54);
   h %= scalar;
 
+  omni::def::second sec(2);
+  auto ya6ak = omni::duration_cast<omni::def::hour>(sec);
+
+  typedef typename std::common_type<omni::def::petameter, omni::def::femtometer>::type YABOK;
+  std::cout << YABOK::period::num << "  " << YABOK::period::den << "\n";
+
 return 0;
 }

@@ -83,101 +83,101 @@ toUnit duration_cast(std::chrono::duration<Rep, Period> const& Obj)
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctosecond = Unit<Duration, Rep, yocto>;
+using yoctosecond = Unit<Duration, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptosecond = Unit<Duration, Rep, zepto>;
+using zeptosecond = Unit<Duration, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attosecond = Unit<Duration, Rep, atto>;
+using attosecond = Unit<Duration, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtosecond = Unit<Duration, Rep, femto>;
+using femtosecond = Unit<Duration, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picosecond = Unit<Duration, Rep, pico>;
+using picosecond = Unit<Duration, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanosecond = Unit<Duration, Rep, nano>;
+using nanosecond = Unit<Duration, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microsecond = Unit<Duration, Rep, micro>;
+using microsecond = Unit<Duration, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millisecond = Unit<Duration, Rep, milli>;
+using millisecond = Unit<Duration, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centisecond = Unit<Duration, Rep, centi>;
+using centisecond = Unit<Duration, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decisecond = Unit<Duration, Rep, deci>;
+using decisecond = Unit<Duration, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using second = Unit<Duration, Rep, base>;
+using second = Unit<Duration, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decasecond = Unit<Duration, Rep, deca>;
+using decasecond = Unit<Duration, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectosecond = Unit<Duration, Rep, hecto>;
+using hectosecond = Unit<Duration, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilosecond = Unit<Duration, Rep, kilo>;
+using kilosecond = Unit<Duration, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megasecond = Unit<Duration, Rep, mega>;
+using megasecond = Unit<Duration, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigasecond = Unit<Duration, Rep, giga>;
+using gigasecond = Unit<Duration, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using terasecond = Unit<Duration, Rep, tera>;
+using terasecond = Unit<Duration, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petasecond = Unit<Duration, Rep, peta>;
+using petasecond = Unit<Duration, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exasecond = Unit<Duration, Rep, exa>;
+using exasecond = Unit<Duration, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettasecond = Unit<Duration, Rep, zetta>;
+using zettasecond = Unit<Duration, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottasecond = Unit<Duration, Rep, yotta>;
+using yottasecond = Unit<Duration, Rep, yotta, zero>;
 
 
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using minute = Unit<Duration, Rep, Ratio<secondsIn1Min, E0>>;
+using minute = Unit<Duration, Rep, Ratio<secondsIn1Min, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hour = Unit<Duration, Rep, Ratio<secondsIn1Hour, E0>>;
+using hour = Unit<Duration, Rep, Ratio<secondsIn1Hour, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using day = Unit<Duration, Rep, Ratio<secondsIn1Day, E0>>;
+using day = Unit<Duration, Rep, Ratio<secondsIn1Day, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using week = Unit<Duration, Rep, Ratio<secondsIn1Week, E0>>;
+using week = Unit<Duration, Rep, Ratio<secondsIn1Week, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using month = Unit<Duration, Rep, secondsIn1Month>;
+using month = Unit<Duration, Rep, secondsIn1Month, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using year = Unit<Duration, Rep, secondsIn1Year>;
+using year = Unit<Duration, Rep, secondsIn1Year, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloyear = Unit<Duration, Rep, typename Ratio_multiply<
-typename year<Rep>::period, kilo>::type>;
+typename year<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using megayear = Unit<Duration, Rep, typename Ratio_multiply<
-typename year<Rep>::period, mega>::type>;
+typename year<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigayear = Unit<Duration, Rep, typename Ratio_multiply<
-typename year<Rep>::period, giga>::type>;
+typename year<Rep>::period, giga>::type, zero>;
 
 
 

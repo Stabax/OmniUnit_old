@@ -48,64 +48,64 @@ typedef Dimension<0, 1, 0, 0, 0, 0, 0, 0, 0> Mass;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptogram = Unit<Mass, Rep, yocto>;
+using zeptogram = Unit<Mass, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attogram = Unit<Mass, Rep, zepto>;
+using attogram = Unit<Mass, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtogram = Unit<Mass, Rep, atto>;
+using femtogram = Unit<Mass, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picogram = Unit<Mass, Rep, femto>;
+using picogram = Unit<Mass, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanogram = Unit<Mass, Rep, pico>;
+using nanogram = Unit<Mass, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microgram = Unit<Mass, Rep, nano>;
+using microgram = Unit<Mass, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using milligram = Unit<Mass, Rep, micro>;
+using milligram = Unit<Mass, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centigram = Unit<Mass, Rep, Ratio<E0, E5>>;
+using centigram = Unit<Mass, Rep, Ratio<E0, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decigram = Unit<Mass, Rep, Ratio<E0, E4>>;
+using decigram = Unit<Mass, Rep, Ratio<E0, E4>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gram = Unit<Mass, Rep, milli>;
+using gram = Unit<Mass, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decagram = Unit<Mass, Rep, Ratio<E0, E2>>;
+using decagram = Unit<Mass, Rep, Ratio<E0, E2>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectogram = Unit<Mass, Rep, Ratio<E0, E1>>;
+using hectogram = Unit<Mass, Rep, Ratio<E0, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilogram = Unit<Mass, Rep, base>;
+using kilogram = Unit<Mass, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megagram = Unit<Mass, Rep, kilo>;
+using megagram = Unit<Mass, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigagram = Unit<Mass, Rep, mega>;
+using gigagram = Unit<Mass, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teragram = Unit<Mass, Rep, giga>;
+using teragram = Unit<Mass, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petagram = Unit<Mass, Rep, tera>;
+using petagram = Unit<Mass, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exagram = Unit<Mass, Rep, peta>;
+using exagram = Unit<Mass, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettagram = Unit<Mass, Rep, exa>;
+using zettagram = Unit<Mass, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottagram = Unit<Mass, Rep, zetta>;
+using yottagram = Unit<Mass, Rep, zetta, zero>;
 
 
 
@@ -113,34 +113,34 @@ using yottagram = Unit<Mass, Rep, zetta>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using atomic_mass = Unit<Mass, Rep, typename Ratio_multiply<
-atomic_massDefinition, Ratio<E0, E27>>::type>;
+atomic_massDefinition, Ratio<E0, E27>>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using evPerC2 = Unit<Mass, Rep, evPerC2Definition>;
+using evPerC2 = Unit<Mass, Rep, evPerC2Definition, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using millievPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, milli>::type>;
+typename evPerC2<Rep>::period, milli>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using microevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, micro>::type>;
+typename evPerC2<Rep>::period, micro>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, kilo>::type>;
+typename evPerC2<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using megaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, mega>::type>;
+typename evPerC2<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, giga>::type>;
+typename evPerC2<Rep>::period, giga>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using teraevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
-typename evPerC2<Rep>::period, tera>::type>;
+typename evPerC2<Rep>::period, tera>::type, zero>;
 
 
 
@@ -148,7 +148,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using ton = megagram<Rep>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using solar_mass = Unit<Mass, Rep, solar_massDefinition>;
+using solar_mass = Unit<Mass, Rep, solar_massDefinition, zero>;
 
 
 
@@ -160,7 +160,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using meug = gram<Rep>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zedou = Unit<Mass, Rep, Ratio<twelve, E3>>;
+using zedou = Unit<Mass, Rep, Ratio<twelve, E3>, zero>;
 
 #endif
 

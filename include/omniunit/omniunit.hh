@@ -903,6 +903,7 @@ public:
   typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
+  static constexpr double origin = Origin;
 
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
@@ -924,7 +925,7 @@ public:
 
   template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
   constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count())
+  Unit(unit_cast<Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
   {
   }
 
@@ -1121,10 +1122,10 @@ protected:
 
 //called if toUnit equals stb::duration
 //cast stb::duration to another stb::duration
-template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
 }
@@ -1132,18 +1133,18 @@ Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
 
 //called if toUnit equals std::chrono::duration
 //cast stb::duration to std::chrono::duration
-template <typename toUnit, typename Rep, typename Period>
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
 unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
 }
 
 
 //cast stb::duration to toUnit
-template <typename toUnit, typename Rep, typename Period>
-constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const& Obj)
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
+constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
 }
@@ -1152,8 +1153,8 @@ constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period> const
 //called if toUnit equals stb::duration
 //cast std::chrono::duration to stb::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period>>,
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -1183,7 +1184,7 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== ARITHMERIC OPERATORS WITHOUT DIMENSION CHANGE ===========================
+//=== ARITHMETIC OPERATORS WITHOUT DIMENSION CHANGE ===========================
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -1656,36 +1657,20 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 
 
-template<typename Dimension, typename Common, typename Period1, typename Period2>
-struct Unit_common_type_wrapper
+template<typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+         typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
+struct common_type<stb::omni::Unit<Dimension1, Rep1, Period1, Origin1>, stb::omni::Unit<Dimension2, Rep2, Period2, Origin2>>
 {
 private:
+  static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
   static constexpr double gcd_num = stb::omni::gcd(Period1::num, Period2::num);
   static constexpr double gcd_den = stb::omni::gcd(Period1::den, Period2::den);
   static constexpr double new_den = (Period1::den / gcd_den) * Period2::den;
-  typedef typename Common::type common;
   typedef stb::omni::Ratio<gcd_num, new_den> new_Ratio;
+  typedef typename std::common_type<Rep1, Rep2>::type common;
+  static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1); // should not compare floating point with == nor !=
 public:
-  typedef std::__success_type<stb::omni::Unit<Dimension, common, new_Ratio>> type;
-};
-
-
-template<typename Dimension, typename Period1, typename Period2>
-struct Unit_common_type_wrapper<Dimension, std::__failure_type, Period1, Period2>
-{
-public:
-  typedef std::__failure_type type;
-};
-
-
-template<typename Dimension1, typename Rep1, typename Period1,
-typename Dimension2, typename Rep2, typename Period2>
-struct common_type<stb::omni::Unit<Dimension1, Rep1, Period1>, stb::omni::Unit<Dimension2, Rep2, Period2>>
-: public Unit_common_type_wrapper<
-typename std::enable_if<std::is_same<Dimension1, Dimension2>::value, Dimension1>::type,
-typename std::__member_type_wrapper<std::common_type<Rep1, Rep2>>::type,
-Period1, Period2>::type
-{
+  typedef stb::omni::Unit<Dimension1, common, new_Ratio, origin> type;
 };
 
 

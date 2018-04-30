@@ -46,67 +46,67 @@ typedef Dimension<0, 0, 0, 0, 1, 0, 0, 0, 0> Temperature;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctokelvin = Unit<Temperature, Rep, yocto>;
+using yoctokelvin = Unit<Temperature, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptokelvin = Unit<Temperature, Rep, zepto>;
+using zeptokelvin = Unit<Temperature, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attokelvin = Unit<Temperature, Rep, atto>;
+using attokelvin = Unit<Temperature, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtokelvin = Unit<Temperature, Rep, femto>;
+using femtokelvin = Unit<Temperature, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picokelvin = Unit<Temperature, Rep, pico>;
+using picokelvin = Unit<Temperature, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanokelvin = Unit<Temperature, Rep, nano>;
+using nanokelvin = Unit<Temperature, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microkelvin = Unit<Temperature, Rep, micro>;
+using microkelvin = Unit<Temperature, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millikelvin = Unit<Temperature, Rep, milli>;
+using millikelvin = Unit<Temperature, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centikelvin = Unit<Temperature, Rep, centi>;
+using centikelvin = Unit<Temperature, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decikelvin = Unit<Temperature, Rep, deci>;
+using decikelvin = Unit<Temperature, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kelvin = Unit<Temperature, Rep, base>;
+using kelvin = Unit<Temperature, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decakelvin = Unit<Temperature, Rep, deca>;
+using decakelvin = Unit<Temperature, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectokelvin = Unit<Temperature, Rep, hecto>;
+using hectokelvin = Unit<Temperature, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilokelvin = Unit<Temperature, Rep, kilo>;
+using kilokelvin = Unit<Temperature, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megakelvin = Unit<Temperature, Rep, mega>;
+using megakelvin = Unit<Temperature, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigakelvin = Unit<Temperature, Rep, giga>;
+using gigakelvin = Unit<Temperature, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using terakelvin = Unit<Temperature, Rep, tera>;
+using terakelvin = Unit<Temperature, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petakelvin = Unit<Temperature, Rep, peta>;
+using petakelvin = Unit<Temperature, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exakelvin = Unit<Temperature, Rep, exa>;
+using exakelvin = Unit<Temperature, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettakelvin = Unit<Temperature, Rep, zetta>;
+using zettakelvin = Unit<Temperature, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottakelvin = Unit<Temperature, Rep, yotta>;
+using yottakelvin = Unit<Temperature, Rep, yotta, zero>;
 
 
 

@@ -46,72 +46,72 @@ typedef Dimension<0, 0, 0, 0, 0, 1, 0, 0, 0> Quantity;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctomol = Unit<Quantity, Rep, yocto>;
+using yoctomol = Unit<Quantity, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptomol = Unit<Quantity, Rep, zepto>;
+using zeptomol = Unit<Quantity, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attomol = Unit<Quantity, Rep, atto>;
+using attomol = Unit<Quantity, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtomol = Unit<Quantity, Rep, femto>;
+using femtomol = Unit<Quantity, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picomol = Unit<Quantity, Rep, pico>;
+using picomol = Unit<Quantity, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanomol = Unit<Quantity, Rep, nano>;
+using nanomol = Unit<Quantity, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using micromol = Unit<Quantity, Rep, micro>;
+using micromol = Unit<Quantity, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millimol = Unit<Quantity, Rep, milli>;
+using millimol = Unit<Quantity, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centimol = Unit<Quantity, Rep, centi>;
+using centimol = Unit<Quantity, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decimol = Unit<Quantity, Rep, deci>;
+using decimol = Unit<Quantity, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using mol = Unit<Quantity, Rep, base>;
+using mol = Unit<Quantity, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decamol = Unit<Quantity, Rep, deca>;
+using decamol = Unit<Quantity, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectomol = Unit<Quantity, Rep, hecto>;
+using hectomol = Unit<Quantity, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilomol = Unit<Quantity, Rep, kilo>;
+using kilomol = Unit<Quantity, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megamol = Unit<Quantity, Rep, mega>;
+using megamol = Unit<Quantity, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigamol = Unit<Quantity, Rep, giga>;
+using gigamol = Unit<Quantity, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teramol = Unit<Quantity, Rep, tera>;
+using teramol = Unit<Quantity, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petamol = Unit<Quantity, Rep, peta>;
+using petamol = Unit<Quantity, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using examol = Unit<Quantity, Rep, exa>;
+using examol = Unit<Quantity, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettamol = Unit<Quantity, Rep, zetta>;
+using zettamol = Unit<Quantity, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottamol = Unit<Quantity, Rep, yotta>;
+using yottamol = Unit<Quantity, Rep, yotta, zero>;
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using unitary_quantity = Unit<Quantity, Rep, unitaryQuantityDefinition>;
+using unitary_quantity = Unit<Quantity, Rep, unitaryQuantityDefinition, zero>;
 
 
 

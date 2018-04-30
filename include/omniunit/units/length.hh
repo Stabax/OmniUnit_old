@@ -46,104 +46,104 @@ typedef Dimension<1, 0, 0, 0, 0, 0, 0, 0, 0> Length;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctometer = Unit<Length, Rep, yocto>;
+using yoctometer = Unit<Length, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptometer = Unit<Length, Rep, zepto>;
+using zeptometer = Unit<Length, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attometer = Unit<Length, Rep, atto>;
+using attometer = Unit<Length, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtometer = Unit<Length, Rep, femto>;
+using femtometer = Unit<Length, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picometer = Unit<Length, Rep, pico>;
+using picometer = Unit<Length, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanometer = Unit<Length, Rep, nano>;
+using nanometer = Unit<Length, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using micrometer = Unit<Length, Rep, micro>;
+using micrometer = Unit<Length, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millimeter = Unit<Length, Rep, milli>;
+using millimeter = Unit<Length, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centimeter = Unit<Length, Rep, centi>;
+using centimeter = Unit<Length, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decimeter = Unit<Length, Rep, deci>;
+using decimeter = Unit<Length, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using meter = Unit<Length, Rep, base>;
+using meter = Unit<Length, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decameter = Unit<Length, Rep, deca>;
+using decameter = Unit<Length, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectometer = Unit<Length, Rep, hecto>;
+using hectometer = Unit<Length, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilometer = Unit<Length, Rep, kilo>;
+using kilometer = Unit<Length, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megameter = Unit<Length, Rep, mega>;
+using megameter = Unit<Length, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigameter = Unit<Length, Rep, giga>;
+using gigameter = Unit<Length, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using terameter = Unit<Length, Rep, tera>;
+using terameter = Unit<Length, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petameter = Unit<Length, Rep, peta>;
+using petameter = Unit<Length, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exameter = Unit<Length, Rep, exa>;
+using exameter = Unit<Length, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettameter = Unit<Length, Rep, zetta>;
+using zettameter = Unit<Length, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottameter = Unit<Length, Rep, yotta>;
+using yottameter = Unit<Length, Rep, yotta, zero>;
 
 
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using angstrom = Unit<Length, Rep, Ratio<E0, E10>>;
+using angstrom = Unit<Length, Rep, Ratio<E0, E10>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using astronomical_unit = Unit<Length, Rep, Ratio<distanceSunEarth, E0>>;
+using astronomical_unit = Unit<Length, Rep, Ratio<distanceSunEarth, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightIn1Sec, E10>>;
+using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightIn1Sec, E10>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightminute = Unit<Length, Rep, typename Ratio_multiply<
-typename lightsecond<Rep>::period, Ratio<secondsIn1Min, E0>>::type>;
+typename lightsecond<Rep>::period, Ratio<secondsIn1Min, E0>>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightyear = Unit<Length, Rep, typename Ratio_multiply<
-typename lightsecond<Rep>::period, secondsIn1Year>::type>;
+typename lightsecond<Rep>::period, secondsIn1Year>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using parsec = Unit<Length, Rep, typename Ratio_multiply<
-typename astronomical_unit<Rep>::period, parsecDefinition>::type>;
+typename astronomical_unit<Rep>::period, parsecDefinition>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloparsec = Unit<Length, Rep, typename Ratio_multiply<
-typename parsec<Rep>::period, kilo>::type>;
+typename parsec<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using megaparsec = Unit<Length, Rep, typename Ratio_multiply<
-typename parsec<Rep>::period, mega>::type>;
+typename parsec<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using gigaparsec = Unit<Length, Rep, typename Ratio_multiply<
-typename parsec<Rep>::period, giga>::type>;
+typename parsec<Rep>::period, giga>::type, zero>;
 
 
 

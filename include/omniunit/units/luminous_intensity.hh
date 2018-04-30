@@ -46,67 +46,67 @@ typedef Dimension<0, 0, 0, 0, 0, 0, 1, 0, 0> LuminousIntensity;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctocandela = Unit<LuminousIntensity, Rep, yocto>;
+using yoctocandela = Unit<LuminousIntensity, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptocandela = Unit<LuminousIntensity, Rep, zepto>;
+using zeptocandela = Unit<LuminousIntensity, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attocandela = Unit<LuminousIntensity, Rep, atto>;
+using attocandela = Unit<LuminousIntensity, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtocandela = Unit<LuminousIntensity, Rep, femto>;
+using femtocandela = Unit<LuminousIntensity, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picocandela = Unit<LuminousIntensity, Rep, pico>;
+using picocandela = Unit<LuminousIntensity, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanocandela = Unit<LuminousIntensity, Rep, nano>;
+using nanocandela = Unit<LuminousIntensity, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microcandela = Unit<LuminousIntensity, Rep, micro>;
+using microcandela = Unit<LuminousIntensity, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millicandela = Unit<LuminousIntensity, Rep, milli>;
+using millicandela = Unit<LuminousIntensity, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centicandela = Unit<LuminousIntensity, Rep, centi>;
+using centicandela = Unit<LuminousIntensity, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decicandela = Unit<LuminousIntensity, Rep, deci>;
+using decicandela = Unit<LuminousIntensity, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using candela = Unit<LuminousIntensity, Rep, base>;
+using candela = Unit<LuminousIntensity, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decacandela = Unit<LuminousIntensity, Rep, deca>;
+using decacandela = Unit<LuminousIntensity, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectocandela = Unit<LuminousIntensity, Rep, hecto>;
+using hectocandela = Unit<LuminousIntensity, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilocandela = Unit<LuminousIntensity, Rep, kilo>;
+using kilocandela = Unit<LuminousIntensity, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megacandela = Unit<LuminousIntensity, Rep, mega>;
+using megacandela = Unit<LuminousIntensity, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigacandela = Unit<LuminousIntensity, Rep, giga>;
+using gigacandela = Unit<LuminousIntensity, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teracandela = Unit<LuminousIntensity, Rep, tera>;
+using teracandela = Unit<LuminousIntensity, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petacandela = Unit<LuminousIntensity, Rep, peta>;
+using petacandela = Unit<LuminousIntensity, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exacandela = Unit<LuminousIntensity, Rep, exa>;
+using exacandela = Unit<LuminousIntensity, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettacandela = Unit<LuminousIntensity, Rep, zetta>;
+using zettacandela = Unit<LuminousIntensity, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottacandela = Unit<LuminousIntensity, Rep, yotta>;
+using yottacandela = Unit<LuminousIntensity, Rep, yotta, zero>;
 
 
 
