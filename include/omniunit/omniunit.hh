@@ -681,6 +681,21 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 }
 
 
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== MACRO THAT INDICATES IF 0°C*2 = 0°C or 273.15°C =========================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+#ifndef OMNI_OFFICIAL_MULTIPLICATION
+#define OMNI_OFFICIAL_MULTIPLICATION true
+#endif
+
+
 
 //=============================================================================
 //=============================================================================
@@ -813,8 +828,15 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
+    if(OMNI_OFFICIAL_MULTIPLICATION)
+      _count -= static_cast<Rep>(origin);
+
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
+
+    if(OMNI_OFFICIAL_MULTIPLICATION)
+      _count += static_cast<Rep>(origin);
+
     return *this;
   }
 
@@ -822,9 +844,16 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
   {
+    if(OMNI_OFFICIAL_MULTIPLICATION)
+      _count -= static_cast<Rep>(origin);
+
     typedef typename std::common_type<Rep, _Rep>::type common;
     Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
     _count = static_cast<Rep>(static_cast<common>(_count) * newObj.count());
+
+    if(OMNI_OFFICIAL_MULTIPLICATION)
+      _count += static_cast<Rep>(origin);
+      
     return *this;
   }
 
@@ -1191,31 +1220,35 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 
 
 
-template <typename Dimension, typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Unit<Dimension, Rep1, Period1>, Unit<Dimension, Rep2, Period2>>::type
-operator+ (Unit<Dimension, Rep1, Period1> const& Obj1, Unit<Dimension, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
+constexpr typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type
+operator+ (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
-  typedef typename std::common_type<Unit<Dimension, Rep1, Period1>, Unit<Dimension, Rep2, Period2>>::type type;
+  static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot sum values with different dimension.");
+  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(type(Obj1).count() + type(Obj2).count());
 }
 
 
-template <typename Dimension, typename Rep1, typename Period1, typename Rep2, typename Period2>
-constexpr typename std::common_type<Unit<Dimension, Rep1, Period1>, Unit<Dimension, Rep2, Period2>>::type
-operator- (Unit<Dimension, Rep1, Period1> const& Obj1, Unit<Dimension, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
+constexpr typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type
+operator- (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
-  typedef typename std::common_type<Unit<Dimension, Rep1, Period1>, Unit<Dimension, Rep2, Period2>>::type type;
+  static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot sum values with different dimension.");
+  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename T>
+template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
 constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
-operator* (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
+std::enable_if<!is_Unit<T>::value, T>::type>::type, Period, Origin>
+operator* (Unit<Dimension, Rep, Period, Origin> const& Obj, T const& coef)
 {
   typedef typename std::common_type<Rep, T>::type common;
-  typedef Unit<Dimension, common, Period> type;
+  typedef Unit<Dimension, common, Period, Origin> type;
   return type(type(Obj).count() * static_cast<common>(coef));
 }
 
@@ -1663,12 +1696,14 @@ struct common_type<stb::omni::Unit<Dimension1, Rep1, Period1, Origin1>, stb::omn
 {
 private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
+
   static constexpr double gcd_num = stb::omni::gcd(Period1::num, Period2::num);
   static constexpr double gcd_den = stb::omni::gcd(Period1::den, Period2::den);
-  static constexpr double new_den = (Period1::den / gcd_den) * Period2::den;
+  static constexpr double new_den = (Period1::den / gcd_den) * Period2::den;  // CHANGE THIS PERIOD CALCULATION !!
   typedef stb::omni::Ratio<gcd_num, new_den> new_Ratio;
   typedef typename std::common_type<Rep1, Rep2>::type common;
   static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1); // should not compare floating point with == nor !=
+
 public:
   typedef stb::omni::Unit<Dimension1, common, new_Ratio, origin> type;
 };
