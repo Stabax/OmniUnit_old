@@ -26,9 +26,19 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
+
+#ifndef OMNI_DEFAULT_TYPE
+  #define OMNI_DEFAULT_TYPE float
+#endif // OMNI_DEFAULT_TYPE
+
+#ifndef OMNI_OFFICIAL_UNITS
+  #define OMNI_OFFICIAL_UNITS true
+#endif
+
 //easter eggs
 #ifdef WESTERN_SPY
-#error "OmniUnit doesn't treat with western spy !"
+  #error "OmniUnit doesn't treat with western spy !"
 #endif
 
 #ifndef OMNIUNIT_HH_
@@ -313,6 +323,9 @@ struct Ratio
   static constexpr double value = num / den;
   typedef Ratio<num, den> type;
 };
+
+template<double const& _Num, double const& _Den>
+constexpr double Ratio<_Num, _Den>::value;
 
 
 template<typename falseType>
@@ -656,13 +669,6 @@ struct is_Unit<Unit<Dimension, Rep, Period, Origin>> : public std::true_type
 };
 
 
-template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-inline constexpr double Unit_Origin_getter(Unit<_Dimension, Rep, Period, Origin>)
-{
-  return Origin;
-}
-
-
 template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 {
@@ -670,30 +676,12 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
-  typedef typename std::common_type<typename toUnit::rep, Rep, double>::type common_rep;
-
-  toUnit var(static_cast<typename toUnit::rep>(static_cast<common_rep>(Obj.count())
-    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den)));
-
-  common_rep originModifier = static_cast<common_rep>(-Origin + Unit_Origin_getter(var));
-
-  return var += (toUnit(originModifier) /= toUnit::period::value);
+  typedef typename std::common_type<typename toUnit::rep, Rep>::type common_rep;
+  
+  return toUnit(static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.count())
+    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den))
+    + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)));
 }
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== MACRO THAT INDICATES IF 0°C*2 = 0°C or 273.15°C =========================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-#ifndef OMNI_OFFICIAL_MULTIPLICATION
-#define OMNI_OFFICIAL_MULTIPLICATION true
-#endif
 
 
 
@@ -715,6 +703,7 @@ public:
   typedef Rep rep;
   typedef Period period;
   static constexpr double origin = Origin;
+  const double _origin = Origin;
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
@@ -828,31 +817,40 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_MULTIPLICATION)
-      _count -= static_cast<Rep>(origin);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_MULTIPLICATION)
-      _count += static_cast<Rep>(origin);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
 
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_MULTIPLICATION)
-      _count -= static_cast<Rep>(origin);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
-    _count = static_cast<Rep>(static_cast<common>(_count) * newObj.count());
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_MULTIPLICATION)
-      _count += static_cast<Rep>(origin);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
       
     return *this;
   }
@@ -861,22 +859,48 @@ public:
   template<typename _Rep>
   Unit& operator/=(_Rep const& coef)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
+
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+    
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
+
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+
     if(newObj.count() >= 0 && newObj.count() <= 0)
       throw Unit_exception("Divide by 0.");
-    _count = static_cast<Rep>(static_cast<common>(_count) / newObj.count());
+
+    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     return *this;
   }
 
@@ -884,20 +908,44 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    if(coef == 0)
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
+    if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
+
     _count = static_cast<Rep>(modulo(_count, coef));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base> newObj(Obj);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
+    
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
     if(newObj.count() == 0) //possible because newObj::rep is integer
       throw Unit_exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+    
     return *this;
   }
 
@@ -905,6 +953,13 @@ public:
 protected:
   Rep _count;
 };
+
+
+//definition of Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Unit class, which permit avoiding the
+//following declaration :
+template<typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
 
 
 
@@ -933,6 +988,7 @@ public:
   typedef Rep rep;
   typedef Period period;
   static constexpr double origin = Origin;
+  const double _origin = Origin;
 
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
@@ -1070,18 +1126,41 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
+
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
-    _count = static_cast<Rep>(static_cast<common>(_count) * newObj.count());
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+      
     return *this;
   }
 
@@ -1089,22 +1168,48 @@ public:
   template<typename _Rep>
   Unit& operator/=(_Rep const& coef)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
+
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+    
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
+
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base> newObj(Obj);
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+
     if(newObj.count() >= 0 && newObj.count() <= 0)
       throw Unit_exception("Divide by 0.");
-    _count = static_cast<Rep>(static_cast<common>(_count) / newObj.count());
+
+    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     return *this;
   }
 
@@ -1112,20 +1217,44 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    if(coef == 0)
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
+    if(coef >= 0 && coef <= 0)
       throw Unit_exception("Divide by 0.");
+
     _count = static_cast<Rep>(modulo(_count, coef));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+
     return *this;
   }
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj)
+  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base> newObj(Obj);
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+    }
+    
+    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
     if(newObj.count() == 0) //possible because newObj::rep is integer
       throw Unit_exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
+
+    if(OMNI_OFFICIAL_UNITS)
+    {
+      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+    }
+    
     return *this;
   }
 
@@ -1134,6 +1263,13 @@ public:
 protected:
   Rep _count;
 };
+
+
+//definition of Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Unit class, which permit avoiding the
+//following declaration :
+template<typename Rep, typename Period, double const& Origin>
+constexpr double Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin>::origin;
 
 
 
@@ -1713,10 +1849,6 @@ public:
 } //namespace std
 
 
-
-#ifndef OMNI_DEFAULT_TYPE
-#define OMNI_DEFAULT_TYPE float
-#endif // OMNI_DEFAULT_TYPE
 
 #include "units/units.hh"
 

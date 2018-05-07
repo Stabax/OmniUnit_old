@@ -53,7 +53,7 @@ static constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
 static constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
 static constexpr double solar_massDefE4     =  19884.; //kg * 10^30
 static constexpr double avogadroE9 = 6022140857.; //10^23
-static constexpr double celsiusConstant = -273.15;
+static constexpr double celsiusConstant = 273.15;
 
 
 
