@@ -1,5 +1,5 @@
 #define GOPNIK blyat
-#define OMNI_OFFICIAL_UNITS false
+#define OMNI_OFFICIAL_ZERO false
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
@@ -20,11 +20,10 @@ int main()
 
   omni::Unit<omni::Dimension<0,0,0,0,0,0,0,0,0>, int, omni::deci, omni::E1> scalar(-90);
 
-  omni::def::minute temp(10);
-  std::cout << (omni::def::second(temp) %= scalar) << '\n';
-
-  //auto b = a * temp;
-  //std::cout << b << b.dimension() <<'\n';
+  omni::def::kilocelsius temp(10);
+  omni::def::kilometer a(10);
+  auto b = a * temp;
+  std::cout << b << b.dimension() << " " << decltype(b)::period::num << '\n';
 
   //typedef typename std::common_type<omni::def::petameter, omni::def::femtometer>::type YABOK;
   //std::cout << YABOK::period::num << "/ " << YABOK::period::den << "\n";

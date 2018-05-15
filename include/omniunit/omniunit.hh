@@ -32,8 +32,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define OMNI_DEFAULT_TYPE float
 #endif // OMNI_DEFAULT_TYPE
 
-#ifndef OMNI_OFFICIAL_UNITS
-  #define OMNI_OFFICIAL_UNITS true
+#ifndef OMNI_OFFICIAL_ZERO
+  #define OMNI_OFFICIAL_ZERO true
 #endif
 
 //easter eggs
@@ -817,7 +817,7 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -825,7 +825,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -837,7 +837,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -847,7 +847,7 @@ public:
     Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -859,7 +859,7 @@ public:
   template<typename _Rep>
   Unit& operator/=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -870,7 +870,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -882,7 +882,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -896,7 +896,7 @@ public:
 
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -908,7 +908,7 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -918,7 +918,7 @@ public:
 
     _count = static_cast<Rep>(modulo(_count, coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -930,7 +930,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -941,7 +941,7 @@ public:
       throw Unit_exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1126,7 +1126,7 @@ public:
   template<typename _Rep>
   Unit& operator*=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1134,7 +1134,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1146,7 +1146,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -1156,7 +1156,7 @@ public:
     Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1168,7 +1168,7 @@ public:
   template<typename _Rep>
   Unit& operator/=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1179,7 +1179,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1191,7 +1191,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -1205,7 +1205,7 @@ public:
 
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1217,7 +1217,7 @@ public:
   template <typename _Rep>
   Unit& operator%=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1227,7 +1227,7 @@ public:
 
     _count = static_cast<Rep>(modulo(_count, coef));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1239,7 +1239,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this += Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -1250,7 +1250,7 @@ public:
       throw Unit_exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
-    if(OMNI_OFFICIAL_UNITS)
+    if(OMNI_OFFICIAL_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1379,47 +1379,43 @@ operator- (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type, Period, Origin>
-operator* (Unit<Dimension, Rep, Period, Origin> const& Obj, T const& coef)
+constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator* (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
-  typedef typename std::common_type<Rep, T>::type common;
-  typedef Unit<Dimension, common, Period, Origin> type;
-  return type(type(Obj).count() * static_cast<common>(coef));
+  static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
+  return Obj *= coef;
+
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
-operator* (T const& coef, Unit<Dimension, Rep, Period> const& Obj)
+template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
+constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator* (T const& coef, Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
+  static_assert(std::is_arithmetic<T>::value, "Operands must be an arithmetic and a unit.");
   return Obj * coef;
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
-operator/ (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
+template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
+constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator/ (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
+  static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
     throw Unit_exception("Divide by 0.");
-  typedef typename std::common_type<Rep, T>::type common;
-  typedef Unit<Dimension, common, Period> type;
-  return type(type(Obj).count() / static_cast<common>(coef));
+  return Obj /= coef;
 }
 
 
-template <typename Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type, Period>
-operator% (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
+template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
+constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator% (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
+  static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
     throw Unit_exception("Divide by 0.");
-  typedef Unit<Dimension, typename std::common_type<Rep, T>::type, Period> type;
-  return type(modulo(type(Obj).count(), coef));
+  return Obj %= coef;
 }
 
 
@@ -1434,19 +1430,27 @@ operator% (Unit<Dimension, Rep, Period> const& Obj, T const& coef)
 
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Dimension2, typename Rep2, typename Period2>
+//This type_trait return zero if origins 1 and 2 are different.
+template<double const& a, double const& b>
+struct origin_getter
+{
+  static constexpr double value = (a<=b && a >=b) ? a : zero;
+};
+
+
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
 constexpr Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_multiply<Period1, Period2>::type>
-operator* (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, Period2> const& Obj2)
+typename Ratio_multiply<Period1, Period2>::type, origin_getter<Origin1, Origin2>::value>
+operator* (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_multiply<Dimension1, Dimension2>::type newDim;
   typedef typename Ratio_multiply<Period1, Period2>::type newPeriod;
-  typedef Unit<newDim, common, newPeriod> type;
+  typedef Unit<newDim, common, newPeriod, origin_getter<Origin1, Origin2>::value> type;
 
-  return type(static_cast<common>(Obj1).count() * static_cast<common>(Obj2));
+  return type(static_cast<common>(Obj1.count()) * static_cast<common>(Obj2.count()));
 }
 
 
