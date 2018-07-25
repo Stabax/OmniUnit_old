@@ -801,7 +801,8 @@ public:
   }
 
 
-  Unit& operator+=(Unit const& Obj)
+  template <typename a, typename b, typename c, double const& orig>
+  Unit& operator+=(Unit<a, b, c, orig> const& Obj)
   {
     _count += Obj.count();
     return *this;
@@ -1850,12 +1851,14 @@ struct common_type<stb::omni::Unit<Dimension1, Rep1, Period1, Origin1>, stb::omn
 private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
 
-  static constexpr double gcd_num = stb::omni::gcd(Period1::num, Period2::num);
-  static constexpr double gcd_den = stb::omni::gcd(Period1::den, Period2::den);
-  static constexpr double new_den = (Period1::den / gcd_den) * Period2::den;  // CHANGE THIS PERIOD CALCULATION !!
-  typedef stb::omni::Ratio<gcd_num, new_den> new_Ratio;
+  //the common period is the nearest of 1/1 in order of magnitude
+  typedef typename std::conditional< (std::abs(std::log10(Period1::value)) < std::abs(std::log10(Period2::value))),
+  Period1, Period2>::type new_Ratio;
+
   typedef typename std::common_type<Rep1, Rep2>::type common;
-  static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1); // should not compare floating point with == nor !=
+
+  //if origins are differents, then the common origin is 0...
+  static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1);
 
 public:
   typedef stb::omni::Unit<Dimension1, common, new_Ratio, origin> type;
