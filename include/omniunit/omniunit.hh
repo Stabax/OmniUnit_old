@@ -722,296 +722,17 @@ public:
   }
 
 
+  //this constructor overlad is needed because unit_cast for a duration is different from other
+  template<typename _Rep, typename _Period, double const& _Origin>
+  constexpr Unit(Unit<Dimension<0,0,1,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj):
+  Unit(unit_cast<Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
+  {
+  }
+
+
   template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
   constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
   Unit(unit_cast<Unit>(Obj).count())
-  {
-  }
-
-
-  ~Unit() = default;
-
-
-  Unit& operator=(Unit const& Obj)
-  {
-    _count = Obj._count;
-    return *this;
-  }
-
-
-  static constexpr Unit zero()
-  {
-    return Unit(0);
-  }
-
-
-  constexpr Rep count() const
-  {
-    return _count;
-  }
-
-
-  static constexpr Rep max()
-  {
-    return std::numeric_limits<Rep>::max();
-  }
-
-
-  static constexpr Rep min()
-  {
-    return std::numeric_limits<Rep>::lowest();
-  }
-
-
-  constexpr std::string dimension() const
-  {
-    return dimension_str<dim>();
-  }
-
-
-  Unit& operator++()
-  {
-    ++_count;
-    return *this;
-  }
-
-
-  Unit operator++(int)
-  {
-    return Unit(_count++);
-  }
-
-
-  Unit& operator--()
-  {
-    --_count;
-    return *this;
-  }
-
-
-  Unit operator--(int)
-  {
-    return Unit(_count--);
-  }
-
-
-  Unit operator-()
-  {
-    return Unit(-_count);
-  }
-
-
-  template <typename a, typename b, typename c, double const& orig>
-  Unit& operator+=(Unit<a, b, c, orig> const& Obj)
-  {
-    _count += Obj.count();
-    return *this;
-  }
-
-
-  Unit& operator-=(Unit const& Obj)
-  {
-    _count -= Obj.count();
-    return *this;
-  }
-
-
-  template<typename _Rep>
-  Unit& operator*=(_Rep const& coef)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    typedef typename std::common_type<Rep, _Rep>::type common;
-    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-  template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
-    }
-
-    typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
-    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-  template<typename _Rep>
-  Unit& operator/=(_Rep const& coef)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    if(coef >= 0 && coef <= 0)
-      throw Unit_exception("Divide by 0.");
-
-    typedef typename std::common_type<Rep, _Rep>::type common;
-    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-  template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
-    }
-
-    typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
-
-    if(newObj.count() >= 0 && newObj.count() <= 0)
-      throw Unit_exception("Divide by 0.");
-
-    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-  template <typename _Rep>
-  Unit& operator%=(_Rep const& coef)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    if(coef >= 0 && coef <= 0)
-      throw Unit_exception("Divide by 0.");
-
-    _count = static_cast<Rep>(modulo(_count, coef));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-  template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
-  {
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
-    }
-
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
-    if(newObj.count() == 0) //possible because newObj::rep is integer
-      throw Unit_exception("Divide by 0.");
-    _count = static_cast<Rep>(modulo(_count, newObj.count()));
-
-    if(OMNI_OFFICIAL_ZERO)
-    {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
-    }
-
-    return *this;
-  }
-
-
-protected:
-  Rep _count;
-};
-
-
-//definition of Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Unit class, which permit avoiding the
-//following declaration :
-template<typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
-
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== UNIT SPECIALIZATION FOR DURATION ========================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-// this specialization is needed to provide converter with std::chrono::duration
-
-
-
-template<typename Rep, typename Period, double const& Origin>
-class Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin>
-{
-
-protected:
-  typedef Dimension<0,0,1,0,0,0,0,0,0> _Dimension;
-
-
-public:
-  typedef _Dimension dim;
-  typedef Rep rep;
-  typedef Period period;
-  static constexpr double origin = Origin;
-
-
-  static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
-  static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
-  static_assert(is_stb_Ratio<Period>::value, "Third template argument should be a ratio from OmniUnit.");
-
-
-  constexpr Unit() = default;
-  Unit(Unit const&) = default;
-
-
-  template<typename _Rep>
-  constexpr Unit(_Rep const& countArg):
-  _count(static_cast<Rep>(countArg))
-  {
-    static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
-  }
-
-
-  template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
-  constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
-  Unit(unit_cast<Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
   {
   }
 
@@ -1020,6 +741,7 @@ public:
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
   Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
   {
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
 
@@ -1036,6 +758,7 @@ public:
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is assignable with an std::chrono::duration");
     _count = Unit(Obj).count();
     return *this;
   }
@@ -1044,9 +767,9 @@ public:
   template<typename _Rep, typename _Period> //transform a stb::omni::duration into a std::chrono::duration
   operator std::chrono::duration<_Rep, _Period>() const
   {
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
     return std::chrono::duration<_Rep, _Period>(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(*this).count());
   }
-
 
   static constexpr Unit zero()
   {
@@ -1260,7 +983,6 @@ public:
   }
 
 
-
 protected:
   Rep _count;
 };
@@ -1269,8 +991,8 @@ protected:
 //definition of Unit::origin, so it can be ODR-usable (required for any call of the variable)
 //In c++17, we can set the variable inline inside the Unit class, which permit avoiding the
 //following declaration :
-template<typename Rep, typename Period, double const& Origin>
-constexpr double Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin>::origin;
+template<typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
 
 
 
