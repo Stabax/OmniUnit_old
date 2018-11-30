@@ -28,7 +28,6 @@
 #endif
 
 
-namespace omni = stb::omni;
 
 template <typename T>
 void show(T const& var1, double ref = 0)
@@ -41,10 +40,10 @@ int main()
 {
 
 
-  omni::Unit<omni::Dimension<0,0,0,0,0,0,0,0,0>, float, omni::deci, omni::E1> scalar(-90);
-  omni::celsius<double> temp1(0);
-  omni::celsius<double> temp2(10);
-  omni::kelvin<double> temp3(10);
+  omniunit::Unit<omniunit::Dimension<0,0,0,0,0,0,0,0,0>, float, omniunit::deci, omniunit::E1> scalar(-90);
+  omniunit::celsius<double> temp1(0);
+  omniunit::celsius<double> temp2(10);
+  omniunit::kelvin<double> temp3(10);
 
   show(temp1);
 

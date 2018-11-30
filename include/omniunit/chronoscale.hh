@@ -34,12 +34,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <ctime>   // gmtime, localtime, time, tm
 #include <memory>  // unique_ptr
 
-namespace stb
-{
 
 
-
-namespace omni
+namespace omniunit
 {
 
 //=============================================================================
@@ -102,7 +99,7 @@ public:
   template<typename durationType = second<long long>>
   durationType get() const
   {
-    return stb::omni::duration_cast<durationType>(getNano());
+    return omniunit::duration_cast<durationType>(getNano());
   }
 
 
@@ -478,7 +475,7 @@ public:
     return toReturn;
   }
 
-  //unit must be one of the typedef on std::ratio defined in the namespace stb
+
   static int get(Unit unit, Location place)
   {
     struct tm* instant = getTm(place);
@@ -498,7 +495,7 @@ public:
     if(unit == Unit::year)
       return (instant->tm_year + 1900);
 
-    throw Date_exception("Only stb::second, stb::minute, stb::hour, stb::week, stb::month and stb::year are allowed.");
+    throw Date_exception("Only omniunit::second, omniunit::minute, omniunit::hour, omniunit::week, omniunit::month and omniunit::year are allowed.");
   }
 
 protected:
@@ -524,10 +521,8 @@ int Date::timeLag = 0;
 
 
 
-} // namespace omni
+} // namespace omniunit
 
 
-
-} // namespace stb
 
 #endif //CHRONOSCALE_HH_

@@ -31,12 +31,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include"constants_for_units.hh"
 
-namespace stb
-{
 
-
-
-namespace omni
+namespace omniunit
 {
 
 
@@ -188,10 +184,7 @@ typedef gigaparsec<> gigaparsec;
 
 
 
-} //namespace omni
+} //namespace omniunit
 
-
-
-} //namespace stb
 
 #endif //LENGTH_HH_

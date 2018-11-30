@@ -31,12 +31,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include"constants_for_units.hh"
 
-namespace stb
-{
 
-
-
-namespace omni
+namespace omniunit
 {
 
 
@@ -148,10 +144,7 @@ typedef unitary_quantity<> rawQuantity;
 
 
 
-} //namespace omni
+} //namespace omniunit
 
-
-
-} //namespace stb
 
 #endif //QUANTITY_HH_

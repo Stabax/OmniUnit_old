@@ -40,7 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define OMNI_OFFICIAL_ZERO true
 #endif // OMNI_OFFICIAL_ZERO
 
-//easter eggs
+//easter egg
 #ifdef WESTERN_SPY
   #error "OmniUnit doesn't treat with western spy !"
 #endif
@@ -56,12 +56,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace stb
-{
-
-
-
-namespace omni
+namespace omniunit
 {
 
 
@@ -690,6 +685,79 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
+//=== UNIT CAST OVERLOAD FOR UNIT<TIME> =======================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+//the purpose is to make aviable unit_cast between stb::duration and std::chrono::duration
+
+
+
+//called if toUnit equals stb::duration
+//cast stb::duration to another stb::duration
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+{
+  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
+}
+
+
+//called if toUnit equals std::chrono::duration
+//cast stb::duration to std::chrono::duration
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
+constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+{
+  return toUnit(Obj);
+}
+
+
+//cast stb::duration to toUnit
+template <typename toUnit, typename Rep, typename Period, double const& Origin>
+constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+{
+  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+}
+
+
+//called if toUnit equals stb::duration
+//cast std::chrono::duration to stb::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+std::chrono::duration<Rep, Period> const& Obj)
+{
+  return toUnit(Obj);
+}
+
+
+//called if toUnit equals std::chrono::duration
+//cast std::chrono::duration to another std::chrono::duration
+template <typename toUnit, typename Rep, typename Period>
+constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
+unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+std::chrono::duration<Rep, Period> const& Obj)
+{
+  return std::chrono::duration_cast<toUnit>(Obj);
+}
+
+
+//cast std::chrono::duration to toUnit
+template <typename toUnit, typename Rep, typename Period>
+constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
+{
+  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+}
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
 //=== UNIT DEFINITION =========================================================
 //=============================================================================
 //=============================================================================
@@ -993,79 +1061,6 @@ protected:
 //following declaration :
 template<typename _Dimension, typename Rep, typename Period, double const& Origin>
 constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
-
-
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== UNIT CAST OVERLOAD FOR UNIT SPECIALIZATION FOR DURATION =================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-//the purpose is to make aviable unit_cast between stb::duration and std::chrono::duration
-
-
-
-//called if toUnit equals stb::duration
-//cast stb::duration to another stb::duration
-template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
-{
-  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
-}
-
-
-//called if toUnit equals std::chrono::duration
-//cast stb::duration to std::chrono::duration
-template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
-{
-  return toUnit(Obj);
-}
-
-
-//cast stb::duration to toUnit
-template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
-{
-  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
-}
-
-
-//called if toUnit equals stb::duration
-//cast std::chrono::duration to stb::duration
-template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
-std::chrono::duration<Rep, Period> const& Obj)
-{
-  return toUnit(Obj);
-}
-
-
-//called if toUnit equals std::chrono::duration
-//cast std::chrono::duration to another std::chrono::duration
-template <typename toUnit, typename Rep, typename Period>
-constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-std::chrono::duration<Rep, Period> const& Obj)
-{
-  return std::chrono::duration_cast<toUnit>(Obj);
-}
-
-
-//cast std::chrono::duration to toUnit
-template <typename toUnit, typename Rep, typename Period>
-constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
-{
-  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
-}
 
 
 
@@ -1541,11 +1536,7 @@ float getUncertainty(T container)
 
 #endif // OMNI_DISABLE_UNCERTAINTIES
 
-} //namespace omni
-
-
-
-} //namespace stb
+} //namespace omniunit
 
 
 
@@ -1568,7 +1559,7 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 template<typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-struct common_type<stb::omni::Unit<Dimension1, Rep1, Period1, Origin1>, stb::omni::Unit<Dimension2, Rep2, Period2, Origin2>>
+struct common_type<omniunit::Unit<Dimension1, Rep1, Period1, Origin1>, omniunit::Unit<Dimension2, Rep2, Period2, Origin2>>
 {
 private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
@@ -1583,7 +1574,7 @@ private:
   static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1);
 
 public:
-  typedef stb::omni::Unit<Dimension1, common, new_Ratio, origin> type;
+  typedef omniunit::Unit<Dimension1, common, new_Ratio, origin> type;
 };
 
 
