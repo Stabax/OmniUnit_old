@@ -71,16 +71,16 @@ namespace omniunit
 
 
 
-class exception : public std::exception
+class Exception : public std::exception
 {
 public:
 
-  exception(std::string const& msg, std::string const& name):
+  Exception(std::string const& msg, std::string const& name):
   _msg("[OmniUnit.exception - " + name + " : " + msg + "]")
   {
   }
 
-  virtual ~exception()
+  virtual ~Exception()
   {
   }
 
@@ -97,16 +97,16 @@ protected:
 
 
 
-class Unit_exception : public exception
+class DivisionByZero_Exception : public Exception
 {
 public:
 
-  Unit_exception(std::string const& msg):
-  exception(msg, "Unit_exception")
+  DivisionByZero_Exception(std::string const& msg):
+  Exception(msg, "DivisionByZero_Exception")
   {
   }
 
-  virtual ~Unit_exception()
+  virtual ~DivisionByZero_Exception()
   {
   }
 };
@@ -123,7 +123,7 @@ public:
 
 
 
-//modulo at compile time which can handle floating point.
+//modulo at compile time which can handle floating points.
 template <typename T, typename U>
 constexpr typename std::common_type<T, U>::type
 modulo(T const& a, U const& b)
@@ -193,14 +193,6 @@ constexpr bool is_positive_integer(T const& number)
   T res = number - static_cast<T>(std::floor(number));
   return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
-
-
-//wrapper for function partial specialization emulation
-//allow to replace partial specialization (which doesn't exist for functions) with an overload
-template <typename T>
-struct partial_specialization_wrapper
-{
-};
 
 
 
@@ -690,8 +682,15 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 //=============================================================================
 //=============================================================================
 
-//the purpose is to make aviable unit_cast between stb::duration and std::chrono::duration
+//the purpose is to make available unit_cast between stb::duration and std::chrono::duration
 
+
+//wrapper for function partial specialization emulation
+//allow to replace partial specialization (which doesn't exist for functions) with an overload
+template <typename T>
+struct partial_specialization_wrapper
+{
+};
 
 
 //called if toUnit equals stb::duration
@@ -966,7 +965,7 @@ public:
     }
 
     if(coef >= 0 && coef <= 0)
-      throw Unit_exception("Divide by 0.");
+      throw DivisionByZero_Exception("Divide by 0.");
 
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
@@ -993,7 +992,7 @@ public:
     Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
 
     if(newObj.count() >= 0 && newObj.count() <= 0)
-      throw Unit_exception("Divide by 0.");
+      throw DivisionByZero_Exception("Divide by 0.");
 
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
 
@@ -1015,7 +1014,7 @@ public:
     }
 
     if(coef >= 0 && coef <= 0)
-      throw Unit_exception("Divide by 0.");
+      throw DivisionByZero_Exception("Divide by 0.");
 
     _count = static_cast<Rep>(modulo(_count, coef));
 
@@ -1039,7 +1038,7 @@ public:
 
     Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
     if(newObj.count() == 0) //possible because newObj::rep is integer
-      throw Unit_exception("Divide by 0.");
+      throw DivisionByZero_Exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
     if(OMNI_OFFICIAL_ZERO)
@@ -1121,7 +1120,7 @@ operator/ (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
   return Obj /= coef;
 }
 
@@ -1132,7 +1131,7 @@ operator% (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
   return Obj %= coef;
 }
 
@@ -1193,7 +1192,7 @@ typename Ratio_divide<Period1, Period2>::type>
 operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(Obj2.count() >= 0 && Obj2.count() <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_divide<Dimension1, Dimension2>::type newDim;
@@ -1212,7 +1211,7 @@ typename Ratio_divide<Ratio<E0, E0>, Period>::type>
 operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
 
   typedef typename std::common_type<Rep, T>::type common;
   typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
@@ -1228,7 +1227,7 @@ constexpr Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::
 operator% (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
 
   typedef Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period> type;
   return type(modulo(coef, Obj.count()));
@@ -1243,7 +1242,7 @@ operator% (Unit<Dimension1, Rep1, Period1> const& Obj1,
 Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(Obj2.count() >= 0 && Obj2.count() <= 0)
-    throw Unit_exception("Divide by 0.");
+    throw DivisionByZero_Exception("Divide by 0.");
 
   typedef Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1> type;
   return type(modulo(Obj1.count(), Obj2.count()));

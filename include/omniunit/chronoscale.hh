@@ -49,12 +49,12 @@ namespace omniunit
 
 
 
-class Date_exception : public exception
+class Date_exception : public Exception
 {
 public:
 
   Date_exception(std::string const& msg):
-  exception(msg, "Date_exception")
+  Exception(msg, "Date_exception")
   {
   }
 
