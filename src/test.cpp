@@ -1,5 +1,6 @@
 #define GOPNIK blyat
 #define OMNI_OFFICIAL_ZERO true
+#define OMNI_DISABLE_UNCERTAINTIES
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"

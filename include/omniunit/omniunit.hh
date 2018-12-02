@@ -1,8 +1,7 @@
 //OmniUnit.hh
 
 /*
-Copyright (c) 1998, Stabax association (France)
-All rights reserved.
+Copyright (c) 2016, Denis Tosetto All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
@@ -13,7 +12,7 @@ modification, are permitted provided that the following conditions are met:
   this list of conditions and the following disclaimer in the documentation
   and/or other materials provided with the distribution.
 
-  Neither the name of the University of California, Berkeley nor the names
+  Neither the name of Denis Tosetton, nor Baxlan nor the names
   of its contributors may be used to endorse or promote products derived
   from this software without specific prior written permission.
 
@@ -636,35 +635,36 @@ std::string dimension_str()
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== UNIT CAST ===============================================================
+//=== BASIC UNIT CAST =========================================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
 
+//Basic_Unit represent a unit without handling uncertainties
 
 
 //forward declaration
 //origin is given in official unit (ratio<1, 1>)
 template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
-class Unit;
+class Basic_Unit;
 
 
 template<typename falseType>
-struct is_Unit : std::false_type
+struct is_Basic_Unit : std::false_type
 {
 };
 
 
 template<typename Dimension, typename Rep, typename Period, double const& Origin>
-struct is_Unit<Unit<Dimension, Rep, Period, Origin>> : public std::true_type
+struct is_Basic_Unit<Basic_Unit<Dimension, Rep, Period, Origin>> : public std::true_type
 {
 };
 
 
 template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
+constexpr toUnit unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
-  static_assert(is_Unit<toUnit>::value, "First template argument should be a unit");
+  static_assert(is_Basic_Unit<toUnit>::value, "First template argument should be a basic_unit");
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
@@ -680,12 +680,14 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== UNIT CAST OVERLOAD FOR UNIT<TIME> =======================================
+//=== BASIC UNIT CAST OVERLOAD FOR UNIT<TIME> =================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
 
-//the purpose is to make available unit_cast between stb::duration and std::chrono::duration
+//Basic_Unit represent a unit without handling uncertainties
+
+//the purpose here is to make available unit_cast between stb::duration and std::chrono::duration
 
 
 //wrapper for function partial specialization emulation
@@ -699,9 +701,9 @@ struct partial_specialization_wrapper
 //called if toUnit equals stb::duration
 //cast stb::duration to another stb::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+constexpr Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
 }
@@ -712,7 +714,7 @@ Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
 unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
 }
@@ -720,7 +722,7 @@ Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 
 //cast stb::duration to toUnit
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
 }
@@ -729,8 +731,8 @@ constexpr toUnit unit_cast(Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origi
 //called if toUnit equals stb::duration
 //cast std::chrono::duration to stb::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+constexpr Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
+unit_cast_impl(partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -760,15 +762,17 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== UNIT DEFINITION =========================================================
+//=== BASIC UNIT DEFINITION ===================================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
+
+//Basic_Unit represent a unit without handling uncertainties
 
 
 
 template<typename _Dimension, typename Rep, typename Period, double const& Origin>
-class Unit
+class Basic_Unit
 {
 public:
   typedef _Dimension dim;
@@ -780,45 +784,45 @@ public:
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
 
-  constexpr Unit() = default;
-  Unit(Unit const&) = default;
+  constexpr Basic_Unit() = default;
+  Basic_Unit(Basic_Unit const&) = default;
 
 
   template<typename _Rep>
-  constexpr explicit Unit(_Rep const& countArg):
+  constexpr explicit Basic_Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg))
   {
     static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 
-  //this constructor overlad is needed because unit_cast for a duration is different from other
+  //this constructor overload is needed because unit_cast for a duration is different
   template<typename _Rep, typename _Period, double const& _Origin>
-  constexpr Unit(Unit<Dimension<0,0,1,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj):
-  Unit(unit_cast<Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
+  constexpr Basic_Unit(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj):
+  Basic_Unit(unit_cast<Basic_Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
   {
   }
 
 
   template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
-  constexpr Unit(Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
-  Unit(unit_cast<Unit>(Obj).count())
+  constexpr Basic_Unit(Basic_Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
+  Basic_Unit(unit_cast<Basic_Unit>(Obj).count())
   {
   }
 
 
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
-  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
+  constexpr Basic_Unit(std::chrono::duration<_Rep, _Period> const& Obj):
+  Basic_Unit(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
 
-  ~Unit() = default;
+  ~Basic_Unit() = default;
 
 
-  Unit& operator=(Unit const& Obj)
+  Basic_Unit& operator=(Basic_Unit const& Obj)
   {
     _count = Obj._count;
     return *this;
@@ -826,10 +830,10 @@ public:
 
 
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
-  Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
+  Basic_Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is assignable with an std::chrono::duration");
-    _count = Unit(Obj).count();
+    _count = Basic_Unit(Obj).count();
     return *this;
   }
 
@@ -838,12 +842,12 @@ public:
   operator std::chrono::duration<_Rep, _Period>() const
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
-    return std::chrono::duration<_Rep, _Period>(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(*this).count());
+    return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(*this).count());
   }
 
-  static constexpr Unit zero()
+  static constexpr Basic_Unit zero()
   {
-    return Unit(0);
+    return Basic_Unit(0);
   }
 
 
@@ -871,46 +875,46 @@ public:
   }
 
 
-  Unit& operator++()
+  Basic_Unit& operator++()
   {
     ++_count;
     return *this;
   }
 
 
-  Unit operator++(int)
+  Basic_Unit operator++(int)
   {
-    return Unit(_count++);
+    return Basic_Unit(_count++);
   }
 
 
-  Unit& operator--()
+  Basic_Unit& operator--()
   {
     --_count;
     return *this;
   }
 
 
-  Unit operator--(int)
+  Basic_Unit operator--(int)
   {
-    return Unit(_count--);
+    return Basic_Unit(_count--);
   }
 
 
-  Unit operator-()
+  Basic_Unit operator-()
   {
-    return Unit(-_count);
+    return Basic_Unit(-_count);
   }
 
 
-  Unit& operator+=(Unit const& Obj)
+  Basic_Unit& operator+=(Basic_Unit const& Obj)
   {
     _count += Obj.count();
     return *this;
   }
 
 
-  Unit& operator-=(Unit const& Obj)
+  Basic_Unit& operator-=(Basic_Unit const& Obj)
   {
     _count -= Obj.count();
     return *this;
@@ -918,11 +922,11 @@ public:
 
 
   template<typename _Rep>
-  Unit& operator*=(_Rep const& coef)
+  Basic_Unit& operator*=(_Rep const& coef)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
@@ -930,7 +934,7 @@ public:
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -938,21 +942,21 @@ public:
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator*=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
+  Basic_Unit& operator*=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+    Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -960,11 +964,11 @@ public:
 
 
   template<typename _Rep>
-  Unit& operator/=(_Rep const& coef)
+  Basic_Unit& operator/=(_Rep const& coef)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     if(coef >= 0 && coef <= 0)
@@ -975,7 +979,7 @@ public:
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -983,16 +987,16 @@ public:
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator/=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
+  Basic_Unit& operator/=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
+    Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
 
     if(newObj.count() >= 0 && newObj.count() <= 0)
       throw DivisionByZero_Exception("Divide by 0.");
@@ -1001,7 +1005,7 @@ public:
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -1009,11 +1013,11 @@ public:
 
 
   template <typename _Rep>
-  Unit& operator%=(_Rep const& coef)
+  Basic_Unit& operator%=(_Rep const& coef)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     if(coef >= 0 && coef <= 0)
@@ -1023,7 +1027,7 @@ public:
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -1031,22 +1035,22 @@ public:
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Unit& operator%=(Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
+  Basic_Unit& operator%=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this += Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+      *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
     }
 
-    Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
+    Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
     if(newObj.count() == 0) //possible because newObj::rep is integer
       throw DivisionByZero_Exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
     if(OMNI_OFFICIAL_ZERO)
     {
-      *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
+      *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
     return *this;
@@ -1058,11 +1062,11 @@ protected:
 };
 
 
-//definition of Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Unit class, which permit avoiding the
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
 //following declaration :
 template<typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
+constexpr double Basic_Unit<_Dimension, Rep, Period, Origin>::origin;
 
 
 
@@ -1078,29 +1082,29 @@ constexpr double Unit<_Dimension, Rep, Period, Origin>::origin;
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type
-operator+ (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
+constexpr typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type
+operator+ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot sum values with different dimension.");
-  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(type(Obj1).count() + type(Obj2).count());
 }
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type
-operator- (Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
+constexpr typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type
+operator- (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot subtract values with different dimension.");
-  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1, Origin1>, Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(type(Obj1).count() - type(Obj2).count());
 }
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator* (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
+constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator* (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   return Obj *= coef;
@@ -1109,8 +1113,8 @@ operator* (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator* (T const& coef, Unit<Dimension, Rep, Period, Origin> const& Obj)
+constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator* (T const& coef, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be an arithmetic and a unit.");
   return Obj * coef;
@@ -1118,8 +1122,8 @@ operator* (T const& coef, Unit<Dimension, Rep, Period, Origin> const& Obj)
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator/ (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
+constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator/ (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
@@ -1129,8 +1133,8 @@ operator/ (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator% (Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
+constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
+operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(coef >= 0 && coef <= 0)
@@ -1160,21 +1164,21 @@ struct origin_getter
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
+constexpr Basic_Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
 typename Ratio_multiply<Period1, Period2>::type, origin_getter<Origin1, Origin2>::value>
-operator* (Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
+operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_OFFICIAL_ZERO)
   {
-    Obj1 += Unit<Dimension1, Rep1, base, Origin1>(Origin1);
-    Obj2 += Unit<Dimension2, Rep2, base, Origin2>(Origin2);
+    Obj1 += Basic_Unit<Dimension1, Rep1, base, Origin1>(Origin1);
+    Obj2 += Basic_Unit<Dimension2, Rep2, base, Origin2>(Origin2);
   }
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_multiply<Dimension1, Dimension2>::type newDim;
   typedef typename Ratio_multiply<Period1, Period2>::type newPeriod;
-  typedef Unit<newDim, common, newPeriod, origin_getter<Origin1, Origin2>::value> type;
+  typedef Basic_Unit<newDim, common, newPeriod, origin_getter<Origin1, Origin2>::value> type;
 
   type toReturn(static_cast<common>(Obj1.count()) * static_cast<common>(Obj2.count()));
 
@@ -1189,10 +1193,10 @@ operator* (Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Unit<Dimension2, Rep2,
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
-constexpr Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
+constexpr Basic_Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
 typename Ratio_divide<Period1, Period2>::type>
-operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, Period2> const& Obj2)
+operator/ (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(Obj2.count() >= 0 && Obj2.count() <= 0)
     throw DivisionByZero_Exception("Divide by 0.");
@@ -1200,18 +1204,18 @@ operator/ (Unit<Dimension1, Rep1, Period1> const& Obj1, Unit<Dimension2, Rep2, P
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_divide<Dimension1, Dimension2>::type newDim;
   typedef typename Ratio_divide<Period1, Period2>::type newPeriod;
-  typedef Unit<newDim, common, newPeriod> type;
+  typedef Basic_Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(Obj1).count() / static_cast<common>(Obj2));
 }
 
 
 template <typename _Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
+constexpr Basic_Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
 typename std::common_type<Rep, typename
-std::enable_if<!is_Unit<T>::value, T>::type>::type,
+std::enable_if<!is_Basic_Unit<T>::value, T>::type>::type,
 typename Ratio_divide<Ratio<E0, E0>, Period>::type>
-operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
+operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
     throw DivisionByZero_Exception("Divide by 0.");
@@ -1219,20 +1223,20 @@ operator/ (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
   typedef typename std::common_type<Rep, T>::type common;
   typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
   typedef typename Ratio_divide<Ratio<E0, E0>, Period>::type newPeriod;
-  typedef Unit<newDim, common, newPeriod> type;
+  typedef Basic_Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(coef) / static_cast<common>(Obj).count());
 }
 
 
 template <typename _Dimension, typename Rep, typename Period, typename T>
-constexpr Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period>
-operator% (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
+constexpr Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period>
+operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(Obj.count() >= 0 && Obj.count() <= 0)
     throw DivisionByZero_Exception("Divide by 0.");
 
-  typedef Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period> type;
+  typedef Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, typename std::common_type<Rep, T>::type, Period> type;
   return type(modulo(coef, Obj.count()));
 }
 
@@ -1240,14 +1244,14 @@ operator% (T const& coef, Unit<_Dimension, Rep, Period> const& Obj)
 //MAYBE CHANGE THE PERIOD OF THE RETURN
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
-constexpr Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1>
-operator% (Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr Basic_Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1>
+operator% (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(Obj2.count() >= 0 && Obj2.count() <= 0)
     throw DivisionByZero_Exception("Divide by 0.");
 
-  typedef Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1> type;
+  typedef Basic_Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1> type;
   return type(modulo(Obj1.count(), Obj2.count()));
 }
 
@@ -1265,22 +1269,22 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator==(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator==(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
 
-  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1>,
-  Unit<Dimension2, Rep2, Period2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1>,
+  Basic_Unit<Dimension2, Rep2, Period2>>::type type;
   return type(Obj1).count() == type(Obj2).count();
 }
 
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator!=(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator!=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -1291,22 +1295,22 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator<(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator<(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
 
-  typedef typename std::common_type<Unit<Dimension1, Rep1, Period1>,
-  Unit<Dimension2, Rep2, Period2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1>,
+  Basic_Unit<Dimension2, Rep2, Period2>>::type type;
   return type(Obj1).count() < type(Obj2).count();
 }
 
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator<=(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator<=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -1317,8 +1321,8 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator>(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator>(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -1329,8 +1333,8 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 template <typename Dimension1, typename Rep1, typename Period1,
 typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator>=(Unit<Dimension1, Rep1, Period1> const& Obj1,
-Unit<Dimension2, Rep2, Period2> const& Obj2)
+constexpr bool operator>=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -1351,28 +1355,28 @@ Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
+Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return std::exp(Obj.count());
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
+Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
 {
   return std::exp(Obj.count() * std::log(basis));
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
+Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
 {
   return std::log(Obj.count());
 }
 
 
 template <typename Rep, typename Period>
-Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
+Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
 {
   return std::log(Obj.count()) / std::log(basis);
 }
@@ -1390,7 +1394,7 @@ Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Unit<Dimension<0,0,0,0,0,0,0
 
 
 template <typename Rep, typename Period, typename T = float>
-T pow(float var, Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& exponent)
+T pow(float var, Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& exponent)
 {
   return std::pow(var, exponent.count()); //A REFAIRE
 }
@@ -1434,7 +1438,7 @@ T pow(float var, Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& exponent
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin>
-std::ostream& operator<<(std::ostream& oss, Unit<Dimension, Rep, Period, Origin> const& Obj)
+std::ostream& operator<<(std::ostream& oss, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
   oss << Obj.count();
   return oss;
@@ -1449,8 +1453,8 @@ std::ostream& operator<<(std::ostream& oss, Unit<Dimension, Rep, Period, Origin>
 
 
 
-//template <typename _Dimension, typename Period, double const& Origin>
-//using Unit =
+template <typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
+using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 
@@ -1500,7 +1504,7 @@ enum class Probability {none, uniform, triangular, triangular_asym, normal, arcs
 
 
 template <typename _Dimension, typename Period, double const& Origin>
-float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Probability law)
+float getDeviation(Basic_Unit<_Dimension, float, Period, Origin> variation, Probability law)
 {
   if(law == Probability::none)
     return variation;
@@ -1561,7 +1565,7 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 template<typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-struct common_type<omniunit::Unit<Dimension1, Rep1, Period1, Origin1>, omniunit::Unit<Dimension2, Rep2, Period2, Origin2>>
+struct common_type<omniunit::Basic_Unit<Dimension1, Rep1, Period1, Origin1>, omniunit::Basic_Unit<Dimension2, Rep2, Period2, Origin2>>
 {
 private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
@@ -1576,7 +1580,7 @@ private:
   static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1);
 
 public:
-  typedef omniunit::Unit<Dimension1, common, new_Ratio, origin> type;
+  typedef omniunit::Basic_Unit<Dimension1, common, new_Ratio, origin> type;
 };
 
 
