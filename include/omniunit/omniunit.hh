@@ -297,6 +297,10 @@ struct Ratio
   typedef Ratio<num, den> type;
 };
 
+
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
+//following declaration :
 template<double const& _Num, double const& _Den>
 constexpr double Ratio<_Num, _Den>::value;
 
