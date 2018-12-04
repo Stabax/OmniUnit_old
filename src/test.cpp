@@ -1,5 +1,5 @@
 #define GOPNIK blyat
-#define OMNI_OFFICIAL_ZERO true
+#define OMNI_TRUE_ZERO true
 #define OMNI_DISABLE_UNCERTAINTIES
 
 #include "omniunit/omniunit.hh"
@@ -10,7 +10,7 @@
 #include <typeinfo>
 
 
-#if OMNI_OFFICIAL_ZERO == true
+#if OMNI_TRUE_ZERO == true
 
 #define VAR1 2458.35
 #define VAR2 2458.35

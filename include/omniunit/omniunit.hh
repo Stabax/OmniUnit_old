@@ -34,9 +34,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define OMNI_DEFAULT_TYPE float
 #endif // OMNI_DEFAULT_TYPE
 
-#ifndef OMNI_OFFICIAL_ZERO
-  #define OMNI_OFFICIAL_ZERO true
-#endif // OMNI_OFFICIAL_ZERO
+#ifndef OMNI_TRUE_ZERO
+  #define OMNI_TRUE_ZERO true
+#endif // OMNI_TRUE_ZERO
 
 //easter egg
 #ifdef WESTERN_SPY
@@ -896,7 +896,7 @@ public:
   template<typename _Rep>
   Basic_Unit& operator*=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -904,7 +904,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -916,7 +916,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Basic_Unit& operator*=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -926,7 +926,7 @@ public:
     Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -938,7 +938,7 @@ public:
   template<typename _Rep>
   Basic_Unit& operator/=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -949,7 +949,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -961,7 +961,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Basic_Unit& operator/=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -975,7 +975,7 @@ public:
 
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -987,7 +987,7 @@ public:
   template <typename _Rep>
   Basic_Unit& operator%=(_Rep const& coef)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -997,7 +997,7 @@ public:
 
     _count = static_cast<Rep>(modulo(_count, coef));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1009,7 +1009,7 @@ public:
   template<typename _Rep, typename _Period, double const& _Origin>
   Basic_Unit& operator%=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
       Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
@@ -1020,7 +1020,7 @@ public:
       throw DivisionByZero_Exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
-    if(OMNI_OFFICIAL_ZERO)
+    if(OMNI_TRUE_ZERO)
     {
       *this -= Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
@@ -1141,7 +1141,7 @@ typename std::common_type<Rep1, Rep2>::type,
 typename Ratio_multiply<Period1, Period2>::type, origin_getter<Origin1, Origin2>::value>
 operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
-  if(OMNI_OFFICIAL_ZERO)
+  if(OMNI_TRUE_ZERO)
   {
     Obj1 += Basic_Unit<Dimension1, Rep1, base, Origin1>(Origin1);
     Obj2 += Basic_Unit<Dimension2, Rep2, base, Origin2>(Origin2);
@@ -1154,7 +1154,7 @@ operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 
   type toReturn(static_cast<common>(Obj1.count()) * static_cast<common>(Obj2.count()));
 
-  if(OMNI_OFFICIAL_ZERO)
+  if(OMNI_TRUE_ZERO)
   {
     //WHAT TO DO HERE ?
   }
