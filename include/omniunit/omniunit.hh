@@ -8,18 +8,14 @@ modification, are permitted provided that the following conditions are met:
   Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
 
-  Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-  Neither the name of Denis Tosetton, nor Baxlan nor the names
+  Neither the name of Denis Tosetto nor the names
   of its contributors may be used to endorse or promote products derived
   from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS "AS IS" AND ANY
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
+DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY
 DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
@@ -125,12 +121,12 @@ public:
 
 
 
-//modulo at compile time which can handle floating points.
+//modulo at compile time (if parameters are constexpr) which can handle floating points.
 template <typename T, typename U>
 constexpr typename std::common_type<T, U>::type
 modulo(T const& a, U const& b)
 {
-  //static_assert(b < 0 || b > 0, "Division by 0.");
+  //we can't test at compile time if "b" equals 0 or not (division by 0) because "b" is not constexpr in all cases... sad.
   static_assert(std::is_arithmetic<T>::value && std::is_arithmetic<U>::value, "Arguments should be arithmetic values.");
   typedef typename std::common_type<T, U>::type common;
   common a2 = static_cast<common>(a);
@@ -139,32 +135,7 @@ modulo(T const& a, U const& b)
 }
 
 
-static constexpr double zero = 0.;
-
-/*
-//The goal is to replace function gcd by type_trait gcd to allow the static_assertion
-//in modulo. However, this doesn't work because modulo is not done at compile time
-//because of std::floor...
-
-template <double const& a, double const& b>
-struct gcd_impl
-{
-  static constexpr double c = modulo(a, b);
-  static constexpr double value = gcd_impl<b, c>::value;
-
-};
-
-
-template <double const& a>
-struct gcd_impl<a, zero>
-{
-  static constexpr double value = a;
-
-};
-*/
-
-
-//there is a standard gcd in c++17. It's too recent.
+//there is a standard gcd in c++17, but it handles only integers.
 template <typename T, typename U>
 constexpr typename std::common_type<T, U>::type
 gcd(T const& a, U const& b)
@@ -175,12 +146,12 @@ gcd(T const& a, U const& b)
   common a2 = static_cast<common>(a);
   common b2 = static_cast<common>(b);
 
-  double tempo = 0;
-  while (b2 > 0)
+  double temp = 0;
+  while (b2 > std::numeric_limits<common>::epsilon())
   {
-    tempo = modulo(a2, b2);
+    temp = modulo(a2, b2);
     a2 = b2;
-    b2 = tempo;
+    b2 = temp;
   }
   return a2;
 }
@@ -191,7 +162,6 @@ template <typename T>
 constexpr bool is_positive_integer(T const& number)
 {
   static_assert(std::is_arithmetic<T>::value, "Arguments should be arithmetic values.");
-
   T res = number - static_cast<T>(std::floor(number));
   return (res >=0 && res <=0 && number >= 0) ? true : false;
 }
@@ -207,6 +177,8 @@ constexpr bool is_positive_integer(T const& number)
 //=============================================================================
 
 
+
+static constexpr double zero = 0.;
 
 static constexpr double E0  = 1.;
 static constexpr double E1  = 10.;
