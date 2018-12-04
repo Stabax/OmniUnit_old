@@ -147,7 +147,7 @@ gcd(T const& a, U const& b)
   common b2 = static_cast<common>(b);
 
   double temp = 0;
-  while (b2 > std::numeric_limits<common>::epsilon())
+  while (std::abs(b2) > std::numeric_limits<common>::epsilon())
   {
     temp = modulo(a2, b2);
     a2 = b2;
@@ -163,7 +163,7 @@ constexpr bool is_positive_integer(T const& number)
 {
   static_assert(std::is_arithmetic<T>::value, "Arguments should be arithmetic values.");
   T res = number - static_cast<T>(std::floor(number));
-  return (res >=0 && res <=0 && number >= 0) ? true : false;
+  return (std::abs(res) <= std::numeric_limits<T>::epsilon() && number >= 0) ? true : false;
 }
 
 
@@ -261,6 +261,16 @@ static constexpr double E77 = 10000000000000000000000000000000000000000000000000
 static constexpr double E78 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 static constexpr double E79 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 static constexpr double E80 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E81 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E82 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E83 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E84 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E85 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E86 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E87 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E88 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E89 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+static constexpr double E90 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 
 
 
@@ -277,7 +287,7 @@ static constexpr double E80 = 10000000000000000000000000000000000000000000000000
 template<double const& _Num, double const& _Den = E0>
 struct Ratio
 {
-  static_assert(_Den > 0 || _Den < 0, "Denominator cannot be zero.");
+  static_assert(std::abs(_Den) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_positive_integer(_Num), "Numerator may not have decimals and may be positive.");
   static_assert(is_positive_integer(_Den), "Denominator may not have decimals and may be positive.");
 
@@ -317,7 +327,7 @@ struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 template <typename ratio>
 struct Ratio_invert
 {
-  static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value , "Template parameter should be an OmniUnit ratio.");
 
   typedef Ratio<ratio::den, ratio::num> type;
@@ -364,7 +374,7 @@ struct value_times_Ratio
 template <typename ratio1, typename ratio2>
 class Ratio_divide
 {
-  static_assert(ratio2::num > 0 || ratio2::num < 0, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio2::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
@@ -378,7 +388,7 @@ public:
 template <typename ratio, double const& val>
 class Ratio_over_value
 {
-  static_assert(val > 0 || val < 0, "Denominator cannot be zero.");
+  static_assert(std::abs(val) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "Second template parameter may not have decimals and may be positive.");
 
@@ -394,7 +404,7 @@ public:
 template <double const& val, typename ratio>
 class value_over_Ratio
 {
-  static_assert(ratio::num > 0 || ratio::num < 0, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
 
@@ -943,7 +953,7 @@ public:
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
-    if(coef >= 0 && coef <= 0)
+    if(std::abs(coef) <= std::numeric_limits<_Rep>::epsilon())
       throw DivisionByZero_Exception("Divide by 0.");
 
     typedef typename std::common_type<Rep, _Rep>::type common;
@@ -970,7 +980,7 @@ public:
     typedef typename std::common_type<Rep, _Rep>::type common;
     Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj);
 
-    if(newObj.count() >= 0 && newObj.count() <= 0)
+    if(std::abs(newObj.count()) <= std::numeric_limits<common>::epsilon())
       throw DivisionByZero_Exception("Divide by 0.");
 
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
@@ -992,7 +1002,7 @@ public:
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
     }
 
-    if(coef >= 0 && coef <= 0)
+    if(std::abs(coef) <= std::numeric_limits<_Rep>::epsilon())
       throw DivisionByZero_Exception("Divide by 0.");
 
     _count = static_cast<Rep>(modulo(_count, coef));
@@ -1098,7 +1108,7 @@ constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period,
 operator/ (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
-  if(coef >= 0 && coef <= 0)
+  if(std::abs(coef) <= std::numeric_limits<T>::epsilon())
     throw DivisionByZero_Exception("Divide by 0.");
   return Obj /= coef;
 }
@@ -1109,7 +1119,7 @@ constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period,
 operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
-  if(coef >= 0 && coef <= 0)
+  if(std::abs(coef) <= std::numeric_limits<T>::epsilon())
     throw DivisionByZero_Exception("Divide by 0.");
   return Obj %= coef;
 }
@@ -1130,7 +1140,7 @@ operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 template<double const& a, double const& b>
 struct origin_getter
 {
-  static constexpr double value = (a<=b && a >=b) ? a : zero;
+  static constexpr double value = (std::abs(a-b) <= std::numeric_limits<double>::epsilon()) ? a : zero;
 };
 
 
@@ -1170,7 +1180,7 @@ typename std::common_type<Rep1, Rep2>::type,
 typename Ratio_divide<Period1, Period2>::type>
 operator/ (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
-  if(Obj2.count() >= 0 && Obj2.count() <= 0)
+  if(std::abs(Obj2.count()) <= std::numeric_limits<Rep2>::epsilon())
     throw DivisionByZero_Exception("Divide by 0.");
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
@@ -1189,7 +1199,7 @@ std::enable_if<!is_Basic_Unit<T>::value, T>::type>::type,
 typename Ratio_divide<Ratio<E0, E0>, Period>::type>
 operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period> const& Obj)
 {
-  if(Obj.count() >= 0 && Obj.count() <= 0)
+  if(std::abs(Obj.count()) <= std::numeric_limits<Rep>::epsilon())
     throw DivisionByZero_Exception("Divide by 0.");
 
   typedef typename std::common_type<Rep, T>::type common;
@@ -1220,7 +1230,7 @@ constexpr Basic_Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Pe
 operator% (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
-  if(Obj2.count() >= 0 && Obj2.count() <= 0)
+  if(std::abs(Obj2.count()) <= std::numeric_limits<Rep2>::epsilon())
     throw DivisionByZero_Exception("Divide by 0.");
 
   typedef Basic_Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1> type;
@@ -1543,13 +1553,14 @@ private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
 
   //the common period is the nearest of 1/1 in order of magnitude
+  //should it be the average in log scale ?
   typedef typename std::conditional< (std::abs(std::log10(Period1::value)) < std::abs(std::log10(Period2::value))),
   Period1, Period2>::type new_Ratio;
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
 
   //if origins are differents, then the common origin is 0...
-  static constexpr double origin = ((Origin1 < Origin2 || Origin1 > Origin2) ? 0. : Origin1);
+  static constexpr double origin = omniunit::origin_getter<Origin1, Origin2>::value;
 
 public:
   typedef omniunit::Basic_Unit<Dimension1, common, new_Ratio, origin> type;
