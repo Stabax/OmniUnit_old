@@ -33,31 +33,30 @@ namespace omniunit
 
 
 
-static constexpr double piE36 = 3141592653589793238462643383279502884.;
-static constexpr double distanceTraveledByLightIn1Sec = 299792458.; // m
-static constexpr double secondsIn1Min = 60.; // s
-static constexpr double secondsIn1Hour = 3600.; // s
-static constexpr double secondsIn1Day = 3600. * 24.; // s
-static constexpr double secondsIn1Week = 3600 * 24. * 7.; // s
-static constexpr double monthsIn1Year = 12.; // s
-static constexpr double secondsIn1YearE2 = 36525. * 24. *3600.; // s
-static constexpr double distanceSunEarth = 149597870700.; //m
-static constexpr double parsecDef = 648000.;
-static constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
-static constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
-static constexpr double solar_massDefE4     =  19884.; //kg * 10^30
-static constexpr double avogadroE9 = 6022140857.; //10^23
-static constexpr double celsiusConstant = 273.15;
+constexpr double piE36 = 3141592653589793238462643383279502884.;
+constexpr double distanceTraveledByLightPerSec = 299792458.; // m
+constexpr double secondsPerMin = 60.; // s
+constexpr double secondsPerHour = 60. * 60.; // s
+constexpr double secondsPerDay = 60. * 60. * 24.; // s
+constexpr double secondsPerWeek = 60. * 60. * 24. * 7.; // s
+constexpr double monthsPerYear = 12.; // s
+constexpr double secondsPerYearE2 = 36525. * 24. *3600.; // s
+constexpr double distanceSunEarth = 149597870700.; //m
+constexpr double parsecDef = 648000.;
+constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
+constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
+constexpr double solar_massDefE4     =  19884.; //kg * 10^30
+constexpr double avogadroE9 = 6022140857.; //10^23
+constexpr double celsiusConstant = 273.15;
 
 
 
 typedef Ratio<piE36, E36> pi;
-typedef Ratio<secondsIn1YearE2, E2> secondsIn1Year;
+typedef Ratio<secondsPerYearE2, E2> secondsPerYear;
 typedef Ratio_divide<Ratio<parsecDef>, pi>::type parsecDefinition;
 typedef Ratio_over_value<Ratio<atomic_massDefE9, E9>, E27>::type atomic_massDefinition;
 typedef Ratio_over_value<Ratio<evPerC2DefE8, E8>, E36>::type evPerC2Definition;
 typedef Ratio_times_value<Ratio<solar_massDefE4, E4>, E30>::type solar_massDefinition;
-typedef Ratio_over_value<secondsIn1Year, monthsIn1Year>::type secondsIn1Month;
 typedef Ratio_times_value<Ratio<avogadroE9, E9>, E23>::type avogadro;
 typedef Ratio_invert<avogadro>::type unitaryQuantityDefinition;
 

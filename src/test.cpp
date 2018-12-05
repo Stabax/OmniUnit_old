@@ -37,6 +37,7 @@ void show(T const& var1, double ref = 0)
   std::cout << var1 << " " << var1.dimension() << " " << typeid(typename T::rep).name() << " "<< T::period::num << "/" << T::period::den << " "<< var1.origin << " " << std::boolalpha << a << "\n";
 }
 
+
 int main()
 {
 
@@ -69,5 +70,7 @@ int main()
   auto var9 = temp1 * temp2;
   show(var9);
 
+  auto a = omniunit::unit_cast<omniunit::second<double>>(omniunit::hour<double>(1));
+  show(a);
 return 0;
 }

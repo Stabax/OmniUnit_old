@@ -106,8 +106,7 @@ using yottagram = Unit<Mass, Rep, zetta, zero>;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using atomic_mass = Unit<Mass, Rep, typename Ratio_multiply<
-atomic_massDefinition, Ratio<E0, E27>>::type, zero>;
+using atomic_mass = Unit<Mass, Rep, atomic_massDefinition, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using evPerC2 = Unit<Mass, Rep, evPerC2Definition, zero>;

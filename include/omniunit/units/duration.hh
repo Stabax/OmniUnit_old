@@ -144,22 +144,26 @@ using yottasecond = Unit<Duration, Rep, yotta, zero>;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using minute = Unit<Duration, Rep, Ratio<secondsIn1Min, E0>, zero>;
+using minute = Unit<Duration, Rep, Ratio<secondsPerMin, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hour = Unit<Duration, Rep, Ratio<secondsIn1Hour, E0>, zero>;
+using hour = Unit<Duration, Rep, Ratio<secondsPerHour, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using day = Unit<Duration, Rep, Ratio<secondsIn1Day, E0>, zero>;
+using day = Unit<Duration, Rep, Ratio<secondsPerDay, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using week = Unit<Duration, Rep, Ratio<secondsIn1Week, E0>, zero>;
+using week = Unit<Duration, Rep, Ratio<secondsPerWeek, E0>, zero>;
+
+//be careful using month
+//the month defined here is an average
+//while a real month could have 28, 29, 30 or 31 days
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using month = Unit<Duration, Rep, Ratio_over_value<
+secondsPerYear, monthsPerYear>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using month = Unit<Duration, Rep, secondsIn1Month, zero>;
-
-template <typename Rep = OMNI_DEFAULT_TYPE>
-using year = Unit<Duration, Rep, secondsIn1Year, zero>;
+using year = Unit<Duration, Rep, secondsPerYear, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using kiloyear = Unit<Duration, Rep, typename Ratio_multiply<

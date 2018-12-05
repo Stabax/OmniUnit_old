@@ -105,7 +105,7 @@ using yottamol = Unit<Quantity, Rep, yotta, zero>;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using unitary_quantity = Unit<Quantity, Rep, unitaryQuantityDefinition, zero>;
+using amount = Unit<Quantity, Rep, unitaryQuantityDefinition, zero>;
 
 
 
@@ -134,7 +134,7 @@ typedef examol<> examol;
 typedef zettamol<> zettamol;
 typedef yottamol<> yottamol;
 
-typedef unitary_quantity<> rawQuantity;
+typedef amount<> amount;
 
 
 

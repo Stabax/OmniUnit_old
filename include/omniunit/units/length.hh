@@ -113,15 +113,15 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using astronomical_unit = Unit<Length, Rep, Ratio<distanceSunEarth, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightIn1Sec, E10>, zero>;
+using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightPerSec, E10>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightminute = Unit<Length, Rep, typename Ratio_multiply<
-typename lightsecond<Rep>::period, Ratio<secondsIn1Min, E0>>::type, zero>;
+typename lightsecond<Rep>::period, Ratio<secondsPerMin, E0>>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightyear = Unit<Length, Rep, typename Ratio_multiply<
-typename lightsecond<Rep>::period, secondsIn1Year>::type, zero>;
+typename lightsecond<Rep>::period, secondsPerYear>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using parsec = Unit<Length, Rep, typename Ratio_multiply<
