@@ -607,9 +607,9 @@ std::string dimension_str()
   if(dimension::luminosity != 0)
     dim += ("[J" + std::to_string(dimension::luminosity) + "]");
   if(dimension::angle != 0)
-  dim += ("[a" + std::to_string(dimension::angle) + "]");
+    dim += ("[a" + std::to_string(dimension::angle) + "]");
   if(dimension::solid_angle != 0)
-  dim += ("[sa" + std::to_string(dimension::solid_angle) + "]");
+    dim += ("[sa" + std::to_string(dimension::solid_angle) + "]");
   if(dim.length() == 0)
     dim = "[/]";
 
@@ -1030,7 +1030,7 @@ public:
     }
 
     Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin> newObj(Obj);
-    if(newObj.count() == 0) //possible because newObj::rep is integer
+    if(std::abs(newObj.count()) <= std::numeric_limits<_Rep>::epsilon())
       throw DivisionByZero_Exception("Divide by 0.");
     _count = static_cast<Rep>(modulo(_count, newObj.count()));
 
