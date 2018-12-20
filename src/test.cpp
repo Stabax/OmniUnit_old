@@ -70,7 +70,8 @@ int main()
   auto var9 = temp1 * temp2;
   show(var9);
 
-  auto a = omniunit::unit_cast<omniunit::second<double>>(omniunit::hour<double>(1));
-  show(a);
+  omniunit::Basic_Unit<omniunit::Dimension<2,0,0,0,0,0,0,0,0>, double, omniunit::base, omniunit::zero> a11(1);
+  omniunit::Basic_Unit<omniunit::Dimension<2,0,0,0,0,0,0,0,0>, double, omniunit::deci, omniunit::zero> b11(a11);
+  std::cout << b11 << "\n";
 return 0;
 }

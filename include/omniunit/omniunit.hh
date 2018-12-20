@@ -425,7 +425,7 @@ public:
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== RATIO CONVERTER STD/STB =================================================
+//=== RATIO CONVERTER STD/OMNI =================================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -647,10 +647,10 @@ struct is_Basic_Unit<Basic_Unit<Dimension, Rep, Period, Origin>> : public std::t
 };
 
 
-template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
+template<typename toUnit, typename Dimension, typename Rep, typename Period, double const& Origin,
+typename = typename std::enable_if<is_Basic_Unit<toUnit>::value, toUnit>::type>
+toUnit unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
-  static_assert(is_Basic_Unit<toUnit>::value, "First template argument should be a basic_unit");
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
@@ -661,6 +661,28 @@ constexpr toUnit unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj
     + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)));
 }
 
+
+template<typename T, typename Dimension, typename Rep, typename Period, double const& Origin,
+typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
+Basic_Unit<Dimension, T, Period, Origin> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
+{
+  return unit_cast<Basic_Unit<Dimension, T, Period, Origin>>(Obj.count());
+}
+
+
+template<typename R, typename Dimension, typename Rep, typename Period, double const& Origin,
+typename = typename std::enable_if<is_stb_Ratio<R>::value, R>::type>
+Basic_Unit<Dimension, Rep, R, Origin> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
+{
+  return unit_cast<Basic_Unit<Dimension, Rep, R, Origin>>(Obj.count());
+}
+
+
+template<double const& O, typename Dimension, typename Rep, typename Period, double const& Origin>
+Basic_Unit<Dimension, Rep, Period, O> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
+{
+  return unit_cast<Basic_Unit<Dimension, Rep, Period, O>>(Obj.count());
+}
 
 
 //=============================================================================
