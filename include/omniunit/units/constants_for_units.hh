@@ -53,7 +53,7 @@ constexpr double celsiusConstant = 273.15;
 
 typedef Ratio<piE36, E36> pi;
 typedef Ratio<secondsPerYearE2, E2> secondsPerYear;
-typedef Ratio_divide<Ratio<parsecDef>, pi>::type parsecDefinition;
+typedef Ratio_over_Ratio<Ratio<parsecDef>, pi>::type parsecDefinition;
 typedef Ratio_over_value<Ratio<atomic_massDefE9, E9>, E27>::type atomic_massDefinition;
 typedef Ratio_over_value<Ratio<evPerC2DefE8, E8>, E36>::type evPerC2Definition;
 typedef Ratio_times_value<Ratio<solar_massDefE4, E4>, E30>::type solar_massDefinition;

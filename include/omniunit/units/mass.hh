@@ -112,27 +112,27 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using evPerC2 = Unit<Mass, Rep, evPerC2Definition, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millievPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using millievPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, milli>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using microevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using microevPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, micro>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using kiloevPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using megaevPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigaevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using gigaevPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, giga>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using teraevPerC2 = Unit<Mass, Rep, typename Ratio_multiply<
+using teraevPerC2 = Unit<Mass, Rep, typename Ratio_times_Ratio<
 typename evPerC2<Rep>::period, tera>::type, zero>;
 
 

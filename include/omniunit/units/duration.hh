@@ -166,15 +166,15 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using year = Unit<Duration, Rep, secondsPerYear, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kiloyear = Unit<Duration, Rep, typename Ratio_multiply<
+using kiloyear = Unit<Duration, Rep, typename Ratio_times_Ratio<
 typename year<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megayear = Unit<Duration, Rep, typename Ratio_multiply<
+using megayear = Unit<Duration, Rep, typename Ratio_times_Ratio<
 typename year<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigayear = Unit<Duration, Rep, typename Ratio_multiply<
+using gigayear = Unit<Duration, Rep, typename Ratio_times_Ratio<
 typename year<Rep>::period, giga>::type, zero>;
 
 

@@ -116,27 +116,27 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightPerSec, E10>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using lightminute = Unit<Length, Rep, typename Ratio_multiply<
+using lightminute = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename lightsecond<Rep>::period, Ratio<secondsPerMin, E0>>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using lightyear = Unit<Length, Rep, typename Ratio_multiply<
+using lightyear = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename lightsecond<Rep>::period, secondsPerYear>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using parsec = Unit<Length, Rep, typename Ratio_multiply<
+using parsec = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename astronomical_unit<Rep>::period, parsecDefinition>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kiloparsec = Unit<Length, Rep, typename Ratio_multiply<
+using kiloparsec = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename parsec<Rep>::period, kilo>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megaparsec = Unit<Length, Rep, typename Ratio_multiply<
+using megaparsec = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename parsec<Rep>::period, mega>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigaparsec = Unit<Length, Rep, typename Ratio_multiply<
+using gigaparsec = Unit<Length, Rep, typename Ratio_times_Ratio<
 typename parsec<Rep>::period, giga>::type, zero>;
 
 

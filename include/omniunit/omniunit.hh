@@ -339,7 +339,7 @@ struct Ratio_invert
 
 
 template <typename ratio1, typename ratio2>
-class Ratio_multiply
+class Ratio_times_Ratio
 {
   static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
 
@@ -376,7 +376,7 @@ struct value_times_Ratio
 
 
 template <typename ratio1, typename ratio2>
-class Ratio_divide
+class Ratio_over_Ratio
 {
   static_assert(std::abs(ratio2::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
@@ -653,7 +653,7 @@ toUnit unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
-  typedef typename Ratio_divide<Period, typename toUnit::period>::type new_Ratio;
+  typedef typename Ratio_over_Ratio<Period, typename toUnit::period>::type new_Ratio;
   typedef typename std::common_type<typename toUnit::rep, Rep>::type common_rep;
 
   return toUnit(static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.count())
@@ -666,7 +666,7 @@ template<typename T, typename Dimension, typename Rep, typename Period, double c
 typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 Basic_Unit<Dimension, T, Period, Origin> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
-  return unit_cast<Basic_Unit<Dimension, T, Period, Origin>>(Obj.count());
+  return unit_cast<Basic_Unit<Dimension, T, Period, Origin>>(Obj);
 }
 
 
@@ -674,14 +674,14 @@ template<typename R, typename Dimension, typename Rep, typename Period, double c
 typename = typename std::enable_if<is_stb_Ratio<R>::value, R>::type>
 Basic_Unit<Dimension, Rep, R, Origin> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
-  return unit_cast<Basic_Unit<Dimension, Rep, R, Origin>>(Obj.count());
+  return unit_cast<Basic_Unit<Dimension, Rep, R, Origin>>(Obj);
 }
 
 
 template<double const& O, typename Dimension, typename Rep, typename Period, double const& Origin>
 Basic_Unit<Dimension, Rep, Period, O> unit_cast(const Basic_Unit<Dimension, Rep, Period, Origin>& Obj)
 {
-  return unit_cast<Basic_Unit<Dimension, Rep, Period, O>>(Obj.count());
+  return unit_cast<Basic_Unit<Dimension, Rep, Period, O>>(Obj);
 }
 
 
@@ -1174,7 +1174,7 @@ template <typename Dimension1, typename Rep1, typename Period1, double const& Or
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
 constexpr Basic_Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_multiply<Period1, Period2>::type, origin_getter<Origin1, Origin2>::value>
+typename Ratio_times_Ratio<Period1, Period2>::type, origin_getter<Origin1, Origin2>::value>
 operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_TRUE_ZERO)
@@ -1185,7 +1185,7 @@ operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_multiply<Dimension1, Dimension2>::type newDim;
-  typedef typename Ratio_multiply<Period1, Period2>::type newPeriod;
+  typedef typename Ratio_times_Ratio<Period1, Period2>::type newPeriod;
   typedef Basic_Unit<newDim, common, newPeriod, origin_getter<Origin1, Origin2>::value> type;
 
   type toReturn(static_cast<common>(Obj1.count()) * static_cast<common>(Obj2.count()));
@@ -1203,7 +1203,7 @@ template <typename Dimension1, typename Rep1, typename Period1,
 typename Dimension2, typename Rep2, typename Period2>
 constexpr Basic_Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_divide<Period1, Period2>::type>
+typename Ratio_over_Ratio<Period1, Period2>::type>
 operator/ (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 {
   if(std::abs(Obj2.count()) <= std::numeric_limits<Rep2>::epsilon())
@@ -1211,7 +1211,7 @@ operator/ (Basic_Unit<Dimension1, Rep1, Period1> const& Obj1, Basic_Unit<Dimensi
 
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_divide<Dimension1, Dimension2>::type newDim;
-  typedef typename Ratio_divide<Period1, Period2>::type newPeriod;
+  typedef typename Ratio_over_Ratio<Period1, Period2>::type newPeriod;
   typedef Basic_Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(Obj1).count() / static_cast<common>(Obj2));
@@ -1222,7 +1222,7 @@ template <typename _Dimension, typename Rep, typename Period, typename T>
 constexpr Basic_Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
 typename std::common_type<Rep, typename
 std::enable_if<!is_Basic_Unit<T>::value, T>::type>::type,
-typename Ratio_divide<Ratio<E0, E0>, Period>::type>
+typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type>
 operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period> const& Obj)
 {
   if(std::abs(Obj.count()) <= std::numeric_limits<Rep>::epsilon())
@@ -1230,7 +1230,7 @@ operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period> const& Obj)
 
   typedef typename std::common_type<Rep, T>::type common;
   typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
-  typedef typename Ratio_divide<Ratio<E0, E0>, Period>::type newPeriod;
+  typedef typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type newPeriod;
   typedef Basic_Unit<newDim, common, newPeriod> type;
 
   return type(static_cast<common>(coef) / static_cast<common>(Obj).count());
