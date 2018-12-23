@@ -17,7 +17,8 @@
 #define VAR3 0
 #define VAR4 0
 #define VAR5 283.15
-#define VAR6 283.15
+#define VAR6 10
+#define VAR7 0
 
 #else // non official zero
 
@@ -47,6 +48,8 @@ int main()
   omniunit::celsius<double> temp2(10);
   omniunit::kelvin<double> temp3(10);
 
+  omniunit::celsius<double> temp4(0);
+
   show(temp1);
 
   auto var1 = temp1 * 10;
@@ -67,11 +70,11 @@ int main()
   auto var6 = temp1 += temp3;
   show(var6, VAR6);
 
+  auto var7 = temp1 + temp4;
+  show(var7, VAR7);
+
   auto var9 = temp1 * temp2;
   show(var9);
 
-  omniunit::Basic_Unit<omniunit::Dimension<2,0,0,0,0,0,0,0,0>, double, omniunit::base, omniunit::zero> a11(1);
-  omniunit::Basic_Unit<omniunit::Dimension<2,0,0,0,0,0,0,0,0>, double, omniunit::deci, omniunit::zero> b11(a11);
-  std::cout << b11 << "\n";
 return 0;
 }

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['relativetimer',['RelativeTimer',['../classstb_1_1RelativeTimer.html',1,'stb']]]
+  ['origin_5fgetter',['origin_getter',['../structomniunit_1_1origin__getter.html',1,'omniunit']]]
 ];

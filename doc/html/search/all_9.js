@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unit',['Unit',['../classstb_1_1Unit.html',1,'stb']]],
-  ['unit_3c_20float_2c_20std_3a_3anano_20_3e',['Unit&lt; float, std::nano &gt;',['../classstb_1_1Unit.html',1,'stb']]]
+  ['partial_5fspecialization_5fwrapper',['partial_specialization_wrapper',['../structomniunit_1_1partial__specialization__wrapper.html',1,'omniunit']]],
+  ['propagationuncertainties',['PropagationUncertainties',['../structomniunit_1_1PropagationUncertainties.html',1,'omniunit']]]
 ];

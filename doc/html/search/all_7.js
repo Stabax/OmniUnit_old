@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['speed',['Speed',['../classstb_1_1Speed.html',1,'stb']]],
-  ['speed_5fcast_5fimpl',['Speed_cast_impl',['../classstb_1_1Speed__cast__impl.html',1,'stb']]],
-  ['speed_5fcast_5fimpl_3c_20tounit_2c_20new_5fratio_2c_20common_5frep_2c_20false_2c_20true_20_3e',['Speed_cast_impl&lt; toUnit, new_ratio, common_rep, false, true &gt;',['../classstb_1_1Speed__cast__impl_3_01toUnit_00_01new__ratio_00_01common__rep_00_01false_00_01true_01_4.html',1,'stb']]],
-  ['speed_5fcast_5fimpl_3c_20tounit_2c_20new_5fratio_2c_20common_5frep_2c_20true_2c_20false_20_3e',['Speed_cast_impl&lt; toUnit, new_ratio, common_rep, true, false &gt;',['../classstb_1_1Speed__cast__impl_3_01toUnit_00_01new__ratio_00_01common__rep_00_01true_00_01false_01_4.html',1,'stb']]],
-  ['speed_5fcast_5fimpl_3c_20tounit_2c_20new_5fratio_2c_20common_5frep_2c_20true_2c_20true_20_3e',['Speed_cast_impl&lt; toUnit, new_ratio, common_rep, true, true &gt;',['../classstb_1_1Speed__cast__impl_3_01toUnit_00_01new__ratio_00_01common__rep_00_01true_00_01true_01_4.html',1,'stb']]]
+  ['is_5fbasic_5funit',['is_Basic_Unit',['../structomniunit_1_1is__Basic__Unit.html',1,'omniunit']]],
+  ['is_5fbasic_5funit_3c_20basic_5funit_3c_20dimension_2c_20rep_2c_20period_2c_20origin_20_3e_20_3e',['is_Basic_Unit&lt; Basic_Unit&lt; Dimension, Rep, Period, Origin &gt; &gt;',['../structomniunit_1_1is__Basic__Unit_3_01Basic__Unit_3_01Dimension_00_01Rep_00_01Period_00_01Origin_01_4_01_4.html',1,'omniunit']]],
+  ['is_5fdimension',['is_Dimension',['../structomniunit_1_1is__Dimension.html',1,'omniunit']]],
+  ['is_5fdimension_3c_20dimension_3c_20length_2c_20mass_2c_20time_2c_20current_2c_20temperature_2c_20quantity_2c_20luminosity_2c_20angle_2c_20solid_5fangle_20_3e_20_3e',['is_Dimension&lt; Dimension&lt; length, mass, time, current, temperature, quantity, luminosity, angle, solid_angle &gt; &gt;',['../structomniunit_1_1is__Dimension_3_01Dimension_3_01length_00_01mass_00_01time_00_01current_00_01tc46b29947c54a19e0003040b9e853c28.html',1,'omniunit']]],
+  ['is_5fstb_5fratio',['is_stb_Ratio',['../structomniunit_1_1is__stb__Ratio.html',1,'omniunit']]],
+  ['is_5fstb_5fratio_3c_20ratio_3c_20num_2c_20den_20_3e_20_3e',['is_stb_Ratio&lt; Ratio&lt; Num, Den &gt; &gt;',['../structomniunit_1_1is__stb__Ratio_3_01Ratio_3_01Num_00_01Den_01_4_01_4.html',1,'omniunit']]],
+  ['is_5fstd_5fratio',['is_std_Ratio',['../structomniunit_1_1is__std__Ratio.html',1,'omniunit']]],
+  ['is_5fstd_5fratio_3c_20std_3a_3aratio_3c_20num_2c_20den_20_3e_20_3e',['is_std_Ratio&lt; std::ratio&lt; Num, Den &gt; &gt;',['../structomniunit_1_1is__std__Ratio_3_01std_1_1ratio_3_01Num_00_01Den_01_4_01_4.html',1,'omniunit']]]
 ];

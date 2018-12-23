@@ -915,15 +915,20 @@ public:
   }
 
 
-  Basic_Unit& operator+=(Basic_Unit const& Obj)
+  // Origin must be deduced not to convert it
+  template <typename __Dimension, double const& _origin>
+  Basic_Unit& operator+=(Basic_Unit<__Dimension, Rep, Period, _origin> const& Obj)
   {
+    static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot sum values with different dimension.");
     _count += Obj.count();
     return *this;
   }
 
-
-  Basic_Unit& operator-=(Basic_Unit const& Obj)
+  // Origin must be deduced not to convert it
+  template <typename __Dimension, double const& _origin>
+  Basic_Unit& operator-=(Basic_Unit<__Dimension, Rep, Period, _origin> const& Obj)
   {
+    static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot subtract values with different dimension.");
     _count -= Obj.count();
     return *this;
   }

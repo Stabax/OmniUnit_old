@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['relativetimer',['RelativeTimer',['../classstb_1_1RelativeTimer.html',1,'stb']]]
+  ['exception',['Exception',['../classomniunit_1_1Exception.html',1,'omniunit']]]
 ];
