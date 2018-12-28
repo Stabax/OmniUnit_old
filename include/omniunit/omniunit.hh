@@ -775,7 +775,7 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 //=============================================================================
 //=============================================================================
 
-//Basic_Unit represent a unit without handling uncertainties
+//Basic_Unit represents a unit without handling uncertainties
 
 
 
