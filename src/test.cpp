@@ -29,6 +29,13 @@
 #define VAR13 -270
 #define VAR14 -270
 
+#define VAR15 2458.35
+#define VAR16 2458.35
+#define VAR17 2458.35
+#define VAR18 -245.835
+#define VAR19 -245.835
+#define VAR20 -270
+#define VAR21 -270
 
 #else // non official zero
 
@@ -51,7 +58,13 @@ template <typename T>
 void show(int test, T const& var1, double ref = 0)
 {
   bool a = (static_cast<float>(var1.count() - ref) <= std::numeric_limits<float>::epsilon());
-  std::cout << "TEST " << std::to_string(test) << " : " << std::setprecision(15) << var1.count() << " " << var1.dimension() << " " << typeid(typename T::rep).name() << " "<< T::period::num << "/" << T::period::den << " "<< var1.origin << " " << std::boolalpha << a << "\n";
+  std::cout << std::left << std::setw(8) << "TEST " + std::to_string(test)
+  << std::left << std::setw(6) << std::boolalpha << a
+  << std::left << std::setw(10) << var1.count()
+  << std::left << std::setw(13) << var1.dimension()
+  << std::left << std::setw(2) << typeid(typename T::rep).name()
+  << std::left << std::setw(0) << T::period::num << std::left << std::setw(0) << "/" << std::left << std::setw(8) << T::period::den
+  << std::left << std::setw(8) << var1.origin << "\n";
 
   if(a == false)
     faux::value++;
@@ -60,7 +73,7 @@ void show(int test, T const& var1, double ref = 0)
 
 int main()
 {
-  omniunit::Unit<omniunit::Dimension<0,0,0,0,0,0,0,0,0>, float, omniunit::deci, omniunit::E1> scalar(-90);
+  typedef omniunit::Unit<omniunit::Dimension<0,0,0,0,0,0,0,0,0>, float, omniunit::deci, omniunit::E1> scalar;
 
 
 
@@ -122,6 +135,46 @@ int main()
   auto var14 = temp14 %= 10;
   show(14, var14, VAR14);
 
+
+
+  omniunit::celsius<double> temp15(0);
+  scalar s15(-90); //1
+  auto var15 = temp15 * s15;
+  show(15, var15, VAR15);
+
+  omniunit::celsius<double> temp16(0);
+  scalar s16(-90); //1
+  auto var16 = s16 * temp16;
+  show(16, var16, VAR16);
+
+  omniunit::celsius<double> temp17(0);
+  scalar s17(-90); //1
+  auto var17 = temp17 *= s17;
+  show(17, var17, VAR17);
+
+  omniunit::celsius<double> temp18(0);
+  scalar s18(-90); //1
+  auto var18 = temp18 / s18;
+  show(18, var18, VAR18);
+
+  omniunit::celsius<double> temp19(0);
+  scalar s19(-90); //1
+  auto var19 = temp19 /= s19;
+  show(19, var19, VAR19);
+
+  omniunit::celsius<double> temp20(0);
+  scalar s20(-90); //1
+  auto var20 = temp20 % 10;
+  show(20, var20, VAR20);
+
+  omniunit::celsius<double> temp21(0);
+  scalar s21(-90); //1
+  auto var21 = temp21 %= 10;
+  show(21, var21, VAR21);
+
+constexpr scalar x(1);
+constexpr scalar y(3);
+constexpr scalar z = (x/y);
 
   std::cout << "nb de faux : " << faux::value << "\n";
 return 0;
