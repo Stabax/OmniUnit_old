@@ -30,6 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "omniunit.hh"
 
 #include <ctime>   // gmtime, localtime, time, tm
+#include <exception>  // exception
 #include <memory>  // unique_ptr
 
 
@@ -45,7 +46,27 @@ namespace omniunit
 //=============================================================================
 //=============================================================================
 
+class Exception : public std::exception
+{
+public:
 
+  Exception(std::string const& msg, std::string const& name):
+  _msg("[OmniUnit.exception - " + name + " : " + msg + "]")
+  {
+  }
+
+  virtual ~Exception()
+  {
+  }
+
+  virtual const char* what() const noexcept
+  {
+    return _msg.c_str();
+  }
+
+protected:
+  std::string const _msg;
+};
 
 class Date_exception : public Exception
 {
