@@ -46,6 +46,8 @@
 #define VAR28 2731.5
 #define VAR29 0
 
+#define VAR30 1
+
 #else // non official zero
 
 #define VAR1 100
@@ -81,6 +83,8 @@
 #define VAR28 2731.5
 #define VAR29 0
 
+#define VAR30 4.53999e-005
+
 #endif
 
 struct faux
@@ -110,7 +114,7 @@ void show(int test, omniunit::Basic_Unit<dim, rep, rat, ori> const& var1, double
 template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value, T>::type>
 void show(int test, T const& var1, double ref = 0)
 {
-  bool a = (static_cast<float>(var1 - ref) <= std::numeric_limits<float>::epsilon());
+  bool a = (static_cast<float>(var1) - static_cast<float>(ref) <= std::numeric_limits<float>::epsilon());
   std::cout << std::left << std::setw(8) << "TEST " + std::to_string(test)
   << std::left << std::setw(8) << std::boolalpha << a
   << std::left << std::setw(10) << var1
@@ -262,11 +266,15 @@ int main()
   show(29, var29, VAR29);
 
 
+  omniunit::Unit<omniunit::Dimension<0,0,0,0,0,0,0,0,0>, long double, omniunit::deci, omniunit::E1> temp30(-100); //1
+  auto var30 = omniunit::exp(temp30);
+  show(30, var30, VAR30);
 
-//constexpr scalar x(1);
-//constexpr scalar y(3);
-//constexpr scalar z = (x/y);
+  //constexpr scalar x(1);
+  //constexpr scalar y(3);
+  //constexpr scalar z = (x/y);
 
   std::cout << "nb de faux : " << faux::value << "\n";
+  std::cout << omniunit::modulo(10, -9.f) << "\n"; //BUG
 return 0;
 }

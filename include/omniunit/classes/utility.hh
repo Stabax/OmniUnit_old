@@ -57,7 +57,6 @@ template <typename T, typename U>
 constexpr typename std::common_type<T, U>::type
 modulo(T const& a, U const& b)
 {
-  //we can't test at compile time if "b" equals 0 or not (division by 0) because "b" is not constexpr in all cases... sad.
   static_assert(std::is_arithmetic<T>::value && std::is_arithmetic<U>::value, "Arguments should be arithmetic values.");
   typedef typename std::common_type<T, U>::type common;
   common a2 = static_cast<common>(a);
@@ -470,6 +469,24 @@ int temperature, int quantity, int luminosity, int angle, int solid_angle>
 struct is_Dimension<Dimension<length, mass, time, current,
 temperature, quantity, luminosity, angle, solid_angle>> : public std::true_type
 {
+};
+
+
+//test if a dimension is a real dimension or not (scalar/angla,solid angle)
+template<typename Dim>
+struct is_noDim
+{
+  static_assert(is_Dimension<Dim>::value, "Template argument must be a Dimension.");
+
+  static constexpr bool value = (
+  Dim::length == 0 &&
+  Dim::mass == 0 &&
+  Dim::time == 0 &&
+  Dim::current == 0 &&
+  Dim::temperature == 0 &&
+  Dim::quantity == 0 &&
+  Dim::luminosity == 0)
+  ? true : false;
 };
 
 

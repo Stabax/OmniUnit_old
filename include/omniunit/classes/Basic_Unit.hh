@@ -775,31 +775,64 @@ Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 
 
 
-template <typename Rep, typename Period>
-Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
-  return std::exp(Obj.count());
+  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::exp(newObj.count());
 }
 
 
-template <typename Rep, typename Period>
-Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> exp(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
-  return std::exp(Obj.count() * std::log(basis));
+  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::exp(static_cast<Rep>(Obj.count() * std::log(basis)));
 }
 
 
-template <typename Rep, typename Period>
-Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
+  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
   return std::log(Obj.count());
 }
 
 
-template <typename Rep, typename Period>
-Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> log(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& Obj, float basis)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
-  return std::log(Obj.count()) / std::log(basis);
+  static_assert(is_noDim<_Dimension>::value, "Dimension should ba adimensional.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  auto temp = std::log(Obj.count());
+  return static_cast<decltype(temp)>(temp / std::log(basis));
 }
 
 
