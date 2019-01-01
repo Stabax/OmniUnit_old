@@ -1,6 +1,5 @@
 #define GOPNIK blyat
 #define OMNI_TRUE_ZERO false
-#define OMNI_DISABLE_UNCERTAINTIES
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
@@ -47,6 +46,8 @@
 #define VAR29 0
 
 #define VAR30 1
+#define VAR31 74610.9225
+#define VAR32 16.52725023
 
 #else // non official zero
 
@@ -84,6 +85,8 @@
 #define VAR29 0
 
 #define VAR30 4.53999e-005
+#define VAR31 0
+#define VAR32 0
 
 #endif
 
@@ -269,6 +272,14 @@ int main()
   omniunit::Unit<omniunit::Dimension<0,0,0,0,0,0,0,0,0>, long double, omniunit::deci, omniunit::E1> temp30(-100); //1
   auto var30 = omniunit::exp(temp30);
   show(30, var30, VAR30);
+
+  omniunit::celsius<double> temp31(0);
+  auto var31 = omniunit::pow<2>(temp31);
+  show(31, var31, VAR31);
+
+  omniunit::Basic_Unit<omniunit::Dimension<0,0,0,0,2,0,0,0,0>, double, omniunit::base, omniunit::celsiusConstant> temp32(0);
+  auto var32 = omniunit::root<2>(temp32);
+  show(32, var32, VAR32);
 
   //constexpr scalar x(1);
   //constexpr scalar y(3);

@@ -138,8 +138,9 @@ typedef omniunit::Ratio&lt;E0, E3*E3&gt; nano;
 <p>The zero of the new unit can be defferent of the zero of the official unit. For exemple, the official unit of temperature is the kelvin : 0°C = 273.15 kelvins, and 0°F = 255.372 kelvins.</p>
 <p>So, what is called the origin of the new unit is the amount of the official unit of ratio 1/1 needed to get the 0 of the new unit. </p><pre class="fragment">    Origin = amount of official unit of ratio 1/1 needed to get the 0 of the new unit
 </pre><p>Thus, the origin of fahrenheit is 255.372, the origin of celsius is 273.15, and the origin of microfahrenheit and kilocelsius is still respectively 255.372 and 273.15 (because the origin is always given in ratio 1/1).</p>
-<p>Most of the time, thos origin will be 0 for the most common units.</p>
+<p>Most of the time, this origin will be 0 for the most common units.</p>
 <p>Well, Origin is taken as <b>double</b> by <b>non-type</b> template parameter. So this value has to be of type <b>constexpr double</b>, must be an lvalue and must have linkage (see above, in __"Step 2 : Ratio"__ ).</p>
+<p><b>Be aware :</b> don't forget to raise the power of the origin for a raised power unit. For exemple, the origin of celsius2 is 74610.9225, those of celsius3 is 20379973.48, etc.</p>
 <h2>Step 4 : Defining the new unit</h2>
 <p>Once you have understood the four steps above, the definition of a new unit is quite simple : the class omniunit::Unit takes 4 templates arguments. In order, they are the dimension of the unit, the internal representation type of the handled value of the unit instance, the ratio of the unit, and the origin of the unit. Let's define a meter from nothing : </p><pre class="fragment">    // Definition of the dimension
     typedef omniunit::Dimension&lt;1,0,0,0,0,0,0,0,0&gt; Length;
@@ -186,7 +187,7 @@ unsing millipoise_v4 = omniunit::Unit&lt;Viscosity, Rep, omniunit::Ratio_over_va
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 22 2018 19:28:55 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 1 2019 19:48:00 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

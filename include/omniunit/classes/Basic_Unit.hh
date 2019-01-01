@@ -847,12 +847,46 @@ auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 
 
 
-template <typename Rep, typename Period, typename T = float>
-T pow(float var, Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, Rep, Period> const& exponent)
+template<double const& origin, int exponent>
+struct origin_power
 {
-  return std::pow(var, exponent.count()); //A REFAIRE
+  static constexpr double value = std::pow(origin, exponent);
+};
+
+
+template<double const& origin, int basis>
+struct origin_root
+{
+  static_assert(basis != 0, "Basis must not be 0.");
+  static constexpr double value = std::pow(origin, 1.0/basis);
+};
+
+
+template <int exponent = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  typedef Basic_Unit<typename Dimension_power<_Dimension, exponent>::type, Rep, typename Ratio_power<Period, exponent>::type, origin_power<Origin, exponent>::value> type;
+  return type(std::pow(Obj.count(), exponent));
 }
 
+
+template <int basis = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
+auto root(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(basis != 0, "Basis must not be 0.");
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  typedef Basic_Unit<typename Dimension_root<_Dimension, basis>::type, Rep, typename Ratio_root<Period, basis>::type, origin_root<Origin, basis>::value> type;
+  return type(std::pow(Obj.count(), 1.0/basis));
+}
 
 
 //=============================================================================

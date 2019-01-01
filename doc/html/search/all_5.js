@@ -5,5 +5,6 @@ var searchData=
   ['dimension',['Dimension',['../structomniunit_1_1Dimension.html',1,'omniunit']]],
   ['dimension_5fdivide',['Dimension_divide',['../structomniunit_1_1Dimension__divide.html',1,'omniunit']]],
   ['dimension_5fmultiply',['Dimension_multiply',['../structomniunit_1_1Dimension__multiply.html',1,'omniunit']]],
-  ['divisionbyzero_5fexception',['DivisionByZero_Exception',['../classomniunit_1_1DivisionByZero__Exception.html',1,'omniunit']]]
+  ['dimension_5fpower',['Dimension_power',['../structomniunit_1_1Dimension__power.html',1,'omniunit']]],
+  ['division_5forigin',['division_origin',['../structomniunit_1_1division__origin.html',1,'omniunit']]]
 ];

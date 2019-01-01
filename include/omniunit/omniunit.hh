@@ -35,7 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif // OMNI_DEFAULT_TYPE
 
 #ifndef OMNI_TRUE_ZERO
-  #define OMNI_TRUE_ZERO true
+  #define OMNI_TRUE_ZERO false
 #endif // OMNI_TRUE_ZERO
 
 //easter egg
@@ -52,12 +52,7 @@ namespace omniunit
 
 
 
-#ifdef OMNI_DISABLE_UNCERTAINTIES
-
-
-
-template <typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
-using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
+#ifdef OMNI_ENABLE_UNCERTAINTIES
 
 
 
@@ -65,7 +60,8 @@ using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 
-
+template <typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
+using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 

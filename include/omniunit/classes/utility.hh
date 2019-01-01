@@ -351,6 +351,32 @@ public:
 };
 
 
+template <typename ratio, int exponent>
+class Ratio_power
+{
+  static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
+
+  static constexpr double _gcd = gcd(std::pow(ratio::num, exponent), std::pow(ratio::den, exponent));
+  static constexpr double num = std::pow(ratio::num, exponent) / _gcd;
+  static constexpr double den = std::pow(ratio::den, exponent) /_gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
+
+template <typename ratio, int basis>
+class Ratio_root
+{
+  static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
+  static_assert(basis != 0, "Basis must not be 0.");
+
+  static constexpr double _gcd = gcd(std::pow(ratio::num, 1.0/basis), std::pow(ratio::den, 1.0/basis));
+  static constexpr double num = std::pow(ratio::num, 1.0/basis) / _gcd;
+  static constexpr double den = std::pow(ratio::den, 1.0/basis) /_gcd;
+public:
+  typedef Ratio<num, den> type;
+};
+
 
 //=============================================================================
 //=============================================================================
@@ -526,6 +552,57 @@ struct Dimension_divide
   dim1::luminosity - dim2::luminosity,
   dim1::angle - dim2::angle,
   dim1::solid_angle - dim2::solid_angle
+  > type;
+};
+
+
+template <typename dim, int exponent>
+struct Dimension_power
+{
+  static_assert(is_Dimension<dim>::value, "Template parameter should be dimension.");
+
+  typedef Dimension<
+  dim::length * exponent,
+  dim::mass * exponent,
+  dim::time * exponent,
+  dim::current * exponent,
+  dim::temperature * exponent,
+  dim::quantity * exponent,
+  dim::luminosity * exponent,
+  dim::angle * exponent,
+  dim::solid_angle * exponent
+  > type;
+};
+
+
+template <typename dim, int basis>
+struct Dimension_root
+{
+  static_assert(is_Dimension<dim>::value, "Template parameter should be dimension.");
+  static_assert(basis != 0, "Basis must not be 0.");
+
+  static_assert(
+  modulo(static_cast<double>(dim::length) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::mass) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::time) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::luminosity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::solid_angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon(),
+  "Cannot root this dimension with this basis.");
+
+  typedef Dimension<
+  dim::length / basis,
+  dim::mass / basis,
+  dim::time / basis,
+  dim::current / basis,
+  dim::temperature / basis,
+  dim::quantity / basis,
+  dim::luminosity / basis,
+  dim::angle / basis,
+  dim::solid_angle / basis
   > type;
 };
 

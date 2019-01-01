@@ -7,6 +7,4 @@ digraph "omniunit::Exception"
   Node1 [label="std::exception",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="omniunit::Date_exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomniunit_1_1Date__exception.html"];
-  Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node3 [label="omniunit::DivisionByZero\l_Exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomniunit_1_1DivisionByZero__Exception.html"];
 }

@@ -34,5 +34,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "mass.hh"
 #include "quantity.hh"
 #include "temperature.hh"
+#include "temp.hh"
 
 #endif //UNITS_HH_
