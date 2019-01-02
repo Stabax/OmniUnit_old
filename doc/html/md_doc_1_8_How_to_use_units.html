@@ -69,145 +69,77 @@ $(function() {
 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1>Pre-existing units</h1>
-<h2>Use units and conversions</h2>
-<p>All the library is under the namespace omniunit::.</p>
-<p>OmniUnit defines some of the main physical units. For example, for the mass dimension, these units are defined :</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>microscopic</b>  </th><th class="markdownTableHeadCenter"><b>astronomic</b>  </th><th class="markdownTableHeadCenter"><b>imperial</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanogram  </td><td class="markdownTableBodyCenter">nanoevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microgram  </td><td class="markdownTableBodyCenter">microevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">milligram  </td><td class="markdownTableBodyCenter">millievPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centigram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decigram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">gram  </td><td class="markdownTableBodyCenter">evPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilogram  </td><td class="markdownTableBodyCenter">kiloevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megagram  </td><td class="markdownTableBodyCenter">megaevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">ton   </td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigagram  </td><td class="markdownTableBodyCenter">gigaevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">teragram  </td><td class="markdownTableBodyCenter">teraevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petagram  </td><td class="markdownTableBodyCenter">petaevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-<tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottagram  </td><td class="markdownTableBodyCenter">atomic_mass  </td><td class="markdownTableBodyCenter">solar_mass  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
-</table>
-<p>See all the defined dimensions and units here : <a href="http://stabax.org/doc/omniunit/md_doc_1_81_8_List_of_all_defined_units.html">http://stabax.org/doc/omniunit/md_doc_1_81_8_List_of_all_defined_units.html</a></p>
-<p>If you want to use another mass unit which is not defined here, like the <b>pound</b>, see below how to easily create your own units : __"Create your own units"__. If a dimension is not defined, like <b>electric conductivity</b> or <b>hypervolume</b>, you can indeed create it, see below : __"Create your own units"__.</p>
-<p>Units are generic. When you use them, you have to precise the arithmetic type which is handled inside them : </p><pre class="fragment">#include "omniunit/omniunit.hh"
+<div class="textblock"><h2>Use units</h2>
+<p>All the library is under the namespace omni::.</p>
+<p>OmniUnit defines most of the main physical units from the metric, imperial, astronomic and micriscopic systems. You can find all the predefined units in the related pages. If you want to use a unit which is not predefined in OmniUnit, look at <b>how to create units</b>.</p>
+<p>Units are generic. When you use them, you have to precise the arithmetic type which is handled inside them : </p><pre class="fragment">omni::gram&lt;int&gt; var1(10);     //var1 equals 10
+omni::gram&lt;int&gt; var2(12.9);   //var2 equals 12, the value is truncated, not rounded
+omni::gram&lt;float&gt; var3(12.9); //var3 equals 12.9
+//you can of course use any primitive type
 
-  omniunit::gram&lt;int&gt; var1(10);     //var1 equals 10
-  omniunit::gram&lt;int&gt; var2(12.9);   //var2 equals 12, the value is truncated, not rounded
-  omniunit::gram&lt;float&gt; var3(12.9); //var3 equals 12.9
-  //you can of course use any primitive type
-  //(you can even use user defined types, but make sure to specialize std::common_type)
+var1 = var3; //var1 equals 12, the value is truncated, not rounded
+</pre><p>If you don't need units to handle different types, you can use a default type : </p><pre class="fragment">#define OMNI_DEFAULT_TYPE float //this value equals "double" by default, if you don't define your own
 
-  var1 = var3; //var1 equals 12, the value is truncated, not rounded
-</pre><p>You can convert a unit to another, implicitly or explicitly, if they have the same dimension (mass in these examples) : </p><pre class="fragment">omniunit::kilogram&lt;float&gt; var1(3.1);
-omniunit::milligram&lt;float&gt; var2(var1);  //conversion by construction
-omniunit::milligram&lt;float&gt; var3 = var1; //conversion by assignment
+omni::meter&lt;&gt; var4(0); //the internal type of var4 is float
+omni::def::meter var5(0); //var5 and var5 are exaclty the same, but var5 is most user friendly
+</pre><h2>Implicit conversions</h2>
+<p>You can convert a unit to another, implicitly or explicitly, <b>if they have the same dimension</b> (mass in these examples) : </p><pre class="fragment">omni::kilogram&lt;float&gt; var1(3.1);
+omni::milligram&lt;float&gt; var2(var1);  //conversion by construction
+omni::milligram&lt;float&gt; var3 = var1; //conversion by assignment
 //var2 and var3 equal 3100000
+</pre><p>you can of course use conversion by explicit cast : </p><pre class="fragment">auto var4 = omni::unit_cast&lt;omni::microgram&lt;int&gt;&gt;(var1); //var4 is a microgram&lt;int&gt;
+auto var5 = omni::unit_cast&lt;omni::milli&gt;(var1);          //var5 is a gram&lt;float&gt; (because kilogram is the base mass unit)
+auto var6 = omni::unit_cast&lt;short&gt;(var1);                    //var6 is a kilogram&lt;short&gt;
+auto var7 = omni::unit_cast&lt;omni::E1&gt;(var1);             //var1 looks like a kilogram&lt;float&gt; but with origin = 10
+//(see the meaning of origin of a unit in "how to create units")
+</pre><h2>Compile-time dimension check</h2>
+<p>Dimension check is done at compile-time, which mean that if you made a dimensional error, the code won't compile, and it is one of the goals of omni, preventing calculation errors. </p><pre class="fragment">omni::def::kilometer var1(1);
+omni::def::hour var2(1);
 
-omniunit::ton&lt;float&gt; var4 = var1; //var4 equals 0.0031
-omniunit::ton&lt;int&gt; var5 = var1; //var5 equals 0, the value is truncated, not rounded
+omni::def::gram var3 = var1/var2;
+//ERROR : var3 is of dimension MASS while var1/var2 is of dimension SPEED. This doesn't compile
 
-//you can of course use explicit conversion, by construction or explicit cast :
-
-//construction, var6 is an omniunit::microgram&lt;int&gt;
-auto var6 = omniunit::microgram&lt;int&gt;(var1);
-
-//explicit cast, var7 is a omniunit::microgram&lt;int&gt;
-auto var7 = omniunit::mass_cast&lt;omniunit::microgram&lt;int&gt;&gt;(var1);
-
-//more complex possibility :
-auto var8 = omniunit::mass_cast&lt;int, omniunit::milli&gt;(var1);
-//here, var8 is a omniunit::gram&lt;int&gt;
-//the first template argument is the type handled by the unit.
-//the second is a typedef of omniunit::Ratio (omniunit::milli is omniunit::Ratio&lt;1, 1000&gt;).
-//the international unit of mass is a kilogram, so omniunit::Ratio&lt;1, 1&gt; represents it.
-//Thus, omniunit::milli represents a gram. Yeah, it's not intuitive at the first time.
-//See below how to use omniunit::ratio.
-
-//last case :
-auto var9 = omniunit::unit_cast&lt;omniunit::Mass, float, omniunit::micro&gt;(var1);
-//var9 is a omniunit::milligram&lt;float&gt;
-//the first argument is a typedef of omniunit::Dimension (omniunit::Mass is omniunit::Dimension&lt;0, 1, 0, 0, 0, 0, 0&gt;).
-//If you use omniunit::Length here, it would not compile because var1 is a mass.
-//See below how to use omniunit::Dimension.
+omni::meterPerSecond var4 = var1/var2;
+//OK, although var1/var2 returns kilometerPerHour, it and var4 have the same dimension. There will just be an implicit conversion
 </pre><h2>Compliance between standard duration and OmniUnit duration</h2>
-<p>If you are familiar with standard duration (std::chrono::duration), you may want to use them and to convert them into OmniUnit duration, and vice versa.</p>
-<p>Happily, there is a full compliance. You can simply do this by constructing or assigning them : </p><pre class="fragment">omniunit::millisecond&lt;float&gt; omni1(1.8);
+<p>If you are familiar with standard duration (std::chrono::duration), you may want to use and convert them into OmniUnit duration, and vice versa. Happily, there is a full compliance. You can simply do this by constructing or assigning them : </p><pre class="fragment">omni::millisecond&lt;float&gt; omni1(1.8);
+std::chrono::hours std1(omni1); //construction
+//notice that here, std::chrono::hour handle an integer while omni::millisecond&lt;float&gt; handle a float, so trucation may appear
 
-std::chrono::hours standard1(omni1); //construction
-//conversion is done implicitly
-//(moreover, std::chrono::hour handle an integer while omniunit::millisecond&lt;float&gt; handle a float...
-//so standard1 equals 1, not 1.8)
-
-std::chrono::minutes standard2 = omni1; //same thing, but with assignment instead of construction
+std::chrono::hours std2 = omni1; //assignment
+//idem
 
 //reciprocally
-omni1 = standard2; //assignment
-omniunit::year&lt;int&gt; omni2(standard2); //construction
-
-//explicit conversion between standard and OmniUnit duration in C and C++ style
-
-//C style
-auto omni3 = omniunit::second&lt;unsigned&gt;(standard1);
-auto standard3 = std::chrono::seconds(omni2);
-
-//C++ style
-auto omni4 = omniunit::duration_cast&lt;omniunit::second&lt;int&gt;&gt;(standard3);
-auto standard4 = omniunit::duration_cast&lt;std::chrono::nanoseconds&gt;(omni3);
-
-//more complex possibility
-auto standard5 = omniunit::duration_cast&lt;int, std::chrono::milli&gt;(omni4);
-//here, duration cast knows it has to return a standard duration instead of a OmniUnit duration
-//because the second template argument is a standard ratio, not a OmniUnit ratio.
-</pre><p>However, you can't use an implicit conversion between standard and OmniUnit to pass a duration parameter to a function, you have to do this explicitly : </p><pre class="fragment">void foo1(std::chrono::hours) {//do something};
-void foo2(omniunit::second&lt;int&gt;) {//do something};
+omni1 = std2; //assignment
+omni::year&lt;int&gt; omni2(std2); //construction
+</pre><p>conversion by explicit cast : </p><pre class="fragment">auto omni4 = omni::unit_cast&lt;omni::second&lt;int&gt;&gt;(std3);
+auto std4 = omni::unit_cast&lt;std::chrono::nanoseconds&gt;(omni3);
+</pre><p>However, you can't use an implicit conversion between standard and OmniUnit to pass a duration parameter to a function, you have to do that explicitly : </p><pre class="fragment">void foo1(std::chrono::hours) {//do something};
+void foo2(omni::second&lt;int&gt;) {//do something};
 
 std::chrono::seconds standard(1);
-omniunit::millisecond&lt;float&gt; omni(2.1);
+omni::millisecond&lt;float&gt; omni5(2.1);
 
-foo1(omni); //ERROR
-foo1(std::chrono::hours(omni)); //OK
-foo1(omniunit::duration_cast&lt;std::chrono::hours&gt;(omni)); //OK
+foo1(omni5); //ERROR
+foo1(std::chrono::hours(omni5)); //OK
+foo1(omni::duration_cast&lt;std::chrono::hours&gt;(omni5)); //OK
 
 foo2(standard1); //ERROR
-foo2(omniunit::second&lt;int&gt;(standard1)); //OK
-foo2(omniunit::duration_cast&lt;omniunit::second&lt;int&gt;(standard)); //OK
-</pre><h2>Dimension composition and compile-time check</h2>
+foo2(omni::second&lt;int&gt;(standard1)); //OK
+foo2(omni::duration_cast&lt;omni::second&lt;int&gt;(standard)); //OK
+</pre><p>The previous tips may be useful if you want to pass an omni::duration to std::this_thread::sleep_for(), for exemple.</p>
+<h2>Mathematic functions</h2>
+<h2>Constexpr instances</h2>
+<h2>Errors and exception safety</h2>
+<p>Most of the library works at compile time, so there is absolutly no exception throwing in order to allow constexpr units (see the previos section). Although, <b>there is no</b> "no throw guarentee" because some standard functions (exp, log, pow, round, cos...) used in Omniunit at execution-time may throw. See the exception safety of these functions in the C++ documentation.</p>
+<p>The others errors that could occur during execution are :</p><ul>
+<li>domain errors like division by zero, or calculating log(0) : to follow the C++ standard, the behavior in OmniUnit is undefined ;</li>
+<li>too large or too small numbers (obtained for exemple by conversion or by exp/pow functions) : again, the behavior is the same as the C++ standard when you reach the maximum of a variable. </li>
+</ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 1 2019 19:47:59 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 2 2019 19:20:58 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

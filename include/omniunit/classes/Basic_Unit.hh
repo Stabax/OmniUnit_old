@@ -117,8 +117,6 @@ constexpr Basic_Unit<Dimension, Rep, Period, O> unit_cast(const Basic_Unit<Dimen
 //=============================================================================
 //=============================================================================
 
-//Basic_Unit represent a unit without handling uncertainties
-
 //the purpose here is to make available unit_cast between stb::duration and std::chrono::duration
 
 
@@ -596,18 +594,11 @@ constexpr T operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin
 
 
 
-template<double const& a, double const& b>
-struct product_origin
-{
-  static constexpr double value = OMNI_TRUE_ZERO ? zero : a*b;
-};
-
-
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
 constexpr Basic_Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_times_Ratio<Period1, Period2>::type, product_origin<Origin1, Origin2>::value>
+typename Ratio_times_Ratio<Period1, Period2>::type, origin_product<Origin1, Origin2>::value>
 operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_TRUE_ZERO)
@@ -619,7 +610,7 @@ operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_multiply<Dimension1, Dimension2>::type newDim;
   typedef typename Ratio_times_Ratio<Period1, Period2>::type newPeriod;
-  typedef Basic_Unit<newDim, common, newPeriod, product_origin<Origin1, Origin2>::value> type;
+  typedef Basic_Unit<newDim, common, newPeriod, origin_product<Origin1, Origin2>::value> type;
 
   type toReturn(static_cast<common>(Obj1.count()) * static_cast<common>(Obj2.count()));
 
@@ -627,18 +618,11 @@ operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 }
 
 
-template<double const& a, double const& b>
-struct division_origin
-{
-  static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= std::numeric_limits<double>::epsilon()) ? zero : a/b;
-};
-
-
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
 constexpr Basic_Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
 typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_over_Ratio<Period1, Period2>::type, division_origin<Origin1, Origin2>::value>
+typename Ratio_over_Ratio<Period1, Period2>::type, origin_division<Origin1, Origin2>::value>
 operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_TRUE_ZERO)
@@ -650,7 +634,7 @@ operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
   typedef typename std::common_type<Rep1, Rep2>::type common;
   typedef typename Dimension_divide<Dimension1, Dimension2>::type newDim;
   typedef typename Ratio_over_Ratio<Period1, Period2>::type newPeriod;
-  typedef Basic_Unit<newDim, common, newPeriod, division_origin<Origin1, Origin2>::value> type;
+  typedef Basic_Unit<newDim, common, newPeriod, origin_division<Origin1, Origin2>::value> type;
 
   return type(static_cast<common>(Obj1.count()) / static_cast<common>(Obj2.count()));
 }
@@ -659,7 +643,7 @@ operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 template <typename _Dimension, typename Rep, typename Period, double const& Origin, typename T>
 constexpr Basic_Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
 typename std::common_type<Rep, typename std::enable_if<!is_Basic_Unit<T>::value, T>::type>::type,
-typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type, division_origin<zero, Origin>::value>
+typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type, origin_division<zero, Origin>::value>
 operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
@@ -671,7 +655,7 @@ operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
   typedef typename std::common_type<Rep, T>::type common;
   typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
   typedef typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type newPeriod;
-  typedef Basic_Unit<newDim, common, newPeriod, division_origin<zero, Origin>::value> type;
+  typedef Basic_Unit<newDim, common, newPeriod, origin_division<zero, Origin>::value> type;
 
   return type(static_cast<common>(coef) / static_cast<common>(Obj.count()));
 }
@@ -847,21 +831,6 @@ auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 
 
 
-template<double const& origin, int exponent>
-struct origin_power
-{
-  static constexpr double value = std::pow(origin, exponent);
-};
-
-
-template<double const& origin, int basis>
-struct origin_root
-{
-  static_assert(basis != 0, "Basis must not be 0.");
-  static constexpr double value = std::pow(origin, 1.0/basis);
-};
-
-
 template <int exponent = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
 auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
@@ -876,7 +845,7 @@ auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <int basis = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto root(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(basis != 0, "Basis must not be 0.");
   if(OMNI_TRUE_ZERO)

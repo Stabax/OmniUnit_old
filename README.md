@@ -8,73 +8,60 @@ Strongly typed values are heavily recommended by the C++ creators themself in or
 C++ stantard has taken this recommendation into account by implementing std::chrono::duration to represent duration. \n
 This is not enough.
 
-* The main purpose of OmniUnit is to provide strong types to represent all physical units.
-* Implicit conversions and compile-time dimensional analysis are performed when operating on these units.
-* These units can handle uncertainties and propagate them through operators.
-* Units from all systems are representable : metric, imperial, microscopic, astronomic...
-* Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration.
-* If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs.
-* It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-3 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well.
+* The main purpose of OmniUnit is to provide strong types to represent all physical units ;
+* Implicit conversions are performed when operating on units : Millimeter = meter + inches is absolutely legal ;
+* compile-time dimensional analysis are performed when operating on units : Length/time returns a speed. Computing this as a Mass causes a compilation error, so there cannot be any runtime error ;
+* Units from all systems are representable : metric, imperial, microscopic, astronomic... ;
+* Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration :
+* If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs ;
+* Units can handle uncertainties and propagate them through operators ; **(comming soon)**
+* Suffixes (through litteral operator) are available for all predefined units, making Omniunit a user friendly library ;
+* More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **(comming soon)**
+* It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **(comming soon)**
 
 OmniUnit requires fully supported **C++14**.\n
 
 
 ### OmniUnit compiles with : ###
-- gcc/g++ 6.2.0\n
-- gcc/g++ 6.3.0\n
+- gcc/g++ 6.2.0
+- gcc/g++ 6.3.0
+- Visual Studio 2015 (with option /constexpr)
 
-### OmniUnit doesn't compiles with : ###
-- Visual Studio 2015 and earlier.\n
-
-### Known bugs ###
-
-No bugs are known.
-
-
-## Why choose THIS unit library ? ##
-
-It does exist some others library to represent and handle physical units in C++. Here's why you should use OmniUnit :
-
-* Units conversion is fully supported and is implicit : millimeter = meter + inches is absolutely legal.
-* Dimension check is done at compile-time. Length/time returns a speed. If Mass = length/time is tried, there is a compilation error. Thus there cannot be runtime issue.
-* Uncertainties on values can be handled. If any, propagation of uncertainties through functions or unit composition/conversion is calculated.
-* All physical units are supported. If one isn't implemented, you can easily create your own only with typedefs. Implicit conversion are automagically supported for your new unit, and dimensions are always checked at compile time.
-* Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration.
-
+### OmniUnit doesn't compile with : ###
+- Visual Studio 2013 and earlier.
 
 ## Documentation ##
 
-See the full documentation here : http://stabax.org/doc/omniunit
+See the full documentation here : http://stabax.org/doc/omniunit.
+If the servers are down, open __omniunit/doc/html/index.html__.
 
 
 ## Use library ##
 
 To get the library, clone the latest revision :
 
-    git clone http://bitbucket.org/stabaxltd/stblib.git
+    git clone http://bitbucket.org/stabax/omniunit.git
 
 Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources, and start using the features.
 
 
 ## Fast and basic example ##
 
-    #include "omniunit/units.hh"
+    #include "omniunit/omniunit.hh"
     #include <iostream>
 
     int main()
     {
-      //a and b represent 3000 meters in different ways
-      omniunit::millimeter<int> a(3000000);  //3000000 is handled by an integer
-      omniunit::kilometer<float> b(3);       //3 is handled by a float
+        //a and b represent 3000 meters in different ways
+        omniunit::millimeter<int> a(3000000);  //3000000 is handled by an integer
+        omniunit::kilometer<float> b(3);       //3 is handled by a float
 
-      omniunit::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
+        omniunit::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
 
-      std::cout << d.count() << '\n';   //prints 100000
+        std::cout << d.count() << '\n';   //prints 100000
 
     return 0;
     }
-
-As you can you can see, every thinkable conversion are done implicitly.
 
 ## Contributors ##
 

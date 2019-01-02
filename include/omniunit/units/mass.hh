@@ -145,20 +145,6 @@ using solar_mass = Unit<Mass, Rep, solar_massDefinition, zero>;
 
 
 
-#ifdef GOPNIK
-
-static constexpr double twelve = 12.;
-
-template <typename Rep = OMNI_DEFAULT_TYPE>
-using meug = gram<Rep>;
-
-template <typename Rep = OMNI_DEFAULT_TYPE>
-using zedou = Unit<Mass, Rep, Ratio<twelve, E3>, zero>;
-
-#endif
-
-
-
 namespace def
 {
 
@@ -196,11 +182,6 @@ typedef teraevPerC2<> teraevPerC2;
 
 typedef ton<> ton;
 typedef solar_mass<> solar_mass;
-
-#ifdef GOPNIK
-typedef meug<> meug;
-typedef zedou<> zedou;
-#endif
 
 
 

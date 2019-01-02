@@ -71,27 +71,26 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>To define your own unit, you need to provide 3 informations : its dimension, its ratio and its origin.</p>
 <h2>Step 1 : Dimension</h2>
-<p>The class <a class="el" href="structomniunit_1_1Dimension.html">omniunit::Dimension</a> has 9 templates parameters which define the 7 basic international dimensions and 2 angular "dimensions". These parameters are, in order : length, mass, time, electric intensity, temperature, quantity, luminosity, angle and solid angle.</p>
+<p>The class omni::Dimension has 9 templates parameters which define the 7 basic international dimensions and 2 angular "dimensions". These parameters are, in order : length, mass, time, electric intensity, temperature, quantity, luminosity, angle and solid angle.</p>
 <p>So, here are some example of dimension definition :</p>
-<p>length dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;1, 0, 0, 0, 0, 0, 0, 0, 0&gt; Length;
-</pre><p>duration dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;0, 0, 1, 0, 0, 0, 0, 0, 0&gt; Duration;
-</pre><p>frequency dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;0, 0, -1, 0, 0, 0, 0, 0, 0&gt; Frequency;
-</pre><p>speed dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;1, 0, -1, 0, 0, 0, 0, 0, 0&gt; Speed;
-</pre><p>energy dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;2, 1, -2, 0, 0, 0, 0, 0, 0&gt; Energy;
-</pre><p>magnetic fiels dimension : </p><pre class="fragment">typedef omniunit::Dimension&lt;0, 1, -2, -1, 0, 0, 0, 0, 0&gt; MegneticField;
-</pre><p>Tips : the function omniunit::dimension_str&lt;&gt;() returns a std::string containing the dimension passed as template argument, if you want to print it. </p><pre class="fragment">std::string dim = omniunit::dimension_str&lt;MegneticField&gt;();
+<p>length dimension : </p><pre class="fragment">typedef omni::Dimension&lt;1, 0, 0, 0, 0, 0, 0, 0, 0&gt; Length;
+</pre><p>duration dimension : </p><pre class="fragment">typedef omni::Dimension&lt;0, 0, 1, 0, 0, 0, 0, 0, 0&gt; Duration;
+</pre><p>frequency dimension : </p><pre class="fragment">typedef omni::Dimension&lt;0, 0, -1, 0, 0, 0, 0, 0, 0&gt; Frequency;
+</pre><p>speed dimension : </p><pre class="fragment">typedef omni::Dimension&lt;1, 0, -1, 0, 0, 0, 0, 0, 0&gt; Speed;
+</pre><p>energy dimension : </p><pre class="fragment">typedef omni::Dimension&lt;2, 1, -2, 0, 0, 0, 0, 0, 0&gt; Energy;
+</pre><p>magnetic fiels dimension : </p><pre class="fragment">typedef omni::Dimension&lt;0, 1, -2, -1, 0, 0, 0, 0, 0&gt; MegneticField;
+</pre><p>Tips : the function omni::dimension_str&lt;&gt;() returns a std::string containing the dimension passed as template argument, if you want to print it. </p><pre class="fragment">std::string dim = omni::dimension_str&lt;MegneticField&gt;();
 std::cout &lt;&lt; dim &lt;&lt; '\\n'; //prints: \[M1]\[Tm-2]\[I-1]
 </pre><h2>Step 2 : Ratio</h2>
 <p>The ratio indicates what the unit represents according to the basic international unit of the considered dimension.<br />
 For example, the basic unit of a length is the meter, represented by a ratio equal to 1 : it is the base. The basic unit of a charge is the coulomb, for a magnetic field it is the tesla... They are all represented by a ratio equal to 1 because they are the basic international unit of their dimension.<br />
 Thus, one millimeter represents 0.001 meter, namely 1/1000 meter. Obviously, the ratio for a millimeter is 1/1000, 1/1000000 for a micrometer, 1000/1 for a kilometer... 1/2 for a half-meter !<br />
-<br />
- Well, <a class="el" href="structomniunit_1_1Ratio.html">omniunit::Ratio</a> is a type which takes two values (a numerator and a denominator) as <b>non-type</b> template parameters. These parameters <b>HAVE TO</b> be of type <b>constexpr double</b>. <br />
+ Well, omni::Ratio is a type which takes two values (a numerator and a denominator) as <b>non-type</b> template parameters. These parameters <b>HAVE TO</b> be of type <b>constexpr double</b>. <br />
 <b>Double</b> are needed for technical reasons (the greater value reachable with an integer or a float is too short to represent all possible units, this is why OmniUnit doesn't use std::ratio). However, a template parameter can only be taken as double if the parameter :</p>
 <ul>
 <li>is <b>known at compile time</b>, so it has to be <b>constexpr</b>. (A constexpr variable must be defined and initialized at the same time) ;</li>
 <li>is not a temporary. It has to be an lvalue ;</li>
-<li>has <b>linkage</b>. So it has to be declared either directly in a namespace (or at global scope), or in a class body being <b>static</b> (any constexpr value is known at compile time, so this value must be independant of any instance of the class, so it must be static). Note : A variable declared in a local scope (like a function or a member function, static or not) has <b>no linkage</b>, even being static (this point could change in C++20 in constexpr functions). To have linkage in a local scope, the variable must be declared <b>extern</b>, but : a <b>constexpr</b> variable <b>cannot</b> be declared extern because a constexpr variable has to be defined and initialized at the same time which is not possible for extern variables.</li>
+<li>has <b>linkage</b>. So it has to be declared either directly in a namespace (or at global scope), or in a class body being <b>static</b> (any constexpr value is known at compile time, so this value must be independant of any instance of the class, so it must be static). Note : A variable declared in a local scope (like a function or a member function, static or not) has <b>no linkage</b>, even being static (this point could change in C++20 in constexpr functions). To have linkage in a local scope, the variable must be declared <b>extern</b>, but a <b>constexpr</b> variable <b>cannot</b> be declared extern because a constexpr variable has to be defined and initialized at the same time which is not possible for extern variables.</li>
 </ul>
 <p>OmniUnit already implements the needed variables to represent the decimal system with ratios : </p><pre class="fragment">constexpr double E0 = 1.;
 constexpr double E1 = 10.;
@@ -109,23 +108,23 @@ typedef Ratio&lt;E3, E0&gt; kilo;
 typedef Ratio&lt;E6, E0&gt; mega;
 typedef Ratio&lt;E9, E0&gt; giga;
 </pre><p>So, how to define a more complex ratio ? A minute contain 60 seconds. The ratio of the minute is 60/1 : </p><pre class="fragment">constexpr double secondsInMinute = 60.;
-typedef omniunit::Ratio&lt;secondsInMinute, E0&gt; minuteRatio;
+typedef omni::Ratio&lt;secondsInMinute, omni::E0&gt; minuteRatio;
 </pre><p>**__Be aware__ : It won't compile if one of the double value is not a positive integer**. </p><pre class="fragment">constexpr double milliVar = 0.001;
-typedef omniunit::Ratio&lt;milliVar, E0&gt; milli;
+typedef omni::Ratio&lt;milliVar, omni::E0&gt; milli;
 //ERROR : a ratio can only handle positive integers (even is their type is double...).
 </pre><p>So... How to define a rational approximation of pi (lets tell 3.1415) for some reason ? </p><pre class="fragment">constexpr double piE4 = 31415.;
-typedef Ratio&lt;piE4, E4&gt; pi;
+typedef Ratio&lt;piE4, omni::E4&gt; pi;
 </pre><p>Tips : the value of the ratio is obtainable through ::value : </p><pre class="fragment">(constexpr) double a = pi::value    //a equals 3.1415
 (constexpr) double b = milli::value //b equals 0.001
-</pre><p>**__Be aware__ : It won't compile if one of the parameters is an rvalue**. </p><pre class="fragment">typedef omniunit::Ratio&lt;E0, 1000.&gt; milli;
+</pre><p>**__Be aware__ : It won't compile if one of the parameters is an rvalue**. </p><pre class="fragment">typedef omni::Ratio&lt;omni::E0, 1000.&gt; milli;
 //ERROR, 1000 is an rvalue, you have to define a constexpr variable which equals 1000.
 
-typedef omniunit::Ratio&lt;E0, E3*E3&gt; nano;
+typedef omni::Ratio&lt;omni::E0, omni::E3*omni::E3&gt; nano;
 //ERROR, E3*E3 is an rvalue, you have to define a variable which equals either E3*E3 or 1000000.
-</pre><p>**__Be aware__ : It won't work as expected if you use dimensions different of -1, 0 or 1**.</p>
-<p>If you are defining surfaces for exemple, the dimension is omniunit::Dimension&lt;2, 0, 0, 0, 0, 0, 0, 0, 0&gt;</p>
-<p>While the ratio of meter2 is 1/1 (aka omniunit::base) because it is the international surface unit, the ratio of deciMeter2 **__IS NOT__** 1/10 (aka omniunit::deci) because 100 square decimeters are needed to obtain a square meter. So the ratio of deciMeter2 **__IS__** 1/100 (aka omniunit::centi).</p>
-<p>Another exemple : the ratio of deciMeter3 is 1/1000 (aka omniunit::milli). The ratio of milliMeter3 is 1/1.000.000.000 (aka omniunit::nano).</p>
+</pre><p>**__Be aware__ : It won't work as expected if you use dimensions different of 0 or 1**.</p>
+<p>If you are defining surfaces for exemple, the dimension is omni::Dimension&lt;2, 0, 0, 0, 0, 0, 0, 0, 0&gt;</p>
+<p>While the ratio of meter2 is 1/1 (aka omni::base) because it is the international surface unit, the ratio of deciMeter2 **__IS NOT__** 1/10 (aka omni::deci) because 100 square decimeters are needed to obtain a square meter. So the ratio of deciMeter2 **__IS__** 1/100 (aka omni::centi).</p>
+<p>Another exemple : the ratio of deciMeter3 is 1/1000 (aka omni::milli). The ratio of milliMeter3 is 1/1.000.000.000 (aka omni::nano).</p>
 <p>Well, lets make a more tricky ratio :</p><ul>
 <li>second4Ampere2PerMeter2kilogram2 (aka the <b>Farad</b>, the official capacitance unit, with dimension &lt;-2, -2, 4, 2, 0, 0, 0, 0, 0&gt;). Its ratio is 1/1.</li>
 <li>millisecond4Ampere2PerMeter2kilogram2 have the ratio 1/1.000.000.000.000,</li>
@@ -142,52 +141,53 @@ typedef omniunit::Ratio&lt;E0, E3*E3&gt; nano;
 <p>Well, Origin is taken as <b>double</b> by <b>non-type</b> template parameter. So this value has to be of type <b>constexpr double</b>, must be an lvalue and must have linkage (see above, in __"Step 2 : Ratio"__ ).</p>
 <p><b>Be aware :</b> don't forget to raise the power of the origin for a raised power unit. For exemple, the origin of celsius2 is 74610.9225, those of celsius3 is 20379973.48, etc.</p>
 <h2>Step 4 : Defining the new unit</h2>
-<p>Once you have understood the four steps above, the definition of a new unit is quite simple : the class omniunit::Unit takes 4 templates arguments. In order, they are the dimension of the unit, the internal representation type of the handled value of the unit instance, the ratio of the unit, and the origin of the unit. Let's define a meter from nothing : </p><pre class="fragment">    // Definition of the dimension
-    typedef omniunit::Dimension&lt;1,0,0,0,0,0,0,0,0&gt; Length;
+<p>Once you have understood the four steps above, the definition of a new unit is quite simple : the class omni::Unit takes 4 templates arguments. In order, they are the dimension of the unit, the internal representation type of the handled value of the unit instance, the ratio of the unit, and the origin of the unit. Let's define a meter from scratch : </p><pre class="fragment">    // Definition of the dimension
+    typedef omni::Dimension&lt;1,0,0,0,0,0,0,0,0&gt; Length;
 
     // Definition of the ratio
     constexpr double one = 1.;
-    typedef omniunit::Ratio&lt;one, one&gt; base;
+    typedef omni::Ratio&lt;one, one&gt; base;
 
     // Definition of the origin
     constexpr double zero = 0.;
 
     // Definition of the new unit
     template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-    unsing meter = omniunit::Unit&lt;Length, Rep, base, zero&gt;;
+    unsing meter = omni::Unit&lt;Length, Rep, base, zero&gt;;
 
     // For each unit defined, you should define the default unit
     namespace default
     {
         typedef meter&lt;&gt; meter;
     }
-</pre><p>And that's all ! </p><pre class="fragment">    // Enjoy and use your new unit :D
+</pre><p>And that's all ! </p><pre class="fragment">    // Enjoy and use your new unit
     meter&lt;int&gt; var1(10); //10 is handeled by a variable of type int inside the unit class
     meter&lt;&gt; var2(10); //10 is handeled by a variable of type OMNI_DEFAULT_TYPE (the macro OMNI_DEFAULT_TYPE equals float if you dont define it yourself)
     default::meter var3(10); //10 is of type OMNI_DEFAULT_TYPE. It is a more friendly style than meter&lt;&gt;
-</pre><p>Of course, the above exemple starts from nothing, but omniunit provides some dimensions, ratios and constexpr variables. You could define your meter like : </p><pre class="fragment">    template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-    unsing meter = omniunit::Unit&lt;omniunit::Length, Rep, omniunit::base, omniunit::zero&gt;;
-</pre><p>Here is a last exemple with some tricks. Let's define the poise and the millipoise (they are non official viscosity unit) </p><pre class="fragment">typedef omniunit::Dimension&lt;-1,1,-1,0,0,0,0,0,0&gt; Viscosity;
+</pre><p>Of course, the above exemple starts from nothing, but OmniUnit provides some dimensions, ratios and constexpr variables. You could define your meter like : </p><pre class="fragment">    template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
+    unsing meter = omni::Unit&lt;omni::Length, Rep, omni::base, omni::zero&gt;;
+</pre><p>Here is a last exemple with some tricks. Let's define the poise and the millipoise (they are non official viscosity unit) </p><pre class="fragment">typedef omni::Dimension&lt;-1,1,-1,0,0,0,0,0,0&gt; Viscosity;
 
 template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-unsing poise = omniunit::Unit&lt;Viscosity, Rep, omniunit::deci, omniunit::zero&gt;; // the ratio is deci because 10 poises are needed to obtain 1 Kg.m-1.s-1 (the official viscosity unit)
+unsing poise = omni::Unit&lt;Viscosity, Rep, omni::deci, omni::zero&gt;; // the ratio is deci because 10 poises are needed to obtain 1 Kg.m-1.s-1 (the official viscosity unit)
 
 template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-unsing millipoise_v1 = omniunit::Unit&lt;Viscosity, Rep, omniunit::Ratio_times_Ratio&lt;poise::dim, omniunit::milli&gt;::type, omniunit::zero&gt;;
+unsing millipoise_v1 = omni::Unit&lt;Viscosity, Rep, omni::Ratio_times_Ratio&lt;poise::dim, omni::milli&gt;::type, omni::zero&gt;;
 
 template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-unsing millipoise_v2 = omniunit::Unit&lt;Viscosity, Rep, omniunit::Ratio_times_Ratio&lt;omniunit::deci, omniunit::milli&gt;::type, omniunit::zero&gt;;
+unsing millipoise_v2 = omni::Unit&lt;Viscosity, Rep, omni::Ratio_times_Ratio&lt;omni::deci, omni::milli&gt;::type, omni::zero&gt;;
 
 template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-unsing millipoise_v3 = omniunit::Unit&lt;Viscosity, Rep, omniunit::Ratio&lt;omniunit::E0, omniunit::E4&gt;, omniunit::zero&gt;;
+unsing millipoise_v3 = omni::Unit&lt;Viscosity, Rep, omni::Ratio&lt;omni::E0, omni::E4&gt;, omni::zero&gt;;
 
 template &lt;typename Rep = OMNI_DEFAULT_TYPE&gt;
-unsing millipoise_v4 = omniunit::Unit&lt;Viscosity, Rep, omniunit::Ratio_over_value&lt;omniunit::deci, omniunit::E3&gt;, omniunit::zero&gt;;
-</pre><p>You can see that there are many ways to define the same unit : millipoise_v1, millipoise_v2, millipoise_v3 and millipoise_v4 are exactly the same units. </p>
+unsing millipoise_v4 = omni::Unit&lt;Viscosity, Rep, omni::Ratio_over_value&lt;omni::deci, omni::E3&gt;, omni::zero&gt;;
+</pre><p>You can see that there are many ways to define the same unit : millipoise_v1, millipoise_v2, millipoise_v3 and millipoise_v4 are exactly the same units.</p>
+<h2>Bonus : defining litteral opertaor for your new unit</h2>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 1 2019 19:48:00 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 2 2019 19:20:58 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

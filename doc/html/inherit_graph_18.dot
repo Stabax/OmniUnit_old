@@ -3,5 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="omniunit::Ratio_omni\l_to_std\< _stbRatio \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1Ratio__omni__to__std.html"];
+  Node0 [label="omniunit::Ratio\< _Num,\l _Den \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1Ratio.html"];
 }

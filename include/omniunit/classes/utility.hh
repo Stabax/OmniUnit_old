@@ -214,7 +214,7 @@ constexpr double E90 = 100000000000000000000000000000000000000000000000000000000
 
 
 
-template<double const& _Num, double const& _Den = E0>
+template<double const& _Num, double const& _Den>
 struct Ratio
 {
   static_assert(std::abs(_Den) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
@@ -640,6 +640,46 @@ constexpr std::string dimension_str()
 
   return dim;
 }
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== ORIGIN MANAGMENT ========================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template<double const& a, double const& b>
+struct origin_product
+{
+  static constexpr double value = OMNI_TRUE_ZERO ? zero : a*b;
+};
+
+
+template<double const& a, double const& b>
+struct origin_division
+{
+  static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= std::numeric_limits<double>::epsilon()) ? zero : a/b;
+};
+
+
+template<double const& origin, int exponent>
+struct origin_power
+{
+  static constexpr double value = std::pow(origin, exponent);
+};
+
+
+template<double const& origin, int basis>
+struct origin_root
+{
+  static_assert(basis != 0, "Basis must not be 0.");
+  static constexpr double value = std::pow(origin, 1.0/basis);
+};
 
 
 

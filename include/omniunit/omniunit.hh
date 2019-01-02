@@ -38,10 +38,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define OMNI_TRUE_ZERO false
 #endif // OMNI_TRUE_ZERO
 
-//easter egg
-#ifdef WESTERN_SPY
-  #error "OmniUnit doesn't treat with western spy !"
-#endif
 
 #include "classes/Complete_Unit.hh"
 
@@ -70,6 +66,8 @@ using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 } //namespace omniunit
+
+
 
 
 #include "units/units.hh"

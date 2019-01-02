@@ -1,4 +1,3 @@
-#define GOPNIK blyat
 #define OMNI_TRUE_ZERO false
 
 #include "omniunit/omniunit.hh"
@@ -274,11 +273,11 @@ int main()
   show(30, var30, VAR30);
 
   omniunit::celsius<double> temp31(0);
-  auto var31 = omniunit::pow<2>(temp31);
+  auto var31 = omniunit::pow(temp31);
   show(31, var31, VAR31);
 
   omniunit::Basic_Unit<omniunit::Dimension<0,0,0,0,2,0,0,0,0>, double, omniunit::base, omniunit::celsiusConstant> temp32(0);
-  auto var32 = omniunit::root<2>(temp32);
+  auto var32 = omniunit::nroot(temp32);
   show(32, var32, VAR32);
 
   //constexpr scalar x(1);

@@ -72,62 +72,51 @@ $(function() {
 C++ stantard has taken this recommendation into account by implementing std::chrono::duration to represent duration. <br />
 This is not enough.</p>
 <ul>
-<li>The main purpose of OmniUnit is to provide strong types to represent all physical units.</li>
-<li>Implicit conversions and compile-time dimensional analysis are performed when operating on these units.</li>
-<li>These units can handle uncertainties and propagate them through operators.</li>
-<li>Units from all systems are representable : metric, imperial, microscopic, astronomic...</li>
-<li>Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration.</li>
-<li>If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs.</li>
-<li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-3 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well.</li>
+<li>The main purpose of OmniUnit is to provide strong types to represent all physical units ;</li>
+<li>Implicit conversions are performed when operating on units : Millimeter = meter + inches is absolutely legal ;</li>
+<li>compile-time dimensional analysis are performed when operating on units : Length/time returns a speed. Computing this as a Mass causes a compilation error, so there cannot be any runtime error ;</li>
+<li>Units from all systems are representable : metric, imperial, microscopic, astronomic... ;</li>
+<li>Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration :</li>
+<li>If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs ;</li>
+<li>Units can handle uncertainties and propagate them through operators ; **(comming soon)**</li>
+<li>Suffixes (through litteral operator) are available for all predefined units, making Omniunit a user friendly library ;</li>
+<li>More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **(comming soon)**</li>
+<li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **(comming soon)**</li>
 </ul>
 <p>OmniUnit requires fully supported <b>C++14</b>.<br />
 </p>
 <h3>OmniUnit compiles with :</h3>
 <ul>
-<li>gcc/g++ 6.2.0<br />
-</li>
-<li>gcc/g++ 6.3.0<br />
- <h3>OmniUnit doesn't compiles with :</h3>
-</li>
+<li>gcc/g++ 6.2.0</li>
+<li>gcc/g++ 6.3.0</li>
+<li>Visual Studio 2015 (with option /constexpr)</li>
 </ul>
+<h3>OmniUnit doesn't compile with :</h3>
 <ul>
-<li>Visual Studio 2015 and earlier.<br />
- <h3>Known bugs</h3>
-</li>
-</ul>
-<p>No bugs are known.</p>
-<h2>Why choose THIS unit library ?</h2>
-<p>It does exist some others library to represent and handle physical units in C++. Here's why you should use OmniUnit :</p>
-<ul>
-<li>Units conversion is fully supported and is implicit : millimeter = meter + inches is absolutely legal.</li>
-<li>Dimension check is done at compile-time. Length/time returns a speed. If Mass = length/time is tried, there is a compilation error. Thus there cannot be runtime issue.</li>
-<li>Uncertainties on values can be handled. If any, propagation of uncertainties through functions or unit composition/conversion is calculated.</li>
-<li>All physical units are supported. If one isn't implemented, you can easily create your own only with typedefs. Implicit conversion are automagically supported for your new unit, and dimensions are always checked at compile time.</li>
-<li>Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration.</li>
+<li>Visual Studio 2013 and earlier.</li>
 </ul>
 <h2>Documentation</h2>
-<p>See the full documentation here : <a href="http://stabax.org/doc/omniunit">http://stabax.org/doc/omniunit</a></p>
+<p>See the full documentation here : <a href="http://stabax.org/doc/omniunit">http://stabax.org/doc/omniunit</a>. If the servers are down, open <b>omniunit/doc/html/index.html</b>.</p>
 <h2>Use library</h2>
-<p>To get the library, clone the latest revision : </p><pre class="fragment">git clone http://bitbucket.org/stabaxltd/stblib.git
+<p>To get the library, clone the latest revision : </p><pre class="fragment">git clone http://bitbucket.org/stabax/omniunit.git
 </pre><p>Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources, and start using the features.</p>
 <h2>Fast and basic example</h2>
-<pre class="fragment">#include "omniunit/units.hh"
+<pre class="fragment">#include "omniunit/omniunit.hh"
 #include &lt;iostream&gt;
 
 int main()
 {
-  //a and b represent 3000 meters in different ways
-  omniunit::millimeter&lt;int&gt; a(3000000);  //3000000 is handled by an integer
-  omniunit::kilometer&lt;float&gt; b(3);       //3 is handled by a float
+    //a and b represent 3000 meters in different ways
+    omniunit::millimeter&lt;int&gt; a(3000000);  //3000000 is handled by an integer
+    omniunit::kilometer&lt;float&gt; b(3);       //3 is handled by a float
 
-  omniunit::centimeterPerSecond&lt;double&gt; d = a / stb::second&lt;int&gt;(3); //OK, length/duration returns a speed.
+    omniunit::centimeterPerSecond&lt;double&gt; d = a / stb::second&lt;int&gt;(3); //OK, length/duration returns a speed.
 
-  std::cout &lt;&lt; d.count() &lt;&lt; '\n';   //prints 100000
+    std::cout &lt;&lt; d.count() &lt;&lt; '\n';   //prints 100000
 
 return 0;
 }
-</pre><p>As you can you can see, every thinkable conversion are done implicitly.</p>
-<h2>Contributors</h2>
+</pre><h2>Contributors</h2>
 <ul>
 <li>Baxlan</li>
 <li>Stabax (<a href="http://stabax.org/">http://stabax.org/</a>)</li>
@@ -142,7 +131,7 @@ return 0;
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 1 2019 19:48:01 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 2 2019 19:21:00 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

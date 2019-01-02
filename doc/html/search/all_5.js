@@ -6,5 +6,5 @@ var searchData=
   ['dimension_5fdivide',['Dimension_divide',['../structomniunit_1_1Dimension__divide.html',1,'omniunit']]],
   ['dimension_5fmultiply',['Dimension_multiply',['../structomniunit_1_1Dimension__multiply.html',1,'omniunit']]],
   ['dimension_5fpower',['Dimension_power',['../structomniunit_1_1Dimension__power.html',1,'omniunit']]],
-  ['division_5forigin',['division_origin',['../structomniunit_1_1division__origin.html',1,'omniunit']]]
+  ['dimension_5froot',['Dimension_root',['../structomniunit_1_1Dimension__root.html',1,'omniunit']]]
 ];
