@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include"constants_for_units.hh"
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -189,7 +189,7 @@ typedef solar_mass<> solar_mass;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 #endif //MASS_HH_

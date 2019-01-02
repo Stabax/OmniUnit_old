@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -121,7 +121,7 @@ float getUncertainty(T container)
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 

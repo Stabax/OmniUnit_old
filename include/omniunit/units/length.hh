@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include"constants_for_units.hh"
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -182,7 +182,7 @@ typedef gigaparsec<> gigaparsec;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 #endif //LENGTH_HH_

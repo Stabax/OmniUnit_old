@@ -14,17 +14,17 @@ This is not enough.
 * Units from all systems are representable : metric, imperial, microscopic, astronomic... ;
 * Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration :
 * If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs ;
-* Units can handle uncertainties and propagate them through operators ; **(comming soon)**
+* Units can handle uncertainties and propagate them through operators ; **comming soon**
 * Suffixes (through litteral operator) are available for all predefined units, making Omniunit a user friendly library ;
-* More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **(comming soon)**
-* It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **(comming soon)**
+* More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **comming soon**
+* It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **comming soon**
 
 OmniUnit requires fully supported **C++14**.\n
 
-
 ### OmniUnit compiles with : ###
-- gcc/g++ 6.2.0
-- gcc/g++ 6.3.0
+- gcc/g++ 6.2
+- gcc/g++ 6.3
+- gcc/g++ 7.2
 - Visual Studio 2015 (with option /constexpr)
 
 ### OmniUnit doesn't compile with : ###
@@ -53,10 +53,10 @@ Then copy the include/omniunit folder into your project folder and simply includ
     int main()
     {
         //a and b represent 3000 meters in different ways
-        omniunit::millimeter<int> a(3000000);  //3000000 is handled by an integer
-        omniunit::kilometer<float> b(3);       //3 is handled by a float
+        omni::millimeter<int> a(3000000);  //3000000 is handled by an integer
+        omni::kilometer<float> b(3);       //3 is handled by a float
 
-        omniunit::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
+        omni::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
 
         std::cout << d.count() << '\n';   //prints 100000
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['countdown',['Countdown',['../classomniunit_1_1Countdown.html',1,'omniunit']]]
+  ['countdown',['Countdown',['../classomni_1_1Countdown.html',1,'omni']]]
 ];

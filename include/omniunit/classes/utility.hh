@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -683,6 +683,6 @@ struct origin_root
 
 
 
-} // namespace omniunit
+} // namespace omni
 
 #endif //OMNIUNIT_UTILITY_HH_

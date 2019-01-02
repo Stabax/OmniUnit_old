@@ -3,5 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="omniunit::Dimension\l\< _length, _mass, _time,\l _current, _temperature,\l _quantity, _luminosity,\l _angle, _solid_angle \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1Dimension.html"];
+  Node0 [label="omni::Dimension\< _length,\l _mass, _time, _current,\l _temperature, _quantity,\l _luminosity, _angle, _solid\l_angle \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1Dimension.html"];
 }

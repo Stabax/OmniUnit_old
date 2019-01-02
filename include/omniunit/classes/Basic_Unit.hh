@@ -37,7 +37,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -903,7 +903,7 @@ std::ostream& operator<<(std::ostream& oss, Basic_Unit<Dimension, Rep, Period, O
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 
@@ -924,7 +924,7 @@ namespace std _GLIBCXX_VISIBILITY(default)
 
 template<typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
          typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-struct common_type<omniunit::Basic_Unit<Dimension1, Rep1, Period1, Origin1>, omniunit::Basic_Unit<Dimension2, Rep2, Period2, Origin2>>
+struct common_type<omni::Basic_Unit<Dimension1, Rep1, Period1, Origin1>, omni::Basic_Unit<Dimension2, Rep2, Period2, Origin2>>
 {
 private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
@@ -937,10 +937,10 @@ private:
   typedef typename std::common_type<Rep1, Rep2>::type common;
 
   //if origins are differents, then the common origin is 0...
-  static constexpr double origin = (std::abs(Origin1 - Origin2) <= std::numeric_limits<double>::epsilon()) ? Origin1 : omniunit::zero;
+  static constexpr double origin = (std::abs(Origin1 - Origin2) <= std::numeric_limits<double>::epsilon()) ? Origin1 : omni::zero;
 
 public:
-  typedef omniunit::Basic_Unit<Dimension1, common, new_Ratio, origin> type;
+  typedef omni::Basic_Unit<Dimension1, common, new_Ratio, origin> type;
 };
 
 

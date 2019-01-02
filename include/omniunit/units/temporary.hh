@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
   constexpr double mileE3 = 1609344.;
 
@@ -120,7 +120,10 @@ namespace omniunit
     typedef milePerHour<> milePerHour;
     typedef bar<> bar;
   }
-}
+
+
+
+} // namespace omni
 
 
 

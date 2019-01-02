@@ -71,7 +71,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>To define your own unit, you need to provide 3 informations : its dimension, its ratio and its origin.</p>
 <h2>Step 1 : Dimension</h2>
-<p>The class omni::Dimension has 9 templates parameters which define the 7 basic international dimensions and 2 angular "dimensions". These parameters are, in order : length, mass, time, electric intensity, temperature, quantity, luminosity, angle and solid angle.</p>
+<p>The class <a class="el" href="structomni_1_1Dimension.html">omni::Dimension</a> has 9 templates parameters which define the 7 basic international dimensions and 2 angular "dimensions". These parameters are, in order : length, mass, time, electric intensity, temperature, quantity, luminosity, angle and solid angle.</p>
 <p>So, here are some example of dimension definition :</p>
 <p>length dimension : </p><pre class="fragment">typedef omni::Dimension&lt;1, 0, 0, 0, 0, 0, 0, 0, 0&gt; Length;
 </pre><p>duration dimension : </p><pre class="fragment">typedef omni::Dimension&lt;0, 0, 1, 0, 0, 0, 0, 0, 0&gt; Duration;
@@ -85,7 +85,7 @@ std::cout &lt;&lt; dim &lt;&lt; '\\n'; //prints: \[M1]\[Tm-2]\[I-1]
 <p>The ratio indicates what the unit represents according to the basic international unit of the considered dimension.<br />
 For example, the basic unit of a length is the meter, represented by a ratio equal to 1 : it is the base. The basic unit of a charge is the coulomb, for a magnetic field it is the tesla... They are all represented by a ratio equal to 1 because they are the basic international unit of their dimension.<br />
 Thus, one millimeter represents 0.001 meter, namely 1/1000 meter. Obviously, the ratio for a millimeter is 1/1000, 1/1000000 for a micrometer, 1000/1 for a kilometer... 1/2 for a half-meter !<br />
- Well, omni::Ratio is a type which takes two values (a numerator and a denominator) as <b>non-type</b> template parameters. These parameters <b>HAVE TO</b> be of type <b>constexpr double</b>. <br />
+ Well, <a class="el" href="structomni_1_1Ratio.html">omni::Ratio</a> is a type which takes two values (a numerator and a denominator) as <b>non-type</b> template parameters. These parameters <b>HAVE TO</b> be of type <b>constexpr double</b>. <br />
 <b>Double</b> are needed for technical reasons (the greater value reachable with an integer or a float is too short to represent all possible units, this is why OmniUnit doesn't use std::ratio). However, a template parameter can only be taken as double if the parameter :</p>
 <ul>
 <li>is <b>known at compile time</b>, so it has to be <b>constexpr</b>. (A constexpr variable must be defined and initialized at the same time) ;</li>
@@ -187,7 +187,7 @@ unsing millipoise_v4 = omni::Unit&lt;Viscosity, Rep, omni::Ratio_over_value&lt;o
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 2 2019 19:20:58 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 2 2019 19:44:18 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "constants_for_units.hh"
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -136,7 +136,7 @@ typedef yottacandela<> yottacandela;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 #endif //LUMINOUS_INTENSITY_HH_

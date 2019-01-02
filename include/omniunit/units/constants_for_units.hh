@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CONSTANTS_FOR_UNITS_HH_
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -62,6 +62,6 @@ typedef Ratio_invert<avogadro>::type unitaryQuantityDefinition;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 #endif //CONSTANTS_FOR_UNITS_HH_

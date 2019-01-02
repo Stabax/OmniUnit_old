@@ -3,5 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node0 [label="omniunit::Dimension\l_root\< dim, basis \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1Dimension__root.html"];
+  Node0 [label="omni::Dimension_root\l\< dim, basis \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1Dimension__root.html"];
 }

@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include"constants_for_units.hh"
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -220,7 +220,7 @@ typedef gigayear<> gigayear;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 #endif //DURATION_HH_

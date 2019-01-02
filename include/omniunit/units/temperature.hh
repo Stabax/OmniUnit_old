@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include"constants_for_units.hh"
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -222,7 +222,7 @@ typedef yottacelsius<> yottacelsius;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 #endif //TEMPERATURE_HH_

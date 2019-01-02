@@ -35,7 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
 
 //=============================================================================
@@ -118,7 +118,7 @@ public:
   template<typename durationType = second<long long>>
   durationType get() const
   {
-    return omniunit::duration_cast<durationType>(getNano());
+    return omni::duration_cast<durationType>(getNano());
   }
 
 
@@ -540,7 +540,7 @@ int Date::timeLag = 0;
 
 
 
-} // namespace omniunit
+} // namespace omni
 
 
 

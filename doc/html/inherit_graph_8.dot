@@ -5,7 +5,7 @@ digraph "Graphical Class Hierarchy"
   rankdir="LR";
   Node33 [label="exception",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node33 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node0 [label="omniunit::Exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomniunit_1_1Exception.html"];
+  Node0 [label="omni::Exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomni_1_1Exception.html"];
   Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 [label="omniunit::Date_exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomniunit_1_1Date__exception.html"];
+  Node1 [label="omni::Date_exception",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classomni_1_1Date__exception.html"];
 }

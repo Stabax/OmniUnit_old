@@ -43,7 +43,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-namespace omniunit
+namespace omni
 {
 
 
@@ -65,7 +65,7 @@ using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 
-} //namespace omniunit
+} //namespace omni
 
 
 

@@ -78,17 +78,17 @@ This is not enough.</p>
 <li>Units from all systems are representable : metric, imperial, microscopic, astronomic... ;</li>
 <li>Units representing a time are fully, implicitly and reciprocally convertible to a std::chrono::duration :</li>
 <li>If a unit is not defined in OmniUnit, user defined units can be defined only through typedefs ;</li>
-<li>Units can handle uncertainties and propagate them through operators ; **(comming soon)**</li>
+<li>Units can handle uncertainties and propagate them through operators ; <b>comming soon</b></li>
 <li>Suffixes (through litteral operator) are available for all predefined units, making Omniunit a user friendly library ;</li>
-<li>More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **(comming soon)**</li>
-<li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **(comming soon)**</li>
+<li>More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; <b>comming soon</b></li>
+<li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. <b>comming soon</b></li>
 </ul>
 <p>OmniUnit requires fully supported <b>C++14</b>.<br />
-</p>
-<h3>OmniUnit compiles with :</h3>
+ </p><h3>OmniUnit compiles with :</h3>
 <ul>
-<li>gcc/g++ 6.2.0</li>
-<li>gcc/g++ 6.3.0</li>
+<li>gcc/g++ 6.2</li>
+<li>gcc/g++ 6.3</li>
+<li>gcc/g++ 7.2</li>
 <li>Visual Studio 2015 (with option /constexpr)</li>
 </ul>
 <h3>OmniUnit doesn't compile with :</h3>
@@ -107,10 +107,10 @@ This is not enough.</p>
 int main()
 {
     //a and b represent 3000 meters in different ways
-    omniunit::millimeter&lt;int&gt; a(3000000);  //3000000 is handled by an integer
-    omniunit::kilometer&lt;float&gt; b(3);       //3 is handled by a float
+    omni::millimeter&lt;int&gt; a(3000000);  //3000000 is handled by an integer
+    omni::kilometer&lt;float&gt; b(3);       //3 is handled by a float
 
-    omniunit::centimeterPerSecond&lt;double&gt; d = a / stb::second&lt;int&gt;(3); //OK, length/duration returns a speed.
+    omni::centimeterPerSecond&lt;double&gt; d = a / stb::second&lt;int&gt;(3); //OK, length/duration returns a speed.
 
     std::cout &lt;&lt; d.count() &lt;&lt; '\n';   //prints 100000
 
@@ -131,7 +131,7 @@ return 0;
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 2 2019 19:21:00 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 2 2019 19:44:19 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

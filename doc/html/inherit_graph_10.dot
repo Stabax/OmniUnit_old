@@ -5,11 +5,11 @@ digraph "Graphical Class Hierarchy"
   rankdir="LR";
   Node28 [label="false_type",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
   Node28 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node0 [label="omniunit::is_Basic\l_Unit\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1is__Basic__Unit.html"];
+  Node0 [label="omni::is_Basic_Unit\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1is__Basic__Unit.html"];
   Node28 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node30 [label="omniunit::is_Dimension\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1is__Dimension.html"];
+  Node30 [label="omni::is_Dimension\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1is__Dimension.html"];
   Node28 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node31 [label="omniunit::is_stb_Ratio\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1is__stb__Ratio.html"];
+  Node31 [label="omni::is_stb_Ratio\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1is__stb__Ratio.html"];
   Node28 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node32 [label="omniunit::is_std_Ratio\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomniunit_1_1is__std__Ratio.html"];
+  Node32 [label="omni::is_std_Ratio\l\< falseType \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structomni_1_1is__std__Ratio.html"];
 }
