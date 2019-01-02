@@ -73,6 +73,13 @@ namespace omniunit
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using meterPerSecond2 = Unit<Acceleration, Rep, base, zero>;
+
+
+
+  typedef Dimension<-1,1,-2,0,0,0,0,0,0> Pressure;
+
+  template <typename Rep = OMNI_DEFAULT_TYPE>
+  using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 }
 
 

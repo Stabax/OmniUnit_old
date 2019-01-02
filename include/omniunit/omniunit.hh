@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifndef OMNI_DEFAULT_TYPE
-  #define OMNI_DEFAULT_TYPE float
+  #define OMNI_DEFAULT_TYPE double
 #endif // OMNI_DEFAULT_TYPE
 
 #ifndef OMNI_TRUE_ZERO
@@ -66,6 +66,8 @@ using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
 
 
 #endif //OMNI_DISABLE_UNCERTAINTIES
+
+
 
 } //namespace omniunit
 

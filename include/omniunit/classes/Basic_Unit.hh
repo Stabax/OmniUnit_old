@@ -55,7 +55,7 @@ namespace omniunit
 
 //forward declaration
 //origin is given in official unit (ratio<1, 1>)
-template<typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
+template<typename _Dimension, typename Rep, typename Period, double const& Origin>
 class Basic_Unit;
 
 
@@ -130,11 +130,11 @@ struct partial_specialization_wrapper
 };
 
 
-//called if toUnit equals stb::duration
-//cast stb::duration to another stb::duration
+//called if toUnit equals omniunit::duration
+//cast omniunit::duration to another omniunit::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+constexpr toUnit unit_cast_impl(
+partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
@@ -142,17 +142,17 @@ Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 
 
 //called if toUnit equals std::chrono::duration
-//cast stb::duration to std::chrono::duration
+//cast omniunit::duration to std::chrono::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+constexpr toUnit unit_cast_impl(
+partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
 Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
 }
 
 
-//cast stb::duration to toUnit
+//cast omniunit::duration to toUnit
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
@@ -160,11 +160,11 @@ constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period,
 }
 
 
-//called if toUnit equals stb::duration
-//cast std::chrono::duration to stb::duration
+//called if toUnit equals omniunit::duration
+//cast std::chrono::duration to omniunit::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>
-unit_cast_impl(partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period /*, toUnit::origin*/>>,
+constexpr toUnit unit_cast_impl(
+partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -174,8 +174,8 @@ std::chrono::duration<Rep, Period> const& Obj)
 //called if toUnit equals std::chrono::duration
 //cast std::chrono::duration to another std::chrono::duration
 template <typename toUnit, typename Rep, typename Period>
-constexpr std::chrono::duration<typename toUnit::rep, typename toUnit::period>
-unit_cast_impl(partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+constexpr toUnit unit_cast_impl(
+partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return std::chrono::duration_cast<toUnit>(Obj);
@@ -274,7 +274,7 @@ public:
   constexpr operator std::chrono::duration<_Rep, _Period>() const
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
-    return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type>(*this).count());
+    return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, zero>(*this).count());
   }
 
   static constexpr Basic_Unit zero()
@@ -688,24 +688,24 @@ operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator==(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator==(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
 
-  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1>,
-  Basic_Unit<Dimension2, Rep2, Period2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>,
+  Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(Obj1).count() == type(Obj2).count();
 }
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator!=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator!=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -714,24 +714,24 @@ Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 }
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator<(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator<(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
 
-  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1>,
-  Basic_Unit<Dimension2, Rep2, Period2>>::type type;
+  typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>,
+  Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
   return type(Obj1).count() < type(Obj2).count();
 }
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator<=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator<=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -740,10 +740,10 @@ Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 }
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator>(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator>(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
@@ -752,10 +752,10 @@ Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
 }
 
 
-template <typename Dimension1, typename Rep1, typename Period1,
-typename Rep2, typename Period2, typename Dimension2>
-constexpr bool operator>=(Basic_Unit<Dimension1, Rep1, Period1> const& Obj1,
-Basic_Unit<Dimension2, Rep2, Period2> const& Obj2)
+template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
+typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+constexpr bool operator>=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
+Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
