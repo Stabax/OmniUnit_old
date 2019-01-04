@@ -220,7 +220,7 @@ public:
   }
 
 
-  template<typename _Rep>
+  template<typename _Rep, typename = typename std::enable_if<std::is_arithmetic<_Rep>::value, _Rep>::type>
   constexpr Basic_Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg))
   {

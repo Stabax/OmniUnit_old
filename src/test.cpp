@@ -301,9 +301,9 @@ int main()
 
   omni::KilometerPerHour speed;
   omni::Inch radius;
-  omni::PerMinute _revolutions;
+  omni::perMinute<int> _revolutions;
   omni::NewtonMeter _torque;
-  omni::PerMinute _mRevolutions;
+  omni::perMinute<int> _mRevolutions;
   omni::Horsepower mPower;
 
   _revolutions = (speed < omni::KilometerPerHour(5) ? omni::PerMinute(800) : omni::PerMinute(speed / (2 * 3.14 * radius)) * 1);
