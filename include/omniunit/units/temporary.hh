@@ -114,6 +114,7 @@ namespace omni
   using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 
   typedef mile<> Mile;
+  typedef inch<> Inch;
   typedef centimeter3<> Centimeter3;
   typedef liter<> Liter;
   typedef newtonMeter<> NewtonMeter;

@@ -298,5 +298,8 @@ int main()
 
   std::cout << "nb de faux : " << faux::value << "\n";
   std::cout << omni::modulo(10, -9.f) << "\n"; //BUG
+
+  omni::PerMinute a(0);
+
 return 0;
 }
