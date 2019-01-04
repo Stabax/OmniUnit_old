@@ -48,6 +48,10 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using centimeter3 = Unit<Volume, Rep, typename Ratio_power<centi, 3>::type, zero>;
 
+  template <typename Rep = OMNI_DEFAULT_TYPE>
+  using liter = Unit<Volume, Rep, typename Ratio_power<deci, 3>::type, zero>;
+
+
 
   typedef Dimension<1,1,-2,0,0,0,0,0,0> Force;
 
@@ -63,11 +67,11 @@ namespace omni
 
   constexpr double chE1 = 7355.;
   template <typename Rep = OMNI_DEFAULT_TYPE>
-  using ch = Unit<Power, Rep, Ratio<chE1, E1>, zero>;
+  using horsepower = Unit<Power, Rep, Ratio<chE1, E1>, zero>;
 
-  constexpr double hpDouble = 746.;
+  constexpr double hpDoubleE1 = 7457.;
   template <typename Rep = OMNI_DEFAULT_TYPE>
-  using hp = Unit<Power, Rep, Ratio<hpDouble, E0>, zero>;
+  using mechanicalhorsepower = Unit<Power, Rep, Ratio<hpDoubleE1, E1>, zero>;
 
 
 
@@ -111,8 +115,8 @@ namespace omni
     typedef newtonMeter<> newtonMeter;
     typedef newton<> newton;
     typedef watt<> watt;
-    typedef ch<> ch;
-    typedef hp<> hp;
+    typedef horsepower<> horsepower;
+    typedef mechanicalhorsepower<> mechanicalhorsepower;
     typedef perMinute<> perMinute;
     typedef meterPerSecond<> meterPerSecond;
     typedef kilometerPerHour<> kilometerPerHour;
