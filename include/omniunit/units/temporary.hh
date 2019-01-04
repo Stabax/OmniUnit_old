@@ -36,6 +36,11 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using mile = Unit<Length, Rep, Ratio<mileE3, E3>, zero>;
 
+  constexpr double inchE2 = 254.;
+
+  template <typename Rep = OMNI_DEFAULT_TYPE>
+  using inch = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<inchE2, E2>, centi>::type, zero>;
+
   typedef Dimension<2,1,-2,0,0,0,0,0,0> Energy;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
