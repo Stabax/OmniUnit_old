@@ -660,12 +660,25 @@ struct origin_product
 };
 
 
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
+//following declaration :
+template<double const& a, double const& b>
+constexpr double origin_product<a, b>::value;
+
+
 template<double const& a, double const& b>
 struct origin_division
 {
   static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= std::numeric_limits<double>::epsilon()) ? zero : a/b;
 };
 
+
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
+//following declaration :
+template<double const& a, double const& b>
+constexpr double origin_division<a, b>::value;
 
 template<double const& origin, int exponent>
 struct origin_power
@@ -674,6 +687,12 @@ struct origin_power
 };
 
 
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
+//following declaration :
+template<double const& a,int exponent>
+constexpr double origin_power<a, exponent>::value;
+
 template<double const& origin, int basis>
 struct origin_root
 {
@@ -681,6 +700,12 @@ struct origin_root
   static constexpr double value = std::pow(origin, 1.0/basis);
 };
 
+
+//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
+//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
+//following declaration :
+template<double const& a, int basis>
+constexpr double origin_root<a, basis>::value;
 
 
 } // namespace omni

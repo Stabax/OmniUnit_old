@@ -299,7 +299,15 @@ int main()
   std::cout << "nb de faux : " << faux::value << "\n";
   std::cout << omni::modulo(10, -9.f) << "\n"; //BUG
 
-  omni::PerMinute a(0);
+  omni::KilometerPerHour speed;
+  omni::Inch radius;
+  omni::PerMinute _revolutions;
+  omni::NewtonMeter _torque;
+  omni::PerMinute _mRevolutions;
+  omni::Horsepower mPower;
+
+  _revolutions = (speed < omni::KilometerPerHour(5) ? omni::PerMinute(800) : omni::PerMinute(speed / (2 * 3.14 * radius)) * 1);
+  _torque = ((_revolutions > _mRevolutions ? -1  : 1) * mPower / omni::pow<2>(_mRevolutions)) * _revolutions;
 
 return 0;
 }
