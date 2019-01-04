@@ -108,22 +108,19 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 
-  namespace def
-  {
-    typedef mile<> mile;
-    typedef centimeter3<> centimeter3;
-    typedef newtonMeter<> newtonMeter;
-    typedef newton<> newton;
-    typedef watt<> watt;
-    typedef horsepower<> horsepower;
-    typedef mechanicalhorsepower<> mechanicalhorsepower;
-    typedef perMinute<> perMinute;
-    typedef meterPerSecond<> meterPerSecond;
-    typedef kilometerPerHour<> kilometerPerHour;
-    typedef meterPerSecond2<> meterPerSecond2;
-    typedef milePerHour<> milePerHour;
-    typedef bar<> bar;
-  }
+  typedef mile<> Mile;
+  typedef centimeter3<> Centimeter3;
+  typedef newtonMeter<> NewtonMeter;
+  typedef newton<> Newton;
+  typedef watt<> Watt;
+  typedef horsepower<> Horsepower;
+  typedef mechanicalhorsepower<> Mechanicalhorsepower;
+  typedef perMinute<> PerMinute;
+  typedef meterPerSecond<> MeterPerSecond;
+  typedef kilometerPerHour<> KilometerPerHour;
+  typedef meterPerSecond2<> MeterPerSecond2;
+  typedef milePerHour<> MilePerHour;
+  typedef bar<> Bar;
 
 
 

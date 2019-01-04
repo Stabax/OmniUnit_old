@@ -179,44 +179,35 @@ typename year<Rep>::period, giga>::type, zero>;
 
 
 
-namespace def
-{
+typedef zeptosecond<> Zeptosecond;
+typedef femtosecond<>  Femtosecond;
+typedef picosecond<> Picosecond;
+typedef nanosecond<> Nanosecond;
+typedef microsecond<> Microsecond;
+typedef millisecond<> Millisecond;
+typedef centisecond<> Centisecond;
+typedef decisecond<> Decisecond;
+typedef second<> Second;
+typedef decasecond<> Decasecond;
+typedef hectosecond<> Hectosecond;
+typedef kilosecond<> Kilosecond;
+typedef megasecond<> Megasecond;
+typedef gigasecond<> Gigasecond;
+typedef terasecond<> Terasecond;
+typedef petasecond<> Petasecond;
+typedef exasecond<> Exasecond;
+typedef zettasecond<> Zettasecond;
+typedef yottasecond<> Yottasecond;
 
-
-
-typedef zeptosecond<> zeptosecond;
-typedef femtosecond<>  femtosecond;
-typedef picosecond<> picosecond;
-typedef nanosecond<> nanosecond;
-typedef microsecond<> microsecond;
-typedef millisecond<> millisecond;
-typedef centisecond<> centisecond;
-typedef decisecond<> decisecond;
-typedef second<> second;
-typedef decasecond<> decasecond;
-typedef hectosecond<> hectosecond;
-typedef kilosecond<> kilosecond;
-typedef megasecond<> megasecond;
-typedef gigasecond<> gigasecond;
-typedef terasecond<> terasecond;
-typedef petasecond<> petasecond;
-typedef exasecond<> exasecond;
-typedef zettasecond<> zettasecond;
-typedef yottasecond<> yottasecond;
-
-typedef minute<> minute;
-typedef hour<> hour;
-typedef day<> day;
-typedef week<> week;
-typedef month<> month;
-typedef year<> year;
-typedef kiloyear<> kiloyear;
-typedef megayear<> megayear;
-typedef gigayear<> gigayear;
-
-
-
-}
+typedef minute<> Minute;
+typedef hour<> Hour;
+typedef day<> Day;
+typedef week<> Week;
+typedef month<> Month;
+typedef year<> Year;
+typedef kiloyear<> Kiloyear;
+typedef megayear<> Megayear;
+typedef gigayear<> Gigayear;
 
 
 

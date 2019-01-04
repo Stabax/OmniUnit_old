@@ -141,44 +141,36 @@ typename parsec<Rep>::period, giga>::type, zero>;
 
 
 
-namespace def
-{
 
+typedef zeptometer<> Zeptometer;
+typedef femtometer<>  Femtometer;
+typedef picometer<> Picometer;
+typedef nanometer<> Nanometer;
+typedef micrometer<> Micrometer;
+typedef millimeter<> Millimeter;
+typedef centimeter<> Centimeter;
+typedef decimeter<> Decimeter;
+typedef meter<> Meter;
+typedef decameter<> Decameter;
+typedef hectometer<> Hectometer;
+typedef kilometer<> Kilometer;
+typedef megameter<> Megameter;
+typedef gigameter<> Migameter;
+typedef terameter<> Terameter;
+typedef petameter<> Petameter;
+typedef exameter<> Exameter;
+typedef zettameter<> Zettameter;
+typedef yottameter<> Yottameter;
 
-
-typedef zeptometer<> zeptometer;
-typedef femtometer<>  femtometer;
-typedef picometer<> picometer;
-typedef nanometer<> nanometer;
-typedef micrometer<> micrometer;
-typedef millimeter<> millimeter;
-typedef centimeter<> centimeter;
-typedef decimeter<> decimeter;
-typedef meter<> meter;
-typedef decameter<> decameter;
-typedef hectometer<> hectometer;
-typedef kilometer<> kilometer;
-typedef megameter<> megameter;
-typedef gigameter<> gigameter;
-typedef terameter<> terameter;
-typedef petameter<> petameter;
-typedef exameter<> exameter;
-typedef zettameter<> zettameter;
-typedef yottameter<> yottameter;
-
-typedef angstrom<> angstrom;
-typedef astronomical_unit<> astronomical_unit;
-typedef lightsecond<> lightsecond;
-typedef lightminute<> lightminute;
-typedef lightyear<> lightyear;
-typedef parsec<> parsec;
-typedef kiloparsec<> kiloparsec;
-typedef megaparsec<> megaparsec;
-typedef gigaparsec<> gigaparsec;
-
-
-
-} // namespace default
+typedef angstrom<> Angstrom;
+typedef astronomical_unit<> Astronomical_unit;
+typedef lightsecond<> Lightsecond;
+typedef lightminute<> Lightminute;
+typedef lightyear<> Lightyear;
+typedef parsec<> Parsec;
+typedef kiloparsec<> Kiloparsec;
+typedef megaparsec<> Megaparsec;
+typedef gigaparsec<> Gigaparsec;
 
 
 

@@ -145,47 +145,38 @@ using solar_mass = Unit<Mass, Rep, solar_massDefinition, zero>;
 
 
 
-namespace def
-{
+typedef zeptogram<> Zeptogram;
+typedef femtogram<>  Femtogram;
+typedef picogram<> Picogram;
+typedef nanogram<> Nanogram;
+typedef microgram<> Microgram;
+typedef milligram<> Milligram;
+typedef centigram<> Centigram;
+typedef decigram<> Decigram;
+typedef gram<> Gram;
+typedef decagram<> Decagram;
+typedef hectogram<> Hectogram;
+typedef kilogram<> Kilogram;
+typedef megagram<> Megagram;
+typedef gigagram<> Gigagram;
+typedef teragram<> Teragram;
+typedef petagram<> Petagram;
+typedef exagram<> Exagram;
+typedef zettagram<> Zettagram;
+typedef yottagram<> Yottagram;
 
+typedef atomic_mass<> Atomic_mass;
 
+typedef evPerC2<> EvPerC2;
+typedef millievPerC2<> MillievPerC2;
+typedef microevPerC2<> MicroevPerC2;
+typedef kiloevPerC2<> KiloevPerC2;
+typedef megaevPerC2<> MegaevPerC2;
+typedef gigaevPerC2<> GigaevPerC2;
+typedef teraevPerC2<> TeraevPerC2;
 
-typedef zeptogram<> zeptogram;
-typedef femtogram<>  femtogram;
-typedef picogram<> picogram;
-typedef nanogram<> nanogram;
-typedef microgram<> microgram;
-typedef milligram<> milligram;
-typedef centigram<> centigram;
-typedef decigram<> decigram;
-typedef gram<> gram;
-typedef decagram<> decagram;
-typedef hectogram<> hectogram;
-typedef kilogram<> kilogram;
-typedef megagram<> megagram;
-typedef gigagram<> gigagram;
-typedef teragram<> teragram;
-typedef petagram<> petagram;
-typedef exagram<> exagram;
-typedef zettagram<> zettagram;
-typedef yottagram<> yottagram;
-
-typedef atomic_mass<> atomic_mass;
-
-typedef evPerC2<> evPerC2;
-typedef millievPerC2<> millievPerC2;
-typedef microevPerC2<> microevPerC2;
-typedef kiloevPerC2<> kiloevPerC2;
-typedef megaevPerC2<> megaevPerC2;
-typedef gigaevPerC2<> gigaevPerC2;
-typedef teraevPerC2<> teraevPerC2;
-
-typedef ton<> ton;
-typedef solar_mass<> solar_mass;
-
-
-
-} // namespace default
+typedef ton<> Ton;
+typedef solar_mass<> Solar_mass;
 
 
 

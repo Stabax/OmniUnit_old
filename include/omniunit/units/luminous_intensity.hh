@@ -104,35 +104,25 @@ using yottacandela = Unit<LuminousIntensity, Rep, yotta, zero>;
 
 
 
-
-namespace def
-{
-
-
-
-typedef zeptocandela<> zeptocandela;
-typedef femtocandela<>  femtocandela;
-typedef picocandela<> picocandela;
-typedef nanocandela<> nanocandela;
-typedef microcandela<> microcandela;
-typedef millicandela<> millicandela;
-typedef centicandela<> centicandela;
-typedef decicandela<> decicandela;
-typedef candela<> candela;
-typedef decacandela<> decacandela;
-typedef hectocandela<> hectocandela;
-typedef kilocandela<> kilocandela;
-typedef megacandela<> megacandela;
-typedef gigacandela<> gigacandela;
-typedef teracandela<> teracandela;
-typedef petacandela<> petacandela;
-typedef exacandela<> exacandela;
-typedef zettacandela<> zettacandela;
-typedef yottacandela<> yottacandela;
-
-
-
-} // namespace default
+typedef zeptocandela<> Zeptocandela;
+typedef femtocandela<>  Femtocandela;
+typedef picocandela<> Picocandela;
+typedef nanocandela<> Nanocandela;
+typedef microcandela<> Microcandela;
+typedef millicandela<> Millicandela;
+typedef centicandela<> Centicandela;
+typedef decicandela<> Decicandela;
+typedef candela<> Candela;
+typedef decacandela<> Decacandela;
+typedef hectocandela<> Hectocandela;
+typedef kilocandela<> Kilocandela;
+typedef megacandela<> Megacandela;
+typedef gigacandela<> Gigacandela;
+typedef teracandela<> Teracandela;
+typedef petacandela<> Petacandela;
+typedef exacandela<> Exacandela;
+typedef zettacandela<> Zettacandela;
+typedef yottacandela<> Yottacandela;
 
 
 

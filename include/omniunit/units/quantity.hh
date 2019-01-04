@@ -109,36 +109,27 @@ using amount = Unit<Quantity, Rep, unitaryQuantityDefinition, zero>;
 
 
 
-namespace def
-{
+typedef zeptomol<> Zeptomol;
+typedef femtomol<>  Femtomol;
+typedef picomol<> Picomol;
+typedef nanomol<> Nanomol;
+typedef micromol<> Micromol;
+typedef millimol<> Millimol;
+typedef centimol<> Centimol;
+typedef decimol<> Decimol;
+typedef mol<> Mol;
+typedef decamol<> Decamol;
+typedef hectomol<> Hectomol;
+typedef kilomol<> Kilomol;
+typedef megamol<> Megamol;
+typedef gigamol<> Gigamol;
+typedef teramol<> Teramol;
+typedef petamol<> Petamol;
+typedef examol<> Examol;
+typedef zettamol<> Zettamol;
+typedef yottamol<> Yottamol;
 
-
-
-typedef zeptomol<> zeptomol;
-typedef femtomol<>  femtomol;
-typedef picomol<> picomol;
-typedef nanomol<> nanomol;
-typedef micromol<> micromol;
-typedef millimol<> millimol;
-typedef centimol<> centimol;
-typedef decimol<> decimol;
-typedef mol<> mol;
-typedef decamol<> decamol;
-typedef hectomol<> hectomol;
-typedef kilomol<> kilomol;
-typedef megamol<> megamol;
-typedef gigamol<> gigamol;
-typedef teramol<> teramol;
-typedef petamol<> petamol;
-typedef examol<> examol;
-typedef zettamol<> zettamol;
-typedef yottamol<> yottamol;
-
-typedef amount<> amount;
-
-
-
-} // namespace default
+typedef amount<> Amount;
 
 
 

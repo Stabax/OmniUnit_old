@@ -104,34 +104,25 @@ using yottaampere = Unit<ElectricIntensity, Rep, yotta, zero>;
 
 
 
-namespace def
-{
-
-
-
-typedef zeptoampere<> zeptoampere;
-typedef femtoampere<>  femtoampere;
-typedef picoampere<> picoampere;
-typedef nanoampere<> nanoampere;
-typedef microampere<> microampere;
-typedef milliampere<> milliampere;
-typedef centiampere<> centiampere;
-typedef deciampere<> deciampere;
-typedef ampere<> ampere;
-typedef decaampere<> decaampere;
-typedef hectoampere<> hectoampere;
-typedef kiloampere<> kiloampere;
-typedef megaampere<> megaampere;
-typedef gigaampere<> gigaampere;
-typedef teraampere<> teraampere;
-typedef petaampere<> petaampere;
-typedef exaampere<> exaampere;
-typedef zettaampere<> zettaampere;
-typedef yottaampere<> yottaampere;
-
-
-
-} // namespace default
+typedef zeptoampere<> Zeptoampere;
+typedef femtoampere<>  Femtoampere;
+typedef picoampere<> Picoampere;
+typedef nanoampere<> Nanoampere;
+typedef microampere<> Microampere;
+typedef milliampere<> Milliampere;
+typedef centiampere<> Centiampere;
+typedef deciampere<> Deciampere;
+typedef ampere<> Ampere;
+typedef decaampere<> Decaampere;
+typedef hectoampere<> Hectoampere;
+typedef kiloampere<> Kiloampere;
+typedef megaampere<> Megaampere;
+typedef gigaampere<> Gigaampere;
+typedef teraampere<> Teraampere;
+typedef petaampere<> Petaampere;
+typedef exaampere<> Exaampere;
+typedef zettaampere<> Zettaampere;
+typedef yottaampere<> Yottaampere;
 
 
 

@@ -169,56 +169,48 @@ using yottacelsius = Unit<Temperature, Rep, yotta, celsiusConstant>;
 
 
 
-namespace def
-{
+typedef zeptokelvin<> Zeptokelvin;
+typedef femtokelvin<>  Femtokelvin;
+typedef picokelvin<> Picokelvin;
+typedef nanokelvin<> Nanokelvin;
+typedef microkelvin<> Microkelvin;
+typedef millikelvin<> Millikelvin;
+typedef centikelvin<> Centikelvin;
+typedef decikelvin<> Decikelvin;
+typedef kelvin<> Kelvin;
+typedef decakelvin<> Decakelvin;
+typedef hectokelvin<> Hectokelvin;
+typedef kilokelvin<> Kilokelvin;
+typedef megakelvin<> Megakelvin;
+typedef gigakelvin<> Gigakelvin;
+typedef terakelvin<> Terakelvin;
+typedef petakelvin<> Petakelvin;
+typedef exakelvin<> Exakelvin;
+typedef zettakelvin<> Zettakelvin;
+typedef yottakelvin<> Yottakelvin;
 
 
 
-typedef zeptokelvin<> zeptokelvin;
-typedef femtokelvin<>  femtokelvin;
-typedef picokelvin<> picokelvin;
-typedef nanokelvin<> nanokelvin;
-typedef microkelvin<> microkelvin;
-typedef millikelvin<> millikelvin;
-typedef centikelvin<> centikelvin;
-typedef decikelvin<> decikelvin;
-typedef kelvin<> kelvin;
-typedef decakelvin<> decakelvin;
-typedef hectokelvin<> hectokelvin;
-typedef kilokelvin<> kilokelvin;
-typedef megakelvin<> megakelvin;
-typedef gigakelvin<> gigakelvin;
-typedef terakelvin<> terakelvin;
-typedef petakelvin<> petakelvin;
-typedef exakelvin<> exakelvin;
-typedef zettakelvin<> zettakelvin;
-typedef yottakelvin<> yottakelvin;
+typedef zeptocelsius<> Zeptocelsius;
+typedef femtocelsius<>  Femtocelsius;
+typedef picocelsius<> Picocelsius;
+typedef nanocelsius<> Nanocelsius;
+typedef microcelsius<> Microcelsius;
+typedef millicelsius<> Millicelsius;
+typedef centicelsius<> Centicelsius;
+typedef decicelsius<> Decicelsius;
+typedef celsius<> Celsius;
+typedef decacelsius<> Decacelsius;
+typedef hectocelsius<> Hectocelsius;
+typedef kilocelsius<> Kilocelsius;
+typedef megacelsius<> Megacelsius;
+typedef gigacelsius<> Gigacelsius;
+typedef teracelsius<> Teracelsius;
+typedef petacelsius<> Petacelsius;
+typedef exacelsius<> Exacelsius;
+typedef zettacelsius<> Zettacelsius;
+typedef yottacelsius<> Yottacelsius;
 
-
-
-typedef zeptocelsius<> zeptocelsius;
-typedef femtocelsius<>  femtocelsius;
-typedef picocelsius<> picocelsius;
-typedef nanocelsius<> nanocelsius;
-typedef microcelsius<> microcelsius;
-typedef millicelsius<> millicelsius;
-typedef centicelsius<> centicelsius;
-typedef decicelsius<> decicelsius;
-typedef celsius<> celsius;
-typedef decacelsius<> decacelsius;
-typedef hectocelsius<> hectocelsius;
-typedef kilocelsius<> kilocelsius;
-typedef megacelsius<> megacelsius;
-typedef gigacelsius<> gigacelsius;
-typedef teracelsius<> teracelsius;
-typedef petacelsius<> petacelsius;
-typedef exacelsius<> exacelsius;
-typedef zettacelsius<> zettacelsius;
-typedef yottacelsius<> yottacelsius;
-
-
-
-} // namespace default
 
 
 
