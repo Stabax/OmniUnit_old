@@ -110,6 +110,7 @@ namespace omni
 
   typedef mile<> Mile;
   typedef centimeter3<> Centimeter3;
+  typedef liter<> Liter;
   typedef newtonMeter<> NewtonMeter;
   typedef newton<> Newton;
   typedef watt<> Watt;
