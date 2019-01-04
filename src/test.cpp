@@ -292,7 +292,7 @@ int main()
   auto var34 = temp34 + temp34;
   show(34, var34, VAR34);
 
-  constexpr scalar x(1);
+  //constexpr scalar x(1);
   //constexpr scalar y(3);
   //constexpr scalar z = (x/y);
 

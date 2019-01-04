@@ -505,8 +505,7 @@ constexpr auto operator-(Basic_Unit<_Dimension, Rep, Period, Origin> const& Obj)
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type
-operator+ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
+constexpr auto operator+ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot sum values with different dimension.");
   typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
@@ -516,8 +515,7 @@ operator+ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Uni
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type
-operator- (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
+constexpr auto operator- (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot subtract values with different dimension.");
   typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>, Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
@@ -526,8 +524,7 @@ operator- (Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1, Basic_Uni
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator* (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
+constexpr auto operator* (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   return Obj *= coef;
@@ -535,8 +532,7 @@ operator* (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator* (T const& coef, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
+constexpr auto operator* (T const& coef, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be an arithmetic and a unit.");
   return Obj * coef;
@@ -544,8 +540,7 @@ operator* (T const& coef, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator/ (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
+constexpr auto operator/ (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   return Obj /= coef;
@@ -554,16 +549,14 @@ operator/ (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T const& coef)
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr Basic_Unit<Dimension1, typename std::common_type<Rep1, Rep2>::type, Period1, Origin1>
-operator% (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
+constexpr auto operator% (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
   return Obj1 %= Obj2;
 }
 
 
 template <typename Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Basic_Unit<Dimension, typename std::common_type<Rep, T>::type, Period, Origin>
-operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T coef)
+constexpr auto operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T coef)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   return Obj %= coef;
@@ -571,7 +564,7 @@ operator% (Basic_Unit<Dimension, Rep, Period, Origin> Obj, T coef)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr T operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> const& Obj)
+constexpr auto operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> const& Obj)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
 
@@ -591,10 +584,7 @@ constexpr T operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr Basic_Unit<typename Dimension_multiply<Dimension1, Dimension2>::type,
-typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_times_Ratio<Period1, Period2>::type, origin_product<Origin1, Origin2>::value>
-operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
+constexpr auto operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_TRUE_ZERO)
   {
@@ -615,10 +605,7 @@ operator* (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
           typename Dimension2, typename Rep2, typename Period2, double const& Origin2>
-constexpr Basic_Unit<typename Dimension_divide<Dimension1, Dimension2>::type,
-typename std::common_type<Rep1, Rep2>::type,
-typename Ratio_over_Ratio<Period1, Period2>::type, origin_division<Origin1, Origin2>::value>
-operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
+constexpr auto operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimension2, Rep2, Period2, Origin2> Obj2)
 {
   if(OMNI_TRUE_ZERO)
   {
@@ -636,10 +623,7 @@ operator/ (Basic_Unit<Dimension1, Rep1, Period1, Origin1> Obj1, Basic_Unit<Dimen
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin, typename T>
-constexpr Basic_Unit<typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type,
-typename std::common_type<Rep, typename std::enable_if<!is_Basic_Unit<T>::value, T>::type>::type,
-typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type, origin_division<zero, Origin>::value>
-operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
   if(OMNI_TRUE_ZERO)
@@ -668,7 +652,7 @@ operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator==(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -682,7 +666,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator!=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -694,7 +678,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator<(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -708,7 +692,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator<=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -720,7 +704,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator>(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -732,7 +716,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
-typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
+          typename Rep2, typename Period2, typename Dimension2, double const& Origin2>
 constexpr bool operator>=(Basic_Unit<Dimension1, Rep1, Period1, Origin1> const& Obj1,
 Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 {
@@ -755,7 +739,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
 
@@ -770,7 +754,7 @@ auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
+constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
   static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
 
@@ -785,7 +769,7 @@ auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
 
@@ -800,7 +784,7 @@ auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
+constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
   static_assert(is_noDim<_Dimension>::value, "Dimension should ba adimensional.");
 
@@ -827,7 +811,7 @@ auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 
 
 template <int exponent = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   if(OMNI_TRUE_ZERO)
   {
@@ -840,7 +824,7 @@ auto pow(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <int basis = 2, typename _Dimension, typename Rep, typename Period, double const& Origin>
-auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
   static_assert(basis != 0, "Basis must not be 0.");
   if(OMNI_TRUE_ZERO)
