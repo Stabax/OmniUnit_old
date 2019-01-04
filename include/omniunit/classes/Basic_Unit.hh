@@ -214,35 +214,29 @@ public:
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
 
-  constexpr Basic_Unit() = default;
-  constexpr Basic_Unit(Basic_Unit const&) = default;
+  constexpr Basic_Unit():
+  _count(static_cast<Rep>(0))
+  {
+  }
 
 
   template<typename _Rep>
-  constexpr explicit Basic_Unit(_Rep const& countArg):
+  constexpr Basic_Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg))
   {
     static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 
-  //this constructor overload is needed because unit_cast for a duration is different
   template<typename _Rep, typename _Period, double const& _Origin>
-  constexpr explicit Basic_Unit(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, _Rep, _Period, _Origin> const& Obj):
-  Basic_Unit(unit_cast<Basic_Unit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj).count())
-  {
-  }
-
-
-  template<typename __Dimension, typename _Rep, typename _Period, double const& _Origin>
-  constexpr explicit Basic_Unit(Basic_Unit<__Dimension, _Rep, _Period, _Origin> const& Obj):
-  Basic_Unit(unit_cast<Basic_Unit>(Obj).count())
+  constexpr Basic_Unit(Basic_Unit<dim, _Rep, _Period, _Origin> const& Obj):
+  Basic_Unit(unit_cast<Basic_Unit, dim>(Obj).count())
   {
   }
 
 
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
-  constexpr explicit Basic_Unit(std::chrono::duration<_Rep, _Period> const& Obj):
+  constexpr Basic_Unit(std::chrono::duration<_Rep, _Period> const& Obj):
   Basic_Unit(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
@@ -252,9 +246,10 @@ public:
   ~Basic_Unit() = default;
 
 
-  constexpr Basic_Unit& operator=(Basic_Unit const& Obj)
+  template<typename _Rep, typename _Period, double const& _Origin>
+  constexpr Basic_Unit& operator=(Basic_Unit<dim, _Rep, _Period, _Origin> const& Obj)
   {
-    _count = Obj._count;
+    _count = Basic_Unit(Obj)._count;
     return *this;
   }
 
@@ -263,7 +258,7 @@ public:
   constexpr Basic_Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is assignable with an std::chrono::duration");
-    _count = Basic_Unit(Obj).count();
+    _count = Basic_Unit(Obj)._count;
     return *this;
   }
 
@@ -328,12 +323,6 @@ public:
   Basic_Unit operator--(int)
   {
     return Basic_Unit(_count--);
-  }
-
-
-  constexpr Basic_Unit operator-() const
-  {
-    return Basic_Unit(-_count);
   }
 
 
@@ -506,6 +495,12 @@ constexpr double Basic_Unit<_Dimension, Rep, Period, Origin>::origin;
 //=============================================================================
 //=============================================================================
 
+
+template<typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto operator-(Basic_Unit<_Dimension, Rep, Period, Origin> const& Obj)
+{
+  return Basic_Unit<_Dimension, Rep, Period, Origin>(-Obj.count());
+}
 
 
 template <typename Dimension1, typename Rep1, typename Period1, double const& Origin1,
@@ -930,7 +925,7 @@ private:
   static_assert(std::is_same<Dimension1, Dimension2>::value, "Cannot get a common unit between two units that have different dimension.");
 
   //the common period is the nearest of 1/1 in order of magnitude
-  //should it be the average in log scale ?
+  //should it be the average in log scale ? or the greater one ?
   typedef typename std::conditional< (std::abs(std::log10(Period1::value)) < std::abs(std::log10(Period2::value))),
   Period1, Period2>::type new_Ratio;
 

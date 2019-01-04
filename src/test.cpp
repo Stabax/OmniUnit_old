@@ -1,4 +1,4 @@
-#define OMNI_TRUE_ZERO false
+#define OMNI_TRUE_ZERO true
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
@@ -47,6 +47,8 @@
 #define VAR30 1
 #define VAR31 74610.9225
 #define VAR32 16.52725023
+#define VAR33 0
+#define VAR34 546.3
 
 #else // non official zero
 
@@ -86,6 +88,8 @@
 #define VAR30 4.53999e-005
 #define VAR31 0
 #define VAR32 0
+#define VAR33 0
+#define VAR34 0
 
 #endif
 
@@ -280,7 +284,15 @@ int main()
   auto var32 = omni::nroot(temp32);
   show(32, var32, VAR32);
 
-  //constexpr scalar x(1);
+  omni::celsius<double> temp33(0);
+  auto var33 =-temp33;
+  show(33, var33, VAR33);
+
+  omni::celsius<double> temp34(0);
+  auto var34 = temp34 + temp34;
+  show(34, var34, VAR34);
+
+  constexpr scalar x(1);
   //constexpr scalar y(3);
   //constexpr scalar z = (x/y);
 
