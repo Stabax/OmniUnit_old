@@ -118,7 +118,7 @@ public:
   template<typename durationType = second<long long>>
   durationType get() const
   {
-    return omni::duration_cast<durationType>(getNano());
+    return omni::unit_cast<durationType>(getNano());
   }
 
 
@@ -166,18 +166,18 @@ public:
   }
 
 
-  template <typename Rep, typename Period>
-  Timer& operator+=(Unit<Duration, Rep, Period> const& duration)
+  template <typename Rep, typename Period, double const& Origin>
+  Timer& operator+=(Unit<Duration, Rep, Period, Origin> const& duration)
   {
     _addedTime += duration;
     return *this;
   }
 
 
-  template <typename Rep, typename Period>
-  Timer& operator-=(Unit<Duration, Rep, Period> const& duration)
+  template <typename Rep, typename Period, double const& Origin>
+  Timer& operator-=(Unit<Duration, Rep, Period, Origin> const& duration)
   {
-    Unit<Duration, Rep, Period> current = get<Unit<Duration, Rep, Period>>();
+    Unit<Duration, Rep, Period, Origin> current = get<Unit<Duration, Rep, Period, Origin>>();
     if(duration < current)
       _addedTime -= duration;
     else
@@ -212,29 +212,29 @@ protected:
 };
 
 
-template <typename Rep, typename Period>
-Timer operator+(Timer const& tim, Unit<Duration, Rep, Period> const& duration)
+template <typename Rep, typename Period, double const& Origin>
+Timer operator+(Timer const& tim, Unit<Duration, Rep, Period, Origin> const& duration)
 {
   return tim += duration;
 }
 
 
-template <typename Rep, typename Period>
-Timer operator+(Unit<Duration, Rep, Period> const& duration, Timer const& tim)
+template <typename Rep, typename Period, double const& Origin>
+Timer operator+(Unit<Duration, Rep, Period, Origin> const& duration, Timer const& tim)
 {
   return tim += duration;
 }
 
 
-template <typename Rep, typename Period>
-Timer operator-(Timer const& tim, Unit<Duration, Rep, Period> const& duration)
+template <typename Rep, typename Period, double const& Origin>
+Timer operator-(Timer const& tim, Unit<Duration, Rep, Period, Origin> const& duration)
 {
   return tim -= duration;
 }
 
 
-template <typename Rep, typename Period>
-Timer operator-(Unit<Duration, Rep, Period> const& duration, Timer const& tim)
+template <typename Rep, typename Period, double const& Origin>
+Timer operator-(Unit<Duration, Rep, Period, Origin> const& duration, Timer const& tim)
 {
   return tim -= duration;
 }
@@ -262,8 +262,8 @@ public:
    }
 
 
-  template <typename Rep, typename Period>
-  explicit Countdown(Unit<Duration, Rep, Period> const& duration) :
+  template <typename Rep, typename Period, double const& Origin>
+  explicit Countdown(Unit<Duration, Rep, Period, Origin> const& duration) :
   _End(std::chrono::steady_clock::now() + duration),
   _Timer(std::make_unique<Timer>())
   {
@@ -287,8 +287,8 @@ protected:
    }
 
 
-  template <typename Rep, typename Period>
-  explicit Countdown(Unit<Duration, Rep, Period> const& duration, Timer const& tim) :
+  template <typename Rep, typename Period, double const& Origin>
+  explicit Countdown(Unit<Duration, Rep, Period, Origin> const& duration, Timer const& tim) :
   _End(std::chrono::steady_clock::now() + duration),
   _Timer(std::make_unique<Timer>(tim))
   {
@@ -306,7 +306,7 @@ public:
   template<typename durationType>
   durationType get() const
   {
-    return duration_cast<durationType>(getNano());
+    return unit_cast<durationType>(getNano());
   }
 
   //durationType is implicitly deduced.

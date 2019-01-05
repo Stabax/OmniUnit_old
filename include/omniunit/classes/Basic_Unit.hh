@@ -224,7 +224,6 @@ public:
   constexpr Basic_Unit(_Rep const& countArg):
   _count(static_cast<Rep>(countArg))
   {
-    static_assert(std::is_arithmetic<_Rep>::value, "Argument should be an aritmetic value.");
   }
 
 

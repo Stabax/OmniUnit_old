@@ -129,7 +129,7 @@ namespace omni
   typedef milePerHour<> MilePerHour;
   typedef bar<> Bar;
 
-
+  //extern template class Unit<Pressure, OMNI_DEFAULT_TYPE, Ratio<E5, E0>, zero>;
 
 } // namespace omni
 

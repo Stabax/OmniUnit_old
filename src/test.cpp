@@ -2,6 +2,7 @@
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
+#include "blyat.hh"
 
 #include <iostream>
 #include <thread>
@@ -299,15 +300,21 @@ int main()
   std::cout << "nb de faux : " << faux::value << "\n";
   std::cout << omni::modulo(10, -9.f) << "\n"; //BUG
 
-  omni::KilometerPerHour speed;
+  omni::KilometerPerHour _speed;
   omni::Inch radius;
   omni::perMinute<int> _revolutions;
   omni::NewtonMeter _torque;
   omni::perMinute<int> _mRevolutions;
   omni::Horsepower mPower;
+  omni::Meter gradient;
+  omni::Kilogram _mass;
+  omni::Millisecond tickDuration;
 
-  _revolutions = (speed < omni::KilometerPerHour(5) ? omni::PerMinute(800) : omni::PerMinute(speed / (2 * 3.14 * radius)) * 1);
+  _revolutions = (_speed < omni::KilometerPerHour(5) ? omni::PerMinute(800) : omni::PerMinute(_speed / (2 * 3.14 * radius)) * 1);
   _torque = ((_revolutions > _mRevolutions ? -1  : 1) * mPower / omni::pow<2>(_mRevolutions)) * _revolutions;
+  omni::Watt cineticDiff =  omni::Horsepower(0) - (_mass * omni::MeterPerSecond2(9.81) * (gradient / (_speed * tickDuration)) * _speed);
+
+  Test::getM();
 
 return 0;
 }

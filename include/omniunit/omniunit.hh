@@ -41,6 +41,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "classes/Complete_Unit.hh"
 
+#ifdef OMNI_USE_UNCERTAINTIES
+  #define Unit Complete_Unit
+#else
+  #define Unit Basic_Unit
+#endif // OMNI_USE_UNCERTAINTIES
+
 
 
 namespace omni
@@ -48,25 +54,7 @@ namespace omni
 
 
 
-#ifdef OMNI_ENABLE_UNCERTAINTIES
-
-
-
-#else
-
-
-
-template <typename _Dimension, typename Rep, typename Period, double const& Origin = zero>
-using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
-
-
-
-#endif //OMNI_DISABLE_UNCERTAINTIES
-
-
-
 } //namespace omni
-
 
 
 
