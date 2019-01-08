@@ -3,6 +3,7 @@
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
 #include "test.hh"
+#include "test.hh"
 
 #include <iostream>
 #include <thread>
@@ -315,6 +316,7 @@ int main()
   omni::Watt cineticDiff =  omni::Horsepower(0) - (_mass * omni::MeterPerSecond2(9.81) * (gradient / (_speed * tickDuration)) * _speed);
 
   getM();
+  foo();
 
 return 0;
 }

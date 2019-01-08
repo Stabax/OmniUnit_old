@@ -6,6 +6,7 @@
 
 
 omni::Bar getM();
+float foo();
 
 #include "test.cpp"
 
