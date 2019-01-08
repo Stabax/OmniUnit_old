@@ -1,11 +1,13 @@
 
 
 
-#include "omniunit/omniunit.hh"
+#include "test.hh"
+
+
 
 omni::Bar getM()
 {
-  return (omni::Bar(0));
+  return (omni::Bar());
 }
 
 

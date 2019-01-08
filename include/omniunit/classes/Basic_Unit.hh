@@ -208,7 +208,7 @@ public:
   typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
-  static constexpr double origin = Origin;
+  inline static constexpr double origin = Origin;
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
@@ -476,13 +476,6 @@ public:
 protected:
   Rep _count;
 };
-
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
-//following declaration :
-template<typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr double Basic_Unit<_Dimension, Rep, Period, Origin>::origin;
 
 
 

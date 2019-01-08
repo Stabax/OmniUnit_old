@@ -33,21 +33,21 @@ namespace omni
 
 
 
-constexpr double piE36 = 3141592653589793238462643383279502884.;
-constexpr double distanceTraveledByLightPerSec = 299792458.; // m
-constexpr double secondsPerMin = 60.; // s
-constexpr double secondsPerHour = 60. * 60.; // s
-constexpr double secondsPerDay = 60. * 60. * 24.; // s
-constexpr double secondsPerWeek = 60. * 60. * 24. * 7.; // s
-constexpr double monthsPerYear = 12.; // s
-constexpr double secondsPerYearE2 = 36525. * 24. *3600.; // s
-constexpr double distanceSunEarth = 149597870700.; //m
-constexpr double parsecDef = 648000.;
-constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
-constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
-constexpr double solar_massDefE4     =  19884.; //kg * 10^30
-constexpr double avogadroE9 = 6022140857.; //10^23
-constexpr double celsiusConstant = 273.15;
+inline constexpr double piE36 = 3141592653589793238462643383279502884.;
+inline constexpr double distanceTraveledByLightPerSec = 299792458.; // m
+inline constexpr double secondsPerMin = 60.; // s
+inline constexpr double secondsPerHour = 60. * 60.; // s
+inline constexpr double secondsPerDay = 60. * 60. * 24.; // s
+inline constexpr double secondsPerWeek = 60. * 60. * 24. * 7.; // s
+inline constexpr double monthsPerYear = 12.; // s
+inline constexpr double secondsPerYearE2 = 36525. * 24. *3600.; // s
+inline constexpr double distanceSunEarth = 149597870700.; //m
+inline constexpr double parsecDef = 648000.;
+inline constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
+inline constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
+inline constexpr double solar_massDefE4     =  19884.; //kg * 10^30
+inline constexpr double avogadroE9 = 6022140857.; //10^23
+inline constexpr double celsiusConstant = 273.15;
 
 
 

@@ -108,99 +108,99 @@ constexpr bool is_positive_integer(T const& number)
 
 
 
-constexpr double zero = 0.;
+inline constexpr double zero = 0.;
 
-constexpr double E0  = 1.;
-constexpr double E1  = 10.;
-constexpr double E2  = 100.;
-constexpr double E3  = 1000.;
-constexpr double E4  = 10000.;
-constexpr double E5  = 100000.;
-constexpr double E6  = 1000000.;
-constexpr double E7  = 10000000.;
-constexpr double E8  = 100000000.;
-constexpr double E9  = 1000000000.;
-constexpr double E10 = 10000000000.;
-constexpr double E11 = 100000000000.;
-constexpr double E12 = 1000000000000.;
-constexpr double E13 = 10000000000000.;
-constexpr double E14 = 100000000000000.;
-constexpr double E15 = 1000000000000000.;
-constexpr double E16 = 10000000000000000.;
-constexpr double E17 = 100000000000000000.;
-constexpr double E18 = 1000000000000000000.;
-constexpr double E19 = 10000000000000000000.;
-constexpr double E20 = 100000000000000000000.;
-constexpr double E21 = 1000000000000000000000.;
-constexpr double E22 = 10000000000000000000000.;
-constexpr double E23 = 100000000000000000000000.;
-constexpr double E24 = 1000000000000000000000000.;
-constexpr double E25 = 10000000000000000000000000.;
-constexpr double E26 = 100000000000000000000000000.;
-constexpr double E27 = 1000000000000000000000000000.;
-constexpr double E28 = 10000000000000000000000000000.;
-constexpr double E29 = 100000000000000000000000000000.;
-constexpr double E30 = 1000000000000000000000000000000.;
-constexpr double E31 = 10000000000000000000000000000000.;
-constexpr double E32 = 100000000000000000000000000000000.;
-constexpr double E33 = 1000000000000000000000000000000000.;
-constexpr double E34 = 10000000000000000000000000000000000.;
-constexpr double E35 = 100000000000000000000000000000000000.;
-constexpr double E36 = 1000000000000000000000000000000000000.;
-constexpr double E37 = 10000000000000000000000000000000000000.;
-constexpr double E38 = 100000000000000000000000000000000000000.;
-constexpr double E39 = 1000000000000000000000000000000000000000.;
-constexpr double E40 = 10000000000000000000000000000000000000000.;
-constexpr double E41 = 100000000000000000000000000000000000000000.;
-constexpr double E42 = 1000000000000000000000000000000000000000000.;
-constexpr double E43 = 10000000000000000000000000000000000000000000.;
-constexpr double E44 = 100000000000000000000000000000000000000000000.;
-constexpr double E45 = 1000000000000000000000000000000000000000000000.;
-constexpr double E46 = 10000000000000000000000000000000000000000000000.;
-constexpr double E47 = 100000000000000000000000000000000000000000000000.;
-constexpr double E48 = 1000000000000000000000000000000000000000000000000.;
-constexpr double E49 = 10000000000000000000000000000000000000000000000000.;
-constexpr double E50 = 100000000000000000000000000000000000000000000000000.;
-constexpr double E51 = 1000000000000000000000000000000000000000000000000000.;
-constexpr double E52 = 10000000000000000000000000000000000000000000000000000.;
-constexpr double E53 = 100000000000000000000000000000000000000000000000000000.;
-constexpr double E54 = 1000000000000000000000000000000000000000000000000000000.;
-constexpr double E55 = 10000000000000000000000000000000000000000000000000000000.;
-constexpr double E56 = 100000000000000000000000000000000000000000000000000000000.;
-constexpr double E57 = 1000000000000000000000000000000000000000000000000000000000.;
-constexpr double E58 = 10000000000000000000000000000000000000000000000000000000000.;
-constexpr double E59 = 100000000000000000000000000000000000000000000000000000000000.;
-constexpr double E60 = 1000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E61 = 10000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E62 = 100000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E63 = 1000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E64 = 10000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E65 = 100000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E66 = 1000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E67 = 10000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E68 = 100000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E69 = 1000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E70 = 10000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E71 = 100000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E72 = 1000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E73 = 10000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E74 = 100000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E75 = 1000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E76 = 10000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E77 = 100000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E78 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E79 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E80 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E81 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E82 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E83 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E84 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E85 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E86 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E87 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E88 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E89 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
-constexpr double E90 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E0  = 1.;
+inline constexpr double E1  = 10.;
+inline constexpr double E2  = 100.;
+inline constexpr double E3  = 1000.;
+inline constexpr double E4  = 10000.;
+inline constexpr double E5  = 100000.;
+inline constexpr double E6  = 1000000.;
+inline constexpr double E7  = 10000000.;
+inline constexpr double E8  = 100000000.;
+inline constexpr double E9  = 1000000000.;
+inline constexpr double E10 = 10000000000.;
+inline constexpr double E11 = 100000000000.;
+inline constexpr double E12 = 1000000000000.;
+inline constexpr double E13 = 10000000000000.;
+inline constexpr double E14 = 100000000000000.;
+inline constexpr double E15 = 1000000000000000.;
+inline constexpr double E16 = 10000000000000000.;
+inline constexpr double E17 = 100000000000000000.;
+inline constexpr double E18 = 1000000000000000000.;
+inline constexpr double E19 = 10000000000000000000.;
+inline constexpr double E20 = 100000000000000000000.;
+inline constexpr double E21 = 1000000000000000000000.;
+inline constexpr double E22 = 10000000000000000000000.;
+inline constexpr double E23 = 100000000000000000000000.;
+inline constexpr double E24 = 1000000000000000000000000.;
+inline constexpr double E25 = 10000000000000000000000000.;
+inline constexpr double E26 = 100000000000000000000000000.;
+inline constexpr double E27 = 1000000000000000000000000000.;
+inline constexpr double E28 = 10000000000000000000000000000.;
+inline constexpr double E29 = 100000000000000000000000000000.;
+inline constexpr double E30 = 1000000000000000000000000000000.;
+inline constexpr double E31 = 10000000000000000000000000000000.;
+inline constexpr double E32 = 100000000000000000000000000000000.;
+inline constexpr double E33 = 1000000000000000000000000000000000.;
+inline constexpr double E34 = 10000000000000000000000000000000000.;
+inline constexpr double E35 = 100000000000000000000000000000000000.;
+inline constexpr double E36 = 1000000000000000000000000000000000000.;
+inline constexpr double E37 = 10000000000000000000000000000000000000.;
+inline constexpr double E38 = 100000000000000000000000000000000000000.;
+inline constexpr double E39 = 1000000000000000000000000000000000000000.;
+inline constexpr double E40 = 10000000000000000000000000000000000000000.;
+inline constexpr double E41 = 100000000000000000000000000000000000000000.;
+inline constexpr double E42 = 1000000000000000000000000000000000000000000.;
+inline constexpr double E43 = 10000000000000000000000000000000000000000000.;
+inline constexpr double E44 = 100000000000000000000000000000000000000000000.;
+inline constexpr double E45 = 1000000000000000000000000000000000000000000000.;
+inline constexpr double E46 = 10000000000000000000000000000000000000000000000.;
+inline constexpr double E47 = 100000000000000000000000000000000000000000000000.;
+inline constexpr double E48 = 1000000000000000000000000000000000000000000000000.;
+inline constexpr double E49 = 10000000000000000000000000000000000000000000000000.;
+inline constexpr double E50 = 100000000000000000000000000000000000000000000000000.;
+inline constexpr double E51 = 1000000000000000000000000000000000000000000000000000.;
+inline constexpr double E52 = 10000000000000000000000000000000000000000000000000000.;
+inline constexpr double E53 = 100000000000000000000000000000000000000000000000000000.;
+inline constexpr double E54 = 1000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E55 = 10000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E56 = 100000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E57 = 1000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E58 = 10000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E59 = 100000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E60 = 1000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E61 = 10000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E62 = 100000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E63 = 1000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E64 = 10000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E65 = 100000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E66 = 1000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E67 = 10000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E68 = 100000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E69 = 1000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E70 = 10000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E71 = 100000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E72 = 1000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E73 = 10000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E74 = 100000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E75 = 1000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E76 = 10000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E77 = 100000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E78 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E79 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E80 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E81 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E82 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E83 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E84 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E85 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E86 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E87 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E88 = 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E89 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
+inline constexpr double E90 = 1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.;
 
 
 
@@ -223,16 +223,9 @@ struct Ratio
 
   static constexpr double num = _Num / gcd(_Num, _Den);
   static constexpr double den = _Den / gcd(_Num, _Den);
-  static constexpr double value = num / den;
+  inline static constexpr double value = num / den;
   typedef Ratio<num, den> type;
 };
-
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Ratio class, which permit avoiding the
-//following declaration :
-template<double const& _Num, double const& _Den>
-constexpr double Ratio<_Num, _Den>::value;
 
 
 template<typename falseType>
@@ -259,11 +252,11 @@ struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 
 
 template <typename ratio>
-struct Ratio_invert
+class Ratio_invert
 {
   static_assert(std::abs(ratio::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value , "Template parameter should be an OmniUnit ratio.");
-
+public:
   typedef Ratio<ratio::den, ratio::num> type;
 };
 
@@ -296,11 +289,11 @@ public:
 
 
 template <double const& val, typename ratio>
-struct value_times_Ratio
+class value_times_Ratio
 {
   static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
-
+public:
   typedef typename Ratio_times_value<ratio, val>::type type;
 };
 
@@ -326,7 +319,6 @@ class Ratio_over_value
   static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "Second template parameter may not have decimals and may be positive.");
 
-
   static constexpr double _gcd = gcd(ratio::num, ratio::den * val);
   static constexpr double num = ratio::num / _gcd;
   static constexpr double den = (ratio::den * val) /_gcd;
@@ -341,7 +333,6 @@ class value_over_Ratio
   static_assert(std::abs(ratio::num) > std::numeric_limits<double>::epsilon(), "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
-
 
   static constexpr double _gcd = gcd(val * ratio::den, ratio::num);
   static constexpr double num = (val * ratio::den) / _gcd;
@@ -401,24 +392,24 @@ struct is_std_Ratio<std::ratio<Num, Den>> : public std::true_type
 
 
 template<typename _stdRatio>
-struct Ratio_std_to_omni
+class Ratio_std_to_omni
 {
   static_assert(is_std_Ratio<_stdRatio>::value, "Template parameter should be a standard ratio.");
 
   static constexpr double num = static_cast<double>(_stdRatio::num);
   static constexpr double den = static_cast<double>(_stdRatio::den);
-
+public:
   typedef Ratio<num, den> type;
 };
 
 
 template<typename _stbRatio>
-struct Ratio_omni_to_std
+class Ratio_omni_to_std
 {
   static_assert(is_stb_Ratio<_stbRatio>::value, "Template parameter should be an OmniUnit ratio.");
   static_assert(_stbRatio::num < std::numeric_limits<intmax_t>::max(), "Too high numerator.");
   static_assert(_stbRatio::den < std::numeric_limits<intmax_t>::max(), "Too high denominator.");
-
+public:
   typedef std::ratio<static_cast<intmax_t>(_stbRatio::num), static_cast<intmax_t>(_stbRatio::den)> type;
 };
 
@@ -472,15 +463,15 @@ template<int _length, int _mass, int _time, int _current,
 int _temperature, int _quantity, int _luminous_intensity, int _angle, int _solid_angle>
 struct Dimension
 {
-  static constexpr int length = _length;
-  static constexpr int mass = _mass;
-  static constexpr int time = _time;
-  static constexpr int current = _current;
-  static constexpr int temperature = _temperature;
-  static constexpr int quantity = _quantity;
-  static constexpr int luminous_intensity = _luminous_intensity;
-  static constexpr int angle = _angle;
-  static constexpr int solid_angle = _solid_angle;
+  inline static constexpr int length = _length;
+  inline static constexpr int mass = _mass;
+  inline static constexpr int time = _time;
+  inline static constexpr int current = _current;
+  inline static constexpr int temperature = _temperature;
+  inline static constexpr int quantity = _quantity;
+  inline static constexpr int luminous_intensity = _luminous_intensity;
+  inline static constexpr int angle = _angle;
+  inline static constexpr int solid_angle = _solid_angle;
 };
 
 
@@ -500,11 +491,11 @@ temperature, quantity, luminous_intensity, angle, solid_angle>> : public std::tr
 
 //test if a dimension is a real dimension or not (scalar/angla,solid angle)
 template<typename Dim>
-struct is_noDim
+class is_noDim
 {
   static_assert(is_Dimension<Dim>::value, "Template argument must be a Dimension.");
-
-  static constexpr bool value = (
+public:
+  inline static constexpr bool value = (
   Dim::length == 0 &&
   Dim::mass == 0 &&
   Dim::time == 0 &&
@@ -656,56 +647,30 @@ constexpr std::string dimension_str()
 template<double const& a, double const& b>
 struct origin_product
 {
-  static constexpr double value = OMNI_TRUE_ZERO ? zero : a*b;
+  inline static constexpr double value = OMNI_TRUE_ZERO ? zero : a*b;
 };
-
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
-//following declaration :
-template<double const& a, double const& b>
-constexpr double origin_product<a, b>::value;
 
 
 template<double const& a, double const& b>
 struct origin_division
 {
-  static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= std::numeric_limits<double>::epsilon()) ? zero : a/b;
+  inline static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= std::numeric_limits<double>::epsilon()) ? zero : a/b;
 };
 
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
-//following declaration :
-template<double const& a, double const& b>
-constexpr double origin_division<a, b>::value;
 
 template<double const& origin, int exponent>
 struct origin_power
 {
-  static constexpr double value = std::pow(origin, exponent);
+  inline static constexpr double value = std::pow(origin, exponent);
 };
 
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
-//following declaration :
-template<double const& a,int exponent>
-constexpr double origin_power<a, exponent>::value;
 
 template<double const& origin, int basis>
 struct origin_root
 {
   static_assert(basis != 0, "Basis must not be 0.");
-  static constexpr double value = std::pow(origin, 1.0/basis);
+  inline static constexpr double value = std::pow(origin, 1.0/basis);
 };
-
-
-//definition of Basic_Unit::origin, so it can be ODR-usable (required for any call of the variable)
-//In c++17, we can set the variable inline inside the Basic_Unit class, which permit avoiding the
-//following declaration :
-template<double const& a, int basis>
-constexpr double origin_root<a, basis>::value;
 
 
 } // namespace omni

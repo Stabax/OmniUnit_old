@@ -3,7 +3,6 @@
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"
 #include "test.hh"
-#include "test.hh"
 
 #include <iostream>
 #include <thread>

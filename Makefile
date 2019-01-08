@@ -2,7 +2,7 @@ CXX = g++
 
 RM = rm -rf
 
-CXXFLAGS = -g3 -std=c++14 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -Wl,--no-as-needed -I$(INCDIR)
+CXXFLAGS = -g3 -std=c++17 -pthread -Wall -Wextra -Wunused-macros -Wshadow -Wundef -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wold-style-cast -Wconversion -Wsign-conversion -Wdouble-promotion -Wfloat-equal -Woverloaded-virtual -Weffc++ -Wswitch-default -Werror -Wl,--no-as-needed -I$(INCDIR)
 
 
 #-O2 -Os
@@ -23,7 +23,8 @@ SRCDIR = src
 
 INCDIR = include
 
-SRCS = $(SRCDIR)/main.cpp
+SRCS = $(SRCDIR)/main.cpp \
+			$(SRCDIR)/test.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
