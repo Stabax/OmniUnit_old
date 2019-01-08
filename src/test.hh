@@ -5,9 +5,8 @@
 #include "omniunit/omniunit.hh"
 
 
-struct Test
-{
-  static omni::Bar getM();
-};
+omni::Bar getM();
 
-#endif /* !TEST_HH_ */
+#include "test.cpp"
+
+#endif // TEST_HH_

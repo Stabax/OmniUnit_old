@@ -23,8 +23,7 @@ SRCDIR = src
 
 INCDIR = include
 
-SRCS =  $(SRCDIR)/test.cpp \
- 				$(SRCDIR)/blyat.cpp
+SRCS = $(SRCDIR)/main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

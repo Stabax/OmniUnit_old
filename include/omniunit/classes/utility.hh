@@ -469,7 +469,7 @@ typedef Ratio<E24, E0> yotta;
 
 
 template<int _length, int _mass, int _time, int _current,
-int _temperature, int _quantity, int _luminosity, int _angle, int _solid_angle>
+int _temperature, int _quantity, int _luminous_intensity, int _angle, int _solid_angle>
 struct Dimension
 {
   static constexpr int length = _length;
@@ -478,7 +478,7 @@ struct Dimension
   static constexpr int current = _current;
   static constexpr int temperature = _temperature;
   static constexpr int quantity = _quantity;
-  static constexpr int luminosity = _luminosity;
+  static constexpr int luminous_intensity = _luminous_intensity;
   static constexpr int angle = _angle;
   static constexpr int solid_angle = _solid_angle;
 };
@@ -491,9 +491,9 @@ struct is_Dimension : std::false_type
 
 
 template<int length, int mass, int time, int current,
-int temperature, int quantity, int luminosity, int angle, int solid_angle>
+int temperature, int quantity, int luminous_intensity, int angle, int solid_angle>
 struct is_Dimension<Dimension<length, mass, time, current,
-temperature, quantity, luminosity, angle, solid_angle>> : public std::true_type
+temperature, quantity, luminous_intensity, angle, solid_angle>> : public std::true_type
 {
 };
 
@@ -511,7 +511,7 @@ struct is_noDim
   Dim::current == 0 &&
   Dim::temperature == 0 &&
   Dim::quantity == 0 &&
-  Dim::luminosity == 0)
+  Dim::luminous_intensity == 0)
   ? true : false;
 };
 
@@ -529,7 +529,7 @@ struct Dimension_multiply
   dim1::current + dim2::current,
   dim1::temperature + dim2::temperature,
   dim1::quantity + dim2::quantity,
-  dim1::luminosity + dim2::luminosity,
+  dim1::luminous_intensity + dim2::luminous_intensity,
   dim1::angle + dim2::angle,
   dim1::solid_angle + dim2::solid_angle
   > type;
@@ -549,7 +549,7 @@ struct Dimension_divide
   dim1::current - dim2::current,
   dim1::temperature - dim2::temperature,
   dim1::quantity - dim2::quantity,
-  dim1::luminosity - dim2::luminosity,
+  dim1::luminous_intensity - dim2::luminous_intensity,
   dim1::angle - dim2::angle,
   dim1::solid_angle - dim2::solid_angle
   > type;
@@ -568,7 +568,7 @@ struct Dimension_power
   dim::current * exponent,
   dim::temperature * exponent,
   dim::quantity * exponent,
-  dim::luminosity * exponent,
+  dim::luminous_intensity * exponent,
   dim::angle * exponent,
   dim::solid_angle * exponent
   > type;
@@ -588,7 +588,7 @@ struct Dimension_root
   modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
-  modulo(static_cast<double>(dim::luminosity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
+  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::solid_angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon(),
   "Cannot root this dimension with this basis.");
@@ -600,7 +600,7 @@ struct Dimension_root
   dim::current / basis,
   dim::temperature / basis,
   dim::quantity / basis,
-  dim::luminosity / basis,
+  dim::luminous_intensity / basis,
   dim::angle / basis,
   dim::solid_angle / basis
   > type;
@@ -629,8 +629,8 @@ constexpr std::string dimension_str()
     dim += ("[Tp" + std::to_string(dimension::temperature) + "]");
   if(dimension::quantity != 0)
     dim += ("[N" + std::to_string(dimension::quantity) + "]");
-  if(dimension::luminosity != 0)
-    dim += ("[J" + std::to_string(dimension::luminosity) + "]");
+  if(dimension::luminous_intensity != 0)
+    dim += ("[J" + std::to_string(dimension::luminous_intensity) + "]");
   if(dimension::angle != 0)
     dim += ("[a" + std::to_string(dimension::angle) + "]");
   if(dimension::solid_angle != 0)

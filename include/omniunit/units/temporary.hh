@@ -113,6 +113,10 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 
+
+
+
+
   typedef mile<> Mile;
   typedef inch<> Inch;
   typedef centimeter3<> Centimeter3;
@@ -129,7 +133,6 @@ namespace omni
   typedef milePerHour<> MilePerHour;
   typedef bar<> Bar;
 
-  //extern template class Unit<Pressure, OMNI_DEFAULT_TYPE, Ratio<E5, E0>, zero>;
 
 } // namespace omni
 

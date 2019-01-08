@@ -21,6 +21,10 @@ This is not enough.
 
 OmniUnit requires fully supported **C++14**.\n
 
+## Versions ##
+
+* OmniUnit is not officially distributed yet.
+
 ### OmniUnit compiles with : ###
 - gcc/g++ 6.2
 - gcc/g++ 6.3
@@ -30,13 +34,7 @@ OmniUnit requires fully supported **C++14**.\n
 ### OmniUnit doesn't compile with : ###
 - Visual Studio 2013 and earlier.
 
-## Documentation ##
-
-See the full documentation here : http://stabax.org/doc/omniunit.
-If the servers are down, open __omniunit/doc/html/index.html__.
-
-
-## Use library ##
+## Use the library ##
 
 To get the library, clone the latest revision :
 
@@ -44,8 +42,12 @@ To get the library, clone the latest revision :
 
 Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources, and start using the features.
 
+## Documentation ##
 
-## Fast and basic example ##
+See the full documentation here : http://stabax.org/doc/omniunit.
+If the servers are down, open __omniunit/doc/html/index.html__.
+
+## Example ##
 
     #include "omniunit/omniunit.hh"
     #include <iostream>
@@ -53,12 +55,17 @@ Then copy the include/omniunit folder into your project folder and simply includ
     int main()
     {
         //a and b represent 3000 meters in different ways
-        omni::millimeter<int> a(3000000);  //3000000 is handled by an integer
-        omni::kilometer<float> b(3);       //3 is handled by a float
+        omni::Millimeter a(3000000);
+        omni::Kilometer b(3);
 
-        omni::centimeterPerSecond<double> d = a / stb::second<int>(3); //OK, length/duration returns a speed.
+        omni::CentimeterPerSecond c = a / stb::second(3); //OK, LENGTH/DURATION returns a SPEED.
+        std::cout << c.count() << '\n';   //prints 100000
 
-        std::cout << d.count() << '\n';   //prints 100000
+        omni::Gram d = c; //ERROR, this doesn't compile because "d" is of dimension MASS and "c" is of dimension SPEED
+
+        omni::Inch e = omni::MilliMeter(5.2) + omni::Angstrom(124.347); //OK, all conversions are done implicitly
+
+        omni::Joule kineticEnergy = 0.5 * omni::Ton(10) * omni::pow<2>(c); //OK
 
     return 0;
     }
@@ -67,7 +74,6 @@ Then copy the include/omniunit folder into your project folder and simply includ
 
 * Baxlan
 * Stabax (http://stabax.org/)
-
 
 ## License ##
 
