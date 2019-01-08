@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exception',['Exception',['../classomni_1_1Exception.html',1,'omni']]]
+  ['basic_5funit',['Basic_Unit',['../classomni_1_1Basic__Unit.html',1,'omni']]]
 ];

@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OmniUnit
    </div>
-   <div id="projectbrief">OmniUnit is a modern C++ library to represent physical units</div>
+   <div id="projectbrief">OmniUnit is a modern C++ header only library to represent physical units</div>
   </td>
  </tr>
  </tbody>
@@ -92,28 +92,22 @@ typedef Period&#160;</td><td class="memItemRight" valign="bottom"><b>period</b><
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a83972761f2bb20ae306260142be71ac5"><td class="memItemLeft" align="right" valign="top"><a id="a83972761f2bb20ae306260142be71ac5"></a>
-constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>Basic_Unit</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> const &amp;)=default</td></tr>
-<tr class="separator:a83972761f2bb20ae306260142be71ac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6250f4162bb0640524d0b80426bbbadd"><td class="memTemplParams" colspan="2"><a id="a6250f4162bb0640524d0b80426bbbadd"></a>
-template&lt;typename _Rep &gt; </td></tr>
-<tr class="memitem:a6250f4162bb0640524d0b80426bbbadd"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (_Rep const &amp;countArg)</td></tr>
-<tr class="separator:a6250f4162bb0640524d0b80426bbbadd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab34bb40f0327b49ca905fa5d813b872c"><td class="memTemplParams" colspan="2"><a id="ab34bb40f0327b49ca905fa5d813b872c"></a>
+<tr class="memitem:a8685dee90d92a60f5b284c207753441b"><td class="memTemplParams" colspan="2"><a id="a8685dee90d92a60f5b284c207753441b"></a>
+template&lt;typename _Rep , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;_Rep&gt;::value, _Rep&gt;::type&gt; </td></tr>
+<tr class="memitem:a8685dee90d92a60f5b284c207753441b"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (_Rep const &amp;countArg)</td></tr>
+<tr class="separator:a8685dee90d92a60f5b284c207753441b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0b47e7cb72b3ab1f70c2d029f80829"><td class="memTemplParams" colspan="2"><a id="a7e0b47e7cb72b3ab1f70c2d029f80829"></a>
 template&lt;typename _Rep , typename _Period , double const &amp; _Origin&gt; </td></tr>
-<tr class="memitem:ab34bb40f0327b49ca905fa5d813b872c"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; <a class="el" href="structomni_1_1Dimension.html">Dimension</a>&lt; 0, 0, 1, 0, 0, 0, 0, 0, 0 &gt;, _Rep, _Period, _Origin &gt; const &amp;Obj)</td></tr>
-<tr class="separator:ab34bb40f0327b49ca905fa5d813b872c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a53fb0d6fa33ace3e634e9e4af13b8c"><td class="memTemplParams" colspan="2"><a id="a8a53fb0d6fa33ace3e634e9e4af13b8c"></a>
-template&lt;typename __Dimension , typename _Rep , typename _Period , double const &amp; _Origin&gt; </td></tr>
-<tr class="memitem:a8a53fb0d6fa33ace3e634e9e4af13b8c"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; __Dimension, _Rep, _Period, _Origin &gt; const &amp;Obj)</td></tr>
-<tr class="separator:a8a53fb0d6fa33ace3e634e9e4af13b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e0b47e7cb72b3ab1f70c2d029f80829"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; dim, _Rep, _Period, _Origin &gt; const &amp;Obj)</td></tr>
+<tr class="separator:a7e0b47e7cb72b3ab1f70c2d029f80829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19be7d96783ff3a2929a2b31e53ea169"><td class="memTemplParams" colspan="2"><a id="a19be7d96783ff3a2929a2b31e53ea169"></a>
 template&lt;typename _Rep , typename _Period &gt; </td></tr>
 <tr class="memitem:a19be7d96783ff3a2929a2b31e53ea169"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><b>Basic_Unit</b> (std::chrono::duration&lt; _Rep, _Period &gt; const &amp;Obj)</td></tr>
 <tr class="separator:a19be7d96783ff3a2929a2b31e53ea169"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5b90f624e87531baf395237cf875c27"><td class="memItemLeft" align="right" valign="top"><a id="ab5b90f624e87531baf395237cf875c27"></a>
-constexpr <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> const &amp;Obj)</td></tr>
-<tr class="separator:ab5b90f624e87531baf395237cf875c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fff3693dbc0e81031fc2f804adeb322"><td class="memTemplParams" colspan="2"><a id="a8fff3693dbc0e81031fc2f804adeb322"></a>
+template&lt;typename _Rep , typename _Period , double const &amp; _Origin&gt; </td></tr>
+<tr class="memitem:a8fff3693dbc0e81031fc2f804adeb322"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; dim, _Rep, _Period, _Origin &gt; const &amp;Obj)</td></tr>
+<tr class="separator:a8fff3693dbc0e81031fc2f804adeb322"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84bbcd8395db5feae095e2c88020d3f9"><td class="memTemplParams" colspan="2"><a id="a84bbcd8395db5feae095e2c88020d3f9"></a>
 template&lt;typename _Rep , typename _Period &gt; </td></tr>
 <tr class="memitem:a84bbcd8395db5feae095e2c88020d3f9"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator=</b> (std::chrono::duration&lt; _Rep, _Period &gt; const &amp;Obj)</td></tr>
@@ -140,9 +134,6 @@ constexpr std::string&#160;</td><td class="memItemRight" valign="bottom"><b>dime
 <tr class="memitem:aee01ad40609435e47386c9cb120bf536"><td class="memItemLeft" align="right" valign="top"><a id="aee01ad40609435e47386c9cb120bf536"></a>
 <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator--</b> (int)</td></tr>
 <tr class="separator:aee01ad40609435e47386c9cb120bf536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a524f35a90df533f1b984cf2e5679e5e6"><td class="memItemLeft" align="right" valign="top"><a id="a524f35a90df533f1b984cf2e5679e5e6"></a>
-constexpr <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>operator-</b> () const</td></tr>
-<tr class="separator:a524f35a90df533f1b984cf2e5679e5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a719a5b1ec5f58661970d18628f300cb2"><td class="memTemplParams" colspan="2"><a id="a719a5b1ec5f58661970d18628f300cb2"></a>
 template&lt;typename __Dimension , typename _Rep , typename _Period , double const &amp; _origin&gt; </td></tr>
 <tr class="memitem:a719a5b1ec5f58661970d18628f300cb2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator+=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; __Dimension, _Rep, _Period, _origin &gt; const &amp;Obj)</td></tr>
@@ -200,13 +191,10 @@ Protected Attributes</h2></td></tr>
 Rep&#160;</td><td class="memItemRight" valign="bottom"><b>_count</b></td></tr>
 <tr class="separator:a00b1027d95e72d8ae436e1eed51803ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/omniunit/classes/<a class="el" href="Basic__Unit_8hh_source.html">Basic_Unit.hh</a></li>
-</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 2 2019 19:44:18 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 8 2019 19:17:21 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

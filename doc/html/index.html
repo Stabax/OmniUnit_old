@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OmniUnit
    </div>
-   <div id="projectbrief">OmniUnit is a modern C++ library to represent physical units</div>
+   <div id="projectbrief">OmniUnit is a modern C++ header only library to represent physical units</div>
   </td>
  </tr>
  </tbody>
@@ -84,7 +84,11 @@ This is not enough.</p>
 <li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. <b>comming soon</b></li>
 </ul>
 <p>OmniUnit requires fully supported <b>C++14</b>.<br />
- </p><h3>OmniUnit compiles with :</h3>
+ </p><h2>Versions</h2>
+<ul>
+<li>OmniUnit is not officially distributed yet.</li>
+</ul>
+<h3>OmniUnit compiles with :</h3>
 <ul>
 <li>gcc/g++ 6.2</li>
 <li>gcc/g++ 6.3</li>
@@ -95,24 +99,29 @@ This is not enough.</p>
 <ul>
 <li>Visual Studio 2013 and earlier.</li>
 </ul>
-<h2>Documentation</h2>
-<p>See the full documentation here : <a href="http://stabax.org/doc/omniunit">http://stabax.org/doc/omniunit</a>. If the servers are down, open <b>omniunit/doc/html/index.html</b>.</p>
-<h2>Use library</h2>
+<h2>Use the library</h2>
 <p>To get the library, clone the latest revision : </p><pre class="fragment">git clone http://bitbucket.org/stabax/omniunit.git
 </pre><p>Then copy the include/omniunit folder into your project folder and simply include the desired header files in your sources, and start using the features.</p>
-<h2>Fast and basic example</h2>
+<h2>Documentation</h2>
+<p>See the full documentation here : <a href="http://stabax.org/doc/omniunit">http://stabax.org/doc/omniunit</a>. If the servers are down, open <b>omniunit/doc/html/index.html</b>.</p>
+<h2>Example</h2>
 <pre class="fragment">#include "omniunit/omniunit.hh"
 #include &lt;iostream&gt;
 
 int main()
 {
     //a and b represent 3000 meters in different ways
-    omni::millimeter&lt;int&gt; a(3000000);  //3000000 is handled by an integer
-    omni::kilometer&lt;float&gt; b(3);       //3 is handled by a float
+    omni::Millimeter a(3000000);
+    omni::Kilometer b(3);
 
-    omni::centimeterPerSecond&lt;double&gt; d = a / stb::second&lt;int&gt;(3); //OK, length/duration returns a speed.
+    omni::CentimeterPerSecond c = a / stb::second(3); //OK, LENGTH/DURATION returns a SPEED.
+    std::cout &lt;&lt; c.count() &lt;&lt; '\n';   //prints 100000
 
-    std::cout &lt;&lt; d.count() &lt;&lt; '\n';   //prints 100000
+    omni::Gram d = c; //ERROR, this doesn't compile because "d" is of dimension MASS and "c" is of dimension SPEED
+
+    omni::Inch e = omni::MilliMeter(5.2) + omni::Angstrom(124.347); //OK, all conversions are done implicitly
+
+    omni::Joule kineticEnergy = 0.5 * omni::Ton(10) * omni::pow&lt;2&gt;(c); //OK
 
 return 0;
 }
@@ -131,7 +140,7 @@ return 0;
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 2 2019 19:44:19 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 8 2019 19:17:22 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

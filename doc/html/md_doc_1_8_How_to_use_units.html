@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">OmniUnit
    </div>
-   <div id="projectbrief">OmniUnit is a modern C++ library to represent physical units</div>
+   <div id="projectbrief">OmniUnit is a modern C++ header only library to represent physical units</div>
   </td>
  </tr>
  </tbody>
@@ -78,22 +78,23 @@ omni::gram&lt;float&gt; var3(12.9); //var3 equals 12.9
 //you can of course use any primitive type
 
 var1 = var3; //var1 equals 12, the value is truncated, not rounded
-</pre><p>If you don't need units to handle different types, you can use a default type : </p><pre class="fragment">#define OMNI_DEFAULT_TYPE float //this value equals "double" by default, if you don't define your own
+</pre><p>If you don't need units to handle different types, you can use the default type. Units using the default type begin with a capital : </p><pre class="fragment">#define OMNI_DEFAULT_TYPE float //not mandatory, this value equals "double" by default
 
 omni::meter&lt;&gt; var4(0); //the internal type of var4 is float
-omni::def::meter var5(0); //var5 and var5 are exaclty the same, but var5 is most user friendly
-</pre><h2>Implicit conversions</h2>
-<p>You can convert a unit to another, implicitly or explicitly, <b>if they have the same dimension</b> (mass in these examples) : </p><pre class="fragment">omni::kilogram&lt;float&gt; var1(3.1);
+omni::Meter var5(0); //notice the capital
+//var4 and var5 are exaclty the same, but the definition of var5 is most user friendly
+</pre><p>So <b>all</b> non-defaulted units begin with a tiny, while <b>all</b> defaulted units begin with a capital.</p>
+<h2>Implicit conversions</h2>
+<p>You can convert a unit to another <b>if they have the same dimension</b> (mass in these examples) : </p><pre class="fragment">omni::kilogram&lt;float&gt; var1(3.1);
 omni::milligram&lt;float&gt; var2(var1);  //conversion by construction
 omni::milligram&lt;float&gt; var3 = var1; //conversion by assignment
 //var2 and var3 equal 3100000
 </pre><p>you can of course use conversion by explicit cast : </p><pre class="fragment">auto var4 = omni::unit_cast&lt;omni::microgram&lt;int&gt;&gt;(var1); //var4 is a microgram&lt;int&gt;
 auto var5 = omni::unit_cast&lt;omni::milli&gt;(var1);          //var5 is a gram&lt;float&gt; (because kilogram is the base mass unit)
-auto var6 = omni::unit_cast&lt;short&gt;(var1);                    //var6 is a kilogram&lt;short&gt;
-auto var7 = omni::unit_cast&lt;omni::E1&gt;(var1);             //var1 looks like a kilogram&lt;float&gt; but with origin = 10
-//(see the meaning of origin of a unit in "how to create units")
+auto var6 = omni::unit_cast&lt;short&gt;(var1);                //var6 is a kilogram&lt;short&gt;
+auto var7 = omni::unit_cast&lt;omni::E1&gt;(var1);             //var1 looks like a kilogram&lt;float&gt; but with origin = 10 (see the meaning of origin of a unit in "how to create units")
 </pre><h2>Compile-time dimension check</h2>
-<p>Dimension check is done at compile-time, which mean that if you made a dimensional error, the code won't compile, and it is one of the goals of omni, preventing calculation errors. </p><pre class="fragment">omni::def::kilometer var1(1);
+<p>Dimension check is done at compile-time, which mean that if you made a dimensional error, the code won't compile. It is one of the goals of omniunit, preventing calculation errors. </p><pre class="fragment">omni::def::kilometer var1(1);
 omni::def::hour var2(1);
 
 omni::def::gram var3 = var1/var2;
@@ -102,9 +103,9 @@ omni::def::gram var3 = var1/var2;
 omni::meterPerSecond var4 = var1/var2;
 //OK, although var1/var2 returns kilometerPerHour, it and var4 have the same dimension. There will just be an implicit conversion
 </pre><h2>Compliance between standard duration and OmniUnit duration</h2>
-<p>If you are familiar with standard duration (std::chrono::duration), you may want to use and convert them into OmniUnit duration, and vice versa. Happily, there is a full compliance. You can simply do this by constructing or assigning them : </p><pre class="fragment">omni::millisecond&lt;float&gt; omni1(1.8);
+<p>If you are familiar with standard duration (std::chrono::duration), you may want to use and convert them into OmniUnit duration, and vice versa. Happily, there is a full compliance between them. You can simply do this by constructing or assigning them : </p><pre class="fragment">omni::millisecond&lt;float&gt; omni1(1.8);
 std::chrono::hours std1(omni1); //construction
-//notice that here, std::chrono::hour handle an integer while omni::millisecond&lt;float&gt; handle a float, so trucation may appear
+//notice that here, std::chrono::hours handle an integer while omni::millisecond&lt;float&gt; handle a float, so trucation may appear
 
 std::chrono::hours std2 = omni1; //assignment
 //idem
@@ -114,7 +115,7 @@ omni1 = std2; //assignment
 omni::year&lt;int&gt; omni2(std2); //construction
 </pre><p>conversion by explicit cast : </p><pre class="fragment">auto omni4 = omni::unit_cast&lt;omni::second&lt;int&gt;&gt;(std3);
 auto std4 = omni::unit_cast&lt;std::chrono::nanoseconds&gt;(omni3);
-</pre><p>However, you can't use an implicit conversion between standard and OmniUnit to pass a duration parameter to a function, you have to do that explicitly : </p><pre class="fragment">void foo1(std::chrono::hours) {//do something};
+</pre><p>However, you can't use an implicit conversion between standard and OmniUnit duration to pass a parameter to a function, you have to do that explicitly : </p><pre class="fragment">void foo1(std::chrono::hours) {//do something};
 void foo2(omni::second&lt;int&gt;) {//do something};
 
 std::chrono::seconds standard(1);
@@ -129,9 +130,11 @@ foo2(omni::second&lt;int&gt;(standard1)); //OK
 foo2(omni::duration_cast&lt;omni::second&lt;int&gt;(standard)); //OK
 </pre><p>The previous tips may be useful if you want to pass an omni::duration to std::this_thread::sleep_for(), for exemple.</p>
 <h2>Mathematic functions</h2>
+<p>The five main operators are provided : +-*/% (together with +=, -=, *=, /=, %=, ++, &ndash; and unary -) </p><pre class="fragment">omni::
+</pre><p>Of course, using units only with these main operators looks limited. Others</p>
 <h2>Constexpr instances</h2>
-<h2>Errors and exception safety</h2>
-<p>Most of the library works at compile time, so there is absolutly no exception throwing in order to allow constexpr units (see the previos section). Although, <b>there is no</b> "no throw guarentee" because some standard functions (exp, log, pow, round, cos...) used in Omniunit at execution-time may throw. See the exception safety of these functions in the C++ documentation.</p>
+<h2>Runetime errors and exception safety</h2>
+<p>Most of the library works at compile time, there is absolutly no exception throwing in order to allow constexpr units (see the previous section). Nevertheless, <b>there is no</b> "no throw guarentee" because some <b>standard</b> functions (exp, log, pow, round, cos...) used in Omniunit at execution-time may (or not) throw. See the exception safety of these functions in the C++ standard documentation.</p>
 <p>The others errors that could occur during execution are :</p><ul>
 <li>domain errors like division by zero, or calculating log(0) : to follow the C++ standard, the behavior in OmniUnit is undefined ;</li>
 <li>too large or too small numbers (obtained for exemple by conversion or by exp/pow functions) : again, the behavior is the same as the C++ standard when you reach the maximum of a variable. </li>
@@ -139,7 +142,7 @@ foo2(omni::duration_cast&lt;omni::second&lt;int&gt;(standard)); //OK
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 2 2019 19:44:18 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 8 2019 19:17:21 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
