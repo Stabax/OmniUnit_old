@@ -6,7 +6,7 @@ OmniUnit is a HEADER ONLY library for modern C++.
 
 Strongly typed values are heavily recommended by the C++ creators themself in order to avoid ambiguities and hidden bugs. \n
 C++ stantard has taken this recommendation into account by implementing std::chrono::duration to represent duration. \n
-This is not enough.
+It is not enough.
 
 * The main purpose of OmniUnit is to provide strong types to represent all physical units ;
 * Implicit conversions are performed when operating on units : Millimeter = meter + inches is absolutely legal ;
@@ -19,20 +19,23 @@ This is not enough.
 * More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; **comming soon**
 * It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. **comming soon**
 
-OmniUnit requires fully supported **C++14**.\n
+OmniUnit requires **C++17**.\n
 
 ## Versions ##
 
 * OmniUnit is not officially distributed yet.
 
 ### OmniUnit compiles with : ###
-- gcc/g++ 6.2
-- gcc/g++ 6.3
+
+- gcc/g++ 8.1
+- gcc/g++ 7.3
 - gcc/g++ 7.2
-- Visual Studio 2015 (with option /constexpr)
+- Visual Studio 2017 (with option /constexpr)
 
 ### OmniUnit doesn't compile with : ###
-- Visual Studio 2013 and earlier.
+
+- gcc/g++ 7.1 and earlier
+- Visual Studio 2015 and earlier.
 
 ## Use the library ##
 
