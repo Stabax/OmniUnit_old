@@ -31,12 +31,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace omni
 {
-  constexpr double mileE3 = 1609344.;
+  inline constexpr double mileE3 = 1609344.;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using mile = Unit<Length, Rep, Ratio<mileE3, E3>, zero>;
 
-  constexpr double inchE2 = 254.;
+  inline constexpr double inchE2 = 254.;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using inch = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<inchE2, E2>, centi>::type, zero>;
@@ -70,18 +70,18 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using watt = Unit<Power, Rep, base, zero>;
 
-  constexpr double chE1 = 7355.;
+  inline constexpr double chE1 = 7355.;
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using horsepower = Unit<Power, Rep, Ratio<chE1, E1>, zero>;
 
-  constexpr double hpDoubleE1 = 7457.;
+  inline constexpr double hpDoubleE1 = 7457.;
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using mechanicalhorsepower = Unit<Power, Rep, Ratio<hpDoubleE1, E1>, zero>;
 
 
 
   typedef Dimension<0,0,-1,0,0,0,0,0,0> Frequency;
-  constexpr double perMinRatio = 60.;
+  inline constexpr double perMinRatio = 60.;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using perMinute = Unit<Frequency, Rep, Ratio<E0, perMinRatio>, zero>;
@@ -133,6 +133,22 @@ namespace omni
   typedef milePerHour<> MilePerHour;
   typedef bar<> Bar;
 
+/*
+  constexpr Mile operator ""mi (long double val) {return val;}
+  constexpr Inch operator ""in (long double val) {return val;}
+  constexpr Centimeter3 operator ""cm3 (long double val) {return val;}
+  constexpr Liter operator ""l (long double val) {return val;}
+  constexpr Newton operator ""n (long double val) {return val;}
+  constexpr Watt operator ""_mi (long double val) {return val;}
+  constexpr Horsepower operator ""_mi (long double val) {return val;}
+  constexpr Mechanicalhorsepower operator ""_mi (long double val) {return val;}
+  constexpr PerMinute operator ""_mi (long double val) {return val;}
+  constexpr MeterPerSecond operator ""_mi (long double val) {return val;}
+  constexpr KilometerPerHour operator ""_mi (long double val) {return val;}
+  constexpr MeterPerSecond2 operator ""_mi (long double val) {return val;}
+  constexpr MilePerHour operator ""_mi (long double val) {return val;}
+  constexpr Bar operator ""_mi (long double val) {return val;}
+*/
 
 } // namespace omni
 

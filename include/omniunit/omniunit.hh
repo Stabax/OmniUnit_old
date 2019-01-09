@@ -46,11 +46,15 @@ namespace omni
 {
 
 #ifdef OMNI_USE_UNCERTAINTIES
+
   template <typename _Dimension, typename Rep, typename Period, double const& Origin>
   using Unit = Complete_Unit<_Dimension, Rep, Period, Origin>;
+
 #else
+
   template <typename _Dimension, typename Rep, typename Period, double const& Origin>
   using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
+
 #endif // OMNI_USE_UNCERTAINTIES
 
 

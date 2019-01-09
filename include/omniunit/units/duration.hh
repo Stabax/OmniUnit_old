@@ -141,7 +141,7 @@ using gigayear = Unit<Duration, Rep, typename Ratio_times_Ratio<
 typename year<Rep>::period, giga>::type, zero>;
 
 
-
+typedef yoctosecond<> Yoctosecond;
 typedef zeptosecond<> Zeptosecond;
 typedef femtosecond<>  Femtosecond;
 typedef picosecond<> Picosecond;
@@ -171,6 +171,7 @@ typedef year<> Year;
 typedef kiloyear<> Kiloyear;
 typedef megayear<> Megayear;
 typedef gigayear<> Gigayear;
+
 
 
 
