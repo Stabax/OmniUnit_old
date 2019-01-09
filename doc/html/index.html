@@ -70,7 +70,7 @@ $(function() {
 <p>OmniUnit is a HEADER ONLY library for modern C++.</p>
 <p>Strongly typed values are heavily recommended by the C++ creators themself in order to avoid ambiguities and hidden bugs. <br />
 C++ stantard has taken this recommendation into account by implementing std::chrono::duration to represent duration. <br />
-This is not enough.</p>
+It is not enough.</p>
 <ul>
 <li>The main purpose of OmniUnit is to provide strong types to represent all physical units ;</li>
 <li>Implicit conversions are performed when operating on units : Millimeter = meter + inches is absolutely legal ;</li>
@@ -83,21 +83,22 @@ This is not enough.</p>
 <li>More than the five basic operations (+-*/%), Mathematic tools are provided to use units (exponential, power, trigonometric, hyperbolic, rounding functions, and matrix computation) ; <b>comming soon</b></li>
 <li>It is not the main purpose of OmniUnit, but a Timer and a Countdown are available (accurate from 10^-4 to 10^-7 seconds depending of the OS), that can take a speed or a kinetic energy to take relativistic effects into account. They provide scalable time flow as well. <b>comming soon</b></li>
 </ul>
-<p>OmniUnit requires fully supported <b>C++14</b>.<br />
+<p>OmniUnit requires <b>C++17</b>.<br />
  </p><h2>Versions</h2>
 <ul>
 <li>OmniUnit is not officially distributed yet.</li>
 </ul>
 <h3>OmniUnit compiles with :</h3>
 <ul>
-<li>gcc/g++ 6.2</li>
-<li>gcc/g++ 6.3</li>
+<li>gcc/g++ 8.1</li>
+<li>gcc/g++ 7.3</li>
 <li>gcc/g++ 7.2</li>
-<li>Visual Studio 2015 (with option /constexpr)</li>
+<li>Visual Studio 2017 (with option /constexpr)</li>
 </ul>
 <h3>OmniUnit doesn't compile with :</h3>
 <ul>
-<li>Visual Studio 2013 and earlier.</li>
+<li>gcc/g++ 7.1 and earlier</li>
+<li>Visual Studio 2015 and earlier.</li>
 </ul>
 <h2>Use the library</h2>
 <p>To get the library, clone the latest revision : </p><pre class="fragment">git clone http://bitbucket.org/stabax/omniunit.git
@@ -140,7 +141,7 @@ return 0;
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jan 8 2019 19:17:22 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 9 2019 18:54:55 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

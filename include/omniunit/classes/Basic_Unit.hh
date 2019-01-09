@@ -293,9 +293,33 @@ public:
   }
 
 
-  constexpr std::string dimension() const
+  constexpr std::string dimension() const //A MODIFIER, RETOURNER UNE CHAR*
   {
     return dimension_str<dim>();
+  }
+
+
+  Basic_Unit ceil(unsigned decimal = 1)
+  {
+    _count = static_cast<Rep>(std::ceil(_count * decimal)) / static_cast<Rep>(decimal);
+  }
+
+
+  Basic_Unit floor(unsigned decimal = 1)
+  {
+    _count = static_cast<Rep>(std::floor(_count * decimal)) / static_cast<Rep>(decimal);
+  }
+
+
+  Basic_Unit round(unsigned decimal = 1)
+  {
+    _count = static_cast<Rep>(std::round(_count * decimal)) / static_cast<Rep>(decimal);
+  }
+
+
+  Basic_Unit trunc(unsigned decimal = 1)
+  {
+    _count = static_cast<Rep>(std::trunc(_count * decimal)) / static_cast<Rep>(decimal);
   }
 
 
@@ -730,62 +754,54 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 
-template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+template <typename Rep, typename Period, double const& Origin>
+constexpr auto exp(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj)
 {
-  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
-
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
   return std::exp(newObj.count());
 }
 
 
-template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
+template <typename Rep, typename Period, double const& Origin>
+constexpr auto exp(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj, float basis)
 {
-  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
-
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
   return std::exp(static_cast<Rep>(Obj.count() * std::log(basis)));
 }
 
 
-template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+template <typename Rep, typename Period, double const& Origin>
+constexpr auto ln(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj)
 {
-  static_assert(is_noDim<_Dimension>::value, "Dimension should be adimensional.");
-
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
   return std::log(Obj.count());
 }
 
 
-template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
+template <typename Rep, typename Period, double const& Origin>
+constexpr auto ln(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj, float basis)
 {
-  static_assert(is_noDim<_Dimension>::value, "Dimension should ba adimensional.");
-
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
   auto temp = std::log(Obj.count());
   return static_cast<decltype(temp)>(temp / std::log(basis));
 }
@@ -855,6 +871,35 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto ceil(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned decimal = 1)
+{
+  return Obj.ceil(decimal);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto floor(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned decimal = 1)
+{
+  return Obj.floor(decimal);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto round(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned decimal = 1)
+{
+  return Obj.round(decimal);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto trunc(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned decimal = 1)
+{
+  return Obj.trunc(decimal);
+}
+
+
+
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -865,11 +910,11 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 
-template <typename Dimension, typename Rep, typename Period, double const& Origin>
-std::ostream& operator<<(std::ostream& oss, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
+template <typename stream_t, typename Dimension, typename Rep, typename Period, double const& Origin>
+stream_t& operator<<(stream_t& stream, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
-  oss << Obj.count();
-  return oss;
+  stream << Obj.count();
+  return stream;
 }
 
 

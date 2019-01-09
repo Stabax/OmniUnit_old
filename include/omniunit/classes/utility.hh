@@ -475,6 +475,9 @@ struct Dimension
 };
 
 
+typedef Dimension<0,0,0,0,0,0,0,0,0> Dimensionless;
+
+
 template<typename falseType>
 struct is_Dimension : std::false_type
 {
@@ -486,24 +489,6 @@ int temperature, int quantity, int luminous_intensity, int angle, int solid_angl
 struct is_Dimension<Dimension<length, mass, time, current,
 temperature, quantity, luminous_intensity, angle, solid_angle>> : public std::true_type
 {
-};
-
-
-//test if a dimension is a real dimension or not (scalar/angla,solid angle)
-template<typename Dim>
-class is_noDim
-{
-  static_assert(is_Dimension<Dim>::value, "Template argument must be a Dimension.");
-public:
-  inline static constexpr bool value = (
-  Dim::length == 0 &&
-  Dim::mass == 0 &&
-  Dim::time == 0 &&
-  Dim::current == 0 &&
-  Dim::temperature == 0 &&
-  Dim::quantity == 0 &&
-  Dim::luminous_intensity == 0)
-  ? true : false;
 };
 
 

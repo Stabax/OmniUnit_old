@@ -314,6 +314,7 @@ int main()
   _torque = ((_revolutions > _mRevolutions ? -1  : 1) * mPower / omni::pow<2>(_mRevolutions)) * _revolutions;
   omni::Watt cineticDiff =  omni::Horsepower(0) - (_mass * omni::MeterPerSecond2(9.81) * (gradient / (_speed * tickDuration)) * _speed);
 
+
   getM();
   foo();
 
