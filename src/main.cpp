@@ -94,6 +94,10 @@
 
 #endif
 
+
+using namespace omni::suffixes;
+
+
 struct faux
 {
   static int value;
@@ -317,6 +321,8 @@ int main()
 
   getM();
   foo();
+
+  auto yougatazbeul = 8.45_ms;
 
 return 0;
 }

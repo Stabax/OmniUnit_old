@@ -143,6 +143,7 @@ typename year<Rep>::period, giga>::type, zero>;
 
 typedef yoctosecond<> Yoctosecond;
 typedef zeptosecond<> Zeptosecond;
+typedef attosecond<> Attosecond;
 typedef femtosecond<>  Femtosecond;
 typedef picosecond<> Picosecond;
 typedef nanosecond<> Nanosecond;
@@ -173,7 +174,45 @@ typedef megayear<> Megayear;
 typedef gigayear<> Gigayear;
 
 
+namespace suffixes
+{
 
+
+
+constexpr Yoctosecond operator"" _ys(long double val){return val;}
+constexpr Zeptosecond operator"" _zs(long double val){return val;}
+constexpr Attosecond operator"" _as(long double val){return val;}
+constexpr Femtosecond operator"" _fs(long double val){return val;}
+constexpr Nanosecond operator"" _ns(long double val){return val;}
+constexpr Microsecond operator"" _us(long double val){return val;}
+constexpr Millisecond operator"" _ms(long double val){return val;}
+constexpr Centisecond operator"" _cs(long double val){return val;}
+constexpr Decisecond operator"" _ds(long double val){return val;}
+constexpr Second operator"" _s(long double val){return val;}
+constexpr Decasecond operator"" _das(long double val){return val;}
+constexpr Hectosecond operator"" _hs(long double val){return val;}
+constexpr Kilosecond operator"" _ks(long double val){return val;}
+constexpr Megasecond operator"" _Ms(long double val){return val;}
+constexpr Gigasecond operator"" _Gs(long double val){return val;}
+constexpr Terasecond operator"" _Ts(long double val){return val;}
+constexpr Petasecond operator"" _Ps(long double val){return val;}
+constexpr Exasecond operator"" _Es(long double val){return val;}
+constexpr Zettasecond operator"" _Zs(long double val){return val;}
+constexpr Yottasecond operator"" _Ys(long double val){return val;}
+
+constexpr Minute operator"" _min(long double val){return val;}
+constexpr Hour operator"" _h(long double val){return val;}
+constexpr Day operator"" _d(long double val){return val;}
+constexpr Week operator"" _w(long double val){return val;}
+constexpr Month operator"" _mon(long double val){return val;}
+constexpr Year operator"" _y(long double val){return val;}
+constexpr Kiloyear operator"" _ky(long double val){return val;}
+constexpr Megayear operator"" _My(long double val){return val;}
+constexpr Gigayear operator"" _Gy(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 } //namespace omni
 
