@@ -104,7 +104,9 @@ using yottacandela = Unit<LuminousIntensity, Rep, yotta, zero>;
 
 
 
+typedef yoctocandela<> Yoctocandela;
 typedef zeptocandela<> Zeptocandela;
+typedef attocandela<> Attocandela;
 typedef femtocandela<>  Femtocandela;
 typedef picocandela<> Picocandela;
 typedef nanocandela<> Nanocandela;
@@ -123,6 +125,38 @@ typedef petacandela<> Petacandela;
 typedef exacandela<> Exacandela;
 typedef zettacandela<> Zettacandela;
 typedef yottacandela<> Yottacandela;
+
+
+
+namespace suffixes
+{
+
+
+
+constexpr Yoctocandela operator"" _ycd(long double val){return val;}
+constexpr Zeptocandela operator"" _zcd(long double val){return val;}
+constexpr Attocandela operator"" _acd(long double val){return val;}
+constexpr Femtocandela operator"" _fcd(long double val){return val;}
+constexpr Nanocandela operator"" _ncd(long double val){return val;}
+constexpr Microcandela operator"" _ucd(long double val){return val;}
+constexpr Millicandela operator"" _mcd(long double val){return val;}
+constexpr Centicandela operator"" _ccd(long double val){return val;}
+constexpr Decicandela operator"" _dcd(long double val){return val;}
+constexpr Candela operator"" _cd(long double val){return val;}
+constexpr Decacandela operator"" _dacd(long double val){return val;}
+constexpr Hectocandela operator"" _hcd(long double val){return val;}
+constexpr Kilocandela operator"" _kcd(long double val){return val;}
+constexpr Megacandela operator"" _Mcd(long double val){return val;}
+constexpr Gigacandela operator"" _Gcd(long double val){return val;}
+constexpr Teracandela operator"" _Tcd(long double val){return val;}
+constexpr Petacandela operator"" _Pcd(long double val){return val;}
+constexpr Exacandela operator"" _Ecd(long double val){return val;}
+constexpr Zettacandela operator"" _Zcd(long double val){return val;}
+constexpr Yottacandela operator"" _Ycd(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 

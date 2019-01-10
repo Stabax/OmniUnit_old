@@ -146,6 +146,7 @@ using solar_mass = Unit<Mass, Rep, solar_massDefinition, zero>;
 
 
 typedef zeptogram<> Zeptogram;
+typedef attogram<> Attogram;
 typedef femtogram<>  Femtogram;
 typedef picogram<> Picogram;
 typedef nanogram<> Nanogram;
@@ -177,6 +178,48 @@ typedef teraevPerC2<> TeraevPerC2;
 
 typedef ton<> Ton;
 typedef solar_mass<> Solar_mass;
+
+
+
+namespace suffixes
+{
+
+
+
+constexpr Zeptogram operator"" _zg(long double val){return val;}
+constexpr Attogram operator"" _ag(long double val){return val;}
+constexpr Femtogram operator"" _fg(long double val){return val;}
+constexpr Nanogram operator"" _ng(long double val){return val;}
+constexpr Microgram operator"" _ug(long double val){return val;}
+constexpr Milligram operator"" _mg(long double val){return val;}
+constexpr Centigram operator"" _cg(long double val){return val;}
+constexpr Decigram operator"" _dg(long double val){return val;}
+constexpr Gram operator"" _g(long double val){return val;}
+constexpr Decagram operator"" _dag(long double val){return val;}
+constexpr Hectogram operator"" _hg(long double val){return val;}
+constexpr Kilogram operator"" _kg(long double val){return val;}
+constexpr Megagram operator"" _Mg(long double val){return val;}
+constexpr Gigagram operator"" _Gg(long double val){return val;}
+constexpr Teragram operator"" _Tg(long double val){return val;}
+constexpr Petagram operator"" _Pg(long double val){return val;}
+constexpr Exagram operator"" _Eg(long double val){return val;}
+constexpr Zettagram operator"" _Zg(long double val){return val;}
+constexpr Yottagram operator"" _Yg(long double val){return val;}
+
+constexpr Atomic_mass operator"" _u(long double val){return val;}
+constexpr EvPerC2 operator"" _eVc2(long double val){return val;}
+constexpr MillievPerC2 operator"" _meVc2(long double val){return val;}
+constexpr MicroevPerC2 operator"" _ueVc2(long double val){return val;}
+constexpr KiloevPerC2 operator"" _keVc2(long double val){return val;}
+constexpr MegaevPerC2 operator"" _MeVc2(long double val){return val;}
+constexpr GigaevPerC2 operator"" _GeVc2(long double val){return val;}
+constexpr TeraevPerC2 operator"" _TeVc2(long double val){return val;}
+constexpr Ton operator"" _ton(long double val){return val;}
+constexpr Solar_mass operator"" _SM(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 

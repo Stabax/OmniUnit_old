@@ -133,22 +133,22 @@ namespace omni
   typedef milePerHour<> MilePerHour;
   typedef bar<> Bar;
 
-/*
-  constexpr Mile operator ""mi (long double val) {return val;}
-  constexpr Inch operator ""in (long double val) {return val;}
-  constexpr Centimeter3 operator ""cm3 (long double val) {return val;}
-  constexpr Liter operator ""l (long double val) {return val;}
-  constexpr Newton operator ""n (long double val) {return val;}
-  constexpr Watt operator ""_mi (long double val) {return val;}
-  constexpr Horsepower operator ""_mi (long double val) {return val;}
-  constexpr Mechanicalhorsepower operator ""_mi (long double val) {return val;}
-  constexpr PerMinute operator ""_mi (long double val) {return val;}
-  constexpr MeterPerSecond operator ""_mi (long double val) {return val;}
-  constexpr KilometerPerHour operator ""_mi (long double val) {return val;}
-  constexpr MeterPerSecond2 operator ""_mi (long double val) {return val;}
-  constexpr MilePerHour operator ""_mi (long double val) {return val;}
-  constexpr Bar operator ""_mi (long double val) {return val;}
-*/
+
+  constexpr Mile operator"" _mi(long double val) {return val;}
+  constexpr Inch operator"" _in(long double val) {return val;}
+  constexpr Centimeter3 operator"" _cm3(long double val) {return val;}
+  constexpr Liter operator"" _L(long double val) {return val;}
+  constexpr Newton operator"" _N(long double val) {return val;}
+  constexpr Watt operator"" _W(long double val) {return val;}
+  constexpr Horsepower operator""_hp (long double val) {return val;}
+  constexpr Mechanicalhorsepower operator""_mhp (long double val) {return val;}
+  constexpr PerMinute operator"" _PerMin(long double val) {return val;}
+  constexpr MeterPerSecond operator""_mPers(long double val) {return val;}
+  constexpr KilometerPerHour operator"" _kmPerh(long double val) {return val;}
+  constexpr MeterPerSecond2 operator"" _mPers2(long double val) {return val;}
+  constexpr MilePerHour operator"" _miPerh(long double val) {return val;}
+  constexpr Bar operator"" _bar(long double val) {return val;}
+
 
 } // namespace omni
 

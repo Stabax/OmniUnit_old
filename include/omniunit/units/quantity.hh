@@ -109,7 +109,9 @@ using amount = Unit<Quantity, Rep, unitaryQuantityDefinition, zero>;
 
 
 
+typedef yoctomol<> Yoctomol;
 typedef zeptomol<> Zeptomol;
+typedef attomol<> Attomol;
 typedef femtomol<>  Femtomol;
 typedef picomol<> Picomol;
 typedef nanomol<> Nanomol;
@@ -130,6 +132,37 @@ typedef zettamol<> Zettamol;
 typedef yottamol<> Yottamol;
 
 typedef amount<> Amount;
+
+
+
+namespace suffixes
+{
+
+
+
+constexpr Zeptomol operator"" _zmol(long double val){return val;}
+constexpr Attomol operator"" _amol(long double val){return val;}
+constexpr Femtomol operator"" _fmol(long double val){return val;}
+constexpr Nanomol operator"" _nmol(long double val){return val;}
+constexpr Micromol operator"" _umol(long double val){return val;}
+constexpr Millimol operator"" _mmol(long double val){return val;}
+constexpr Centimol operator"" _cmol(long double val){return val;}
+constexpr Decimol operator"" _dmol(long double val){return val;}
+constexpr Mol operator"" _mol(long double val){return val;}
+constexpr Decamol operator"" _damol(long double val){return val;}
+constexpr Hectomol operator"" _hmol(long double val){return val;}
+constexpr Kilomol operator"" _kmol(long double val){return val;}
+constexpr Megamol operator"" _Mmol(long double val){return val;}
+constexpr Gigamol operator"" _Gmol(long double val){return val;}
+constexpr Teramol operator"" _Tmol(long double val){return val;}
+constexpr Petamol operator"" _Pmol(long double val){return val;}
+constexpr Examol operator"" _Emol(long double val){return val;}
+constexpr Zettamol operator"" _Zmol(long double val){return val;}
+constexpr Yottamol operator"" _Ymol(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 

@@ -104,7 +104,9 @@ using yottaampere = Unit<ElectricIntensity, Rep, yotta, zero>;
 
 
 
+typedef yoctoampere<> Yoctoampere;
 typedef zeptoampere<> Zeptoampere;
+typedef attoampere<> Attoampere;
 typedef femtoampere<>  Femtoampere;
 typedef picoampere<> Picoampere;
 typedef nanoampere<> Nanoampere;
@@ -123,6 +125,38 @@ typedef petaampere<> Petaampere;
 typedef exaampere<> Exaampere;
 typedef zettaampere<> Zettaampere;
 typedef yottaampere<> Yottaampere;
+
+
+
+namespace suffixes
+{
+
+
+
+constexpr Yoctoampere operator"" _yA(long double val){return val;}
+constexpr Zeptoampere operator"" _zA(long double val){return val;}
+constexpr Attoampere operator"" _aA(long double val){return val;}
+constexpr Femtoampere operator"" _fA(long double val){return val;}
+constexpr Nanoampere operator"" _nA(long double val){return val;}
+constexpr Microampere operator"" _uA(long double val){return val;}
+constexpr Milliampere operator"" _mA(long double val){return val;}
+constexpr Centiampere operator"" _cA(long double val){return val;}
+constexpr Deciampere operator"" _dA(long double val){return val;}
+constexpr Ampere operator"" _A(long double val){return val;}
+constexpr Decaampere operator"" _daA(long double val){return val;}
+constexpr Hectoampere operator"" _hA(long double val){return val;}
+constexpr Kiloampere operator"" _kA(long double val){return val;}
+constexpr Megaampere operator"" _MA(long double val){return val;}
+constexpr Gigaampere operator"" _GA(long double val){return val;}
+constexpr Teraampere operator"" _TA(long double val){return val;}
+constexpr Petaampere operator"" _PA(long double val){return val;}
+constexpr Exaampere operator"" _EA(long double val){return val;}
+constexpr Zettaampere operator"" _ZA(long double val){return val;}
+constexpr Yottaampere operator"" _YA(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 

@@ -142,7 +142,9 @@ typename parsec<Rep>::period, giga>::type, zero>;
 
 
 
+typedef yoctometer<> Yoctometer;
 typedef zeptometer<> Zeptometer;
+typedef attometer<> Attometer;
 typedef femtometer<>  Femtometer;
 typedef picometer<> Picometer;
 typedef nanometer<> Nanometer;
@@ -155,7 +157,7 @@ typedef decameter<> Decameter;
 typedef hectometer<> Hectometer;
 typedef kilometer<> Kilometer;
 typedef megameter<> Megameter;
-typedef gigameter<> Migameter;
+typedef gigameter<> Gigameter;
 typedef terameter<> Terameter;
 typedef petameter<> Petameter;
 typedef exameter<> Exameter;
@@ -171,6 +173,48 @@ typedef parsec<> Parsec;
 typedef kiloparsec<> Kiloparsec;
 typedef megaparsec<> Megaparsec;
 typedef gigaparsec<> Gigaparsec;
+
+
+
+namespace suffixes
+{
+
+
+
+constexpr Yoctometer operator"" _ym(long double val){return val;}
+constexpr Zeptometer operator"" _zm(long double val){return val;}
+constexpr Attometer operator"" _am(long double val){return val;}
+constexpr Femtometer operator"" _fm(long double val){return val;}
+constexpr Nanometer operator"" _nm(long double val){return val;}
+constexpr Micrometer operator"" _um(long double val){return val;}
+constexpr Millimeter operator"" _mm(long double val){return val;}
+constexpr Centimeter operator"" _cm(long double val){return val;}
+constexpr Decimeter operator"" _dm(long double val){return val;}
+constexpr Meter operator"" _m(long double val){return val;}
+constexpr Decameter operator"" _dam(long double val){return val;}
+constexpr Hectometer operator"" _hm(long double val){return val;}
+constexpr Kilometer operator"" _km(long double val){return val;}
+constexpr Megameter operator"" _Mm(long double val){return val;}
+constexpr Gigameter operator"" _Gm(long double val){return val;}
+constexpr Terameter operator"" _Tm(long double val){return val;}
+constexpr Petameter operator"" _Pm(long double val){return val;}
+constexpr Exameter operator"" _Em(long double val){return val;}
+constexpr Zettameter operator"" _Zm(long double val){return val;}
+constexpr Yottameter operator"" _Ym(long double val){return val;}
+
+constexpr Angstrom operator"" _a(long double val){return val;}
+constexpr Astronomical_unit operator"" _AU(long double val){return val;}
+constexpr Lightsecond operator"" _ls(long double val){return val;}
+constexpr Lightminute operator"" _lmin(long double val){return val;}
+constexpr Lightyear operator"" _ly(long double val){return val;}
+constexpr Parsec operator"" _pc(long double val){return val;}
+constexpr Kiloparsec operator"" _kpc(long double val){return val;}
+constexpr Megaparsec operator"" _Mpc(long double val){return val;}
+constexpr Gigaparsec operator"" _Gpc(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 

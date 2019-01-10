@@ -169,7 +169,9 @@ using yottacelsius = Unit<Temperature, Rep, yotta, celsiusConstant>;
 
 
 
+typedef yoctokelvin<> Yoctokelvin;
 typedef zeptokelvin<> Zeptokelvin;
+typedef attokelvin<> Attokelvin;
 typedef femtokelvin<>  Femtokelvin;
 typedef picokelvin<> Picokelvin;
 typedef nanokelvin<> Nanokelvin;
@@ -190,8 +192,9 @@ typedef zettakelvin<> Zettakelvin;
 typedef yottakelvin<> Yottakelvin;
 
 
-
+typedef yoctocelsius<> Yoctocelsius;
 typedef zeptocelsius<> Zeptocelsius;
+typedef attocelsius<> Attocelsius;
 typedef femtocelsius<>  Femtocelsius;
 typedef picocelsius<> Picocelsius;
 typedef nanocelsius<> Nanocelsius;
@@ -211,6 +214,56 @@ typedef exacelsius<> Exacelsius;
 typedef zettacelsius<> Zettacelsius;
 typedef yottacelsius<> Yottacelsius;
 
+
+
+namespace suffixes
+{
+
+
+
+constexpr Zeptokelvin operator"" _zK(long double val){return val;}
+constexpr Attokelvin operator"" _aK(long double val){return val;}
+constexpr Femtokelvin operator"" _fK(long double val){return val;}
+constexpr Nanokelvin operator"" _nK(long double val){return val;}
+constexpr Microkelvin operator"" _uK(long double val){return val;}
+constexpr Millikelvin operator"" _mK(long double val){return val;}
+constexpr Centikelvin operator"" _cK(long double val){return val;}
+constexpr Decikelvin operator"" _dK(long double val){return val;}
+constexpr Kelvin operator"" _K(long double val){return val;}
+constexpr Decakelvin operator"" _daK(long double val){return val;}
+constexpr Hectokelvin operator"" _hK(long double val){return val;}
+constexpr Kilokelvin operator"" _kK(long double val){return val;}
+constexpr Megakelvin operator"" _MK(long double val){return val;}
+constexpr Gigakelvin operator"" _GK(long double val){return val;}
+constexpr Terakelvin operator"" _TK(long double val){return val;}
+constexpr Petakelvin operator"" _PK(long double val){return val;}
+constexpr Exakelvin operator"" _EK(long double val){return val;}
+constexpr Zettakelvin operator"" _ZK(long double val){return val;}
+constexpr Yottakelvin operator"" _YK(long double val){return val;}
+
+constexpr Zeptocelsius operator"" _zc(long double val){return val;}
+constexpr Attocelsius operator"" _ac(long double val){return val;}
+constexpr Femtocelsius operator"" _fc(long double val){return val;}
+constexpr Nanocelsius operator"" _nc(long double val){return val;}
+constexpr Microcelsius operator"" _uc(long double val){return val;}
+constexpr Millicelsius operator"" _mc(long double val){return val;}
+constexpr Centicelsius operator"" _cc(long double val){return val;}
+constexpr Decicelsius operator"" _dc(long double val){return val;}
+constexpr Celsius operator"" _c(long double val){return val;}
+constexpr Decacelsius operator"" _dac(long double val){return val;}
+constexpr Hectocelsius operator"" _hc(long double val){return val;}
+constexpr Kilocelsius operator"" _kc(long double val){return val;}
+constexpr Megacelsius operator"" _Mc(long double val){return val;}
+constexpr Gigacelsius operator"" _Gc(long double val){return val;}
+constexpr Teracelsius operator"" _Tc(long double val){return val;}
+constexpr Petacelsius operator"" _Pc(long double val){return val;}
+constexpr Exacelsius operator"" _Ec(long double val){return val;}
+constexpr Zettacelsius operator"" _Zc(long double val){return val;}
+constexpr Yottacelsius operator"" _Yc(long double val){return val;}
+
+
+
+} //namespaxe suffixies
 
 
 
