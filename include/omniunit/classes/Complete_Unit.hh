@@ -1,12 +1,16 @@
 //Complete_Unit.hh
 
 /*
-Copyright (c) 2016, Denis Tosetto All rights reserved.
+Copyright (c) 2019, Denis Tosetto All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
   Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
+
+  Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
 
   Neither the name of Denis Tosetto nor the names
   of its contributors may be used to endorse or promote products derived
@@ -31,15 +35,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include "Basic_Unit.hh"
-
-
-#ifndef OMNI_DEFAULT_PROPAGATION
-  #define OMNI_DEFAULT_PROPAGATION quadratic
-#endif //OMNI_DEFAULT_PROPAGATION
-
-#ifndef OMNI_PRIORITY_PROPAGATION
-  #define OMNI_PRIORITY_PROPAGATION linear
-#endif //OMNI_PRIORITY_PROPAGATION
 
 
 
@@ -96,10 +91,30 @@ float getUncertainty(T container)
 */
 
 
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== COMPLETE_UNIT DEFINITION ================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
 
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+class Complete_Unit
+{
+  typedef _Dimension dim;
+  typedef Rep rep;
+  typedef Period period;
+  inline static constexpr double origin = Origin;
 
+  static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
+  static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
+  static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
 
-
+private:
+  Basic_Unit<_Dimension, Rep, Period, Origin> _count;
+  Basic_Unit<_Dimension, Rep, Period, Origin> _error; //standard error of _count
+};
 
 
 } //namespace omni

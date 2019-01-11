@@ -1,4 +1,4 @@
-//units.hh
+//settings.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.
@@ -28,16 +28,15 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef UNITS_HH_
-#define UNITS_HH_
+#ifndef OMNI_SETTINGS_HH_
+#define OMNI_SETTINGS_HH_
 
-#include "duration.hh"
-#include "electric_intensity.hh"
-#include "length.hh"
-#include "luminous_intensity.hh"
-#include "mass.hh"
-#include "quantity.hh"
-#include "temperature.hh"
-#include "temporary.hh"
+#define OMNI_DEFAULT_TYPE double
+#define OMNI_TRUE_ZERO false
 
-#endif //UNITS_HH_
+#define OMNI_USE_UNCERTAINTIES false
+#define OMNI_DEFAULT_PROPAGATION quadratic
+#define OMNI_PRIORITY_PROPAGATION linear
+#define OMNI_VALID_SAMPLE_SIZE 100
+
+#endif //OMNI_SETTINGS_HH_

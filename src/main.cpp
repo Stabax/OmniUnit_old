@@ -1,4 +1,4 @@
-#define OMNI_TRUE_ZERO true
+
 
 #include "omniunit/omniunit.hh"
 #include "omniunit/chronoscale.hh"

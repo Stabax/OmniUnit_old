@@ -1,12 +1,16 @@
-//OmniUnit.hh
+//omniunit.hh
 
 /*
-Copyright (c) 2016, Denis Tosetto All rights reserved.
+Copyright (c) 2019, Denis Tosetto All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
   Redistributions of source code must retain the above copyright notice,
   this list of conditions and the following disclaimer.
+
+  Redistributions in binary form must reproduce the above copyright
+  notice, this list of conditions and the following disclaimer in the
+  documentation and/or other materials provided with the distribution.
 
   Neither the name of Denis Tosetto nor the names
   of its contributors may be used to endorse or promote products derived
@@ -30,22 +34,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNIUNIT_HH_
 
 
-#ifndef OMNI_DEFAULT_TYPE
-  #define OMNI_DEFAULT_TYPE double
-#endif // OMNI_DEFAULT_TYPE
-
-#ifndef OMNI_TRUE_ZERO
-  #define OMNI_TRUE_ZERO false
-#endif // OMNI_TRUE_ZERO
-
-
+#include "settings.hh"
 #include "classes/Complete_Unit.hh"
+
 
 
 namespace omni
 {
 
-#ifdef OMNI_USE_UNCERTAINTIES
+#if OMNI_USE_UNCERTAINTIES == true
 
   template <typename _Dimension, typename Rep, typename Period, double const& Origin>
   using Unit = Complete_Unit<_Dimension, Rep, Period, Origin>;
