@@ -121,7 +121,7 @@ constexpr Basic_Unit<Dimension, Rep, Period, O> unit_cast(const Basic_Unit<Dimen
 //=============================================================================
 //=============================================================================
 
-//the purpose here is to make available unit_cast between stb::duration and std::chrono::duration
+//the purpose here is to make available unit_cast between omni::Unit<duration> and std::chrono::duration
 
 
 //wrapper for function partial specialization emulation
