@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 1, 0, 0, 0, 0, 0, 0> Duration;
+typedef Dimension<0,0,1,0,0,0,0> Duration;
 
 
 
@@ -215,6 +215,38 @@ constexpr Megayear operator"" _My(long double val){return val;}
 constexpr Gigayear operator"" _Gy(long double val){return val;}
 
 
+
+
+constexpr Yoctosecond operator"" _ys(unsigned long long int val){return val;}
+constexpr Zeptosecond operator"" _zs(unsigned long long int val){return val;}
+constexpr Attosecond operator"" _as(unsigned long long int val){return val;}
+constexpr Femtosecond operator"" _fs(unsigned long long int val){return val;}
+constexpr Nanosecond operator"" _ns(unsigned long long int val){return val;}
+constexpr Microsecond operator"" _us(unsigned long long int val){return val;}
+constexpr Millisecond operator"" _ms(unsigned long long int val){return val;}
+constexpr Centisecond operator"" _cs(unsigned long long int val){return val;}
+constexpr Decisecond operator"" _ds(unsigned long long int val){return val;}
+constexpr Second operator"" _s(unsigned long long int val){return val;}
+constexpr Decasecond operator"" _das(unsigned long long int val){return val;}
+constexpr Hectosecond operator"" _hs(unsigned long long int val){return val;}
+constexpr Kilosecond operator"" _ks(unsigned long long int val){return val;}
+constexpr Megasecond operator"" _Ms(unsigned long long int val){return val;}
+constexpr Gigasecond operator"" _Gs(unsigned long long int val){return val;}
+constexpr Terasecond operator"" _Ts(unsigned long long int val){return val;}
+constexpr Petasecond operator"" _Ps(unsigned long long int val){return val;}
+constexpr Exasecond operator"" _Es(unsigned long long int val){return val;}
+constexpr Zettasecond operator"" _Zs(unsigned long long int val){return val;}
+constexpr Yottasecond operator"" _Ys(unsigned long long int val){return val;}
+
+constexpr Minute operator"" _min(unsigned long long int val){return val;}
+constexpr Hour operator"" _h(unsigned long long int val){return val;}
+constexpr Day operator"" _d(unsigned long long int val){return val;}
+constexpr Week operator"" _w(unsigned long long int val){return val;}
+constexpr Month operator"" _mon(unsigned long long int val){return val;}
+constexpr Year operator"" _y(unsigned long long int val){return val;}
+constexpr Kiloyear operator"" _ky(unsigned long long int val){return val;}
+constexpr Megayear operator"" _My(unsigned long long int val){return val;}
+constexpr Gigayear operator"" _Gy(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

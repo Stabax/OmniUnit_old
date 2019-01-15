@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 0, 0, 1, 0, 0, 0, 0> Temperature;
+typedef Dimension<0,0,0,0,1,0,0> Temperature;
 
 
 
@@ -225,6 +225,7 @@ namespace suffixes
 
 
 
+constexpr Yoctokelvin operator"" _yK(long double val){return val;}
 constexpr Zeptokelvin operator"" _zK(long double val){return val;}
 constexpr Attokelvin operator"" _aK(long double val){return val;}
 constexpr Femtokelvin operator"" _fK(long double val){return val;}
@@ -245,6 +246,7 @@ constexpr Exakelvin operator"" _EK(long double val){return val;}
 constexpr Zettakelvin operator"" _ZK(long double val){return val;}
 constexpr Yottakelvin operator"" _YK(long double val){return val;}
 
+constexpr Yoctocelsius operator"" _yc(long double val){return val;}
 constexpr Zeptocelsius operator"" _zc(long double val){return val;}
 constexpr Attocelsius operator"" _ac(long double val){return val;}
 constexpr Femtocelsius operator"" _fc(long double val){return val;}
@@ -266,6 +268,48 @@ constexpr Zettacelsius operator"" _Zc(long double val){return val;}
 constexpr Yottacelsius operator"" _Yc(long double val){return val;}
 
 
+
+constexpr Yoctokelvin operator"" _yK(unsigned long long int val){return val;}
+constexpr Zeptokelvin operator"" _zK(unsigned long long int val){return val;}
+constexpr Attokelvin operator"" _aK(unsigned long long int val){return val;}
+constexpr Femtokelvin operator"" _fK(unsigned long long int val){return val;}
+constexpr Nanokelvin operator"" _nK(unsigned long long int val){return val;}
+constexpr Microkelvin operator"" _uK(unsigned long long int val){return val;}
+constexpr Millikelvin operator"" _mK(unsigned long long int val){return val;}
+constexpr Centikelvin operator"" _cK(unsigned long long int val){return val;}
+constexpr Decikelvin operator"" _dK(unsigned long long int val){return val;}
+constexpr Kelvin operator"" _K(unsigned long long int val){return val;}
+constexpr Decakelvin operator"" _daK(unsigned long long int val){return val;}
+constexpr Hectokelvin operator"" _hK(unsigned long long int val){return val;}
+constexpr Kilokelvin operator"" _kK(unsigned long long int val){return val;}
+constexpr Megakelvin operator"" _MK(unsigned long long int val){return val;}
+constexpr Gigakelvin operator"" _GK(unsigned long long int val){return val;}
+constexpr Terakelvin operator"" _TK(unsigned long long int val){return val;}
+constexpr Petakelvin operator"" _PK(unsigned long long int val){return val;}
+constexpr Exakelvin operator"" _EK(unsigned long long int val){return val;}
+constexpr Zettakelvin operator"" _ZK(unsigned long long int val){return val;}
+constexpr Yottakelvin operator"" _YK(unsigned long long int val){return val;}
+
+constexpr Yoctocelsius operator"" _yc(unsigned long long int val){return val;}
+constexpr Zeptocelsius operator"" _zc(unsigned long long int val){return val;}
+constexpr Attocelsius operator"" _ac(unsigned long long int val){return val;}
+constexpr Femtocelsius operator"" _fc(unsigned long long int val){return val;}
+constexpr Nanocelsius operator"" _nc(unsigned long long int val){return val;}
+constexpr Microcelsius operator"" _uc(unsigned long long int val){return val;}
+constexpr Millicelsius operator"" _mc(unsigned long long int val){return val;}
+constexpr Centicelsius operator"" _cc(unsigned long long int val){return val;}
+constexpr Decicelsius operator"" _dc(unsigned long long int val){return val;}
+constexpr Celsius operator"" _c(unsigned long long int val){return val;}
+constexpr Decacelsius operator"" _dac(unsigned long long int val){return val;}
+constexpr Hectocelsius operator"" _hc(unsigned long long int val){return val;}
+constexpr Kilocelsius operator"" _kc(unsigned long long int val){return val;}
+constexpr Megacelsius operator"" _Mc(unsigned long long int val){return val;}
+constexpr Gigacelsius operator"" _Gc(unsigned long long int val){return val;}
+constexpr Teracelsius operator"" _Tc(unsigned long long int val){return val;}
+constexpr Petacelsius operator"" _Pc(unsigned long long int val){return val;}
+constexpr Exacelsius operator"" _Ec(unsigned long long int val){return val;}
+constexpr Zettacelsius operator"" _Zc(unsigned long long int val){return val;}
+constexpr Yottacelsius operator"" _Yc(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

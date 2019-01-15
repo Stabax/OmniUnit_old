@@ -464,7 +464,7 @@ typedef Ratio<E24, E0> yotta;
 
 
 template<int _length, int _mass, int _time, int _current,
-int _temperature, int _quantity, int _luminous_intensity, int _angle, int _solid_angle>
+int _temperature, int _quantity, int _luminous_intensity>
 struct Dimension
 {
   inline static constexpr int length = _length;
@@ -474,12 +474,10 @@ struct Dimension
   inline static constexpr int temperature = _temperature;
   inline static constexpr int quantity = _quantity;
   inline static constexpr int luminous_intensity = _luminous_intensity;
-  inline static constexpr int angle = _angle;
-  inline static constexpr int solid_angle = _solid_angle;
 };
 
 
-typedef Dimension<0,0,0,0,0,0,0,0,0> Dimensionless;
+typedef Dimension<0,0,0,0,0,0,0> Dimensionless;
 
 
 template<typename falseType>
@@ -489,9 +487,9 @@ struct is_Dimension : std::false_type
 
 
 template<int length, int mass, int time, int current,
-int temperature, int quantity, int luminous_intensity, int angle, int solid_angle>
+int temperature, int quantity, int luminous_intensity>
 struct is_Dimension<Dimension<length, mass, time, current,
-temperature, quantity, luminous_intensity, angle, solid_angle>> : public std::true_type
+temperature, quantity, luminous_intensity>> : public std::true_type
 {
 };
 
@@ -509,9 +507,7 @@ struct Dimension_multiply
   dim1::current + dim2::current,
   dim1::temperature + dim2::temperature,
   dim1::quantity + dim2::quantity,
-  dim1::luminous_intensity + dim2::luminous_intensity,
-  dim1::angle + dim2::angle,
-  dim1::solid_angle + dim2::solid_angle
+  dim1::luminous_intensity + dim2::luminous_intensity
   > type;
 };
 
@@ -529,9 +525,7 @@ struct Dimension_divide
   dim1::current - dim2::current,
   dim1::temperature - dim2::temperature,
   dim1::quantity - dim2::quantity,
-  dim1::luminous_intensity - dim2::luminous_intensity,
-  dim1::angle - dim2::angle,
-  dim1::solid_angle - dim2::solid_angle
+  dim1::luminous_intensity - dim2::luminous_intensity
   > type;
 };
 
@@ -548,9 +542,7 @@ struct Dimension_power
   dim::current * exponent,
   dim::temperature * exponent,
   dim::quantity * exponent,
-  dim::luminous_intensity * exponent,
-  dim::angle * exponent,
-  dim::solid_angle * exponent
+  dim::luminous_intensity * exponent
   > type;
 };
 
@@ -568,9 +560,7 @@ struct Dimension_root
   modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
   modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
-  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
-  modulo(static_cast<double>(dim::angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon() &&
-  modulo(static_cast<double>(dim::solid_angle) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon(),
+  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= std::numeric_limits<double>::epsilon(),
   "Cannot root this dimension with this basis.");
 
   typedef Dimension<
@@ -580,9 +570,7 @@ struct Dimension_root
   dim::current / basis,
   dim::temperature / basis,
   dim::quantity / basis,
-  dim::luminous_intensity / basis,
-  dim::angle / basis,
-  dim::solid_angle / basis
+  dim::luminous_intensity / basis
   > type;
 };
 
@@ -611,10 +599,6 @@ constexpr std::string dimension_str()
     dim += ("[N" + std::to_string(dimension::quantity) + "]");
   if(dimension::luminous_intensity != 0)
     dim += ("[J" + std::to_string(dimension::luminous_intensity) + "]");
-  if(dimension::angle != 0)
-    dim += ("[a" + std::to_string(dimension::angle) + "]");
-  if(dimension::solid_angle != 0)
-    dim += ("[sa" + std::to_string(dimension::solid_angle) + "]");
   if(dim.length() == 0)
     dim = "[/]";
 

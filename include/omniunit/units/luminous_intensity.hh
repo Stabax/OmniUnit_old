@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 0, 0, 0, 0, 1, 0, 0> LuminousIntensity;
+typedef Dimension<0,0,0,0,0,0,1> LuminousIntensity;
 
 
 
@@ -159,6 +159,27 @@ constexpr Zettacandela operator"" _Zcd(long double val){return val;}
 constexpr Yottacandela operator"" _Ycd(long double val){return val;}
 
 
+
+constexpr Yoctocandela operator"" _ycd(unsigned long long int val){return val;}
+constexpr Zeptocandela operator"" _zcd(unsigned long long int val){return val;}
+constexpr Attocandela operator"" _acd(unsigned long long int val){return val;}
+constexpr Femtocandela operator"" _fcd(unsigned long long int val){return val;}
+constexpr Nanocandela operator"" _ncd(unsigned long long int val){return val;}
+constexpr Microcandela operator"" _ucd(unsigned long long int val){return val;}
+constexpr Millicandela operator"" _mcd(unsigned long long int val){return val;}
+constexpr Centicandela operator"" _ccd(unsigned long long int val){return val;}
+constexpr Decicandela operator"" _dcd(unsigned long long int val){return val;}
+constexpr Candela operator"" _cd(unsigned long long int val){return val;}
+constexpr Decacandela operator"" _dacd(unsigned long long int val){return val;}
+constexpr Hectocandela operator"" _hcd(unsigned long long int val){return val;}
+constexpr Kilocandela operator"" _kcd(unsigned long long int val){return val;}
+constexpr Megacandela operator"" _Mcd(unsigned long long int val){return val;}
+constexpr Gigacandela operator"" _Gcd(unsigned long long int val){return val;}
+constexpr Teracandela operator"" _Tcd(unsigned long long int val){return val;}
+constexpr Petacandela operator"" _Pcd(unsigned long long int val){return val;}
+constexpr Exacandela operator"" _Ecd(unsigned long long int val){return val;}
+constexpr Zettacandela operator"" _Zcd(unsigned long long int val){return val;}
+constexpr Yottacandela operator"" _Ycd(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

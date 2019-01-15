@@ -45,14 +45,14 @@ namespace omni
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using inch = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<inchE2, E2>, centi>::type, zero>;
 
-  typedef Dimension<2,1,-2,0,0,0,0,0,0> Energy;
+  typedef Dimension<2,1,-2,0,0,0,0> Energy;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using newtonMeter = Unit<Energy, Rep, base, zero>;
 
 
 
-  typedef Dimension<3,0,0,0,0,0,0,0,0> Volume;
+  typedef Dimension<3,0,0,0,0,0,0> Volume;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using centimeter3 = Unit<Volume, Rep, typename Ratio_power<centi, 3>::type, zero>;
@@ -62,14 +62,14 @@ namespace omni
 
 
 
-  typedef Dimension<1,1,-2,0,0,0,0,0,0> Force;
+  typedef Dimension<1,1,-2,0,0,0,0> Force;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using newton = Unit<Force, Rep, base, zero>;
 
 
 
-  typedef Dimension<2,1,-3,0,0,0,0,0,0> Power;
+  typedef Dimension<2,1,-3,0,0,0,0> Power;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using watt = Unit<Power, Rep, base, zero>;
@@ -84,7 +84,7 @@ namespace omni
 
 
 
-  typedef Dimension<0,0,-1,0,0,0,0,0,0> Frequency;
+  typedef Dimension<0,0,-1,0,0,0,0> Frequency;
   inline constexpr double perMinRatio = 60.;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -92,7 +92,7 @@ namespace omni
 
 
 
-  typedef Dimension<1,0,-1,0,0,0,0,0,0> Speed;
+  typedef Dimension<1,0,-1,0,0,0,0> Speed;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using meterPerSecond = Unit<Speed, Rep, base, zero>;
@@ -105,14 +105,14 @@ namespace omni
 
 
 
-  typedef Dimension<1,0,-2,0,0,0,0,0,0> Acceleration;
+  typedef Dimension<1,0,-2,0,0,0,0> Acceleration;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using meterPerSecond2 = Unit<Acceleration, Rep, base, zero>;
 
 
 
-  typedef Dimension<-1,1,-2,0,0,0,0,0,0> Pressure;
+  typedef Dimension<-1,1,-2,0,0,0,0> Pressure;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
   using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
@@ -153,6 +153,20 @@ namespace omni
   constexpr MilePerHour operator"" _miPerh(long double val) {return val;}
   constexpr Bar operator"" _bar(long double val) {return val;}
 
+  constexpr Mile operator"" _mi(unsigned long long int val) {return val;}
+  constexpr Inch operator"" _in(unsigned long long int val) {return val;}
+  constexpr Centimeter3 operator"" _cm3(unsigned long long int val) {return val;}
+  constexpr Liter operator"" _L(unsigned long long int val) {return val;}
+  constexpr Newton operator"" _N(unsigned long long int val) {return val;}
+  constexpr Watt operator"" _W(unsigned long long int val) {return val;}
+  constexpr Horsepower operator""_hp (unsigned long long int val) {return val;}
+  constexpr Mechanicalhorsepower operator""_mhp (unsigned long long int val) {return val;}
+  constexpr PerMinute operator"" _PerMin(unsigned long long int val) {return val;}
+  constexpr MeterPerSecond operator""_mPers(unsigned long long int val) {return val;}
+  constexpr KilometerPerHour operator"" _kmPerh(unsigned long long int val) {return val;}
+  constexpr MeterPerSecond2 operator"" _mPers2(unsigned long long int val) {return val;}
+  constexpr MilePerHour operator"" _miPerh(unsigned long long int val) {return val;}
+  constexpr Bar operator"" _bar(unsigned long long int val) {return val;}
 
 } // namespace omni
 

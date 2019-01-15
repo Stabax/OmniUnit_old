@@ -173,10 +173,10 @@ constexpr Complete_Unit<Dimension, Rep, Period, O> unit_cast(const Complete_Unit
 //cast omniunit::duration to another omniunit::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
-Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+partial_specialization_wrapper<Complete_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+Complete_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
-  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
+  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0>>(Obj);
 }
 
 
@@ -185,7 +185,7 @@ Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
 partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+Complete_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
 }
@@ -193,7 +193,7 @@ Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 
 //cast omniunit::duration to toUnit
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+constexpr toUnit unit_cast(Complete_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
 }
@@ -203,7 +203,7 @@ constexpr toUnit unit_cast(Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Peri
 //cast std::chrono::duration to omniunit::duration
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Complete_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+partial_specialization_wrapper<Complete_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -268,7 +268,7 @@ class Complete_Unit
   constexpr Complete_Unit(std::chrono::duration<_Rep, _Period> const& Obj, Complete_Unit<dim, _Rep, Period, zero> const& err = Complete_Unit<dim, _Rep, Period, zero>::zero()):
   Complete_Unit(Complete_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count(), err.sigma()))
   {
-    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
 

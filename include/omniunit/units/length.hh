@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<1, 0, 0, 0, 0, 0, 0, 0, 0> Length;
+typedef Dimension<1,0,0,0,0,0,0> Length;
 
 
 
@@ -217,6 +217,37 @@ constexpr Megaparsec operator"" _Mpc(long double val){return val;}
 constexpr Gigaparsec operator"" _Gpc(long double val){return val;}
 
 
+
+constexpr Yoctometer operator"" _ym(unsigned long long int val){return val;}
+constexpr Zeptometer operator"" _zm(unsigned long long int val){return val;}
+constexpr Attometer operator"" _am(unsigned long long int val){return val;}
+constexpr Femtometer operator"" _fm(unsigned long long int val){return val;}
+constexpr Nanometer operator"" _nm(unsigned long long int val){return val;}
+constexpr Micrometer operator"" _um(unsigned long long int val){return val;}
+constexpr Millimeter operator"" _mm(unsigned long long int val){return val;}
+constexpr Centimeter operator"" _cm(unsigned long long int val){return val;}
+constexpr Decimeter operator"" _dm(unsigned long long int val){return val;}
+constexpr Meter operator"" _m(unsigned long long int val){return val;}
+constexpr Decameter operator"" _dam(unsigned long long int val){return val;}
+constexpr Hectometer operator"" _hm(unsigned long long int val){return val;}
+constexpr Kilometer operator"" _km(unsigned long long int val){return val;}
+constexpr Megameter operator"" _Mm(unsigned long long int val){return val;}
+constexpr Gigameter operator"" _Gm(unsigned long long int val){return val;}
+constexpr Terameter operator"" _Tm(unsigned long long int val){return val;}
+constexpr Petameter operator"" _Pm(unsigned long long int val){return val;}
+constexpr Exameter operator"" _Em(unsigned long long int val){return val;}
+constexpr Zettameter operator"" _Zm(unsigned long long int val){return val;}
+constexpr Yottameter operator"" _Ym(unsigned long long int val){return val;}
+
+constexpr Angstrom operator"" _a(unsigned long long int val){return val;}
+constexpr Astronomical_unit operator"" _AU(unsigned long long int val){return val;}
+constexpr Lightsecond operator"" _ls(unsigned long long int val){return val;}
+constexpr Lightminute operator"" _lmin(unsigned long long int val){return val;}
+constexpr Lightyear operator"" _ly(unsigned long long int val){return val;}
+constexpr Parsec operator"" _pc(unsigned long long int val){return val;}
+constexpr Kiloparsec operator"" _kpc(unsigned long long int val){return val;}
+constexpr Megaparsec operator"" _Mpc(unsigned long long int val){return val;}
+constexpr Gigaparsec operator"" _Gpc(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

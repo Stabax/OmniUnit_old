@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 0, 0, 0, 1, 0, 0, 0> Quantity;
+typedef Dimension<0,0,0,0,0,1,0> Quantity;
 
 
 
@@ -144,6 +144,7 @@ namespace suffixes
 
 
 
+constexpr Yoctomol operator"" _ymol(long double val){return val;}
 constexpr Zeptomol operator"" _zmol(long double val){return val;}
 constexpr Attomol operator"" _amol(long double val){return val;}
 constexpr Femtomol operator"" _fmol(long double val){return val;}
@@ -165,6 +166,27 @@ constexpr Zettamol operator"" _Zmol(long double val){return val;}
 constexpr Yottamol operator"" _Ymol(long double val){return val;}
 
 
+
+constexpr Yoctomol operator"" _ymol(unsigned long long int val){return val;}
+constexpr Zeptomol operator"" _zmol(unsigned long long int val){return val;}
+constexpr Attomol operator"" _amol(unsigned long long int val){return val;}
+constexpr Femtomol operator"" _fmol(unsigned long long int val){return val;}
+constexpr Nanomol operator"" _nmol(unsigned long long int val){return val;}
+constexpr Micromol operator"" _umol(unsigned long long int val){return val;}
+constexpr Millimol operator"" _mmol(unsigned long long int val){return val;}
+constexpr Centimol operator"" _cmol(unsigned long long int val){return val;}
+constexpr Decimol operator"" _dmol(unsigned long long int val){return val;}
+constexpr Mol operator"" _mol(unsigned long long int val){return val;}
+constexpr Decamol operator"" _damol(unsigned long long int val){return val;}
+constexpr Hectomol operator"" _hmol(unsigned long long int val){return val;}
+constexpr Kilomol operator"" _kmol(unsigned long long int val){return val;}
+constexpr Megamol operator"" _Mmol(unsigned long long int val){return val;}
+constexpr Gigamol operator"" _Gmol(unsigned long long int val){return val;}
+constexpr Teramol operator"" _Tmol(unsigned long long int val){return val;}
+constexpr Petamol operator"" _Pmol(unsigned long long int val){return val;}
+constexpr Examol operator"" _Emol(unsigned long long int val){return val;}
+constexpr Zettamol operator"" _Zmol(unsigned long long int val){return val;}
+constexpr Yottamol operator"" _Ymol(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

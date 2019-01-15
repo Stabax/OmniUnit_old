@@ -39,7 +39,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 0, 0, 1, 0, 0, 0, 0, 0> ElectricIntensity;
+typedef Dimension<0,0,0,1,0,0,0> ElectricIntensity;
 
 
 
@@ -158,6 +158,26 @@ constexpr Exaampere operator"" _EA(long double val){return val;}
 constexpr Zettaampere operator"" _ZA(long double val){return val;}
 constexpr Yottaampere operator"" _YA(long double val){return val;}
 
+constexpr Yoctoampere operator"" _yA(unsigned long long int val){return val;}
+constexpr Zeptoampere operator"" _zA(unsigned long long int val){return val;}
+constexpr Attoampere operator"" _aA(unsigned long long int val){return val;}
+constexpr Femtoampere operator"" _fA(unsigned long long int val){return val;}
+constexpr Nanoampere operator"" _nA(unsigned long long int val){return val;}
+constexpr Microampere operator"" _uA(unsigned long long int val){return val;}
+constexpr Milliampere operator"" _mA(unsigned long long int val){return val;}
+constexpr Centiampere operator"" _cA(unsigned long long int val){return val;}
+constexpr Deciampere operator"" _dA(unsigned long long int val){return val;}
+constexpr Ampere operator"" _A(unsigned long long int val){return val;}
+constexpr Decaampere operator"" _daA(unsigned long long int val){return val;}
+constexpr Hectoampere operator"" _hA(unsigned long long int val){return val;}
+constexpr Kiloampere operator"" _kA(unsigned long long int val){return val;}
+constexpr Megaampere operator"" _MA(unsigned long long int val){return val;}
+constexpr Gigaampere operator"" _GA(unsigned long long int val){return val;}
+constexpr Teraampere operator"" _TA(unsigned long long int val){return val;}
+constexpr Petaampere operator"" _PA(unsigned long long int val){return val;}
+constexpr Exaampere operator"" _EA(unsigned long long int val){return val;}
+constexpr Zettaampere operator"" _ZA(unsigned long long int val){return val;}
+constexpr Yottaampere operator"" _YA(unsigned long long int val){return val;}
 
 
 } //namespaxe suffixies

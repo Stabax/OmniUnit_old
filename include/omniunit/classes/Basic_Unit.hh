@@ -136,10 +136,10 @@ struct partial_specialization_wrapper
 //cast omniunit::duration to another omniunit::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
-Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
-  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0,0,0>>(Obj);
+  return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0>>(Obj);
 }
 
 
@@ -148,7 +148,7 @@ Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
 partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
-Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
 }
@@ -156,7 +156,7 @@ Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
 
 //cast omniunit::duration to toUnit
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
-constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period, Origin> const& Obj)
+constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
 }
@@ -166,7 +166,7 @@ constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, Rep, Period,
 //cast std::chrono::duration to omniunit::duration
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -242,7 +242,7 @@ public:
   constexpr Basic_Unit(std::chrono::duration<_Rep, _Period> const& Obj):
   Basic_Unit(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
   {
-    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
 
@@ -260,7 +260,7 @@ public:
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   constexpr Basic_Unit& operator=(std::chrono::duration<_Rep, _Period> const& Obj)
   {
-    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is assignable with an std::chrono::duration");
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is assignable with an std::chrono::duration");
     _count = Basic_Unit(Obj)._count;
     return *this;
   }
@@ -269,7 +269,7 @@ public:
   template<typename _Rep, typename _Period> //transform a stb::omni::duration into a std::chrono::duration
   constexpr operator std::chrono::duration<_Rep, _Period>() const
   {
-    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
     return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, zero>(*this).count());
   }
 
@@ -394,16 +394,16 @@ public:
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Basic_Unit& operator*=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
+  Basic_Unit& operator*=(Basic_Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
     if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
+    Basic_Unit<Dimension<0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
 
     if(OMNI_TRUE_ZERO)
@@ -438,16 +438,16 @@ public:
 
 
   template<typename _Rep, typename _Period, double const& _Origin>
-  Basic_Unit& operator/=(Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
+  Basic_Unit& operator/=(Basic_Unit<Dimension<0,0,0,0,0,0,0>, _Rep, _Period, _Origin> Obj)
   {
     if(OMNI_TRUE_ZERO)
     {
       *this += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
-      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
+      Obj += Basic_Unit<Dimension<0,0,0,0,0,0,0>, _Rep, base, _Origin>(_Origin);
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
+    Basic_Unit<Dimension<0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
 
     if(OMNI_TRUE_ZERO)
@@ -588,7 +588,7 @@ constexpr auto operator% (T const& coef, Basic_Unit<_Dimension, Rep, Period, Ori
 {
   static_assert(std::is_arithmetic<T>::value, "Operands must be a unit and an arithmetic.");
 
-  return (Basic_Unit<Dimension<0,0,0,0,0,0,0,0,0>, T, base, zero>(coef) %= Obj).count();
+  return (Basic_Unit<Dimension<0,0,0,0,0,0,0>, T, base, zero>(coef) %= Obj).count();
 }
 
 
@@ -652,7 +652,7 @@ constexpr auto operator/ (T const& coef, Basic_Unit<_Dimension, Rep, Period, Ori
   }
 
   typedef typename std::common_type<Rep, T>::type common;
-  typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0,0,0>, _Dimension>::type newDim;
+  typedef typename Dimension_divide<Dimension<0,0,0,0,0,0,0>, _Dimension>::type newDim;
   typedef typename Ratio_over_Ratio<Ratio<E0, E0>, Period>::type newPeriod;
   typedef Basic_Unit<newDim, common, newPeriod, origin_division<zero, Origin>::value> type;
 
@@ -758,54 +758,62 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
 
 
-template <typename Rep, typename Period, double const& Origin>
-constexpr auto exp(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Exp parameter must be dinmensionless.");
+
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
   return std::exp(newObj.count());
 }
 
 
-template <typename Rep, typename Period, double const& Origin>
-constexpr auto exp(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj, float basis)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Exp parameter must be dinmensionless.");
+
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
   return std::exp(static_cast<Rep>(Obj.count() * std::log(basis)));
 }
 
 
-template <typename Rep, typename Period, double const& Origin>
-constexpr auto ln(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Ln parameter must be dinmensionless.");
+
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
   return std::log(Obj.count());
 }
 
 
-template <typename Rep, typename Period, double const& Origin>
-constexpr auto ln(Basic_Unit<Dimensionless, Rep, Period, Origin> Obj, float basis)
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Ln parameter must be dinmensionless.");
+
   if(OMNI_TRUE_ZERO)
   {
-    Obj += Basic_Unit<Dimensionless, Rep, base, Origin>(Origin);
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
   }
 
-  Basic_Unit<Dimensionless, Rep, base, Origin> newObj(Obj);
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
   auto temp = std::log(Obj.count());
   return static_cast<decltype(temp)>(temp / std::log(basis));
 }
@@ -856,6 +864,7 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
+
 
 //=============================================================================
 //=============================================================================

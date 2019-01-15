@@ -36,7 +36,10 @@ namespace omni
 {
 
 
-
+inline constexpr double two = 2.;
+inline constexpr double four = 4.;
+inline constexpr double degVal = 180.;
+inline constexpr double gradVal = 200.;
 inline constexpr double piE36 = 3141592653589793238462643383279502884.;
 inline constexpr double distanceTraveledByLightPerSec = 299792458.; // m
 inline constexpr double secondsPerMin = 60.; // s

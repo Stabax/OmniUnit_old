@@ -137,7 +137,7 @@ void show(int test, T const& var1, double ref = 0)
 
 int main()
 {
-  typedef omni::Unit<omni::Dimension<0,0,0,0,0,0,0,0,0>, float, omni::deci, omni::E1> scalar;
+  typedef omni::Unit<omni::Dimension<0,0,0,0,0,0,0>, float, omni::deci, omni::E1> scalar;
 
 
 
@@ -277,7 +277,7 @@ int main()
   show(29, var29, VAR29);
 
 
-  omni::Unit<omni::Dimension<0,0,0,0,0,0,0,0,0>, long double, omni::deci, omni::E1> temp30(-100); //1
+  omni::Unit<omni::Dimension<0,0,0,0,0,0,0>, long double, omni::deci, omni::E1> temp30(-100); //1
   auto var30 = omni::exp(temp30);
   show(30, var30, VAR30);
 
@@ -285,7 +285,7 @@ int main()
   auto var31 = omni::pow(temp31);
   show(31, var31, VAR31);
 
-  omni::Basic_Unit<omni::Dimension<0,0,0,0,2,0,0,0,0>, double, omni::base, omni::celsiusConstant> temp32(0);
+  omni::Basic_Unit<omni::Dimension<0,0,0,0,2,0,0>, double, omni::base, omni::celsiusConstant> temp32(0);
   auto var32 = omni::nroot(temp32);
   show(32, var32, VAR32);
 
@@ -322,7 +322,7 @@ int main()
   getM();
   foo();
 
-  auto yougatazbeul = 8.45_ms;
+  auto yougatazbeul = -8_val;
 
 return 0;
 }

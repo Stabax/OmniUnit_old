@@ -41,7 +41,7 @@ namespace omni
 
 
 
-typedef Dimension<0, 1, 0, 0, 0, 0, 0, 0, 0> Mass;
+typedef Dimension<0,1,0,0,0,0,0> Mass;
 
 
 
@@ -224,6 +224,37 @@ constexpr Ton operator"" _ton(long double val){return val;}
 constexpr Solar_mass operator"" _SM(long double val){return val;}
 
 
+
+constexpr Zeptogram operator"" _zg(unsigned long long int val){return val;}
+constexpr Attogram operator"" _ag(unsigned long long int val){return val;}
+constexpr Femtogram operator"" _fg(unsigned long long int val){return val;}
+constexpr Nanogram operator"" _ng(unsigned long long int val){return val;}
+constexpr Microgram operator"" _ug(unsigned long long int val){return val;}
+constexpr Milligram operator"" _mg(unsigned long long int val){return val;}
+constexpr Centigram operator"" _cg(unsigned long long int val){return val;}
+constexpr Decigram operator"" _dg(unsigned long long int val){return val;}
+constexpr Gram operator"" _g(unsigned long long int val){return val;}
+constexpr Decagram operator"" _dag(unsigned long long int val){return val;}
+constexpr Hectogram operator"" _hg(unsigned long long int val){return val;}
+constexpr Kilogram operator"" _kg(unsigned long long int val){return val;}
+constexpr Megagram operator"" _Mg(unsigned long long int val){return val;}
+constexpr Gigagram operator"" _Gg(unsigned long long int val){return val;}
+constexpr Teragram operator"" _Tg(unsigned long long int val){return val;}
+constexpr Petagram operator"" _Pg(unsigned long long int val){return val;}
+constexpr Exagram operator"" _Eg(unsigned long long int val){return val;}
+constexpr Zettagram operator"" _Zg(unsigned long long int val){return val;}
+constexpr Yottagram operator"" _Yg(unsigned long long int val){return val;}
+
+constexpr Atomic_mass operator"" _u(unsigned long long int val){return val;}
+constexpr EvPerC2 operator"" _eVc2(unsigned long long int val){return val;}
+constexpr MillievPerC2 operator"" _meVc2(unsigned long long int val){return val;}
+constexpr MicroevPerC2 operator"" _ueVc2(unsigned long long int val){return val;}
+constexpr KiloevPerC2 operator"" _keVc2(unsigned long long int val){return val;}
+constexpr MegaevPerC2 operator"" _MeVc2(unsigned long long int val){return val;}
+constexpr GigaevPerC2 operator"" _GeVc2(unsigned long long int val){return val;}
+constexpr TeraevPerC2 operator"" _TeVc2(unsigned long long int val){return val;}
+constexpr Ton operator"" _ton(unsigned long long int val){return val;}
+constexpr Solar_mass operator"" _SM(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 
