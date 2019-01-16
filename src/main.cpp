@@ -324,5 +324,9 @@ int main()
 
   auto yougatazbeul = -8_val;
 
+  auto yougataharam = 180_deg;
+  auto bla = omni::cos(yougataharam);
+  std::cout << bla << "\n";
+
 return 0;
 }

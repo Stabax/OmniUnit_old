@@ -761,7 +761,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
 constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
-  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Exp parameter must be dinmensionless.");
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "exp parameter must be dimensionless.");
 
   if(OMNI_TRUE_ZERO)
   {
@@ -776,7 +776,7 @@ constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
 constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 {
-  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Exp parameter must be dinmensionless.");
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "exp parameter must be dimensionless.");
 
   if(OMNI_TRUE_ZERO)
   {
@@ -789,9 +789,9 @@ constexpr auto exp(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 {
-  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Ln parameter must be dinmensionless.");
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "ln parameter must be dimensionless.");
 
   if(OMNI_TRUE_ZERO)
   {
@@ -804,9 +804,9 @@ constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 
 
 template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
+constexpr auto log(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, double basis)
 {
-  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "Ln parameter must be dinmensionless.");
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "ln parameter must be dimensionless.");
 
   if(OMNI_TRUE_ZERO)
   {
@@ -814,8 +814,7 @@ constexpr auto ln(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, float basis)
   }
 
   Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
-  auto temp = std::log(Obj.count());
-  return static_cast<decltype(temp)>(temp / std::log(basis));
+  return log(Obj) / std::log(basis);
 }
 
 
@@ -853,8 +852,21 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
   }
 
   typedef Basic_Unit<typename Dimension_root<_Dimension, basis>::type, Rep, typename Ratio_root<Period, basis>::type, origin_root<Origin, basis>::value> type;
-  return type(std::pow(Obj.count(), 1.0/basis));
+  return type(std::pow(Obj.count(), 1./basis));
 }
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto sqrt(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  return nroot(Obj);
+}
+
 
 
 //=============================================================================
@@ -866,6 +878,199 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 //=============================================================================
 
 
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto cos(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::cos(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto sin(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::sin(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto tan(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::tan(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto sec(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./cos(Obj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto csc(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./sin(Obj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto cot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./tan(Obj);
+}
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== REVERSE TRIGONOMETRIC FUNCTIONS =========================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acos(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::acos(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto asin(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::asin(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto atan(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::atan(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto asec(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return acos(1./newObj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acsc(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return asin(1./newObj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+
+  return atan(1./newObj);
+}
+
+
+
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -873,6 +1078,201 @@ constexpr auto nroot(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
 //=============================================================================
 //=============================================================================
 //=============================================================================
+
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto cosh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::cosh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto sinh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::sinh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto tanh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::tanh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto sech(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./cosh(Obj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto csch(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./sinh(Obj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto coth(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return 1./tanh(Obj);
+}
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== REVERSE HYPERBOLIC FUNCTIONS ============================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acosh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::acosh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto asinh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::asinh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto atanh(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return std::atanh(newObj.count());
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto asech(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return acosh(1./newObj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acsch(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+  return asinh(1./newObj);
+}
+
+
+template <typename _Dimension, typename Rep, typename Period, double const& Origin>
+constexpr auto acoth(Basic_Unit<_Dimension, Rep, Period, Origin> Obj)
+{
+  static_assert(std::is_same<_Dimension, Dimension<0,0,0,0,0,0,0>>::value, "cos parameter must be dimensionless.");
+
+  if(OMNI_TRUE_ZERO)
+  {
+    Obj += Basic_Unit<_Dimension, Rep, base, Origin>(Origin);
+  }
+
+  Basic_Unit<_Dimension, Rep, base, Origin> newObj(Obj);
+
+  return atanh(1./newObj);
+}
+
+
 
 //=============================================================================
 //=============================================================================

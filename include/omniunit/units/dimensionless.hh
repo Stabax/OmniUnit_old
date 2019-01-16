@@ -59,10 +59,10 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using grad = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, gradVal>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using minutearc = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerMin>::type, zero>;
+using arcminute = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerMin>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using secondarc = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerHour>::type, zero>;
+using arcsecond = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerHour>::type, zero>;
 
 
 
@@ -85,8 +85,8 @@ typedef milliradian<> Milliradian;
 typedef turn<> Turn;
 typedef degree<> Degree;
 typedef grad<> Grad;
-typedef minutearc<> Minutearc;
-typedef secondarc<> Secondarc;
+typedef arcminute<> Arcminute;
+typedef arcsecond<>Arcsecond;
 typedef steradian<> Steradian;
 typedef hemishpere<> Hemisphere;
 typedef shpere<> Sphere;
@@ -105,8 +105,8 @@ constexpr Milliradian operator"" _mrad(long double val){return val;}
 constexpr Turn operator"" _turn(long double val){return val;}
 constexpr Degree operator"" _deg(long double val){return val;}
 constexpr Grad operator"" _grad(long double val){return val;}
-constexpr Minutearc operator"" _minarc(long double val){return val;}
-constexpr Secondarc operator"" _sarc(long double val){return val;}
+constexpr Arcminute operator"" _arcmin(long double val){return val;}
+constexpr Arcsecond operator"" _arcs(long double val){return val;}
 constexpr Steradian operator"" _sr(long double val){return val;}
 constexpr Hemisphere operator"" _hsphe(long double val){return val;}
 constexpr Sphere operator"" _sphe(long double val){return val;}
@@ -118,8 +118,8 @@ constexpr Milliradian operator"" _mrad(unsigned long long int val){return val;}
 constexpr Turn operator"" _turn(unsigned long long int val){return val;}
 constexpr Degree operator"" _deg(unsigned long long int val){return val;}
 constexpr Grad operator"" _grad(unsigned long long int val){return val;}
-constexpr Minutearc operator"" _minarc(unsigned long long int val){return val;}
-constexpr Secondarc operator"" _sarc(unsigned long long int val){return val;}
+constexpr Arcminute operator"" _arcmin(unsigned long long int val){return val;}
+constexpr Arcsecond operator"" _arcs(unsigned long long int val){return val;}
 constexpr Steradian operator"" _sr(unsigned long long int val){return val;}
 constexpr Hemisphere operator"" _hsphe(unsigned long long int val){return val;}
 constexpr Sphere operator"" _sphe(unsigned long long int val){return val;}
