@@ -322,11 +322,10 @@ int main()
   getM();
   foo();
 
-  auto yougatazbeul = -8_val;
+  constexpr auto youg = 8_val;
+  constexpr auto youga = omni::exp(youg);
 
-  auto yougataharam = 180_deg;
-  auto bla = omni::cos(yougataharam);
-  std::cout << bla << "\n";
+  
 
 return 0;
 }

@@ -1,4 +1,4 @@
-# 1.1. List of all pre-defined units #
+# 2. Predefined units #
 
 ## All defined dimensions ##
 
@@ -15,8 +15,6 @@ Dimension<0, 0, 0, 0, 0, 0, 1>   Luminosity\n
 ### Derived dimensions ###
 
 ## All defined ratios ##
-
-These ratios are defined :
 
 Ratio<E0, E24>   yocto;\n
 Ratio<E0, E21>   zepto;\n
