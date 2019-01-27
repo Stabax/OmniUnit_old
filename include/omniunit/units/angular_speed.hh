@@ -36,8 +36,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace omni
 {
 
+typedef Dimension<0,0,-1,0,0,0,0> AngularSpeed;
+
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using turnPerMinute = Unit<Dimensionless, Rep,
+using turnPerMinute = Unit<AngularSpeed, Rep,
 typename Ratio_over_value<typename value_times_Ratio<two, pi>::type, secondsPerMin>::type, zero>;
 
 

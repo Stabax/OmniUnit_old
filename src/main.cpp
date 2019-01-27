@@ -306,7 +306,7 @@ int main()
 
   omni::KilometerPerHour _speed;
   omni::Inch radius;
-  omni::perMinute<int> _revolutions;
+  omni::turnPerMinute<int> _revolutions;
   omni::NewtonMeter _torque;
   omni::perMinute<int> _mRevolutions;
   omni::Horsepower mPower;
@@ -318,6 +318,7 @@ int main()
   _torque = ((_revolutions > _mRevolutions ? -1  : 1) * mPower / omni::pow<2>(_mRevolutions)) * _revolutions;
   omni::Watt cineticDiff =  omni::Horsepower(0) - (_mass * omni::MeterPerSecond2(9.81) * (gradient / (_speed * tickDuration)) * _speed);
 
+  mPower = _torque * _revolutions;
 
   getM();
   foo();
