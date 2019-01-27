@@ -323,9 +323,9 @@ int main()
   foo();
 
   constexpr auto youg = 8_val;
-  constexpr auto youga = omni::exp(youg);
+  [[maybe_unused]] constexpr auto youga = omni::exp(youg);
 
-  
+
 
 return 0;
 }

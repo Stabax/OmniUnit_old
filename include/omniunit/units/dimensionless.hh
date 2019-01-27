@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef DIMENSIONLESS_HH_
 #define DIMENSIONLESS_HH_
 
-#include"constants_for_units.hh"
+#include "constants_for_units.hh"
 
 
 namespace omni
