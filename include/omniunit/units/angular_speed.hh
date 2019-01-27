@@ -38,7 +38,7 @@ namespace omni
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using turnPerMinute = Unit<Dimensionless, Rep,
-typename Ratio_over_value<typename value_times_Ratio<two, pi>::type>, sixty>::type, zero>;
+typename Ratio_over_value<typename value_times_Ratio<two, pi>::type, secondsPerMin>::type, zero>;
 
 
 typedef turnPerMinute<> TurnPerMinute;
