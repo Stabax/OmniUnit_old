@@ -41,6 +41,9 @@ using turnPerMinute = Unit<Dimensionless, Rep,
 typename Ratio_over_value<typename value_times_Ratio<two, pi>::type>, sixty>::type, zero>;
 
 
+typedef turnPerMinute<> TurnPerMinute;
+
+
 namespace suffixes
 {
 
