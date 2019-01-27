@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['date',['Date',['../classomni_1_1Date.html',1,'omni']]],
-  ['date_5fexception',['Date_exception',['../classomni_1_1Date__exception.html',1,'omni']]],
-  ['dimension',['Dimension',['../structomni_1_1Dimension.html',1,'omni']]],
-  ['dimension_5fdivide',['Dimension_divide',['../structomni_1_1Dimension__divide.html',1,'omni']]],
-  ['dimension_5fmultiply',['Dimension_multiply',['../structomni_1_1Dimension__multiply.html',1,'omni']]],
-  ['dimension_5fpower',['Dimension_power',['../structomni_1_1Dimension__power.html',1,'omni']]],
-  ['dimension_5froot',['Dimension_root',['../structomni_1_1Dimension__root.html',1,'omni']]]
+  ['omniunit_20overview',['OmniUnit overview',['../index.html',1,'']]],
+  ['origin_5fdivision',['origin_division',['../structomni_1_1origin__division.html',1,'omni']]],
+  ['origin_5fpower',['origin_power',['../structomni_1_1origin__power.html',1,'omni']]],
+  ['origin_5fproduct',['origin_product',['../structomni_1_1origin__product.html',1,'omni']]],
+  ['origin_5froot',['origin_root',['../structomni_1_1origin__root.html',1,'omni']]]
 ];

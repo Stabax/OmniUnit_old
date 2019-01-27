@@ -71,7 +71,6 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classomni_1_1Basic__Unit-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">omni::Basic_Unit&lt; _Dimension, Rep, Period, Origin &gt; Class Template Reference</div>  </div>
@@ -122,6 +121,18 @@ constexpr Rep&#160;</td><td class="memItemRight" valign="bottom"><b>count</b> ()
 <tr class="memitem:a5977e121e9deed9e6bf02580c2a4e018"><td class="memItemLeft" align="right" valign="top"><a id="a5977e121e9deed9e6bf02580c2a4e018"></a>
 constexpr std::string&#160;</td><td class="memItemRight" valign="bottom"><b>dimension</b> () const</td></tr>
 <tr class="separator:a5977e121e9deed9e6bf02580c2a4e018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2025c55f99f3bd8daf50a2abd0c93fd6"><td class="memItemLeft" align="right" valign="top"><a id="a2025c55f99f3bd8daf50a2abd0c93fd6"></a>
+<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ceil</b> (unsigned decimal=1)</td></tr>
+<tr class="separator:a2025c55f99f3bd8daf50a2abd0c93fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a162cf1557843af22a812353d9a7f19dc"><td class="memItemLeft" align="right" valign="top"><a id="a162cf1557843af22a812353d9a7f19dc"></a>
+<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>floor</b> (unsigned decimal=1)</td></tr>
+<tr class="separator:a162cf1557843af22a812353d9a7f19dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c0115f99f46b1c1f010244275a0af82"><td class="memItemLeft" align="right" valign="top"><a id="a0c0115f99f46b1c1f010244275a0af82"></a>
+<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>round</b> (unsigned decimal=1)</td></tr>
+<tr class="separator:a0c0115f99f46b1c1f010244275a0af82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a3975273e49c9497d555e6079687d30"><td class="memItemLeft" align="right" valign="top"><a id="a1a3975273e49c9497d555e6079687d30"></a>
+<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>trunc</b> (unsigned decimal=1)</td></tr>
+<tr class="separator:a1a3975273e49c9497d555e6079687d30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33ad8073743052c892a8a10e56f0d51f"><td class="memItemLeft" align="right" valign="top"><a id="a33ad8073743052c892a8a10e56f0d51f"></a>
 <a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator++</b> ()</td></tr>
 <tr class="separator:a33ad8073743052c892a8a10e56f0d51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,18 +157,18 @@ template&lt;typename __Dimension , typename _Rep , typename _Period , double con
 template&lt;typename _Rep &gt; </td></tr>
 <tr class="memitem:a8edee7fc1378e8681b5c9edd7868727c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*=</b> (_Rep const &amp;coef)</td></tr>
 <tr class="separator:a8edee7fc1378e8681b5c9edd7868727c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0d8027aea50f447087e8e185c58d9ec"><td class="memTemplParams" colspan="2"><a id="ac0d8027aea50f447087e8e185c58d9ec"></a>
+<tr class="memitem:a6fcea747135913c179733e71c6921624"><td class="memTemplParams" colspan="2"><a id="a6fcea747135913c179733e71c6921624"></a>
 template&lt;typename _Rep , typename _Period , double const &amp; _Origin&gt; </td></tr>
-<tr class="memitem:ac0d8027aea50f447087e8e185c58d9ec"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; <a class="el" href="structomni_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0, 0, 0 &gt;, _Rep, _Period, _Origin &gt; Obj)</td></tr>
-<tr class="separator:ac0d8027aea50f447087e8e185c58d9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fcea747135913c179733e71c6921624"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator*=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; <a class="el" href="structomni_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0 &gt;, _Rep, _Period, _Origin &gt; Obj)</td></tr>
+<tr class="separator:a6fcea747135913c179733e71c6921624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a478bf12c61f1448ca0e7db3e5c850252"><td class="memTemplParams" colspan="2"><a id="a478bf12c61f1448ca0e7db3e5c850252"></a>
 template&lt;typename _Rep &gt; </td></tr>
 <tr class="memitem:a478bf12c61f1448ca0e7db3e5c850252"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/=</b> (_Rep const &amp;coef)</td></tr>
 <tr class="separator:a478bf12c61f1448ca0e7db3e5c850252"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2b9fa59c8d156353590b61957c154ee"><td class="memTemplParams" colspan="2"><a id="ad2b9fa59c8d156353590b61957c154ee"></a>
+<tr class="memitem:a709d89b23652baeee80e2c88219c0241"><td class="memTemplParams" colspan="2"><a id="a709d89b23652baeee80e2c88219c0241"></a>
 template&lt;typename _Rep , typename _Period , double const &amp; _Origin&gt; </td></tr>
-<tr class="memitem:ad2b9fa59c8d156353590b61957c154ee"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; <a class="el" href="structomni_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0, 0, 0 &gt;, _Rep, _Period, _Origin &gt; Obj)</td></tr>
-<tr class="separator:ad2b9fa59c8d156353590b61957c154ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709d89b23652baeee80e2c88219c0241"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator/=</b> (<a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a>&lt; <a class="el" href="structomni_1_1Dimension.html">Dimension</a>&lt; 0, 0, 0, 0, 0, 0, 0 &gt;, _Rep, _Period, _Origin &gt; Obj)</td></tr>
+<tr class="separator:a709d89b23652baeee80e2c88219c0241"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15ee658a3c0fd38a9feddee29c32c002"><td class="memTemplParams" colspan="2"><a id="a15ee658a3c0fd38a9feddee29c32c002"></a>
 template&lt;typename _Rep &gt; </td></tr>
 <tr class="memitem:a15ee658a3c0fd38a9feddee29c32c002"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classomni_1_1Basic__Unit.html">Basic_Unit</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator%=</b> (_Rep const &amp;coef)</td></tr>
@@ -184,17 +195,11 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a990df999bb4d849d4825af48301ad607"><td class="memItemLeft" align="right" valign="top"><a id="a990df999bb4d849d4825af48301ad607"></a>
 static constexpr double&#160;</td><td class="memItemRight" valign="bottom"><b>origin</b> = Origin</td></tr>
 <tr class="separator:a990df999bb4d849d4825af48301ad607"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a00b1027d95e72d8ae436e1eed51803ec"><td class="memItemLeft" align="right" valign="top"><a id="a00b1027d95e72d8ae436e1eed51803ec"></a>
-Rep&#160;</td><td class="memItemRight" valign="bottom"><b>_count</b></td></tr>
-<tr class="separator:a00b1027d95e72d8ae436e1eed51803ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 9 2019 18:54:53 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jan 18 2019 18:47:07 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

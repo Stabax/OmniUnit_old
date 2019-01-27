@@ -1,4 +1,4 @@
-# 2. Predefined units #
+# Predefined units #
 
 ## All defined dimensions ##
 

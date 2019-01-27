@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['5_2e_20chronoscale_20tutorial',['5. ChronoScale tutorial',['../md_doc_5_8_ChronoScale_tutorial.html',1,'']]]
+  ['how_20to_20use_20units',['How to use units',['../md_doc_1_8_How_to_use_units.html',1,'']]],
+  ['how_20to_20use_20uncertainties',['How to use uncertainties',['../md_doc_3_8_How_to_use_uncertainties.html',1,'']]],
+  ['how_20to_20create_20units',['How to create units',['../md_doc_4_8_How_to_create_units.html',1,'']]]
 ];
