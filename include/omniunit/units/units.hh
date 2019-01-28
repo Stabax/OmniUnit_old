@@ -31,7 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef UNITS_HH_
 #define UNITS_HH_
 
-#include "dimensionless.hh"
+#include "dimensionless_angle.hh"
 #include "angular_speed.hh"
 #include "duration.hh"
 #include "electric_intensity.hh"

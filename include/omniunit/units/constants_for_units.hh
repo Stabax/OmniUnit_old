@@ -36,11 +36,13 @@ namespace omni
 {
 
 
+inline constexpr double one = 1.;
 inline constexpr double two = 2.;
 inline constexpr double four = 4.;
 inline constexpr double degVal = 180.;
 inline constexpr double gradVal = 200.;
 inline constexpr double piE36 = 3141592653589793238462643383279502884.;
+inline constexpr double tauE36 = 2 * piE36;
 inline constexpr double distanceTraveledByLightPerSec = 299792458.; // m
 inline constexpr double secondsPerMin = 60.; // s
 inline constexpr double secondsPerHour = 60. * 60.; // s
@@ -59,6 +61,7 @@ inline constexpr double celsiusConstant = 273.15;
 
 
 typedef Ratio<piE36, E36> pi;
+typedef Ratio<tauE36, E36> tau;
 typedef Ratio<secondsPerYearE2, E2> secondsPerYear;
 typedef Ratio_over_Ratio<Ratio<parsecDef, E0>, pi>::type parsecDefinition;
 typedef Ratio_over_value<Ratio<atomic_massDefE9, E9>, E27>::type atomic_massDefinition;

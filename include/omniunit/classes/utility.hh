@@ -101,6 +101,17 @@ constexpr bool is_positive_integer(T const& number)
 }
 
 
+template <typename T>
+constexpr long long unsigned factorial(T const& n)
+{
+  static_assert(std::is_integral<T>::value && std::is_unsigned<T>::value, "Factorial argument must be a unsigned integer type");
+  return ((n == 1 || n == 0) ? 1 : factorial(n-1) * n);
+}
+
+
+constexpr long long unsigned operator"" _fact(unsigned long long n) {return factorial(n);}
+
+
 
 //=============================================================================
 //=============================================================================

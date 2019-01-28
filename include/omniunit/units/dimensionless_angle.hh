@@ -1,4 +1,4 @@
-//dimensionless.hh
+//dimensionless_angle.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.
@@ -28,8 +28,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DIMENSIONLESS_HH_
-#define DIMENSIONLESS_HH_
+#ifndef DIMENSIONLESS_ANGLE_HH_
+#define DIMENSIONLESS_ANGLE_HH_
 
 #include "constants_for_units.hh"
 
@@ -50,7 +50,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using milliradian = Unit<Dimensionless, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using turn = Unit<Dimensionless, Rep, typename value_times_Ratio<two, pi>::type, zero>;
+using turn = Unit<Dimensionless, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using degree = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, degVal>::type, zero>;
@@ -70,7 +70,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using steradian = Unit<Dimensionless, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hemishpere = Unit<Dimensionless, Rep, typename value_times_Ratio<two, pi>::type, zero>;
+using hemishpere = Unit<Dimensionless, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using shpere = Unit<Dimensionless, Rep, typename value_times_Ratio<four, pi>::type, zero>;
@@ -134,4 +134,4 @@ constexpr Degree2 operator"" _deg2(unsigned long long int val){return val;}
 } //namespace omni
 
 
-#endif //DIMENSIONLESS_HH_
+#endif //DIMENSIONLESS_ANGLE_HH_
