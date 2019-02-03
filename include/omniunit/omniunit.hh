@@ -42,7 +42,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace omni
 {
 
-#if OMNI_USE_UNCERTAINTIES == true
+#if OMNI_DEFAULT_IS_UNCERTAINTY == true
+  #if OMNI_ENABLE_UNCERTAINTIES == false
+    #error "default unit is set on uncertainty but uncertainties aren't enabled."
+  #endif //OMNI_ENABLE_UNCERTAINTIES == false
 
   template <typename _Dimension, typename Rep, typename Period, double const& Origin>
   using Unit = Complete_Unit<_Dimension, Rep, Period, Origin>;

@@ -306,7 +306,7 @@ int main()
 
   omni::KilometerPerHour _speed;
   omni::Inch radius;
-  omni::turnPerMinute<int> _revolutions;
+  omni::revolutionPerMinute<int> _revolutions;
   omni::NewtonMeter _torque;
   omni::perMinute<int> _mRevolutions;
   omni::Horsepower mPower;
@@ -323,7 +323,7 @@ int main()
   getM();
   foo();
 
-  constexpr auto youg = 8_val;
+  constexpr auto youg = 8_;
   [[maybe_unused]] constexpr auto youga = omni::exp(youg);
 
 

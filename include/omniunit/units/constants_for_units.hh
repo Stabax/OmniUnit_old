@@ -53,10 +53,22 @@ inline constexpr double secondsPerYearE2 = 36525. * 24. *3600.; // s
 inline constexpr double distanceSunEarth = 149597870700.; //m
 inline constexpr double parsecDef = 648000.;
 inline constexpr double atomic_massDefE9 = 1660538921.; //kg * 10^-27
-inline constexpr double evPerC2DefE8     =  178266191.; //kg * 10^-36
-inline constexpr double solar_massDefE4     =  19884.; //kg * 10^30
+inline constexpr double evPerC2DefE8 = 178266191.; //kg * 10^-36
+inline constexpr double solar_massDefE4 = 19884.; //kg * 10^30
 inline constexpr double avogadroE9 = 6022140857.; //10^23
 inline constexpr double celsiusConstant = 273.15;
+inline constexpr double inchE2 = 254.; //cm
+inline constexpr double linkE4 = 201168; //cm
+inline constexpr double footE2 = 3048; //cm
+inline constexpr double yardE2 = 9144; //cm
+inline constexpr double rodE4 = 50292; //m
+inline constexpr double chainE4 = 201168; //m
+inline constexpr double mileE3 = 1609344.; //m
+inline constexpr double leagueE3 = 4828032; //m
+inline constexpr double nauticmileDef = 1852; //m
+inline constexpr double fathomE4 = 18288; //m
+inline constexpr double picaE4 = 42333; //mm
+inline constexpr double pointE6 = 88194; //mm
 
 
 

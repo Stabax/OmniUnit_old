@@ -35,15 +35,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 namespace omni
 {
-  inline constexpr double mileE3 = 1609344.;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using mile = Unit<Length, Rep, Ratio<mileE3, E3>, zero>;
-
-  inline constexpr double inchE2 = 254.;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using inch = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<inchE2, E2>, centi>::type, zero>;
 
   typedef Dimension<2,1,-2,0,0,0,0> Energy;
 

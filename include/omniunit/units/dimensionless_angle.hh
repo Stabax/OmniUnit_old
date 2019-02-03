@@ -50,7 +50,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using milliradian = Unit<Dimensionless, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using turn = Unit<Dimensionless, Rep, tau, zero>;
+using revolution = Unit<Dimensionless, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using degree = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, degVal>::type, zero>;
@@ -82,7 +82,7 @@ using  degree2 = Unit<Dimensionless, Rep, typename Ratio_power<typename degree<R
 typedef value<> Value;
 typedef radian<> Radian;
 typedef milliradian<> Milliradian;
-typedef turn<> Turn;
+typedef revolution<> Revolution;
 typedef degree<> Degree;
 typedef grad<> Grad;
 typedef arcminute<> Arcminute;
@@ -99,10 +99,10 @@ namespace suffixes
 
 
 
-constexpr value<OMNI_LITTERAL_FLOATING> operator"" _val(long double val){return val;}
+constexpr value<OMNI_LITTERAL_FLOATING> operator"" _(long double val){return val;}
 constexpr radian<OMNI_LITTERAL_FLOATING> operator"" _rad(long double val){return val;}
 constexpr milliradian<OMNI_LITTERAL_FLOATING> operator"" _mrad(long double val){return val;}
-constexpr turn<OMNI_LITTERAL_FLOATING> operator"" _turn(long double val){return val;}
+constexpr revolution<OMNI_LITTERAL_FLOATING> operator"" _rev(long double val){return val;}
 constexpr degree<OMNI_LITTERAL_FLOATING> operator"" _deg(long double val){return val;}
 constexpr grad<OMNI_LITTERAL_FLOATING> operator"" _grad(long double val){return val;}
 constexpr arcminute<OMNI_LITTERAL_FLOATING> operator"" _arcmin(long double val){return val;}
@@ -112,10 +112,10 @@ constexpr hemisphere<OMNI_LITTERAL_FLOATING> operator"" _hsphe(long double val){
 constexpr sphere<OMNI_LITTERAL_FLOATING> operator"" _sphe(long double val){return val;}
 constexpr degree2<OMNI_LITTERAL_FLOATING> operator"" _deg2(long double val){return val;}
 
-constexpr value<OMNI_LITTERAL_INTEGER> operator"" _val(unsigned long long int val){return val;}
+constexpr value<OMNI_LITTERAL_INTEGER> operator"" _(unsigned long long int val){return val;}
 constexpr radian<OMNI_LITTERAL_INTEGER> operator"" _rad(unsigned long long int val){return val;}
 constexpr milliradian<OMNI_LITTERAL_INTEGER> operator"" _mrad(unsigned long long int val){return val;}
-constexpr turn<OMNI_LITTERAL_INTEGER> operator"" _turn(unsigned long long int val){return val;}
+constexpr revolution<OMNI_LITTERAL_INTEGER> operator"" _rev(unsigned long long int val){return val;}
 constexpr degree<OMNI_LITTERAL_INTEGER> operator"" _deg(unsigned long long int val){return val;}
 constexpr grad<OMNI_LITTERAL_INTEGER> operator"" _grad(unsigned long long int val){return val;}
 constexpr arcminute<OMNI_LITTERAL_INTEGER> operator"" _arcmin(unsigned long long int val){return val;}

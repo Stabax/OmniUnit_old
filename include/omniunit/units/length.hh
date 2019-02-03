@@ -145,6 +145,43 @@ typename parsec<Rep>::period, giga>::type, zero>;
 
 
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using inch = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<inchE2, E2>, centi>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using link = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<linkE4, E4>, centi>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using foot = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<footE2, E2>, centi>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using yard = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<yardE2, E2>, centi>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using rod = Unit<Length, Rep, Ratio<rodE4, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using chain = Unit<Length, Rep, Ratio<chainE4, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using mile = Unit<Length, Rep, Ratio<mileE3, E3>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using league = Unit<Length, Rep, Ratio<leagueE3, E3>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using nauticmile = Unit<Length, Rep, Ratio<nauticmileDef, E0>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using fathom = Unit<Length, Rep, Ratio<fathomE4, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using pica = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<picaE4, E4>, milli>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using point = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<pointE6, E6>, milli>::type, zero>;
+
+
 
 typedef yoctometer<> Yoctometer;
 typedef zeptometer<> Zeptometer;
@@ -178,7 +215,18 @@ typedef kiloparsec<> Kiloparsec;
 typedef megaparsec<> Megaparsec;
 typedef gigaparsec<> Gigaparsec;
 
-
+typedef inch<> Inch;
+typedef link<> Link;
+typedef foot<> Foot;
+typedef yard<> Yard;
+typedef rod<> Rod;
+typedef chain<> Chain;
+typedef mile<> Mile;
+typedef league<>  League;
+typedef nauticmile<> Nauticmile;
+typedef fathom<> Fathom;
+typedef pica<> Pica;
+typedef point<> Point;
 
 namespace suffixes
 {
@@ -216,6 +264,19 @@ constexpr kiloparsec<OMNI_LITTERAL_FLOATING> operator"" _kpc(long double val){re
 constexpr megaparsec<OMNI_LITTERAL_FLOATING> operator"" _Mpc(long double val){return val;}
 constexpr gigaparsec<OMNI_LITTERAL_FLOATING> operator"" _Gpc(long double val){return val;}
 
+constexpr inch<OMNI_LITTERAL_FLOATING> operator"" _in(long double val){return val;}
+constexpr link<OMNI_LITTERAL_FLOATING> operator"" _lnk(long double val){return val;}
+constexpr foot<OMNI_LITTERAL_FLOATING> operator"" _ft(long double val){return val;}
+constexpr yard<OMNI_LITTERAL_FLOATING> operator"" _yd(long double val){return val;}
+constexpr rod<OMNI_LITTERAL_FLOATING> operator"" _rod(long double val){return val;}
+constexpr chain<OMNI_LITTERAL_FLOATING> operator"" _chn(long double val){return val;}
+constexpr mile<OMNI_LITTERAL_FLOATING> operator"" _mi(long double val){return val;}
+constexpr league<OMNI_LITTERAL_FLOATING> operator"" _league(long double val){return val;}
+constexpr nauticmile<OMNI_LITTERAL_FLOATING> operator"" _nmi(long double val){return val;}
+constexpr fathom<OMNI_LITTERAL_FLOATING> operator"" _fathom(long double val){return val;}
+constexpr pica<OMNI_LITTERAL_FLOATING> operator"" _pica(long double val){return val;}
+constexpr point<OMNI_LITTERAL_FLOATING> operator"" _pt(long double val){return val;}
+
 
 
 constexpr yoctometer<OMNI_LITTERAL_INTEGER> operator"" _ym(unsigned long long int val){return val;}
@@ -248,6 +309,21 @@ constexpr parsec<OMNI_LITTERAL_INTEGER> operator"" _pc(unsigned long long int va
 constexpr kiloparsec<OMNI_LITTERAL_INTEGER> operator"" _kpc(unsigned long long int val){return val;}
 constexpr megaparsec<OMNI_LITTERAL_INTEGER> operator"" _Mpc(unsigned long long int val){return val;}
 constexpr gigaparsec<OMNI_LITTERAL_INTEGER> operator"" _Gpc(unsigned long long int val){return val;}
+
+constexpr inch<OMNI_LITTERAL_INTEGER> operator"" _in(unsigned long long int val){return val;}
+constexpr link<OMNI_LITTERAL_INTEGER> operator"" _lnk(unsigned long long int val){return val;}
+constexpr foot<OMNI_LITTERAL_INTEGER> operator"" _fathom(unsigned long long int val){return val;}
+constexpr yard<OMNI_LITTERAL_INTEGER> operator"" _yd(unsigned long long int val){return val;}
+constexpr rod<OMNI_LITTERAL_INTEGER> operator"" _rod(unsigned long long int val){return val;}
+constexpr chain<OMNI_LITTERAL_INTEGER> operator"" _chn(unsigned long long int val){return val;}
+constexpr mile<OMNI_LITTERAL_INTEGER> operator"" _mi(unsigned long long int val){return val;}
+constexpr league<OMNI_LITTERAL_INTEGER> operator"" _league(unsigned long long int val){return val;}
+constexpr nauticmile<OMNI_LITTERAL_INTEGER> operator"" _nmi(unsigned long long int val){return val;}
+constexpr fathom<OMNI_LITTERAL_INTEGER> operator"" _fh(unsigned long long int val){return val;}
+constexpr pica<OMNI_LITTERAL_INTEGER> operator"" _pica(unsigned long long int val){return val;}
+constexpr point<OMNI_LITTERAL_INTEGER> operator"" _pt(unsigned long long int val){return val;}
+
+
 
 } //namespaxe suffixies
 
