@@ -70,10 +70,10 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using steradian = Unit<Dimensionless, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hemishpere = Unit<Dimensionless, Rep, tau, zero>;
+using hemisphere = Unit<Dimensionless, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using shpere = Unit<Dimensionless, Rep, typename value_times_Ratio<four, pi>::type, zero>;
+using sphere = Unit<Dimensionless, Rep, typename value_times_Ratio<four, pi>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using  degree2 = Unit<Dimensionless, Rep, typename Ratio_power<typename degree<Rep>::period, 2>::type, zero>;
@@ -88,8 +88,8 @@ typedef grad<> Grad;
 typedef arcminute<> Arcminute;
 typedef arcsecond<>Arcsecond;
 typedef steradian<> Steradian;
-typedef hemishpere<> Hemisphere;
-typedef shpere<> Sphere;
+typedef hemisphere<> Hemisphere;
+typedef sphere<> Sphere;
 typedef degree2<> Degree2;
 
 
@@ -99,31 +99,31 @@ namespace suffixes
 
 
 
-constexpr Value operator"" _val(long double val){return val;}
-constexpr Radian operator"" _rad(long double val){return val;}
-constexpr Milliradian operator"" _mrad(long double val){return val;}
-constexpr Turn operator"" _turn(long double val){return val;}
-constexpr Degree operator"" _deg(long double val){return val;}
-constexpr Grad operator"" _grad(long double val){return val;}
-constexpr Arcminute operator"" _arcmin(long double val){return val;}
-constexpr Arcsecond operator"" _arcs(long double val){return val;}
-constexpr Steradian operator"" _sr(long double val){return val;}
-constexpr Hemisphere operator"" _hsphe(long double val){return val;}
-constexpr Sphere operator"" _sphe(long double val){return val;}
-constexpr Degree2 operator"" _deg2(long double val){return val;}
+constexpr value<OMNI_LITTERAL_FLOATING> operator"" _val(long double val){return val;}
+constexpr radian<OMNI_LITTERAL_FLOATING> operator"" _rad(long double val){return val;}
+constexpr milliradian<OMNI_LITTERAL_FLOATING> operator"" _mrad(long double val){return val;}
+constexpr turn<OMNI_LITTERAL_FLOATING> operator"" _turn(long double val){return val;}
+constexpr degree<OMNI_LITTERAL_FLOATING> operator"" _deg(long double val){return val;}
+constexpr grad<OMNI_LITTERAL_FLOATING> operator"" _grad(long double val){return val;}
+constexpr arcminute<OMNI_LITTERAL_FLOATING> operator"" _arcmin(long double val){return val;}
+constexpr arcsecond<OMNI_LITTERAL_FLOATING> operator"" _arcs(long double val){return val;}
+constexpr steradian<OMNI_LITTERAL_FLOATING> operator"" _sr(long double val){return val;}
+constexpr hemisphere<OMNI_LITTERAL_FLOATING> operator"" _hsphe(long double val){return val;}
+constexpr sphere<OMNI_LITTERAL_FLOATING> operator"" _sphe(long double val){return val;}
+constexpr degree2<OMNI_LITTERAL_FLOATING> operator"" _deg2(long double val){return val;}
 
-constexpr Value operator"" _val(unsigned long long int val){return val;}
-constexpr Radian operator"" _rad(unsigned long long int val){return val;}
-constexpr Milliradian operator"" _mrad(unsigned long long int val){return val;}
-constexpr Turn operator"" _turn(unsigned long long int val){return val;}
-constexpr Degree operator"" _deg(unsigned long long int val){return val;}
-constexpr Grad operator"" _grad(unsigned long long int val){return val;}
-constexpr Arcminute operator"" _arcmin(unsigned long long int val){return val;}
-constexpr Arcsecond operator"" _arcs(unsigned long long int val){return val;}
-constexpr Steradian operator"" _sr(unsigned long long int val){return val;}
-constexpr Hemisphere operator"" _hsphe(unsigned long long int val){return val;}
-constexpr Sphere operator"" _sphe(unsigned long long int val){return val;}
-constexpr Degree2 operator"" _deg2(unsigned long long int val){return val;}
+constexpr value<OMNI_LITTERAL_INTEGER> operator"" _val(unsigned long long int val){return val;}
+constexpr radian<OMNI_LITTERAL_INTEGER> operator"" _rad(unsigned long long int val){return val;}
+constexpr milliradian<OMNI_LITTERAL_INTEGER> operator"" _mrad(unsigned long long int val){return val;}
+constexpr turn<OMNI_LITTERAL_INTEGER> operator"" _turn(unsigned long long int val){return val;}
+constexpr degree<OMNI_LITTERAL_INTEGER> operator"" _deg(unsigned long long int val){return val;}
+constexpr grad<OMNI_LITTERAL_INTEGER> operator"" _grad(unsigned long long int val){return val;}
+constexpr arcminute<OMNI_LITTERAL_INTEGER> operator"" _arcmin(unsigned long long int val){return val;}
+constexpr arcsecond<OMNI_LITTERAL_INTEGER> operator"" _arcs(unsigned long long int val){return val;}
+constexpr steradian<OMNI_LITTERAL_INTEGER> operator"" _sr(unsigned long long int val){return val;}
+constexpr hemisphere<OMNI_LITTERAL_INTEGER> operator"" _hsphe(unsigned long long int val){return val;}
+constexpr sphere<OMNI_LITTERAL_INTEGER> operator"" _sphe(unsigned long long int val){return val;}
+constexpr degree2<OMNI_LITTERAL_INTEGER> operator"" _deg2(unsigned long long int val){return val;}
 
 
 

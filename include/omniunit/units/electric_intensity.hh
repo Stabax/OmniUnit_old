@@ -137,47 +137,47 @@ namespace suffixes
 
 
 
-constexpr Yoctoampere operator"" _yA(long double val){return val;}
-constexpr Zeptoampere operator"" _zA(long double val){return val;}
-constexpr Attoampere operator"" _aA(long double val){return val;}
-constexpr Femtoampere operator"" _fA(long double val){return val;}
-constexpr Nanoampere operator"" _nA(long double val){return val;}
-constexpr Microampere operator"" _uA(long double val){return val;}
-constexpr Milliampere operator"" _mA(long double val){return val;}
-constexpr Centiampere operator"" _cA(long double val){return val;}
-constexpr Deciampere operator"" _dA(long double val){return val;}
-constexpr Ampere operator"" _A(long double val){return val;}
-constexpr Decaampere operator"" _daA(long double val){return val;}
-constexpr Hectoampere operator"" _hA(long double val){return val;}
-constexpr Kiloampere operator"" _kA(long double val){return val;}
-constexpr Megaampere operator"" _MA(long double val){return val;}
-constexpr Gigaampere operator"" _GA(long double val){return val;}
-constexpr Teraampere operator"" _TA(long double val){return val;}
-constexpr Petaampere operator"" _PA(long double val){return val;}
-constexpr Exaampere operator"" _EA(long double val){return val;}
-constexpr Zettaampere operator"" _ZA(long double val){return val;}
-constexpr Yottaampere operator"" _YA(long double val){return val;}
+constexpr yoctoampere<OMNI_LITTERAL_FLOATING> operator"" _yA(long double val){return val;}
+constexpr zeptoampere<OMNI_LITTERAL_FLOATING> operator"" _zA(long double val){return val;}
+constexpr attoampere<OMNI_LITTERAL_FLOATING> operator"" _aA(long double val){return val;}
+constexpr femtoampere<OMNI_LITTERAL_FLOATING> operator"" _fA(long double val){return val;}
+constexpr nanoampere<OMNI_LITTERAL_FLOATING> operator"" _nA(long double val){return val;}
+constexpr microampere<OMNI_LITTERAL_FLOATING> operator"" _uA(long double val){return val;}
+constexpr milliampere<OMNI_LITTERAL_FLOATING> operator"" _mA(long double val){return val;}
+constexpr centiampere<OMNI_LITTERAL_FLOATING> operator"" _cA(long double val){return val;}
+constexpr deciampere<OMNI_LITTERAL_FLOATING> operator"" _dA(long double val){return val;}
+constexpr ampere<OMNI_LITTERAL_FLOATING> operator"" _A(long double val){return val;}
+constexpr decaampere<OMNI_LITTERAL_FLOATING> operator"" _daA(long double val){return val;}
+constexpr hectoampere<OMNI_LITTERAL_FLOATING> operator"" _hA(long double val){return val;}
+constexpr kiloampere<OMNI_LITTERAL_FLOATING> operator"" _kA(long double val){return val;}
+constexpr megaampere<OMNI_LITTERAL_FLOATING> operator"" _MA(long double val){return val;}
+constexpr gigaampere<OMNI_LITTERAL_FLOATING> operator"" _GA(long double val){return val;}
+constexpr teraampere<OMNI_LITTERAL_FLOATING> operator"" _TA(long double val){return val;}
+constexpr petaampere<OMNI_LITTERAL_FLOATING> operator"" _PA(long double val){return val;}
+constexpr exaampere<OMNI_LITTERAL_FLOATING> operator"" _EA(long double val){return val;}
+constexpr zettaampere<OMNI_LITTERAL_FLOATING> operator"" _ZA(long double val){return val;}
+constexpr yottaampere<OMNI_LITTERAL_FLOATING> operator"" _YA(long double val){return val;}
 
-constexpr Yoctoampere operator"" _yA(unsigned long long int val){return val;}
-constexpr Zeptoampere operator"" _zA(unsigned long long int val){return val;}
-constexpr Attoampere operator"" _aA(unsigned long long int val){return val;}
-constexpr Femtoampere operator"" _fA(unsigned long long int val){return val;}
-constexpr Nanoampere operator"" _nA(unsigned long long int val){return val;}
-constexpr Microampere operator"" _uA(unsigned long long int val){return val;}
-constexpr Milliampere operator"" _mA(unsigned long long int val){return val;}
-constexpr Centiampere operator"" _cA(unsigned long long int val){return val;}
-constexpr Deciampere operator"" _dA(unsigned long long int val){return val;}
-constexpr Ampere operator"" _A(unsigned long long int val){return val;}
-constexpr Decaampere operator"" _daA(unsigned long long int val){return val;}
-constexpr Hectoampere operator"" _hA(unsigned long long int val){return val;}
-constexpr Kiloampere operator"" _kA(unsigned long long int val){return val;}
-constexpr Megaampere operator"" _MA(unsigned long long int val){return val;}
-constexpr Gigaampere operator"" _GA(unsigned long long int val){return val;}
-constexpr Teraampere operator"" _TA(unsigned long long int val){return val;}
-constexpr Petaampere operator"" _PA(unsigned long long int val){return val;}
-constexpr Exaampere operator"" _EA(unsigned long long int val){return val;}
-constexpr Zettaampere operator"" _ZA(unsigned long long int val){return val;}
-constexpr Yottaampere operator"" _YA(unsigned long long int val){return val;}
+constexpr yoctoampere<OMNI_LITTERAL_INTEGER> operator"" _yA(unsigned long long int val){return val;}
+constexpr zeptoampere<OMNI_LITTERAL_INTEGER> operator"" _zA(unsigned long long int val){return val;}
+constexpr attoampere<OMNI_LITTERAL_INTEGER> operator"" _aA(unsigned long long int val){return val;}
+constexpr femtoampere<OMNI_LITTERAL_INTEGER> operator"" _fA(unsigned long long int val){return val;}
+constexpr nanoampere<OMNI_LITTERAL_INTEGER> operator"" _nA(unsigned long long int val){return val;}
+constexpr microampere<OMNI_LITTERAL_INTEGER> operator"" _uA(unsigned long long int val){return val;}
+constexpr milliampere<OMNI_LITTERAL_INTEGER> operator"" _mA(unsigned long long int val){return val;}
+constexpr centiampere<OMNI_LITTERAL_INTEGER> operator"" _cA(unsigned long long int val){return val;}
+constexpr deciampere<OMNI_LITTERAL_INTEGER> operator"" _dA(unsigned long long int val){return val;}
+constexpr ampere<OMNI_LITTERAL_INTEGER> operator"" _A(unsigned long long int val){return val;}
+constexpr decaampere<OMNI_LITTERAL_INTEGER> operator"" _daA(unsigned long long int val){return val;}
+constexpr hectoampere<OMNI_LITTERAL_INTEGER> operator"" _hA(unsigned long long int val){return val;}
+constexpr kiloampere<OMNI_LITTERAL_INTEGER> operator"" _kA(unsigned long long int val){return val;}
+constexpr megaampere<OMNI_LITTERAL_INTEGER> operator"" _MA(unsigned long long int val){return val;}
+constexpr gigaampere<OMNI_LITTERAL_INTEGER> operator"" _GA(unsigned long long int val){return val;}
+constexpr teraampere<OMNI_LITTERAL_INTEGER> operator"" _TA(unsigned long long int val){return val;}
+constexpr petaampere<OMNI_LITTERAL_INTEGER> operator"" _PA(unsigned long long int val){return val;}
+constexpr exaampere<OMNI_LITTERAL_INTEGER> operator"" _EA(unsigned long long int val){return val;}
+constexpr zettaampere<OMNI_LITTERAL_INTEGER> operator"" _ZA(unsigned long long int val){return val;}
+constexpr yottaampere<OMNI_LITTERAL_INTEGER> operator"" _YA(unsigned long long int val){return val;}
 
 
 } //namespaxe suffixies

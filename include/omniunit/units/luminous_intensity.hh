@@ -137,49 +137,49 @@ namespace suffixes
 
 
 
-constexpr Yoctocandela operator"" _ycd(long double val){return val;}
-constexpr Zeptocandela operator"" _zcd(long double val){return val;}
-constexpr Attocandela operator"" _acd(long double val){return val;}
-constexpr Femtocandela operator"" _fcd(long double val){return val;}
-constexpr Nanocandela operator"" _ncd(long double val){return val;}
-constexpr Microcandela operator"" _ucd(long double val){return val;}
-constexpr Millicandela operator"" _mcd(long double val){return val;}
-constexpr Centicandela operator"" _ccd(long double val){return val;}
-constexpr Decicandela operator"" _dcd(long double val){return val;}
-constexpr Candela operator"" _cd(long double val){return val;}
-constexpr Decacandela operator"" _dacd(long double val){return val;}
-constexpr Hectocandela operator"" _hcd(long double val){return val;}
-constexpr Kilocandela operator"" _kcd(long double val){return val;}
-constexpr Megacandela operator"" _Mcd(long double val){return val;}
-constexpr Gigacandela operator"" _Gcd(long double val){return val;}
-constexpr Teracandela operator"" _Tcd(long double val){return val;}
-constexpr Petacandela operator"" _Pcd(long double val){return val;}
-constexpr Exacandela operator"" _Ecd(long double val){return val;}
-constexpr Zettacandela operator"" _Zcd(long double val){return val;}
-constexpr Yottacandela operator"" _Ycd(long double val){return val;}
+constexpr yoctocandela<OMNI_LITTERAL_FLOATING> operator"" _ycd(long double val){return val;}
+constexpr zeptocandela<OMNI_LITTERAL_FLOATING> operator"" _zcd(long double val){return val;}
+constexpr attocandela<OMNI_LITTERAL_FLOATING> operator"" _acd(long double val){return val;}
+constexpr femtocandela<OMNI_LITTERAL_FLOATING> operator"" _fcd(long double val){return val;}
+constexpr nanocandela<OMNI_LITTERAL_FLOATING> operator"" _ncd(long double val){return val;}
+constexpr microcandela<OMNI_LITTERAL_FLOATING> operator"" _ucd(long double val){return val;}
+constexpr millicandela<OMNI_LITTERAL_FLOATING> operator"" _mcd(long double val){return val;}
+constexpr centicandela<OMNI_LITTERAL_FLOATING> operator"" _ccd(long double val){return val;}
+constexpr decicandela<OMNI_LITTERAL_FLOATING> operator"" _dcd(long double val){return val;}
+constexpr candela<OMNI_LITTERAL_FLOATING> operator"" _cd(long double val){return val;}
+constexpr decacandela<OMNI_LITTERAL_FLOATING> operator"" _dacd(long double val){return val;}
+constexpr hectocandela<OMNI_LITTERAL_FLOATING> operator"" _hcd(long double val){return val;}
+constexpr kilocandela<OMNI_LITTERAL_FLOATING> operator"" _kcd(long double val){return val;}
+constexpr megacandela<OMNI_LITTERAL_FLOATING> operator"" _Mcd(long double val){return val;}
+constexpr gigacandela<OMNI_LITTERAL_FLOATING> operator"" _Gcd(long double val){return val;}
+constexpr teracandela<OMNI_LITTERAL_FLOATING> operator"" _Tcd(long double val){return val;}
+constexpr petacandela<OMNI_LITTERAL_FLOATING> operator"" _Pcd(long double val){return val;}
+constexpr exacandela<OMNI_LITTERAL_FLOATING> operator"" _Ecd(long double val){return val;}
+constexpr zettacandela<OMNI_LITTERAL_FLOATING> operator"" _Zcd(long double val){return val;}
+constexpr yottacandela<OMNI_LITTERAL_FLOATING> operator"" _Ycd(long double val){return val;}
 
 
 
-constexpr Yoctocandela operator"" _ycd(unsigned long long int val){return val;}
-constexpr Zeptocandela operator"" _zcd(unsigned long long int val){return val;}
-constexpr Attocandela operator"" _acd(unsigned long long int val){return val;}
-constexpr Femtocandela operator"" _fcd(unsigned long long int val){return val;}
-constexpr Nanocandela operator"" _ncd(unsigned long long int val){return val;}
-constexpr Microcandela operator"" _ucd(unsigned long long int val){return val;}
-constexpr Millicandela operator"" _mcd(unsigned long long int val){return val;}
-constexpr Centicandela operator"" _ccd(unsigned long long int val){return val;}
-constexpr Decicandela operator"" _dcd(unsigned long long int val){return val;}
-constexpr Candela operator"" _cd(unsigned long long int val){return val;}
-constexpr Decacandela operator"" _dacd(unsigned long long int val){return val;}
-constexpr Hectocandela operator"" _hcd(unsigned long long int val){return val;}
-constexpr Kilocandela operator"" _kcd(unsigned long long int val){return val;}
-constexpr Megacandela operator"" _Mcd(unsigned long long int val){return val;}
-constexpr Gigacandela operator"" _Gcd(unsigned long long int val){return val;}
-constexpr Teracandela operator"" _Tcd(unsigned long long int val){return val;}
-constexpr Petacandela operator"" _Pcd(unsigned long long int val){return val;}
-constexpr Exacandela operator"" _Ecd(unsigned long long int val){return val;}
-constexpr Zettacandela operator"" _Zcd(unsigned long long int val){return val;}
-constexpr Yottacandela operator"" _Ycd(unsigned long long int val){return val;}
+constexpr yoctocandela<OMNI_LITTERAL_INTEGER> operator"" _ycd(unsigned long long int val){return val;}
+constexpr zeptocandela<OMNI_LITTERAL_INTEGER> operator"" _zcd(unsigned long long int val){return val;}
+constexpr attocandela<OMNI_LITTERAL_INTEGER> operator"" _acd(unsigned long long int val){return val;}
+constexpr femtocandela<OMNI_LITTERAL_INTEGER> operator"" _fcd(unsigned long long int val){return val;}
+constexpr nanocandela<OMNI_LITTERAL_INTEGER> operator"" _ncd(unsigned long long int val){return val;}
+constexpr microcandela<OMNI_LITTERAL_INTEGER> operator"" _ucd(unsigned long long int val){return val;}
+constexpr millicandela<OMNI_LITTERAL_INTEGER> operator"" _mcd(unsigned long long int val){return val;}
+constexpr centicandela<OMNI_LITTERAL_INTEGER> operator"" _ccd(unsigned long long int val){return val;}
+constexpr decicandela<OMNI_LITTERAL_INTEGER> operator"" _dcd(unsigned long long int val){return val;}
+constexpr candela<OMNI_LITTERAL_INTEGER> operator"" _cd(unsigned long long int val){return val;}
+constexpr decacandela<OMNI_LITTERAL_INTEGER> operator"" _dacd(unsigned long long int val){return val;}
+constexpr hectocandela<OMNI_LITTERAL_INTEGER> operator"" _hcd(unsigned long long int val){return val;}
+constexpr kilocandela<OMNI_LITTERAL_INTEGER> operator"" _kcd(unsigned long long int val){return val;}
+constexpr megacandela<OMNI_LITTERAL_INTEGER> operator"" _Mcd(unsigned long long int val){return val;}
+constexpr gigacandela<OMNI_LITTERAL_INTEGER> operator"" _Gcd(unsigned long long int val){return val;}
+constexpr teracandela<OMNI_LITTERAL_INTEGER> operator"" _Tcd(unsigned long long int val){return val;}
+constexpr petacandela<OMNI_LITTERAL_INTEGER> operator"" _Pcd(unsigned long long int val){return val;}
+constexpr exacandela<OMNI_LITTERAL_INTEGER> operator"" _Ecd(unsigned long long int val){return val;}
+constexpr zettacandela<OMNI_LITTERAL_INTEGER> operator"" _Zcd(unsigned long long int val){return val;}
+constexpr yottacandela<OMNI_LITTERAL_INTEGER> operator"" _Ycd(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

@@ -138,35 +138,35 @@ namespace omni
   typedef bar<> Bar;
 
 
-  constexpr Mile operator"" _mi(long double val) {return val;}
-  constexpr Inch operator"" _in(long double val) {return val;}
-  constexpr Centimeter3 operator"" _cm3(long double val) {return val;}
-  constexpr Liter operator"" _L(long double val) {return val;}
-  constexpr Newton operator"" _N(long double val) {return val;}
-  constexpr Watt operator"" _W(long double val) {return val;}
-  constexpr Horsepower operator""_hp (long double val) {return val;}
-  constexpr Mechanicalhorsepower operator""_mhp (long double val) {return val;}
-  constexpr PerMinute operator"" _PerMin(long double val) {return val;}
-  constexpr MeterPerSecond operator""_mPers(long double val) {return val;}
-  constexpr KilometerPerHour operator"" _kmPerh(long double val) {return val;}
-  constexpr MeterPerSecond2 operator"" _mPers2(long double val) {return val;}
-  constexpr MilePerHour operator"" _miPerh(long double val) {return val;}
-  constexpr Bar operator"" _bar(long double val) {return val;}
+  constexpr mile<OMNI_LITTERAL_FLOATING> operator"" _mi(long double val) {return val;}
+  constexpr inch<OMNI_LITTERAL_FLOATING> operator"" _in(long double val) {return val;}
+  constexpr centimeter3<OMNI_LITTERAL_FLOATING> operator"" _cm3(long double val) {return val;}
+  constexpr liter<OMNI_LITTERAL_FLOATING> operator"" _L(long double val) {return val;}
+  constexpr newton<OMNI_LITTERAL_FLOATING> operator"" _N(long double val) {return val;}
+  constexpr watt<OMNI_LITTERAL_FLOATING> operator"" _W(long double val) {return val;}
+  constexpr horsepower<OMNI_LITTERAL_FLOATING> operator""_hp (long double val) {return val;}
+  constexpr mechanicalhorsepower<OMNI_LITTERAL_FLOATING> operator""_mhp (long double val) {return val;}
+  constexpr perMinute<OMNI_LITTERAL_FLOATING> operator"" _PerMin(long double val) {return val;}
+  constexpr meterPerSecond<OMNI_LITTERAL_FLOATING> operator""_mPers(long double val) {return val;}
+  constexpr kilometerPerHour<OMNI_LITTERAL_FLOATING> operator"" _kmPerh(long double val) {return val;}
+  constexpr meterPerSecond2<OMNI_LITTERAL_FLOATING> operator"" _mPers2(long double val) {return val;}
+  constexpr milePerHour<OMNI_LITTERAL_FLOATING> operator"" _miPerh(long double val) {return val;}
+  constexpr bar<OMNI_LITTERAL_FLOATING> operator"" _bar(long double val) {return val;}
 
-  constexpr Mile operator"" _mi(unsigned long long int val) {return val;}
-  constexpr Inch operator"" _in(unsigned long long int val) {return val;}
-  constexpr Centimeter3 operator"" _cm3(unsigned long long int val) {return val;}
-  constexpr Liter operator"" _L(unsigned long long int val) {return val;}
-  constexpr Newton operator"" _N(unsigned long long int val) {return val;}
-  constexpr Watt operator"" _W(unsigned long long int val) {return val;}
-  constexpr Horsepower operator""_hp (unsigned long long int val) {return val;}
-  constexpr Mechanicalhorsepower operator""_mhp (unsigned long long int val) {return val;}
-  constexpr PerMinute operator"" _PerMin(unsigned long long int val) {return val;}
-  constexpr MeterPerSecond operator""_mPers(unsigned long long int val) {return val;}
-  constexpr KilometerPerHour operator"" _kmPerh(unsigned long long int val) {return val;}
-  constexpr MeterPerSecond2 operator"" _mPers2(unsigned long long int val) {return val;}
-  constexpr MilePerHour operator"" _miPerh(unsigned long long int val) {return val;}
-  constexpr Bar operator"" _bar(unsigned long long int val) {return val;}
+  constexpr mile<OMNI_LITTERAL_INTEGER> operator"" _mi(unsigned long long int val) {return val;}
+  constexpr inch<OMNI_LITTERAL_INTEGER> operator"" _in(unsigned long long int val) {return val;}
+  constexpr centimeter3<OMNI_LITTERAL_INTEGER> operator"" _cm3(unsigned long long int val) {return val;}
+  constexpr liter<OMNI_LITTERAL_INTEGER> operator"" _L(unsigned long long int val) {return val;}
+  constexpr newton<OMNI_LITTERAL_INTEGER> operator"" _N(unsigned long long int val) {return val;}
+  constexpr watt<OMNI_LITTERAL_INTEGER> operator"" _W(unsigned long long int val) {return val;}
+  constexpr horsepower<OMNI_LITTERAL_INTEGER> operator""_hp (unsigned long long int val) {return val;}
+  constexpr mechanicalhorsepower<OMNI_LITTERAL_INTEGER> operator""_mhp (unsigned long long int val) {return val;}
+  constexpr perMinute<OMNI_LITTERAL_INTEGER> operator"" _PerMin(unsigned long long int val) {return val;}
+  constexpr meterPerSecond<OMNI_LITTERAL_INTEGER> operator""_mPers(unsigned long long int val) {return val;}
+  constexpr kilometerPerHour<OMNI_LITTERAL_INTEGER> operator"" _kmPerh(unsigned long long int val) {return val;}
+  constexpr meterPerSecond2<OMNI_LITTERAL_INTEGER> operator"" _mPers2(unsigned long long int val) {return val;}
+  constexpr milePerHour<OMNI_LITTERAL_INTEGER> operator"" _miPerh(unsigned long long int val) {return val;}
+  constexpr bar<OMNI_LITTERAL_INTEGER> operator"" _bar(unsigned long long int val) {return val;}
 
 } // namespace omni
 

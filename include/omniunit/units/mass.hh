@@ -192,69 +192,69 @@ namespace suffixes
 
 
 
-constexpr Zeptogram operator"" _zg(long double val){return val;}
-constexpr Attogram operator"" _ag(long double val){return val;}
-constexpr Femtogram operator"" _fg(long double val){return val;}
-constexpr Nanogram operator"" _ng(long double val){return val;}
-constexpr Microgram operator"" _ug(long double val){return val;}
-constexpr Milligram operator"" _mg(long double val){return val;}
-constexpr Centigram operator"" _cg(long double val){return val;}
-constexpr Decigram operator"" _dg(long double val){return val;}
-constexpr Gram operator"" _g(long double val){return val;}
-constexpr Decagram operator"" _dag(long double val){return val;}
-constexpr Hectogram operator"" _hg(long double val){return val;}
-constexpr Kilogram operator"" _kg(long double val){return val;}
-constexpr Megagram operator"" _Mg(long double val){return val;}
-constexpr Gigagram operator"" _Gg(long double val){return val;}
-constexpr Teragram operator"" _Tg(long double val){return val;}
-constexpr Petagram operator"" _Pg(long double val){return val;}
-constexpr Exagram operator"" _Eg(long double val){return val;}
-constexpr Zettagram operator"" _Zg(long double val){return val;}
-constexpr Yottagram operator"" _Yg(long double val){return val;}
+constexpr zeptogram<OMNI_LITTERAL_FLOATING> operator"" _zg(long double val){return val;}
+constexpr attogram<OMNI_LITTERAL_FLOATING> operator"" _ag(long double val){return val;}
+constexpr femtogram<OMNI_LITTERAL_FLOATING> operator"" _fg(long double val){return val;}
+constexpr nanogram<OMNI_LITTERAL_FLOATING> operator"" _ng(long double val){return val;}
+constexpr microgram<OMNI_LITTERAL_FLOATING> operator"" _ug(long double val){return val;}
+constexpr milligram<OMNI_LITTERAL_FLOATING> operator"" _mg(long double val){return val;}
+constexpr centigram<OMNI_LITTERAL_FLOATING> operator"" _cg(long double val){return val;}
+constexpr decigram<OMNI_LITTERAL_FLOATING> operator"" _dg(long double val){return val;}
+constexpr gram<OMNI_LITTERAL_FLOATING> operator"" _g(long double val){return val;}
+constexpr decagram<OMNI_LITTERAL_FLOATING> operator"" _dag(long double val){return val;}
+constexpr hectogram<OMNI_LITTERAL_FLOATING> operator"" _hg(long double val){return val;}
+constexpr kilogram<OMNI_LITTERAL_FLOATING> operator"" _kg(long double val){return val;}
+constexpr megagram<OMNI_LITTERAL_FLOATING> operator"" _Mg(long double val){return val;}
+constexpr gigagram<OMNI_LITTERAL_FLOATING> operator"" _Gg(long double val){return val;}
+constexpr teragram<OMNI_LITTERAL_FLOATING> operator"" _Tg(long double val){return val;}
+constexpr petagram<OMNI_LITTERAL_FLOATING> operator"" _Pg(long double val){return val;}
+constexpr exagram<OMNI_LITTERAL_FLOATING> operator"" _Eg(long double val){return val;}
+constexpr zettagram<OMNI_LITTERAL_FLOATING> operator"" _Zg(long double val){return val;}
+constexpr yottagram<OMNI_LITTERAL_FLOATING> operator"" _Yg(long double val){return val;}
 
-constexpr Atomic_mass operator"" _u(long double val){return val;}
-constexpr EvPerC2 operator"" _eVc2(long double val){return val;}
-constexpr MillievPerC2 operator"" _meVc2(long double val){return val;}
-constexpr MicroevPerC2 operator"" _ueVc2(long double val){return val;}
-constexpr KiloevPerC2 operator"" _keVc2(long double val){return val;}
-constexpr MegaevPerC2 operator"" _MeVc2(long double val){return val;}
-constexpr GigaevPerC2 operator"" _GeVc2(long double val){return val;}
-constexpr TeraevPerC2 operator"" _TeVc2(long double val){return val;}
-constexpr Ton operator"" _ton(long double val){return val;}
-constexpr Solar_mass operator"" _SM(long double val){return val;}
+constexpr atomic_mass<OMNI_LITTERAL_FLOATING> operator"" _u(long double val){return val;}
+constexpr evPerC2<OMNI_LITTERAL_FLOATING> operator"" _eVc2(long double val){return val;}
+constexpr millievPerC2<OMNI_LITTERAL_FLOATING> operator"" _meVc2(long double val){return val;}
+constexpr microevPerC2<OMNI_LITTERAL_FLOATING> operator"" _ueVc2(long double val){return val;}
+constexpr kiloevPerC2<OMNI_LITTERAL_FLOATING> operator"" _keVc2(long double val){return val;}
+constexpr megaevPerC2<OMNI_LITTERAL_FLOATING> operator"" _MeVc2(long double val){return val;}
+constexpr gigaevPerC2<OMNI_LITTERAL_FLOATING> operator"" _GeVc2(long double val){return val;}
+constexpr teraevPerC2<OMNI_LITTERAL_FLOATING> operator"" _TeVc2(long double val){return val;}
+constexpr ton<OMNI_LITTERAL_FLOATING> operator"" _ton(long double val){return val;}
+constexpr solar_mass<OMNI_LITTERAL_FLOATING> operator"" _SM(long double val){return val;}
 
 
 
-constexpr Zeptogram operator"" _zg(unsigned long long int val){return val;}
-constexpr Attogram operator"" _ag(unsigned long long int val){return val;}
-constexpr Femtogram operator"" _fg(unsigned long long int val){return val;}
-constexpr Nanogram operator"" _ng(unsigned long long int val){return val;}
-constexpr Microgram operator"" _ug(unsigned long long int val){return val;}
-constexpr Milligram operator"" _mg(unsigned long long int val){return val;}
-constexpr Centigram operator"" _cg(unsigned long long int val){return val;}
-constexpr Decigram operator"" _dg(unsigned long long int val){return val;}
-constexpr Gram operator"" _g(unsigned long long int val){return val;}
-constexpr Decagram operator"" _dag(unsigned long long int val){return val;}
-constexpr Hectogram operator"" _hg(unsigned long long int val){return val;}
-constexpr Kilogram operator"" _kg(unsigned long long int val){return val;}
-constexpr Megagram operator"" _Mg(unsigned long long int val){return val;}
-constexpr Gigagram operator"" _Gg(unsigned long long int val){return val;}
-constexpr Teragram operator"" _Tg(unsigned long long int val){return val;}
-constexpr Petagram operator"" _Pg(unsigned long long int val){return val;}
-constexpr Exagram operator"" _Eg(unsigned long long int val){return val;}
-constexpr Zettagram operator"" _Zg(unsigned long long int val){return val;}
-constexpr Yottagram operator"" _Yg(unsigned long long int val){return val;}
+constexpr zeptogram<OMNI_LITTERAL_INTEGER> operator"" _zg(unsigned long long int val){return val;}
+constexpr attogram<OMNI_LITTERAL_INTEGER> operator"" _ag(unsigned long long int val){return val;}
+constexpr femtogram<OMNI_LITTERAL_INTEGER> operator"" _fg(unsigned long long int val){return val;}
+constexpr nanogram<OMNI_LITTERAL_INTEGER> operator"" _ng(unsigned long long int val){return val;}
+constexpr microgram<OMNI_LITTERAL_INTEGER> operator"" _ug(unsigned long long int val){return val;}
+constexpr milligram<OMNI_LITTERAL_INTEGER> operator"" _mg(unsigned long long int val){return val;}
+constexpr centigram<OMNI_LITTERAL_INTEGER> operator"" _cg(unsigned long long int val){return val;}
+constexpr decigram<OMNI_LITTERAL_INTEGER> operator"" _dg(unsigned long long int val){return val;}
+constexpr gram<OMNI_LITTERAL_INTEGER> operator"" _g(unsigned long long int val){return val;}
+constexpr decagram<OMNI_LITTERAL_INTEGER> operator"" _dag(unsigned long long int val){return val;}
+constexpr hectogram<OMNI_LITTERAL_INTEGER> operator"" _hg(unsigned long long int val){return val;}
+constexpr kilogram<OMNI_LITTERAL_INTEGER> operator"" _kg(unsigned long long int val){return val;}
+constexpr megagram<OMNI_LITTERAL_INTEGER> operator"" _Mg(unsigned long long int val){return val;}
+constexpr gigagram<OMNI_LITTERAL_INTEGER> operator"" _Gg(unsigned long long int val){return val;}
+constexpr teragram<OMNI_LITTERAL_INTEGER> operator"" _Tg(unsigned long long int val){return val;}
+constexpr petagram<OMNI_LITTERAL_INTEGER> operator"" _Pg(unsigned long long int val){return val;}
+constexpr exagram<OMNI_LITTERAL_INTEGER> operator"" _Eg(unsigned long long int val){return val;}
+constexpr zettagram<OMNI_LITTERAL_INTEGER> operator"" _Zg(unsigned long long int val){return val;}
+constexpr yottagram<OMNI_LITTERAL_INTEGER> operator"" _Yg(unsigned long long int val){return val;}
 
-constexpr Atomic_mass operator"" _u(unsigned long long int val){return val;}
-constexpr EvPerC2 operator"" _eVc2(unsigned long long int val){return val;}
-constexpr MillievPerC2 operator"" _meVc2(unsigned long long int val){return val;}
-constexpr MicroevPerC2 operator"" _ueVc2(unsigned long long int val){return val;}
-constexpr KiloevPerC2 operator"" _keVc2(unsigned long long int val){return val;}
-constexpr MegaevPerC2 operator"" _MeVc2(unsigned long long int val){return val;}
-constexpr GigaevPerC2 operator"" _GeVc2(unsigned long long int val){return val;}
-constexpr TeraevPerC2 operator"" _TeVc2(unsigned long long int val){return val;}
-constexpr Ton operator"" _ton(unsigned long long int val){return val;}
-constexpr Solar_mass operator"" _SM(unsigned long long int val){return val;}
+constexpr atomic_mass<OMNI_LITTERAL_INTEGER> operator"" _u(unsigned long long int val){return val;}
+constexpr evPerC2<OMNI_LITTERAL_INTEGER> operator"" _eVc2(unsigned long long int val){return val;}
+constexpr millievPerC2<OMNI_LITTERAL_INTEGER> operator"" _meVc2(unsigned long long int val){return val;}
+constexpr microevPerC2<OMNI_LITTERAL_INTEGER> operator"" _ueVc2(unsigned long long int val){return val;}
+constexpr kiloevPerC2<OMNI_LITTERAL_INTEGER> operator"" _keVc2(unsigned long long int val){return val;}
+constexpr megaevPerC2<OMNI_LITTERAL_INTEGER> operator"" _MeVc2(unsigned long long int val){return val;}
+constexpr gigaevPerC2<OMNI_LITTERAL_INTEGER> operator"" _GeVc2(unsigned long long int val){return val;}
+constexpr teraevPerC2<OMNI_LITTERAL_INTEGER> operator"" _TeVc2(unsigned long long int val){return val;}
+constexpr ton<OMNI_LITTERAL_INTEGER> operator"" _ton(unsigned long long int val){return val;}
+constexpr solar_mass<OMNI_LITTERAL_INTEGER> operator"" _SM(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

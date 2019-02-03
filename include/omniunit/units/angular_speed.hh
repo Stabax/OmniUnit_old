@@ -1,4 +1,4 @@
-//dimensionless.hh
+//angular_speed.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.
@@ -146,55 +146,55 @@ namespace suffixes
 {
 
 
-constexpr RadianPerNanosecond operator"" _radPerns(long double val){return val;}
-constexpr RadianPerMicrosecond operator"" _radPerus(long double val){return val;}
-constexpr RadianPerMillisecond operator"" _radPerms(long double val){return val;}
-constexpr RadianPerSecond operator"" _radPers(long double val){return val;}
-constexpr RadianPerMinute operator"" _radPermin(long double val){return val;}
-constexpr RadianPerHour operator"" _radPerh(long double val){return val;}
-constexpr RadianPerDay operator"" _radPerd(long double val){return val;}
-constexpr RadianPerYear operator"" _radPery(long double val){return val;}
-constexpr TurnPerNanosecond operator"" _turnPerns(long double val){return val;}
-constexpr TurnPerMicrosecond operator"" _turnPerus(long double val){return val;}
-constexpr TurnPerMillisecond operator"" _turnPerms(long double val){return val;}
-constexpr TurnPerSecond operator"" _turnPers(long double val){return val;}
-constexpr TurnPerMinute operator"" _turnPermin(long double val){return val;}
-constexpr TurnPerHour operator"" _turnPerh(long double val){return val;}
-constexpr TurnPerDay operator"" _turnPerd(long double val){return val;}
-constexpr TurnPerYear operator"" _turnPery(long double val){return val;}
-constexpr DegreePerNanosecond operator"" _degPerns(long double val){return val;}
-constexpr DegreePerMicrosecond operator"" _degPerus(long double val){return val;}
-constexpr DegreePerMillisecond operator"" _degPerms(long double val){return val;}
-constexpr DegreePerSecond operator"" _degPers(long double val){return val;}
-constexpr DegreenPerMinute operator"" _degPermin(long double val){return val;}
-constexpr DegreePerHour operator"" _degPerh(long double val){return val;}
-constexpr DegreePerDay operator"" _degPerd(long double val){return val;}
-constexpr DegreePerYear operator"" _degPery(long double val){return val;}
+constexpr radianPerNanosecond<OMNI_LITTERAL_FLOATING> operator"" _radPerns(long double val){return val;}
+constexpr radianPerMicrosecond<OMNI_LITTERAL_FLOATING> operator"" _radPerus(long double val){return val;}
+constexpr radianPerMillisecond<OMNI_LITTERAL_FLOATING> operator"" _radPerms(long double val){return val;}
+constexpr radianPerSecond<OMNI_LITTERAL_FLOATING> operator"" _radPers(long double val){return val;}
+constexpr radianPerMinute<OMNI_LITTERAL_FLOATING> operator"" _radPermin(long double val){return val;}
+constexpr radianPerHour<OMNI_LITTERAL_FLOATING> operator"" _radPerh(long double val){return val;}
+constexpr radianPerDay<OMNI_LITTERAL_FLOATING> operator"" _radPerd(long double val){return val;}
+constexpr radianPerYear<OMNI_LITTERAL_FLOATING> operator"" _radPery(long double val){return val;}
+constexpr turnPerNanosecond<OMNI_LITTERAL_FLOATING> operator"" _turnPerns(long double val){return val;}
+constexpr turnPerMicrosecond<OMNI_LITTERAL_FLOATING> operator"" _turnPerus(long double val){return val;}
+constexpr turnPerMillisecond<OMNI_LITTERAL_FLOATING> operator"" _turnPerms(long double val){return val;}
+constexpr turnPerSecond<OMNI_LITTERAL_FLOATING> operator"" _turnPers(long double val){return val;}
+constexpr turnPerMinute<OMNI_LITTERAL_FLOATING> operator"" _turnPermin(long double val){return val;}
+constexpr turnPerHour<OMNI_LITTERAL_FLOATING> operator"" _turnPerh(long double val){return val;}
+constexpr turnPerDay<OMNI_LITTERAL_FLOATING> operator"" _turnPerd(long double val){return val;}
+constexpr turnPerYear<OMNI_LITTERAL_FLOATING> operator"" _turnPery(long double val){return val;}
+constexpr degreePerNanosecond<OMNI_LITTERAL_FLOATING> operator"" _degPerns(long double val){return val;}
+constexpr degreePerMicrosecond<OMNI_LITTERAL_FLOATING> operator"" _degPerus(long double val){return val;}
+constexpr degreePerMillisecond<OMNI_LITTERAL_FLOATING> operator"" _degPerms(long double val){return val;}
+constexpr degreePerSecond<OMNI_LITTERAL_FLOATING> operator"" _degPers(long double val){return val;}
+constexpr degreePerMinute<OMNI_LITTERAL_FLOATING> operator"" _degPermin(long double val){return val;}
+constexpr degreePerHour<OMNI_LITTERAL_FLOATING> operator"" _degPerh(long double val){return val;}
+constexpr degreePerDay<OMNI_LITTERAL_FLOATING> operator"" _degPerd(long double val){return val;}
+constexpr degreePerYear<OMNI_LITTERAL_FLOATING> operator"" _degPery(long double val){return val;}
 
-constexpr RadianPerNanosecond operator"" _radPerns(unsigned long long int val){return val;}
-constexpr RadianPerMicrosecond operator"" _radPerus(unsigned long long int val){return val;}
-constexpr RadianPerMillisecond operator"" _radPerms(unsigned long long int val){return val;}
-constexpr RadianPerSecond operator"" _radPers(unsigned long long int val){return val;}
-constexpr RadianPerMinute operator"" _radPermin(unsigned long long int val){return val;}
-constexpr RadianPerHour operator"" _radPerh(unsigned long long int val){return val;}
-constexpr RadianPerDay operator"" _radPerd(unsigned long long int val){return val;}
-constexpr RadianPerYear operator"" _radPery(unsigned long long int val){return val;}
-constexpr TurnPerNanosecond operator"" _turnPerns(unsigned long long int val){return val;}
-constexpr TurnPerMicrosecond operator"" _turnPerus(unsigned long long int val){return val;}
-constexpr TurnPerMillisecond operator"" _turnPerms(unsigned long long int val){return val;}
-constexpr TurnPerSecond operator"" _turnPers(unsigned long long int val){return val;}
-constexpr TurnPerMinute operator"" _turnPermin(unsigned long long int val){return val;}
-constexpr TurnPerHour operator"" _turnPerh(unsigned long long int val){return val;}
-constexpr TurnPerDay operator"" _turnPerd(unsigned long long int val){return val;}
-constexpr TurnPerYear operator"" _turnPery(unsigned long long int val){return val;}
-constexpr DegreePerNanosecond operator"" _degPerns(unsigned long long int val){return val;}
-constexpr DegreePerMicrosecond operator"" _degPerus(unsigned long long int val){return val;}
-constexpr DegreePerMillisecond operator"" _degPerms(unsigned long long int val){return val;}
-constexpr DegreePerSecond operator"" _degPers(unsigned long long int val){return val;}
-constexpr DegreenPerMinute operator"" _degPermin(unsigned long long int val){return val;}
-constexpr DegreePerHour operator"" _degPerh(unsigned long long int val){return val;}
-constexpr DegreePerDay operator"" _degPerd(unsigned long long int val){return val;}
-constexpr DegreePerYear operator"" _degPery(unsigned long long int val){return val;}
+constexpr radianPerNanosecond<OMNI_LITTERAL_INTEGER> operator"" _radPerns(unsigned long long int val){return val;}
+constexpr radianPerMicrosecond<OMNI_LITTERAL_INTEGER> operator"" _radPerus(unsigned long long int val){return val;}
+constexpr radianPerMillisecond<OMNI_LITTERAL_INTEGER> operator"" _radPerms(unsigned long long int val){return val;}
+constexpr radianPerSecond<OMNI_LITTERAL_INTEGER> operator"" _radPers(unsigned long long int val){return val;}
+constexpr radianPerMinute<OMNI_LITTERAL_INTEGER> operator"" _radPermin(unsigned long long int val){return val;}
+constexpr radianPerHour<OMNI_LITTERAL_INTEGER> operator"" _radPerh(unsigned long long int val){return val;}
+constexpr radianPerDay<OMNI_LITTERAL_INTEGER> operator"" _radPerd(unsigned long long int val){return val;}
+constexpr radianPerYear<OMNI_LITTERAL_INTEGER> operator"" _radPery(unsigned long long int val){return val;}
+constexpr turnPerNanosecond<OMNI_LITTERAL_INTEGER> operator"" _turnPerns(unsigned long long int val){return val;}
+constexpr turnPerMicrosecond<OMNI_LITTERAL_INTEGER> operator"" _turnPerus(unsigned long long int val){return val;}
+constexpr turnPerMillisecond<OMNI_LITTERAL_INTEGER> operator"" _turnPerms(unsigned long long int val){return val;}
+constexpr turnPerSecond<OMNI_LITTERAL_INTEGER> operator"" _turnPers(unsigned long long int val){return val;}
+constexpr turnPerMinute<OMNI_LITTERAL_INTEGER> operator"" _turnPermin(unsigned long long int val){return val;}
+constexpr turnPerHour<OMNI_LITTERAL_INTEGER> operator"" _turnPerh(unsigned long long int val){return val;}
+constexpr turnPerDay<OMNI_LITTERAL_INTEGER> operator"" _turnPerd(unsigned long long int val){return val;}
+constexpr turnPerYear<OMNI_LITTERAL_INTEGER> operator"" _turnPery(unsigned long long int val){return val;}
+constexpr degreePerNanosecond<OMNI_LITTERAL_INTEGER> operator"" _degPerns(unsigned long long int val){return val;}
+constexpr degreePerMicrosecond<OMNI_LITTERAL_INTEGER> operator"" _degPerus(unsigned long long int val){return val;}
+constexpr degreePerMillisecond<OMNI_LITTERAL_INTEGER> operator"" _degPerms(unsigned long long int val){return val;}
+constexpr degreePerSecond<OMNI_LITTERAL_INTEGER> operator"" _degPers(unsigned long long int val){return val;}
+constexpr degreePerMinute<OMNI_LITTERAL_INTEGER> operator"" _degPermin(unsigned long long int val){return val;}
+constexpr degreePerHour<OMNI_LITTERAL_INTEGER> operator"" _degPerh(unsigned long long int val){return val;}
+constexpr degreePerDay<OMNI_LITTERAL_INTEGER> operator"" _degPerd(unsigned long long int val){return val;}
+constexpr degreePerYear<OMNI_LITTERAL_INTEGER> operator"" _degPery(unsigned long long int val){return val;}
 
 } // namespace suffixes
 

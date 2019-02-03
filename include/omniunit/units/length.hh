@@ -185,69 +185,69 @@ namespace suffixes
 
 
 
-constexpr Yoctometer operator"" _ym(long double val){return val;}
-constexpr Zeptometer operator"" _zm(long double val){return val;}
-constexpr Attometer operator"" _am(long double val){return val;}
-constexpr Femtometer operator"" _fm(long double val){return val;}
-constexpr Nanometer operator"" _nm(long double val){return val;}
-constexpr Micrometer operator"" _um(long double val){return val;}
-constexpr Millimeter operator"" _mm(long double val){return val;}
-constexpr Centimeter operator"" _cm(long double val){return val;}
-constexpr Decimeter operator"" _dm(long double val){return val;}
-constexpr Meter operator"" _m(long double val){return val;}
-constexpr Decameter operator"" _dam(long double val){return val;}
-constexpr Hectometer operator"" _hm(long double val){return val;}
-constexpr Kilometer operator"" _km(long double val){return val;}
-constexpr Megameter operator"" _Mm(long double val){return val;}
-constexpr Gigameter operator"" _Gm(long double val){return val;}
-constexpr Terameter operator"" _Tm(long double val){return val;}
-constexpr Petameter operator"" _Pm(long double val){return val;}
-constexpr Exameter operator"" _Em(long double val){return val;}
-constexpr Zettameter operator"" _Zm(long double val){return val;}
-constexpr Yottameter operator"" _Ym(long double val){return val;}
+constexpr yoctometer<OMNI_LITTERAL_FLOATING> operator"" _ym(long double val){return val;}
+constexpr zeptometer<OMNI_LITTERAL_FLOATING> operator"" _zm(long double val){return val;}
+constexpr attometer<OMNI_LITTERAL_FLOATING> operator"" _am(long double val){return val;}
+constexpr femtometer<OMNI_LITTERAL_FLOATING> operator"" _fm(long double val){return val;}
+constexpr nanometer<OMNI_LITTERAL_FLOATING> operator"" _nm(long double val){return val;}
+constexpr micrometer<OMNI_LITTERAL_FLOATING> operator"" _um(long double val){return val;}
+constexpr millimeter<OMNI_LITTERAL_FLOATING> operator"" _mm(long double val){return val;}
+constexpr centimeter<OMNI_LITTERAL_FLOATING> operator"" _cm(long double val){return val;}
+constexpr decimeter<OMNI_LITTERAL_FLOATING> operator"" _dm(long double val){return val;}
+constexpr meter<OMNI_LITTERAL_FLOATING> operator"" _m(long double val){return val;}
+constexpr decameter<OMNI_LITTERAL_FLOATING> operator"" _dam(long double val){return val;}
+constexpr hectometer<OMNI_LITTERAL_FLOATING> operator"" _hm(long double val){return val;}
+constexpr kilometer<OMNI_LITTERAL_FLOATING> operator"" _km(long double val){return val;}
+constexpr megameter<OMNI_LITTERAL_FLOATING> operator"" _Mm(long double val){return val;}
+constexpr gigameter<OMNI_LITTERAL_FLOATING> operator"" _Gm(long double val){return val;}
+constexpr terameter<OMNI_LITTERAL_FLOATING> operator"" _Tm(long double val){return val;}
+constexpr petameter<OMNI_LITTERAL_FLOATING> operator"" _Pm(long double val){return val;}
+constexpr exameter<OMNI_LITTERAL_FLOATING> operator"" _Em(long double val){return val;}
+constexpr zettameter<OMNI_LITTERAL_FLOATING> operator"" _Zm(long double val){return val;}
+constexpr yottameter<OMNI_LITTERAL_FLOATING> operator"" _Ym(long double val){return val;}
 
-constexpr Angstrom operator"" _a(long double val){return val;}
-constexpr Astronomical_unit operator"" _AU(long double val){return val;}
-constexpr Lightsecond operator"" _ls(long double val){return val;}
-constexpr Lightminute operator"" _lmin(long double val){return val;}
-constexpr Lightyear operator"" _ly(long double val){return val;}
-constexpr Parsec operator"" _pc(long double val){return val;}
-constexpr Kiloparsec operator"" _kpc(long double val){return val;}
-constexpr Megaparsec operator"" _Mpc(long double val){return val;}
-constexpr Gigaparsec operator"" _Gpc(long double val){return val;}
+constexpr angstrom<OMNI_LITTERAL_FLOATING> operator"" _a(long double val){return val;}
+constexpr astronomical_unit<OMNI_LITTERAL_FLOATING> operator"" _au(long double val){return val;}
+constexpr lightsecond<OMNI_LITTERAL_FLOATING> operator"" _ls(long double val){return val;}
+constexpr lightminute<OMNI_LITTERAL_FLOATING> operator"" _lmin(long double val){return val;}
+constexpr lightyear<OMNI_LITTERAL_FLOATING> operator"" _ly(long double val){return val;}
+constexpr parsec<OMNI_LITTERAL_FLOATING> operator"" _pc(long double val){return val;}
+constexpr kiloparsec<OMNI_LITTERAL_FLOATING> operator"" _kpc(long double val){return val;}
+constexpr megaparsec<OMNI_LITTERAL_FLOATING> operator"" _Mpc(long double val){return val;}
+constexpr gigaparsec<OMNI_LITTERAL_FLOATING> operator"" _Gpc(long double val){return val;}
 
 
 
-constexpr Yoctometer operator"" _ym(unsigned long long int val){return val;}
-constexpr Zeptometer operator"" _zm(unsigned long long int val){return val;}
-constexpr Attometer operator"" _am(unsigned long long int val){return val;}
-constexpr Femtometer operator"" _fm(unsigned long long int val){return val;}
-constexpr Nanometer operator"" _nm(unsigned long long int val){return val;}
-constexpr Micrometer operator"" _um(unsigned long long int val){return val;}
-constexpr Millimeter operator"" _mm(unsigned long long int val){return val;}
-constexpr Centimeter operator"" _cm(unsigned long long int val){return val;}
-constexpr Decimeter operator"" _dm(unsigned long long int val){return val;}
-constexpr Meter operator"" _m(unsigned long long int val){return val;}
-constexpr Decameter operator"" _dam(unsigned long long int val){return val;}
-constexpr Hectometer operator"" _hm(unsigned long long int val){return val;}
-constexpr Kilometer operator"" _km(unsigned long long int val){return val;}
-constexpr Megameter operator"" _Mm(unsigned long long int val){return val;}
-constexpr Gigameter operator"" _Gm(unsigned long long int val){return val;}
-constexpr Terameter operator"" _Tm(unsigned long long int val){return val;}
-constexpr Petameter operator"" _Pm(unsigned long long int val){return val;}
-constexpr Exameter operator"" _Em(unsigned long long int val){return val;}
-constexpr Zettameter operator"" _Zm(unsigned long long int val){return val;}
-constexpr Yottameter operator"" _Ym(unsigned long long int val){return val;}
+constexpr yoctometer<OMNI_LITTERAL_INTEGER> operator"" _ym(unsigned long long int val){return val;}
+constexpr zeptometer<OMNI_LITTERAL_INTEGER> operator"" _zm(unsigned long long int val){return val;}
+constexpr attometer<OMNI_LITTERAL_INTEGER> operator"" _am(unsigned long long int val){return val;}
+constexpr femtometer<OMNI_LITTERAL_INTEGER> operator"" _fm(unsigned long long int val){return val;}
+constexpr nanometer<OMNI_LITTERAL_INTEGER> operator"" _nm(unsigned long long int val){return val;}
+constexpr micrometer<OMNI_LITTERAL_INTEGER> operator"" _um(unsigned long long int val){return val;}
+constexpr millimeter<OMNI_LITTERAL_INTEGER> operator"" _mm(unsigned long long int val){return val;}
+constexpr centimeter<OMNI_LITTERAL_INTEGER> operator"" _cm(unsigned long long int val){return val;}
+constexpr decimeter<OMNI_LITTERAL_INTEGER> operator"" _dm(unsigned long long int val){return val;}
+constexpr meter<OMNI_LITTERAL_INTEGER> operator"" _m(unsigned long long int val){return val;}
+constexpr decameter<OMNI_LITTERAL_INTEGER> operator"" _dam(unsigned long long int val){return val;}
+constexpr hectometer<OMNI_LITTERAL_INTEGER> operator"" _hm(unsigned long long int val){return val;}
+constexpr kilometer<OMNI_LITTERAL_INTEGER> operator"" _km(unsigned long long int val){return val;}
+constexpr megameter<OMNI_LITTERAL_INTEGER> operator"" _Mm(unsigned long long int val){return val;}
+constexpr gigameter<OMNI_LITTERAL_INTEGER> operator"" _Gm(unsigned long long int val){return val;}
+constexpr terameter<OMNI_LITTERAL_INTEGER> operator"" _Tm(unsigned long long int val){return val;}
+constexpr petameter<OMNI_LITTERAL_INTEGER> operator"" _Pm(unsigned long long int val){return val;}
+constexpr exameter<OMNI_LITTERAL_INTEGER> operator"" _Em(unsigned long long int val){return val;}
+constexpr zettameter<OMNI_LITTERAL_INTEGER> operator"" _Zm(unsigned long long int val){return val;}
+constexpr yottameter<OMNI_LITTERAL_INTEGER> operator"" _Ym(unsigned long long int val){return val;}
 
-constexpr Angstrom operator"" _a(unsigned long long int val){return val;}
-constexpr Astronomical_unit operator"" _AU(unsigned long long int val){return val;}
-constexpr Lightsecond operator"" _ls(unsigned long long int val){return val;}
-constexpr Lightminute operator"" _lmin(unsigned long long int val){return val;}
-constexpr Lightyear operator"" _ly(unsigned long long int val){return val;}
-constexpr Parsec operator"" _pc(unsigned long long int val){return val;}
-constexpr Kiloparsec operator"" _kpc(unsigned long long int val){return val;}
-constexpr Megaparsec operator"" _Mpc(unsigned long long int val){return val;}
-constexpr Gigaparsec operator"" _Gpc(unsigned long long int val){return val;}
+constexpr angstrom<OMNI_LITTERAL_INTEGER> operator"" _a(unsigned long long int val){return val;}
+constexpr astronomical_unit<OMNI_LITTERAL_INTEGER> operator"" _au(unsigned long long int val){return val;}
+constexpr lightsecond<OMNI_LITTERAL_INTEGER> operator"" _ls(unsigned long long int val){return val;}
+constexpr lightminute<OMNI_LITTERAL_INTEGER> operator"" _lmin(unsigned long long int val){return val;}
+constexpr lightyear<OMNI_LITTERAL_INTEGER> operator"" _ly(unsigned long long int val){return val;}
+constexpr parsec<OMNI_LITTERAL_INTEGER> operator"" _pc(unsigned long long int val){return val;}
+constexpr kiloparsec<OMNI_LITTERAL_INTEGER> operator"" _kpc(unsigned long long int val){return val;}
+constexpr megaparsec<OMNI_LITTERAL_INTEGER> operator"" _Mpc(unsigned long long int val){return val;}
+constexpr gigaparsec<OMNI_LITTERAL_INTEGER> operator"" _Gpc(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

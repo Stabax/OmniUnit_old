@@ -225,91 +225,91 @@ namespace suffixes
 
 
 
-constexpr Yoctokelvin operator"" _yK(long double val){return val;}
-constexpr Zeptokelvin operator"" _zK(long double val){return val;}
-constexpr Attokelvin operator"" _aK(long double val){return val;}
-constexpr Femtokelvin operator"" _fK(long double val){return val;}
-constexpr Nanokelvin operator"" _nK(long double val){return val;}
-constexpr Microkelvin operator"" _uK(long double val){return val;}
-constexpr Millikelvin operator"" _mK(long double val){return val;}
-constexpr Centikelvin operator"" _cK(long double val){return val;}
-constexpr Decikelvin operator"" _dK(long double val){return val;}
-constexpr Kelvin operator"" _K(long double val){return val;}
-constexpr Decakelvin operator"" _daK(long double val){return val;}
-constexpr Hectokelvin operator"" _hK(long double val){return val;}
-constexpr Kilokelvin operator"" _kK(long double val){return val;}
-constexpr Megakelvin operator"" _MK(long double val){return val;}
-constexpr Gigakelvin operator"" _GK(long double val){return val;}
-constexpr Terakelvin operator"" _TK(long double val){return val;}
-constexpr Petakelvin operator"" _PK(long double val){return val;}
-constexpr Exakelvin operator"" _EK(long double val){return val;}
-constexpr Zettakelvin operator"" _ZK(long double val){return val;}
-constexpr Yottakelvin operator"" _YK(long double val){return val;}
+constexpr yoctokelvin<OMNI_LITTERAL_FLOATING> operator"" _yK(long double val){return val;}
+constexpr zeptokelvin<OMNI_LITTERAL_FLOATING> operator"" _zK(long double val){return val;}
+constexpr attokelvin<OMNI_LITTERAL_FLOATING> operator"" _aK(long double val){return val;}
+constexpr femtokelvin<OMNI_LITTERAL_FLOATING> operator"" _fK(long double val){return val;}
+constexpr nanokelvin<OMNI_LITTERAL_FLOATING> operator"" _nK(long double val){return val;}
+constexpr microkelvin<OMNI_LITTERAL_FLOATING> operator"" _uK(long double val){return val;}
+constexpr millikelvin<OMNI_LITTERAL_FLOATING> operator"" _mK(long double val){return val;}
+constexpr centikelvin<OMNI_LITTERAL_FLOATING> operator"" _cK(long double val){return val;}
+constexpr decikelvin<OMNI_LITTERAL_FLOATING> operator"" _dK(long double val){return val;}
+constexpr kelvin<OMNI_LITTERAL_FLOATING> operator"" _K(long double val){return val;}
+constexpr decakelvin<OMNI_LITTERAL_FLOATING> operator"" _daK(long double val){return val;}
+constexpr hectokelvin<OMNI_LITTERAL_FLOATING> operator"" _hK(long double val){return val;}
+constexpr kilokelvin<OMNI_LITTERAL_FLOATING> operator"" _kK(long double val){return val;}
+constexpr megakelvin<OMNI_LITTERAL_FLOATING> operator"" _MK(long double val){return val;}
+constexpr gigakelvin<OMNI_LITTERAL_FLOATING> operator"" _GK(long double val){return val;}
+constexpr terakelvin<OMNI_LITTERAL_FLOATING> operator"" _TK(long double val){return val;}
+constexpr petakelvin<OMNI_LITTERAL_FLOATING> operator"" _PK(long double val){return val;}
+constexpr exakelvin<OMNI_LITTERAL_FLOATING> operator"" _EK(long double val){return val;}
+constexpr zettakelvin<OMNI_LITTERAL_FLOATING> operator"" _ZK(long double val){return val;}
+constexpr yottakelvin<OMNI_LITTERAL_FLOATING> operator"" _YK(long double val){return val;}
 
-constexpr Yoctocelsius operator"" _yc(long double val){return val;}
-constexpr Zeptocelsius operator"" _zc(long double val){return val;}
-constexpr Attocelsius operator"" _ac(long double val){return val;}
-constexpr Femtocelsius operator"" _fc(long double val){return val;}
-constexpr Nanocelsius operator"" _nc(long double val){return val;}
-constexpr Microcelsius operator"" _uc(long double val){return val;}
-constexpr Millicelsius operator"" _mc(long double val){return val;}
-constexpr Centicelsius operator"" _cc(long double val){return val;}
-constexpr Decicelsius operator"" _dc(long double val){return val;}
-constexpr Celsius operator"" _c(long double val){return val;}
-constexpr Decacelsius operator"" _dac(long double val){return val;}
-constexpr Hectocelsius operator"" _hc(long double val){return val;}
-constexpr Kilocelsius operator"" _kc(long double val){return val;}
-constexpr Megacelsius operator"" _Mc(long double val){return val;}
-constexpr Gigacelsius operator"" _Gc(long double val){return val;}
-constexpr Teracelsius operator"" _Tc(long double val){return val;}
-constexpr Petacelsius operator"" _Pc(long double val){return val;}
-constexpr Exacelsius operator"" _Ec(long double val){return val;}
-constexpr Zettacelsius operator"" _Zc(long double val){return val;}
-constexpr Yottacelsius operator"" _Yc(long double val){return val;}
+constexpr yoctocelsius<OMNI_LITTERAL_FLOATING> operator"" _yc(long double val){return val;}
+constexpr zeptocelsius<OMNI_LITTERAL_FLOATING> operator"" _zc(long double val){return val;}
+constexpr attocelsius<OMNI_LITTERAL_FLOATING> operator"" _ac(long double val){return val;}
+constexpr femtocelsius<OMNI_LITTERAL_FLOATING> operator"" _fc(long double val){return val;}
+constexpr nanocelsius<OMNI_LITTERAL_FLOATING> operator"" _nc(long double val){return val;}
+constexpr microcelsius<OMNI_LITTERAL_FLOATING> operator"" _uc(long double val){return val;}
+constexpr millicelsius<OMNI_LITTERAL_FLOATING> operator"" _mc(long double val){return val;}
+constexpr centicelsius<OMNI_LITTERAL_FLOATING> operator"" _cc(long double val){return val;}
+constexpr decicelsius<OMNI_LITTERAL_FLOATING> operator"" _dc(long double val){return val;}
+constexpr celsius<OMNI_LITTERAL_FLOATING> operator"" _c(long double val){return val;}
+constexpr decacelsius<OMNI_LITTERAL_FLOATING> operator"" _dac(long double val){return val;}
+constexpr hectocelsius<OMNI_LITTERAL_FLOATING> operator"" _hc(long double val){return val;}
+constexpr kilocelsius<OMNI_LITTERAL_FLOATING> operator"" _kc(long double val){return val;}
+constexpr megacelsius<OMNI_LITTERAL_FLOATING> operator"" _Mc(long double val){return val;}
+constexpr gigacelsius<OMNI_LITTERAL_FLOATING> operator"" _Gc(long double val){return val;}
+constexpr teracelsius<OMNI_LITTERAL_FLOATING> operator"" _Tc(long double val){return val;}
+constexpr petacelsius<OMNI_LITTERAL_FLOATING> operator"" _Pc(long double val){return val;}
+constexpr exacelsius<OMNI_LITTERAL_FLOATING> operator"" _Ec(long double val){return val;}
+constexpr zettacelsius<OMNI_LITTERAL_FLOATING> operator"" _Zc(long double val){return val;}
+constexpr yottacelsius<OMNI_LITTERAL_FLOATING> operator"" _Yc(long double val){return val;}
 
 
 
-constexpr Yoctokelvin operator"" _yK(unsigned long long int val){return val;}
-constexpr Zeptokelvin operator"" _zK(unsigned long long int val){return val;}
-constexpr Attokelvin operator"" _aK(unsigned long long int val){return val;}
-constexpr Femtokelvin operator"" _fK(unsigned long long int val){return val;}
-constexpr Nanokelvin operator"" _nK(unsigned long long int val){return val;}
-constexpr Microkelvin operator"" _uK(unsigned long long int val){return val;}
-constexpr Millikelvin operator"" _mK(unsigned long long int val){return val;}
-constexpr Centikelvin operator"" _cK(unsigned long long int val){return val;}
-constexpr Decikelvin operator"" _dK(unsigned long long int val){return val;}
-constexpr Kelvin operator"" _K(unsigned long long int val){return val;}
-constexpr Decakelvin operator"" _daK(unsigned long long int val){return val;}
-constexpr Hectokelvin operator"" _hK(unsigned long long int val){return val;}
-constexpr Kilokelvin operator"" _kK(unsigned long long int val){return val;}
-constexpr Megakelvin operator"" _MK(unsigned long long int val){return val;}
-constexpr Gigakelvin operator"" _GK(unsigned long long int val){return val;}
-constexpr Terakelvin operator"" _TK(unsigned long long int val){return val;}
-constexpr Petakelvin operator"" _PK(unsigned long long int val){return val;}
-constexpr Exakelvin operator"" _EK(unsigned long long int val){return val;}
-constexpr Zettakelvin operator"" _ZK(unsigned long long int val){return val;}
-constexpr Yottakelvin operator"" _YK(unsigned long long int val){return val;}
+constexpr yoctokelvin<OMNI_LITTERAL_INTEGER> operator"" _yK(unsigned long long int val){return val;}
+constexpr zeptokelvin<OMNI_LITTERAL_INTEGER> operator"" _zK(unsigned long long int val){return val;}
+constexpr attokelvin<OMNI_LITTERAL_INTEGER> operator"" _aK(unsigned long long int val){return val;}
+constexpr femtokelvin<OMNI_LITTERAL_INTEGER> operator"" _fK(unsigned long long int val){return val;}
+constexpr nanokelvin<OMNI_LITTERAL_INTEGER> operator"" _nK(unsigned long long int val){return val;}
+constexpr microkelvin<OMNI_LITTERAL_INTEGER> operator"" _uK(unsigned long long int val){return val;}
+constexpr millikelvin<OMNI_LITTERAL_INTEGER> operator"" _mK(unsigned long long int val){return val;}
+constexpr centikelvin<OMNI_LITTERAL_INTEGER> operator"" _cK(unsigned long long int val){return val;}
+constexpr decikelvin<OMNI_LITTERAL_INTEGER> operator"" _dK(unsigned long long int val){return val;}
+constexpr kelvin<OMNI_LITTERAL_INTEGER> operator"" _K(unsigned long long int val){return val;}
+constexpr decakelvin<OMNI_LITTERAL_INTEGER> operator"" _daK(unsigned long long int val){return val;}
+constexpr hectokelvin<OMNI_LITTERAL_INTEGER> operator"" _hK(unsigned long long int val){return val;}
+constexpr kilokelvin<OMNI_LITTERAL_INTEGER> operator"" _kK(unsigned long long int val){return val;}
+constexpr megakelvin<OMNI_LITTERAL_INTEGER> operator"" _MK(unsigned long long int val){return val;}
+constexpr gigakelvin<OMNI_LITTERAL_INTEGER> operator"" _GK(unsigned long long int val){return val;}
+constexpr terakelvin<OMNI_LITTERAL_INTEGER> operator"" _TK(unsigned long long int val){return val;}
+constexpr petakelvin<OMNI_LITTERAL_INTEGER> operator"" _PK(unsigned long long int val){return val;}
+constexpr exakelvin<OMNI_LITTERAL_INTEGER> operator"" _EK(unsigned long long int val){return val;}
+constexpr zettakelvin<OMNI_LITTERAL_INTEGER> operator"" _ZK(unsigned long long int val){return val;}
+constexpr yottakelvin<OMNI_LITTERAL_INTEGER> operator"" _YK(unsigned long long int val){return val;}
 
-constexpr Yoctocelsius operator"" _yc(unsigned long long int val){return val;}
-constexpr Zeptocelsius operator"" _zc(unsigned long long int val){return val;}
-constexpr Attocelsius operator"" _ac(unsigned long long int val){return val;}
-constexpr Femtocelsius operator"" _fc(unsigned long long int val){return val;}
-constexpr Nanocelsius operator"" _nc(unsigned long long int val){return val;}
-constexpr Microcelsius operator"" _uc(unsigned long long int val){return val;}
-constexpr Millicelsius operator"" _mc(unsigned long long int val){return val;}
-constexpr Centicelsius operator"" _cc(unsigned long long int val){return val;}
-constexpr Decicelsius operator"" _dc(unsigned long long int val){return val;}
-constexpr Celsius operator"" _c(unsigned long long int val){return val;}
-constexpr Decacelsius operator"" _dac(unsigned long long int val){return val;}
-constexpr Hectocelsius operator"" _hc(unsigned long long int val){return val;}
-constexpr Kilocelsius operator"" _kc(unsigned long long int val){return val;}
-constexpr Megacelsius operator"" _Mc(unsigned long long int val){return val;}
-constexpr Gigacelsius operator"" _Gc(unsigned long long int val){return val;}
-constexpr Teracelsius operator"" _Tc(unsigned long long int val){return val;}
-constexpr Petacelsius operator"" _Pc(unsigned long long int val){return val;}
-constexpr Exacelsius operator"" _Ec(unsigned long long int val){return val;}
-constexpr Zettacelsius operator"" _Zc(unsigned long long int val){return val;}
-constexpr Yottacelsius operator"" _Yc(unsigned long long int val){return val;}
+constexpr yoctocelsius<OMNI_LITTERAL_INTEGER> operator"" _yc(unsigned long long int val){return val;}
+constexpr zeptocelsius<OMNI_LITTERAL_INTEGER> operator"" _zc(unsigned long long int val){return val;}
+constexpr attocelsius<OMNI_LITTERAL_INTEGER> operator"" _ac(unsigned long long int val){return val;}
+constexpr femtocelsius<OMNI_LITTERAL_INTEGER> operator"" _fc(unsigned long long int val){return val;}
+constexpr nanocelsius<OMNI_LITTERAL_INTEGER> operator"" _nc(unsigned long long int val){return val;}
+constexpr microcelsius<OMNI_LITTERAL_INTEGER> operator"" _uc(unsigned long long int val){return val;}
+constexpr millicelsius<OMNI_LITTERAL_INTEGER> operator"" _mc(unsigned long long int val){return val;}
+constexpr centicelsius<OMNI_LITTERAL_INTEGER> operator"" _cc(unsigned long long int val){return val;}
+constexpr decicelsius<OMNI_LITTERAL_INTEGER> operator"" _dc(unsigned long long int val){return val;}
+constexpr celsius<OMNI_LITTERAL_INTEGER> operator"" _c(unsigned long long int val){return val;}
+constexpr decacelsius<OMNI_LITTERAL_INTEGER> operator"" _dac(unsigned long long int val){return val;}
+constexpr hectocelsius<OMNI_LITTERAL_INTEGER> operator"" _hc(unsigned long long int val){return val;}
+constexpr kilocelsius<OMNI_LITTERAL_INTEGER> operator"" _kc(unsigned long long int val){return val;}
+constexpr megacelsius<OMNI_LITTERAL_INTEGER> operator"" _Mc(unsigned long long int val){return val;}
+constexpr gigacelsius<OMNI_LITTERAL_INTEGER> operator"" _Gc(unsigned long long int val){return val;}
+constexpr teracelsius<OMNI_LITTERAL_INTEGER> operator"" _Tc(unsigned long long int val){return val;}
+constexpr petacelsius<OMNI_LITTERAL_INTEGER> operator"" _Pc(unsigned long long int val){return val;}
+constexpr exacelsius<OMNI_LITTERAL_INTEGER> operator"" _Ec(unsigned long long int val){return val;}
+constexpr zettacelsius<OMNI_LITTERAL_INTEGER> operator"" _Zc(unsigned long long int val){return val;}
+constexpr yottacelsius<OMNI_LITTERAL_INTEGER> operator"" _Yc(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

@@ -144,49 +144,49 @@ namespace suffixes
 
 
 
-constexpr Yoctomol operator"" _ymol(long double val){return val;}
-constexpr Zeptomol operator"" _zmol(long double val){return val;}
-constexpr Attomol operator"" _amol(long double val){return val;}
-constexpr Femtomol operator"" _fmol(long double val){return val;}
-constexpr Nanomol operator"" _nmol(long double val){return val;}
-constexpr Micromol operator"" _umol(long double val){return val;}
-constexpr Millimol operator"" _mmol(long double val){return val;}
-constexpr Centimol operator"" _cmol(long double val){return val;}
-constexpr Decimol operator"" _dmol(long double val){return val;}
-constexpr Mol operator"" _mol(long double val){return val;}
-constexpr Decamol operator"" _damol(long double val){return val;}
-constexpr Hectomol operator"" _hmol(long double val){return val;}
-constexpr Kilomol operator"" _kmol(long double val){return val;}
-constexpr Megamol operator"" _Mmol(long double val){return val;}
-constexpr Gigamol operator"" _Gmol(long double val){return val;}
-constexpr Teramol operator"" _Tmol(long double val){return val;}
-constexpr Petamol operator"" _Pmol(long double val){return val;}
-constexpr Examol operator"" _Emol(long double val){return val;}
-constexpr Zettamol operator"" _Zmol(long double val){return val;}
-constexpr Yottamol operator"" _Ymol(long double val){return val;}
+constexpr yoctomol<OMNI_LITTERAL_FLOATING> operator"" _ymol(long double val){return val;}
+constexpr zeptomol<OMNI_LITTERAL_FLOATING> operator"" _zmol(long double val){return val;}
+constexpr attomol<OMNI_LITTERAL_FLOATING> operator"" _amol(long double val){return val;}
+constexpr femtomol<OMNI_LITTERAL_FLOATING> operator"" _fmol(long double val){return val;}
+constexpr nanomol<OMNI_LITTERAL_FLOATING> operator"" _nmol(long double val){return val;}
+constexpr micromol<OMNI_LITTERAL_FLOATING> operator"" _umol(long double val){return val;}
+constexpr millimol<OMNI_LITTERAL_FLOATING> operator"" _mmol(long double val){return val;}
+constexpr centimol<OMNI_LITTERAL_FLOATING> operator"" _cmol(long double val){return val;}
+constexpr decimol<OMNI_LITTERAL_FLOATING> operator"" _dmol(long double val){return val;}
+constexpr mol<OMNI_LITTERAL_FLOATING> operator"" _mol(long double val){return val;}
+constexpr decamol<OMNI_LITTERAL_FLOATING> operator"" _damol(long double val){return val;}
+constexpr hectomol<OMNI_LITTERAL_FLOATING> operator"" _hmol(long double val){return val;}
+constexpr kilomol<OMNI_LITTERAL_FLOATING> operator"" _kmol(long double val){return val;}
+constexpr megamol<OMNI_LITTERAL_FLOATING> operator"" _Mmol(long double val){return val;}
+constexpr gigamol<OMNI_LITTERAL_FLOATING> operator"" _Gmol(long double val){return val;}
+constexpr teramol<OMNI_LITTERAL_FLOATING> operator"" _Tmol(long double val){return val;}
+constexpr petamol<OMNI_LITTERAL_FLOATING> operator"" _Pmol(long double val){return val;}
+constexpr examol<OMNI_LITTERAL_FLOATING> operator"" _Emol(long double val){return val;}
+constexpr zettamol<OMNI_LITTERAL_FLOATING> operator"" _Zmol(long double val){return val;}
+constexpr yottamol<OMNI_LITTERAL_FLOATING> operator"" _Ymol(long double val){return val;}
 
 
 
-constexpr Yoctomol operator"" _ymol(unsigned long long int val){return val;}
-constexpr Zeptomol operator"" _zmol(unsigned long long int val){return val;}
-constexpr Attomol operator"" _amol(unsigned long long int val){return val;}
-constexpr Femtomol operator"" _fmol(unsigned long long int val){return val;}
-constexpr Nanomol operator"" _nmol(unsigned long long int val){return val;}
-constexpr Micromol operator"" _umol(unsigned long long int val){return val;}
-constexpr Millimol operator"" _mmol(unsigned long long int val){return val;}
-constexpr Centimol operator"" _cmol(unsigned long long int val){return val;}
-constexpr Decimol operator"" _dmol(unsigned long long int val){return val;}
-constexpr Mol operator"" _mol(unsigned long long int val){return val;}
-constexpr Decamol operator"" _damol(unsigned long long int val){return val;}
-constexpr Hectomol operator"" _hmol(unsigned long long int val){return val;}
-constexpr Kilomol operator"" _kmol(unsigned long long int val){return val;}
-constexpr Megamol operator"" _Mmol(unsigned long long int val){return val;}
-constexpr Gigamol operator"" _Gmol(unsigned long long int val){return val;}
-constexpr Teramol operator"" _Tmol(unsigned long long int val){return val;}
-constexpr Petamol operator"" _Pmol(unsigned long long int val){return val;}
-constexpr Examol operator"" _Emol(unsigned long long int val){return val;}
-constexpr Zettamol operator"" _Zmol(unsigned long long int val){return val;}
-constexpr Yottamol operator"" _Ymol(unsigned long long int val){return val;}
+constexpr yoctomol<OMNI_LITTERAL_INTEGER> operator"" _ymol(unsigned long long int val){return val;}
+constexpr zeptomol<OMNI_LITTERAL_INTEGER> operator"" _zmol(unsigned long long int val){return val;}
+constexpr attomol<OMNI_LITTERAL_INTEGER> operator"" _amol(unsigned long long int val){return val;}
+constexpr femtomol<OMNI_LITTERAL_INTEGER> operator"" _fmol(unsigned long long int val){return val;}
+constexpr nanomol<OMNI_LITTERAL_INTEGER> operator"" _nmol(unsigned long long int val){return val;}
+constexpr micromol<OMNI_LITTERAL_INTEGER> operator"" _umol(unsigned long long int val){return val;}
+constexpr millimol<OMNI_LITTERAL_INTEGER> operator"" _mmol(unsigned long long int val){return val;}
+constexpr centimol<OMNI_LITTERAL_INTEGER> operator"" _cmol(unsigned long long int val){return val;}
+constexpr decimol<OMNI_LITTERAL_INTEGER> operator"" _dmol(unsigned long long int val){return val;}
+constexpr mol<OMNI_LITTERAL_INTEGER> operator"" _mol(unsigned long long int val){return val;}
+constexpr decamol<OMNI_LITTERAL_INTEGER> operator"" _damol(unsigned long long int val){return val;}
+constexpr hectomol<OMNI_LITTERAL_INTEGER> operator"" _hmol(unsigned long long int val){return val;}
+constexpr kilomol<OMNI_LITTERAL_INTEGER> operator"" _kmol(unsigned long long int val){return val;}
+constexpr megamol<OMNI_LITTERAL_INTEGER> operator"" _Mmol(unsigned long long int val){return val;}
+constexpr gigamol<OMNI_LITTERAL_INTEGER> operator"" _Gmol(unsigned long long int val){return val;}
+constexpr teramol<OMNI_LITTERAL_INTEGER> operator"" _Tmol(unsigned long long int val){return val;}
+constexpr petamol<OMNI_LITTERAL_INTEGER> operator"" _Pmol(unsigned long long int val){return val;}
+constexpr examol<OMNI_LITTERAL_INTEGER> operator"" _Emol(unsigned long long int val){return val;}
+constexpr zettamol<OMNI_LITTERAL_INTEGER> operator"" _Zmol(unsigned long long int val){return val;}
+constexpr yottamol<OMNI_LITTERAL_INTEGER> operator"" _Ymol(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

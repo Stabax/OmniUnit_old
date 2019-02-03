@@ -183,70 +183,70 @@ namespace suffixes
 
 
 
-constexpr Yoctosecond operator"" _ys(long double val){return val;}
-constexpr Zeptosecond operator"" _zs(long double val){return val;}
-constexpr Attosecond operator"" _as(long double val){return val;}
-constexpr Femtosecond operator"" _fs(long double val){return val;}
-constexpr Nanosecond operator"" _ns(long double val){return val;}
-constexpr Microsecond operator"" _us(long double val){return val;}
-constexpr Millisecond operator"" _ms(long double val){return val;}
-constexpr Centisecond operator"" _cs(long double val){return val;}
-constexpr Decisecond operator"" _ds(long double val){return val;}
-constexpr Second operator"" _s(long double val){return val;}
-constexpr Decasecond operator"" _das(long double val){return val;}
-constexpr Hectosecond operator"" _hs(long double val){return val;}
-constexpr Kilosecond operator"" _ks(long double val){return val;}
-constexpr Megasecond operator"" _Ms(long double val){return val;}
-constexpr Gigasecond operator"" _Gs(long double val){return val;}
-constexpr Terasecond operator"" _Ts(long double val){return val;}
-constexpr Petasecond operator"" _Ps(long double val){return val;}
-constexpr Exasecond operator"" _Es(long double val){return val;}
-constexpr Zettasecond operator"" _Zs(long double val){return val;}
-constexpr Yottasecond operator"" _Ys(long double val){return val;}
+constexpr yoctosecond<OMNI_LITTERAL_FLOATING> operator"" _ys(long double val){return val;}
+constexpr zeptosecond<OMNI_LITTERAL_FLOATING> operator"" _zs(long double val){return val;}
+constexpr attosecond<OMNI_LITTERAL_FLOATING> operator"" _as(long double val){return val;}
+constexpr femtosecond<OMNI_LITTERAL_FLOATING> operator"" _fs(long double val){return val;}
+constexpr nanosecond<OMNI_LITTERAL_FLOATING> operator"" _ns(long double val){return val;}
+constexpr microsecond<OMNI_LITTERAL_FLOATING> operator"" _us(long double val){return val;}
+constexpr millisecond<OMNI_LITTERAL_FLOATING> operator"" _ms(long double val){return val;}
+constexpr centisecond<OMNI_LITTERAL_FLOATING> operator"" _cs(long double val){return val;}
+constexpr decisecond<OMNI_LITTERAL_FLOATING> operator"" _ds(long double val){return val;}
+constexpr second<OMNI_LITTERAL_FLOATING> operator"" _s(long double val){return val;}
+constexpr decasecond<OMNI_LITTERAL_FLOATING> operator"" _das(long double val){return val;}
+constexpr hectosecond<OMNI_LITTERAL_FLOATING> operator"" _hs(long double val){return val;}
+constexpr kilosecond<OMNI_LITTERAL_FLOATING> operator"" _ks(long double val){return val;}
+constexpr megasecond<OMNI_LITTERAL_FLOATING> operator"" _Ms(long double val){return val;}
+constexpr gigasecond<OMNI_LITTERAL_FLOATING> operator"" _Gs(long double val){return val;}
+constexpr terasecond<OMNI_LITTERAL_FLOATING> operator"" _Ts(long double val){return val;}
+constexpr petasecond<OMNI_LITTERAL_FLOATING> operator"" _Ps(long double val){return val;}
+constexpr exasecond<OMNI_LITTERAL_FLOATING> operator"" _Es(long double val){return val;}
+constexpr zettasecond<OMNI_LITTERAL_FLOATING> operator"" _Zs(long double val){return val;}
+constexpr yottasecond<OMNI_LITTERAL_FLOATING> operator"" _Ys(long double val){return val;}
 
-constexpr Minute operator"" _min(long double val){return val;}
-constexpr Hour operator"" _h(long double val){return val;}
-constexpr Day operator"" _d(long double val){return val;}
-constexpr Week operator"" _w(long double val){return val;}
-constexpr Month operator"" _mon(long double val){return val;}
-constexpr Year operator"" _y(long double val){return val;}
-constexpr Kiloyear operator"" _ky(long double val){return val;}
-constexpr Megayear operator"" _My(long double val){return val;}
-constexpr Gigayear operator"" _Gy(long double val){return val;}
-
-
+constexpr minute<OMNI_LITTERAL_FLOATING> operator"" _min(long double val){return val;}
+constexpr hour<OMNI_LITTERAL_FLOATING> operator"" _h(long double val){return val;}
+constexpr day<OMNI_LITTERAL_FLOATING> operator"" _d(long double val){return val;}
+constexpr week<OMNI_LITTERAL_FLOATING> operator"" _w(long double val){return val;}
+constexpr month<OMNI_LITTERAL_FLOATING> operator"" _mon(long double val){return val;}
+constexpr year<OMNI_LITTERAL_FLOATING> operator"" _y(long double val){return val;}
+constexpr kiloyear<OMNI_LITTERAL_FLOATING> operator"" _ky(long double val){return val;}
+constexpr megayear<OMNI_LITTERAL_FLOATING> operator"" _My(long double val){return val;}
+constexpr gigayear<OMNI_LITTERAL_FLOATING> operator"" _Gy(long double val){return val;}
 
 
-constexpr Yoctosecond operator"" _ys(unsigned long long int val){return val;}
-constexpr Zeptosecond operator"" _zs(unsigned long long int val){return val;}
-constexpr Attosecond operator"" _as(unsigned long long int val){return val;}
-constexpr Femtosecond operator"" _fs(unsigned long long int val){return val;}
-constexpr Nanosecond operator"" _ns(unsigned long long int val){return val;}
-constexpr Microsecond operator"" _us(unsigned long long int val){return val;}
-constexpr Millisecond operator"" _ms(unsigned long long int val){return val;}
-constexpr Centisecond operator"" _cs(unsigned long long int val){return val;}
-constexpr Decisecond operator"" _ds(unsigned long long int val){return val;}
-constexpr Second operator"" _s(unsigned long long int val){return val;}
-constexpr Decasecond operator"" _das(unsigned long long int val){return val;}
-constexpr Hectosecond operator"" _hs(unsigned long long int val){return val;}
-constexpr Kilosecond operator"" _ks(unsigned long long int val){return val;}
-constexpr Megasecond operator"" _Ms(unsigned long long int val){return val;}
-constexpr Gigasecond operator"" _Gs(unsigned long long int val){return val;}
-constexpr Terasecond operator"" _Ts(unsigned long long int val){return val;}
-constexpr Petasecond operator"" _Ps(unsigned long long int val){return val;}
-constexpr Exasecond operator"" _Es(unsigned long long int val){return val;}
-constexpr Zettasecond operator"" _Zs(unsigned long long int val){return val;}
-constexpr Yottasecond operator"" _Ys(unsigned long long int val){return val;}
 
-constexpr Minute operator"" _min(unsigned long long int val){return val;}
-constexpr Hour operator"" _h(unsigned long long int val){return val;}
-constexpr Day operator"" _d(unsigned long long int val){return val;}
-constexpr Week operator"" _w(unsigned long long int val){return val;}
-constexpr Month operator"" _mon(unsigned long long int val){return val;}
-constexpr Year operator"" _y(unsigned long long int val){return val;}
-constexpr Kiloyear operator"" _ky(unsigned long long int val){return val;}
-constexpr Megayear operator"" _My(unsigned long long int val){return val;}
-constexpr Gigayear operator"" _Gy(unsigned long long int val){return val;}
+
+constexpr yoctosecond<OMNI_LITTERAL_INTEGER> operator"" _ys(unsigned long long int val){return val;}
+constexpr zeptosecond<OMNI_LITTERAL_INTEGER> operator"" _zs(unsigned long long int val){return val;}
+constexpr attosecond<OMNI_LITTERAL_INTEGER> operator"" _as(unsigned long long int val){return val;}
+constexpr femtosecond<OMNI_LITTERAL_INTEGER> operator"" _fs(unsigned long long int val){return val;}
+constexpr nanosecond<OMNI_LITTERAL_INTEGER> operator"" _ns(unsigned long long int val){return val;}
+constexpr microsecond<OMNI_LITTERAL_INTEGER> operator"" _us(unsigned long long int val){return val;}
+constexpr millisecond<OMNI_LITTERAL_INTEGER> operator"" _ms(unsigned long long int val){return val;}
+constexpr centisecond<OMNI_LITTERAL_INTEGER> operator"" _cs(unsigned long long int val){return val;}
+constexpr decisecond<OMNI_LITTERAL_INTEGER> operator"" _ds(unsigned long long int val){return val;}
+constexpr second<OMNI_LITTERAL_INTEGER> operator"" _s(unsigned long long int val){return val;}
+constexpr decasecond<OMNI_LITTERAL_INTEGER> operator"" _das(unsigned long long int val){return val;}
+constexpr hectosecond<OMNI_LITTERAL_INTEGER> operator"" _hs(unsigned long long int val){return val;}
+constexpr kilosecond<OMNI_LITTERAL_INTEGER> operator"" _ks(unsigned long long int val){return val;}
+constexpr megasecond<OMNI_LITTERAL_INTEGER> operator"" _Ms(unsigned long long int val){return val;}
+constexpr gigasecond<OMNI_LITTERAL_INTEGER> operator"" _Gs(unsigned long long int val){return val;}
+constexpr terasecond<OMNI_LITTERAL_INTEGER> operator"" _Ts(unsigned long long int val){return val;}
+constexpr petasecond<OMNI_LITTERAL_INTEGER> operator"" _Ps(unsigned long long int val){return val;}
+constexpr exasecond<OMNI_LITTERAL_INTEGER> operator"" _Es(unsigned long long int val){return val;}
+constexpr zettasecond<OMNI_LITTERAL_INTEGER> operator"" _Zs(unsigned long long int val){return val;}
+constexpr yottasecond<OMNI_LITTERAL_INTEGER> operator"" _Ys(unsigned long long int val){return val;}
+
+constexpr minute<OMNI_LITTERAL_INTEGER> operator"" _min(unsigned long long int val){return val;}
+constexpr hour<OMNI_LITTERAL_INTEGER> operator"" _h(unsigned long long int val){return val;}
+constexpr day<OMNI_LITTERAL_INTEGER> operator"" _d(unsigned long long int val){return val;}
+constexpr week<OMNI_LITTERAL_INTEGER> operator"" _w(unsigned long long int val){return val;}
+constexpr month<OMNI_LITTERAL_INTEGER> operator"" _mon(unsigned long long int val){return val;}
+constexpr year<OMNI_LITTERAL_INTEGER> operator"" _y(unsigned long long int val){return val;}
+constexpr kiloyear<OMNI_LITTERAL_INTEGER> operator"" _ky(unsigned long long int val){return val;}
+constexpr megayear<OMNI_LITTERAL_INTEGER> operator"" _My(unsigned long long int val){return val;}
+constexpr gigayear<OMNI_LITTERAL_INTEGER> operator"" _Gy(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 
