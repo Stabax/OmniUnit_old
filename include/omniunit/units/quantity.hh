@@ -165,6 +165,8 @@ constexpr examol<OMNI_LITTERAL_FLOATING> operator"" _Emol(long double val){retur
 constexpr zettamol<OMNI_LITTERAL_FLOATING> operator"" _Zmol(long double val){return val;}
 constexpr yottamol<OMNI_LITTERAL_FLOATING> operator"" _Ymol(long double val){return val;}
 
+constexpr amount<OMNI_LITTERAL_FLOATING> operator"" _amount(long double val){return val;}
+
 
 
 constexpr yoctomol<OMNI_LITTERAL_INTEGER> operator"" _ymol(unsigned long long int val){return val;}
@@ -187,6 +189,8 @@ constexpr petamol<OMNI_LITTERAL_INTEGER> operator"" _Pmol(unsigned long long int
 constexpr examol<OMNI_LITTERAL_INTEGER> operator"" _Emol(unsigned long long int val){return val;}
 constexpr zettamol<OMNI_LITTERAL_INTEGER> operator"" _Zmol(unsigned long long int val){return val;}
 constexpr yottamol<OMNI_LITTERAL_INTEGER> operator"" _Ymol(unsigned long long int val){return val;}
+
+constexpr amount<OMNI_LITTERAL_INTEGER> operator"" _amount(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

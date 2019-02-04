@@ -173,6 +173,70 @@ using yottacelsius = Unit<Temperature, Rep, yotta, celsiusConstant>;
 
 
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using yoctofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, yocto>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using zeptofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, zepto>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using attofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, atto>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using femtofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, femto>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using picofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, pico>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using nanofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, nano>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using microfahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, micro>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using millifahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, milli>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using centifahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, centi>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using decifahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, deci>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using fahrenheit = Unit<Temperature, Rep, fahrenheitRatio, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using decafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, deca>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using hectofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, hecto>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilofahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, kilo>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, mega>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, giga>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using terafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, tera>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using petafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, peta>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using exafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, exa>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using zettafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, zetta>::type, fahrenheitConstant>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using yottafahrenheit = Unit<Temperature, Rep, typename Ratio_times_Ratio<fahrenheitRatio, yotta>::type, fahrenheitConstant>;
+
+
 typedef yoctokelvin<> Yoctokelvin;
 typedef zeptokelvin<> Zeptokelvin;
 typedef attokelvin<> Attokelvin;
@@ -194,6 +258,7 @@ typedef petakelvin<> Petakelvin;
 typedef exakelvin<> Exakelvin;
 typedef zettakelvin<> Zettakelvin;
 typedef yottakelvin<> Yottakelvin;
+
 
 
 typedef yoctocelsius<> Yoctocelsius;
@@ -218,6 +283,29 @@ typedef exacelsius<> Exacelsius;
 typedef zettacelsius<> Zettacelsius;
 typedef yottacelsius<> Yottacelsius;
 
+
+
+typedef yoctofahrenheit<> Yoctofahrenheit;
+typedef zeptofahrenheit<> Zeptofahrenheit;
+typedef attofahrenheit<> Attofahrenheit;
+typedef femtofahrenheit<>  Femtofahrenheit;
+typedef picofahrenheit<> Picofahrenheit;
+typedef nanofahrenheit<> Nanofahrenheit;
+typedef microfahrenheit<> Microfahrenheit;
+typedef millifahrenheit<> Millifahrenheit;
+typedef centifahrenheit<> Centifahrenheit;
+typedef decifahrenheit<> Decifahrenheit;
+typedef fahrenheit<> Fahrenheit;
+typedef decafahrenheit<> Decafahrenheit;
+typedef hectofahrenheit<> Hectofahrenheit;
+typedef kilofahrenheit<> Kilofahrenheit;
+typedef megafahrenheit<> Megafahrenheit;
+typedef gigafahrenheit<> Gigafahrenheit;
+typedef terafahrenheit<> Terafahrenheit;
+typedef petafahrenheit<> Petafahrenheit;
+typedef exafahrenheit<> Exafahrenheit;
+typedef zettafahrenheit<> Zettafahrenheit;
+typedef yottafahrenheit<> Yottafahrenheit;
 
 
 namespace suffixes
@@ -267,6 +355,26 @@ constexpr exacelsius<OMNI_LITTERAL_FLOATING> operator"" _Ec(long double val){ret
 constexpr zettacelsius<OMNI_LITTERAL_FLOATING> operator"" _Zc(long double val){return val;}
 constexpr yottacelsius<OMNI_LITTERAL_FLOATING> operator"" _Yc(long double val){return val;}
 
+constexpr yoctofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _yf(long double val){return val;}
+constexpr zeptofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _zf(long double val){return val;}
+constexpr attofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _af(long double val){return val;}
+constexpr femtofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _ff(long double val){return val;}
+constexpr nanofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _nf(long double val){return val;}
+constexpr microfahrenheit<OMNI_LITTERAL_FLOATING> operator"" _uf(long double val){return val;}
+constexpr millifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _mf(long double val){return val;}
+constexpr centifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _cf(long double val){return val;}
+constexpr decifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _df(long double val){return val;}
+constexpr fahrenheit<OMNI_LITTERAL_FLOATING> operator"" _f(long double val){return val;}
+constexpr decafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _daf(long double val){return val;}
+constexpr hectofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _hf(long double val){return val;}
+constexpr kilofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _kf(long double val){return val;}
+constexpr megafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Mf(long double val){return val;}
+constexpr gigafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Gf(long double val){return val;}
+constexpr terafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Tf(long double val){return val;}
+constexpr petafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Pf(long double val){return val;}
+constexpr exafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Ef(long double val){return val;}
+constexpr zettafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Zf(long double val){return val;}
+constexpr yottafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Yf(long double val){return val;}
 
 
 constexpr yoctokelvin<OMNI_LITTERAL_INTEGER> operator"" _yK(unsigned long long int val){return val;}
@@ -310,6 +418,28 @@ constexpr petacelsius<OMNI_LITTERAL_INTEGER> operator"" _Pc(unsigned long long i
 constexpr exacelsius<OMNI_LITTERAL_INTEGER> operator"" _Ec(unsigned long long int val){return val;}
 constexpr zettacelsius<OMNI_LITTERAL_INTEGER> operator"" _Zc(unsigned long long int val){return val;}
 constexpr yottacelsius<OMNI_LITTERAL_INTEGER> operator"" _Yc(unsigned long long int val){return val;}
+
+constexpr yoctofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _yf(unsigned long long int val){return val;}
+constexpr zeptofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _zf(unsigned long long int val){return val;}
+constexpr attofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _af(unsigned long long int val){return val;}
+constexpr femtofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _ff(unsigned long long int val){return val;}
+constexpr nanofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _nf(unsigned long long int val){return val;}
+constexpr microfahrenheit<OMNI_LITTERAL_FLOATING> operator"" _uf(unsigned long long int val){return val;}
+constexpr millifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _mf(unsigned long long int val){return val;}
+constexpr centifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _cf(unsigned long long int val){return val;}
+constexpr decifahrenheit<OMNI_LITTERAL_FLOATING> operator"" _df(unsigned long long int val){return val;}
+constexpr fahrenheit<OMNI_LITTERAL_FLOATING> operator"" _f(unsigned long long int val){return val;}
+constexpr decafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _daf(unsigned long long int val){return val;}
+constexpr hectofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _hf(unsigned long long int val){return val;}
+constexpr kilofahrenheit<OMNI_LITTERAL_FLOATING> operator"" _kf(unsigned long long int val){return val;}
+constexpr megafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Mf(unsigned long long int val){return val;}
+constexpr gigafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Gf(unsigned long long int val){return val;}
+constexpr terafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Tf(unsigned long long int val){return val;}
+constexpr petafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Pf(unsigned long long int val){return val;}
+constexpr exafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Ef(unsigned long long int val){return val;}
+constexpr zettafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Zf(unsigned long long int val){return val;}
+constexpr yottafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Yf(unsigned long long int val){return val;}
+
 
 } //namespaxe suffixies
 

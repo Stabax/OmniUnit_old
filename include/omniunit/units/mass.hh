@@ -149,6 +149,18 @@ using ton = megagram<Rep>;
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using solar_mass = Unit<Mass, Rep, solar_massDefinition, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using pound = Unit<Mass, Rep, Ratio<poundE8, E8>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using ounce = Unit<Mass, Rep, Ratio<ounceE10, E10>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using longton = Unit<Mass, Rep, Ratio<longtonDef, E0>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using shortton = Unit<Mass, Rep, Ratio<shorttonE1, E1>, zero>;
+
 
 
 typedef zeptogram<> Zeptogram;
@@ -184,6 +196,10 @@ typedef teraevPerC2<> TeraevPerC2;
 
 typedef ton<> Ton;
 typedef solar_mass<> Solar_mass;
+typedef pound<> Pound;
+typedef ounce<> Ounce;
+typedef longton<> Longton;
+typedef shortton<> Shortton;
 
 
 
@@ -222,6 +238,10 @@ constexpr gigaevPerC2<OMNI_LITTERAL_FLOATING> operator"" _GeVc2(long double val)
 constexpr teraevPerC2<OMNI_LITTERAL_FLOATING> operator"" _TeVc2(long double val){return val;}
 constexpr ton<OMNI_LITTERAL_FLOATING> operator"" _ton(long double val){return val;}
 constexpr solar_mass<OMNI_LITTERAL_FLOATING> operator"" _SM(long double val){return val;}
+constexpr pound<OMNI_LITTERAL_FLOATING> operator"" _lb(long double val){return val;}
+constexpr ounce<OMNI_LITTERAL_FLOATING> operator"" _oz(long double val){return val;}
+constexpr longton<OMNI_LITTERAL_FLOATING> operator"" _lton(long double val){return val;}
+constexpr shortton<OMNI_LITTERAL_FLOATING> operator"" _ston(long double val){return val;}
 
 
 
@@ -253,8 +273,13 @@ constexpr kiloevPerC2<OMNI_LITTERAL_INTEGER> operator"" _keVc2(unsigned long lon
 constexpr megaevPerC2<OMNI_LITTERAL_INTEGER> operator"" _MeVc2(unsigned long long int val){return val;}
 constexpr gigaevPerC2<OMNI_LITTERAL_INTEGER> operator"" _GeVc2(unsigned long long int val){return val;}
 constexpr teraevPerC2<OMNI_LITTERAL_INTEGER> operator"" _TeVc2(unsigned long long int val){return val;}
+
 constexpr ton<OMNI_LITTERAL_INTEGER> operator"" _ton(unsigned long long int val){return val;}
 constexpr solar_mass<OMNI_LITTERAL_INTEGER> operator"" _SM(unsigned long long int val){return val;}
+constexpr pound<OMNI_LITTERAL_INTEGER> operator"" _lb(unsigned long long int val){return val;}
+constexpr ounce<OMNI_LITTERAL_INTEGER> operator"" _oz(unsigned long long int val){return val;}
+constexpr longton<OMNI_LITTERAL_INTEGER> operator"" _lton(unsigned long long int val){return val;}
+constexpr shortton<OMNI_LITTERAL_INTEGER> operator"" _ston(unsigned long long int val){return val;}
 
 } //namespaxe suffixies
 

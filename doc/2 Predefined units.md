@@ -4,13 +4,14 @@
 
 ### Basic dimensions ###
 
-Dimension<1, 0, 0, 0, 0, 0, 0>   Length\n
-Dimension<0, 1, 0, 0, 0, 0, 0>   Mass\n
+Dimension<0, 0, 0, 0, 0, 0, 0>   Dimensionless\n
 Dimension<0, 0, 1, 0, 0, 0, 0>   Duration\n
 Dimension<0, 0, 0, 1, 0, 0, 0>   ElectricIntensity\n
-Dimension<0, 0, 0, 0, 1, 0, 0>   Temperature\n
-Dimension<0, 0, 0, 0, 0, 1, 0>   Quantity\n
+Dimension<1, 0, 0, 0, 0, 0, 0>   Length\n
 Dimension<0, 0, 0, 0, 0, 0, 1>   Luminosity\n
+Dimension<0, 1, 0, 0, 0, 0, 0>   Mass\n
+Dimension<0, 0, 0, 0, 0, 1, 0>   Quantity\n
+Dimension<0, 0, 0, 0, 1, 0, 0>   Temperature\n
 
 ### Derived dimensions ###
 
@@ -40,194 +41,205 @@ Ratio<E24, E0>   yotta;\n
 
 ## Defined units for basic dimensions ##
 
+### Angle and Dimensionless ###
+
+| **dimensionless** | **angle** | **solid angle** |
+| :----------------: | :--------------------: | :-------------------: |
+| value (_) | radian (_rad) | steradian (_sr) |
+| | milliradian (_mrad) | sphere (_sphe) |
+| | revolution (_rev) | hemisphere (_hsphe) |
+| | degree (_deg) | degree2 (_deg2) |
+| | grad (_grad) | |
+| | arcsecond (_arcs) | |
+| | arcminute (_arcmin) | |
+
+### Duration ###
+
+| **metric** | **other** |
+| :----------------: | :--------------------: |
+| yoctosecond (_ys) | |
+| zeptosecond (_zs) | |
+| attosecond (_as) | |
+| femtosecond (_fs) | |
+| picosecond (_ps) | |
+| nanosecond (_ns) | |
+| microsecond (_us) | |
+| millisecond (_ms) | |
+| centisecond (_cs) | |
+| decisecond (_ds) | |
+| second (_s) | |
+| decasecond (_das) | minute (_min) |
+| hectosecond (_hs) | hour (_h) |
+| kilosecond (_ks) | day (_d) |
+| megasecond (_Ms) | week (_w) |
+| gigasecond (_Gs) | month (_mon) |
+| terasecond (_Ts) | year (_y) |
+| petasecond (_Ps) | kiloyear (_ky) |
+| exasecond (_Es) | megayear (_My) |
+| zettasecond (_Zs) | gigayear (_Gy) |
+| yottasecond (_Ys) | |
+
+### Electric intensity ###
+
+| **metric** |
+| :----------------: |
+| yoctoampere (_yA) |
+| zeptoampere (_zA) |
+| attoampere (_aA) |
+| femtoampere (_fA) |
+| picoampere (_pA) |
+| nanoampere (_nA) |
+| microampere (_uA) |
+| milliampere (_mA) |
+| centiampere (_cA) |
+| deciampere (_dA) |
+| ampere (_A) |
+| decaampere (_daA) |
+| hectoampere (_hA) |
+| kiloampere (_kA) |
+| megaampere (_MA) |
+| gigaampere (_GA) |
+| teraampere (_TA) |
+| petaampere (_PA) |
+| exaampere (_EA) |
+| zettaampere (_ZA) |
+| yottaampere (_YA) |
+
 ### Units for Length ###
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
+| **metric** | **microscopic** | **macroscopic** | **american** |
 | :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctometer | | | |
-| zeptometer | | | |
-| attometer | | | |
-| femtometer | angstrom | | |
-| picometer | | | |
-| nanometer | | | |
-| micrometer | | | |
-| millimeter | | | |
-| centimeter | | | |
-| decimeter | | | |
-| meter | | astronomical_unit | |
-| decameter | | | |
-| hectometer | | lightsecond | |
-| kilometer | | lightminute | |
-| megameter | | lightyear | |
-| gigameter | | | |
-| terameter | | parsec | |
-| petameter | | kiloparsec | |
-| exameter | | megaparsec | |
-| zettameter | | gigaparsec | |
-| yottameter | | | |
+| yoctometer (_ym) | | | inch (_in) |
+| zeptometer (_zm) | | | link (_lnk) |
+| attometer (_am) | | | foot (_ft) |
+| femtometer (_fm) | angstrom (_a) | | yard (_yd) |
+| picometer (_pm) | | | rod (_rod) |
+| nanometer (_nm) | | | chain (_chn) |
+| micrometer (_um) | | | mile (_mi) |
+| millimeter (_mm) | | | league (_lea) |
+| centimeter (_cm) | | | nauticmile (_nmi) |
+| decimeter (_dm) | | | fathom (_ftm) |
+| meter (_m) | | macroscopical_unit (_au) | pica (_pica) |
+| decameter (_dam) | | | point (_pt) |
+| hectometer (_hm) | | lightsecond (_ls) | |
+| kilometer (_km) | | lightminute (_lmin) | |
+| megameter (_Mm) | | lightyear (_ly) | |
+| gigameter (_Gm) | | | |
+| terameter (_Tm) | | parsec (pc) | |
+| petameter (_Pm) | | kiloparsec (kpc) | |
+| exameter (_Em) | | megaparsec (Mpc) | |
+| zettameter (_Zm) | | gigaparsec (Gpc) | |
+| yottameter (_Ym) | | | |
 
 ### Units for mass ###
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
+| **metric** | **microscopic** | **macroscopic** | **american** |
 | :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctogram | | | |
-| zeptogram | | | |
-| attogram | | | |
-| femtogram | | | |
-| picogram | | | |
-| nanogram | | | |
-| microgram | microevPerC2 | | |
-| milligram | millievPerC2 | | |
-| centigram | | | |
-| decigram | | | |
-| gram | evPerC2 | | |
-| decagram | | | |
-| hectogram | | | |
-| kilogram | kiloevPerC2 | | |
-| megagram | megaevPerC2 | | ton |
-| gigagram | gigaevPerC2 | | |
-| teragram | teraevPerC2 | | |
-| petagram | | | |
-| exagram | | | |
-| zettagram | | | |
-| yottagram | atomic_mass | solar_mass | |
+| yoctogram (_yg) | | | |
+| zeptogram (_zg) | | | |
+| attogram (_ag) | | | |
+| femtogram (_fg) | | | |
+| picogram (_pg) | | | |
+| nanogram (_ng) | | | |
+| microgram (_um) | microevPerC2 (_ueVc2) | | |
+| milligram (_mg) | millievPerC2 (_meVc2) | | |
+| centigram (_cg) | | | |
+| decigram (_dg) | | | |
+| gram (_g) | evPerC2 (_eVc2) | | |
+| decagram (_dag) | | | ounce (_oz) |
+| hectogram (_hg) | | | pound (_lb) |
+| kilogram (_kg) | kiloevPerC2 (_keVc2) | | shortton (_ston) |
+| megagram (_Mg) | megaevPerC2 (_MeVc2) | | ton (_ton) |
+| gigagram (_Gg) | gigaevPerC2 (_GeVc2) | | longton (_lton) |
+| teragram (_Tg) | teraevPerC2 (_TeVc2) | | |
+| petagram (_Pg) | | | |
+| exagram (_Eg) | | | |
+| zettagram (_Zg) | | | |
+| yottagram (_Yg) | atomic_mass (_u) | solar_mass (_SM) | |
 
-### Units for duration ###
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
-| :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctosecond | | | |
-| zeptosecond | | | |
-| attosecond | | | |
-| femtosecond | | | |
-| picosecond | | | |
-| nanosecond | | | |
-| microsecond | | | |
-| millisecond | | | |
-| centisecond | | | |
-| decisecond | | | |
-| second | | | |
-| decasecond | | | minute |
-| hectosecond | | | hour |
-| kilosecond | | | day |
-| megasecond | | | week |
-| gigasecond | | | month |
-| terasecond | | | year |
-| petasecond | | kiloyear | |
-| exasecond | | megayear | |
-| zettasecond | | gigayear | |
-| yottasecond | | | |
 
-### Units for electric intensity ###
-
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
-| :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctoampere | | | |
-| zeptoampere | | | |
-| attoampere | | | |
-| femtoampere | | | |
-| picoampere | | | |
-| nanoampere | | | |
-| microampere | | | |
-| milliampere | | | |
-| centiampere | | | |
-| deciampere | | | |
-| ampere | | | |
-| decaampere | | | |
-| hectoampere | | | |
-| kiloampere | | | |
-| megaampere | | | |
-| gigaampere | | | |
-| teraampere | | | |
-| petaampere | | | |
-| exaampere | | | |
-| zettaampere | | | |
-| yottaampere | | | |
 
 ### Units for temperature ###
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
-| :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctokelvin | | | |
-| zeptokelvin | | | |
-| attokelvin | | | |
-| femtokelvin | | | |
-| picokelvin | | | |
-| nanokelvin | | | |
-| microkelvin | | | |
-| millikelvin | | | |
-| centikelvin | | | |
-| decikelvin | | | |
-| kelvin | | | |
-| decakelvin | | | |
-| hectokelvin | | | |
-| kilokelvin | | | |
-| megakelvin | | | |
-| gigakelvin | | | |
-| terakelvin | | | |
-| petakelvin | | | |
-| exakelvin | | | |
-| zettakelvin | | | |
-| yottakelvin | | | |
+| **metric** | **Celsius** | **Fahrenheit** |
+| :----------------: | :--------------------: | :-------------------: |
+| yoctokelvin (_yK) | yoctocelsius (_yc) | yoctofahrenheit (_yf) |
+| zeptokelvin (_zK) | zeptocelsius (_zc) | zeptofahrenheit (_zf) |
+| attokelvin (_aK) | attocelsius (_ac) | attofahrenheit (_af) |
+| femtokelvin (_fK) | femtocelsius (_fc) | femtofahrenheit (_ff) |
+| picokelvin (_pK) | picocelsius (_pc) | picofahrenheit (_pf) |
+| nanokelvin (_nK) | nanocelsius (_nc) | nanofahrenheit (_nf) |
+| microkelvin (_uK) | microcelsius (_uc) | microfahrenheit (_uf) |
+| millikelvin (_mK) | millicelsius (_mc) | millifahrenheit (_mf) |
+| centikelvin (_cK) | centicelsius (_cc) | centifahrenheit (_cf) |
+| decikelvin (_dK) | decicelsius (_dc) | decifahrenheit (_df) |
+| kelvin (_K) | celsius (_c) | fahrenheit (_f) |
+| decakelvin (_daK) | decacelsius (_dac) | decafahrenheit (_daf) |
+| hectokelvin (_hK) | hectocelsius (_hc) | hectofahrenheit (_hf) |
+| kilokelvin (_kK) | kilocelsius (_kc) | kilofahrenheit (_kf) |
+| megakelvin (_MK) | megacelsius (_Mc) | megafahrenheit (_Mf) |
+| gigakelvin (_GK) | gigacelsius (_Gc) | gigafahrenheit (_Gf) |
+| terakelvin (_TK) | teracelsius (_Tc) | terafahrenheit (_Tf) |
+| petakelvin (_PK) | petacelsius (_Pc) | petafahrenheit (_Pf) |
+| exakelvin (_EK) | exacelsius (_Ec) | exafahrenheit (_Ef) |
+| zettakelvin (_ZK) | zettacelsius (_Zc) | zettafahrenheit (_Zf) |
+| yottakelvin (_YK) | yottacelsius (_Yc) | yottafahrenheit (_Yf) |
 
 ### Units for matter quantity ###
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
-| :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctomol | | | |
-| zeptomol | | | |
-| attomol | | | |
-| femtomol | | | |
-| picomol | | | |
-| nanomol | | | |
-| micromol | | | |
-| millimol | | | |
-| centimol | | | |
-| decimol | | | |
-| mol | | | rawQuantity |
-| decamol | | | |
-| hectomol | | | |
-| kilomol | | | |
-| megamol | | | |
-| gigamol | | | |
-| teramol | | | |
-| petamol | | | |
-| examol | | | |
-| zettamol | | | |
-| yottamol | | | |
+| **metric** | **other** |
+| :----------------: | :--------------------: |
+| yoctomol (_ymol) | |
+| zeptomol (_zmol) | |
+| attomol (_amol) | |
+| femtomol (_fmol) | |
+| picomol (_pmol) | |
+| nanomol (_nmol) | |
+| micromol (_umol) | |
+| millimol (_mmol) | |
+| centimol (_cmol) | |
+| decimol (_dmol) | |
+| mol (_mol) | amount (_amount) |
+| decamol (_damol) | |
+| hectomol (_hmol) | |
+| kilomol (_kmol) | |
+| megamol (_Mmol) | |
+| gigamol (_Gmol) | |
+| teramol (_Tmol) | |
+| petamol (_Pmol) | |
+| examol (_Emol) | |
+| zettamol (_Zmol) | |
+| yottamol (_Ymol) | |
 
 ### Units for luminosity ###
 
 Luminous intensity and luminous flux have the same physical dimension, because steradian is not a physical dimension.
 
-| **decimal system** | **microscopic system** | **astronomic system** | **other** |
-| :----------------: | :--------------------: | :-------------------: | :-------: |
-| yoctocandela | | | yoctolumen |
-| zeptocandela | | | zeptolumen |
-| attocandela | | | attolumen |
-| femtocandela | | | femtolumen |
-| picocandela | | | picolumen |
-| nanocandela | | | nanolumen |
-| microcandela | | | microlumen |
-| millicandela | | | millilumen |
-| centicandela | | | centilumen |
-| decicandela | | | decilumen |
-| candela | | | lumen |
-| decacandela | | | decalumen |
-| hectocandela | | | hectolumen |
-| kilocandela | | | kilolumen |
-| megacandela | | | megalumen |
-| gigacandela | | | gigalumen |
-| teracandela | | | teralumen |
-| petacandela | | | petalumen |
-| exacandela | | | exalumen |
-| zettacandela | | | zettalumen |
-| yottacandela | | | yottalumen |
+| **metric** |
+| :-------: |
+| yoctocandela (_ycd) |
+| zeptocandela (_zcd) |
+| attocandela (_acd) |
+| femtocandela (_fcd) |
+| picocandela (_pcd) |
+| nanocandela (_ncd) |
+| microcandela (_ucd) |
+| millicandela (_mcd) |
+| centicandela (_ccd) |
+| decicandela (_dcd) |
+| candela (_cd) |
+| decacandela (_dacd) |
+| hectocandela (_hcd) |
+| kilocandela (_kcd) |
+| megacandela (_Mcd) |
+| gigacandela (_Gcd) |
+| teracandela (_Tcd) |
+| petacandela (_Pcd) |
+| exacandela (_Ecd) |
+| zettacandela (_Zcd) |
+| yottacandela (_Ycd) |
 
 ## Defined units for derived dimensions ##
-
-
-
-## Defined units for other composed dimensions ##
 
 ### Units for Speed ###

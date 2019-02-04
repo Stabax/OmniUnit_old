@@ -39,6 +39,8 @@ namespace omni
 inline constexpr double one = 1.;
 inline constexpr double two = 2.;
 inline constexpr double four = 4.;
+inline constexpr double five = 5.;
+inline constexpr double nine = 9.;
 inline constexpr double degVal = 180.;
 inline constexpr double gradVal = 200.;
 inline constexpr double piE36 = 3141592653589793238462643383279502884.;
@@ -57,6 +59,7 @@ inline constexpr double evPerC2DefE8 = 178266191.; //kg * 10^-36
 inline constexpr double solar_massDefE4 = 19884.; //kg * 10^30
 inline constexpr double avogadroE9 = 6022140857.; //10^23
 inline constexpr double celsiusConstant = 273.15;
+inline constexpr double fahrenheitConstant = 459.67;
 inline constexpr double inchE2 = 254.; //cm
 inline constexpr double linkE4 = 201168; //cm
 inline constexpr double footE2 = 3048; //cm
@@ -69,6 +72,10 @@ inline constexpr double nauticmileDef = 1852; //m
 inline constexpr double fathomE4 = 18288; //m
 inline constexpr double picaE4 = 42333; //mm
 inline constexpr double pointE6 = 88194; //mm
+inline constexpr double poundE8 = 45359237; //kg
+inline constexpr double ounceE10 = 283495231; // kg
+inline constexpr double longtonDef = 1016; //kg
+inline constexpr double shorttonE1 = 9072; //kg
 
 
 
@@ -81,6 +88,7 @@ typedef Ratio_over_value<Ratio<evPerC2DefE8, E8>, E36>::type evPerC2Definition;
 typedef Ratio_times_value<Ratio<solar_massDefE4, E4>, E30>::type solar_massDefinition;
 typedef Ratio_times_value<Ratio<avogadroE9, E9>, E23>::type avogadro;
 typedef Ratio_invert<avogadro>::type unitaryQuantityDefinition;
+typedef Ratio<nine, five> fahrenheitRatio;
 
 
 

@@ -75,12 +75,15 @@ omni::gram&lt;float&gt; var3(12.9); //var3 equals 12.9
 //you can of course use any primitive type
 
 var1 = var3; //var1 equals 12, the value is truncated, not rounded
-</pre><p>If you don't need units to handle different types inside them, you can use the default type. Units using the default type begin with a capital : </p><pre class="fragment">#define OMNI_DEFAULT_TYPE float //not mandatory, this value equals "double" by default
-
-omni::meter&lt;&gt; var4(0); //the internal type of var4 is float
+</pre><p>If you don't need units to handle different types inside them, you can use the default type. Units using the default type begin with a capital : </p><pre class="fragment">omni::meter&lt;&gt; var4(0); //the internal type of var4 is float
 omni::Meter var5(0); //notice the capital
 //var4 and var5 are exaclty the same, but the definition of var5 is most user friendly
-</pre><p>So <b>all</b> non-defaulted units begin with a tiny character, while <b>all</b> defaulted units begin with a capital.</p>
+</pre><p>So all <b>non-defaulted</b> units begin with a tiny character, and all <b>defaulted</b> units begin with a capital. The default type is defined by the <b>OMNI_DEFAULT_TYPE</b> macro in <a class="el" href="settings_8hh_source.html">settings.hh</a>. It equals <b>double</b> by default.</p>
+<p>Literal operators are also available : </p><pre class="fragment">using namespace suffixes; //this line is mandatory to use literals operator in omniunit
+
+auto var6 = 30_m;  //30 meters
+auto var7 = 30.2_m //30.2 meters
+</pre><p>For technical reasons, literal operators are only implemented for <b>official</b> and <b>derived</b> units. They aren't defined for composed units (like speed units for example). You can change the <b>OMNI_LITTERAL_INTEGER</b> and the <b>OMNI_LITTERAL_FLOATING</b> macros in setting.hh to modify the type handeled by units returned by a literal operator. The first one is used when the literal is an integer (see var6) and the second one when the literal is a double (see var7).</p>
 <h2>Implicit conversions</h2>
 <p>You can convert a unit to another <b>if they have the same dimension</b> (mass in these examples) : </p><pre class="fragment">omni::kilogram&lt;float&gt; var1(3.1);
 omni::milligram&lt;float&gt; var2(var1);  //conversion by construction
@@ -178,7 +181,7 @@ foo2(omni::duration_cast&lt;omni::Second&gt;(standard4)); //OK
 <li>round()</li>
 <li>trunc()</li>
 </ul>
-<p><b>Of course, these functions are defined for values with OmniUnit types, they do not accept values with primitives types.</b></p>
+<p><b>Of course, these functions are defined for values of OmniUnit types, they do not accept values of primitive types.</b></p>
 <h2>Constexpr instances</h2>
 <p>To improve the execution speed of your application, you can perform calculations at compile time : it is a kind of metaprogramming. To do so, you have to declare a value with the <b>constexpr</b> keyword : </p><pre class="fragment">constexpr omni::Meter var1(1.2);
 constexpr omni::Second var2(3.55);
@@ -211,7 +214,7 @@ constexpr auto var8 = omni::pow&lt;3&gt;(omni::Value(1.54)); // OK
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 18 2019 18:47:07 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 4 2019 22:46:37 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

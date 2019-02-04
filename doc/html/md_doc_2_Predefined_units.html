@@ -68,7 +68,8 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h2>All defined dimensions</h2>
 <h3>Basic dimensions</h3>
-<p>Dimension&lt;1, 0, 0, 0, 0, 0, 0&gt; Length<br />
+<p>Dimension&lt;0, 0, 0, 0, 0, 0, 0&gt; Dimensionless<br />
+Dimension&lt;1, 0, 0, 0, 0, 0, 0&gt; Length<br />
 Dimension&lt;0, 1, 0, 0, 0, 0, 0&gt; Mass<br />
 Dimension&lt;0, 0, 1, 0, 0, 0, 0&gt; Duration<br />
 Dimension&lt;0, 0, 0, 1, 0, 0, 0&gt; ElectricIntensity<br />
@@ -99,342 +100,361 @@ Ratio&lt;E18, E0&gt; exa;<br />
 Ratio&lt;E21, E0&gt; zetta;<br />
 Ratio&lt;E24, E0&gt; yotta;<br />
  </p><h2>Defined units for basic dimensions</h2>
+<h3>Units for Angle and Dimensionless</h3>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter"><b>dimensionless</b>  </th><th class="markdownTableHeadCenter"><b>angle</b>  </th><th class="markdownTableHeadCenter"><b>solid angle</b>   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">value (_)  </td><td class="markdownTableBodyCenter">radian (_rad)  </td><td class="markdownTableBodyCenter">steradian (_sr)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">milliradian (_mrad)  </td><td class="markdownTableBodyCenter">sphere (_sphe)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">revolution (_rev)  </td><td class="markdownTableBodyCenter">hemisphere (_hsphe)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">degree (_deg)  </td><td class="markdownTableBodyCenter">degree2 (_deg2)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">grad (_grad)  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">arcsecond (_arcs)  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">arcminute (_arcmin)  </td><td class="markdownTableBodyCenter"></td></tr>
+</table>
 <h3>Units for Length</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>microscopic</b>  </th><th class="markdownTableHeadCenter"><b>macroscopic</b>  </th><th class="markdownTableHeadCenter"><b>american</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctometer (_ym)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">inch (_in)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptometer (_zm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">link (_lnk)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attometer (_am)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">foot (_ft)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtometer  </td><td class="markdownTableBodyCenter">angstrom  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtometer (_fm)  </td><td class="markdownTableBodyCenter">angstrom (_a)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">yard (_yd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picometer (_pm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">rod (_rod)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanometer (_nm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">chain (_chn)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">micrometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">micrometer (_um)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">mile (_mi)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">millimeter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">millimeter (_mm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">league (_lea)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centimeter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centimeter (_cm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">nauticmile (_nmi)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decimeter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decimeter (_dm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">fathom (_ftm)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">meter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">astronomical_unit  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">meter (_m)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">macroscopical_unit (_au)  </td><td class="markdownTableBodyCenter">pica (_pica)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decameter (_dam)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">point (_pt)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightsecond  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">hectometer (_hm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightsecond (_ls)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilometer  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightminute  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kilometer (_km)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightminute (_lmin)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightyear  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">megameter (_Mm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lightyear (_ly)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gigameter (_Gm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">terameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">parsec  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">terameter (_Tm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">parsec (pc)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">kiloparsec  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petameter (_Pm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">kiloparsec (kpc)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">megaparsec  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">exameter (_Em)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">megaparsec (Mpc)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">gigaparsec  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettameter (_Zm)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">gigaparsec (Gpc)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottameter  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottameter (_Ym)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <h3>Units for mass</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>microscopic</b>  </th><th class="markdownTableHeadCenter"><b>macroscopic</b>  </th><th class="markdownTableHeadCenter"><b>american</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctogram (_yg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptogram (_zg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attogram (_ag)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtogram (_fg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picogram (_pg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanogram (_ng)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microgram  </td><td class="markdownTableBodyCenter">microevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">microgram (_um)  </td><td class="markdownTableBodyCenter">microevPerC2 (_ueVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">milligram  </td><td class="markdownTableBodyCenter">millievPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">milligram (_mg)  </td><td class="markdownTableBodyCenter">millievPerC2 (_meVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centigram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centigram (_cg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decigram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decigram (_dg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">gram  </td><td class="markdownTableBodyCenter">evPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gram (_g)  </td><td class="markdownTableBodyCenter">evPerC2 (_eVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decagram (_dag)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">ounce (_oz)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectogram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">hectogram (_hg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">pound (_lb)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilogram  </td><td class="markdownTableBodyCenter">kiloevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kilogram (_kg)  </td><td class="markdownTableBodyCenter">kiloevPerC2 (_keVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">shortton (_ston)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megagram  </td><td class="markdownTableBodyCenter">megaevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">ton   </td></tr>
+<td class="markdownTableBodyCenter">megagram (_Mg)  </td><td class="markdownTableBodyCenter">megaevPerC2 (_MeVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">ton (_ton)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigagram  </td><td class="markdownTableBodyCenter">gigaevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gigagram (_Gg)  </td><td class="markdownTableBodyCenter">gigaevPerC2 (_GeVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">longton (_lton)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">teragram  </td><td class="markdownTableBodyCenter">teraevPerC2  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">teragram (_Tg)  </td><td class="markdownTableBodyCenter">teraevPerC2 (_TeVc2)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petagram (_Pg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">exagram (_Eg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettagram  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettagram (_Zg)  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottagram  </td><td class="markdownTableBodyCenter">atomic_mass  </td><td class="markdownTableBodyCenter">solar_mass  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottagram (_Yg)  </td><td class="markdownTableBodyCenter">atomic_mass (_u)  </td><td class="markdownTableBodyCenter">solar_mass (_SM)  </td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <h3>Units for duration</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctosecond (_ys)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptosecond (_zs)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attosecond (_as)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtosecond (_fs)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picosecond (_ps)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanosecond (_ns)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microsecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">microsecond (_us)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">millisecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">millisecond (_ms)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centisecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centisecond (_cs)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decisecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decisecond (_ds)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">second  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">second (_s)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">minute   </td></tr>
+<td class="markdownTableBodyCenter">decasecond (_das)  </td><td class="markdownTableBodyCenter">minute (_min)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">hour   </td></tr>
+<td class="markdownTableBodyCenter">hectosecond (_hs)  </td><td class="markdownTableBodyCenter">hour (_h)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilosecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">day   </td></tr>
+<td class="markdownTableBodyCenter">kilosecond (_ks)  </td><td class="markdownTableBodyCenter">day (_d)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">week   </td></tr>
+<td class="markdownTableBodyCenter">megasecond (_Ms)  </td><td class="markdownTableBodyCenter">week (_w)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">month   </td></tr>
+<td class="markdownTableBodyCenter">gigasecond (_Gs)  </td><td class="markdownTableBodyCenter">month (_mon)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">terasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">year   </td></tr>
+<td class="markdownTableBodyCenter">terasecond (_Ts)  </td><td class="markdownTableBodyCenter">year (_y)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">kiloyear  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petasecond (_Ps)  </td><td class="markdownTableBodyCenter">kiloyear (_ky)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">megayear  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">exasecond (_Es)  </td><td class="markdownTableBodyCenter">megayear (_My)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">gigayear  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettasecond (_Zs)  </td><td class="markdownTableBodyCenter">gigayear (_Gy)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottasecond  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottasecond (_Ys)  </td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <h3>Units for electric intensity</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctoampere (_yA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptoampere (_zA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attoampere (_aA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtoampere (_fA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picoampere (_pA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanoampere (_nA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">microampere (_uA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">milliampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">milliampere (_mA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centiampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centiampere (_cA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">deciampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">deciampere (_dA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">ampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">ampere (_A)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decaampere (_daA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectoampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">hectoampere (_hA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kiloampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kiloampere (_kA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">megaampere (_MA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gigaampere (_GA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">teraampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">teraampere (_TA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petaampere (_PA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">exaampere (_EA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettaampere (_ZA)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottaampere  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottaampere (_YA)   </td></tr>
 </table>
 <h3>Units for temperature</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>Celsius</b>  </th><th class="markdownTableHeadCenter"><b>Fahrenheit</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctokelvin (_yK)  </td><td class="markdownTableBodyCenter">yoctocelsius (_yc)  </td><td class="markdownTableBodyCenter">yoctofahrenheit (_yf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptokelvin (_zK)  </td><td class="markdownTableBodyCenter">zeptocelsius (_zc)  </td><td class="markdownTableBodyCenter">zeptofahrenheit (_zf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attokelvin (_aK)  </td><td class="markdownTableBodyCenter">attocelsius (_ac)  </td><td class="markdownTableBodyCenter">attofahrenheit (_af)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtokelvin (_fK)  </td><td class="markdownTableBodyCenter">femtocelsius (_fc)  </td><td class="markdownTableBodyCenter">femtofahrenheit (_ff)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picokelvin (_pK)  </td><td class="markdownTableBodyCenter">picocelsius (_pc)  </td><td class="markdownTableBodyCenter">picofahrenheit (_pf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanokelvin (_nK)  </td><td class="markdownTableBodyCenter">nanocelsius (_nc)  </td><td class="markdownTableBodyCenter">nanofahrenheit (_nf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microkelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">microkelvin (_uK)  </td><td class="markdownTableBodyCenter">microcelsius (_uc)  </td><td class="markdownTableBodyCenter">microfahrenheit (_uf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">millikelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">millikelvin (_mK)  </td><td class="markdownTableBodyCenter">millicelsius (_mc)  </td><td class="markdownTableBodyCenter">millifahrenheit (_mf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centikelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centikelvin (_cK)  </td><td class="markdownTableBodyCenter">centicelsius (_cc)  </td><td class="markdownTableBodyCenter">centifahrenheit (_cf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decikelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decikelvin (_dK)  </td><td class="markdownTableBodyCenter">decicelsius (_dc)  </td><td class="markdownTableBodyCenter">decifahrenheit (_df)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">kelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kelvin (_K)  </td><td class="markdownTableBodyCenter">celsius (_c)  </td><td class="markdownTableBodyCenter">fahrenheit (_f)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decakelvin (_daK)  </td><td class="markdownTableBodyCenter">decacelsius (_dac)  </td><td class="markdownTableBodyCenter">decafahrenheit (_daf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">hectokelvin (_hK)  </td><td class="markdownTableBodyCenter">hectocelsius (_hc)  </td><td class="markdownTableBodyCenter">hectofahrenheit (_hf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilokelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kilokelvin (_kK)  </td><td class="markdownTableBodyCenter">kilocelsius (_kc)  </td><td class="markdownTableBodyCenter">kilofahrenheit (_kf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">megakelvin (_MK)  </td><td class="markdownTableBodyCenter">megacelsius (_Mc)  </td><td class="markdownTableBodyCenter">megafahrenheit (_Mf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gigakelvin (_GK)  </td><td class="markdownTableBodyCenter">gigacelsius (_Gc)  </td><td class="markdownTableBodyCenter">gigafahrenheit (_Gf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">terakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">terakelvin (_TK)  </td><td class="markdownTableBodyCenter">teracelsius (_Tc)  </td><td class="markdownTableBodyCenter">terafahrenheit (_Tf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petakelvin (_PK)  </td><td class="markdownTableBodyCenter">petacelsius (_Pc)  </td><td class="markdownTableBodyCenter">petafahrenheit (_Pf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">exakelvin (_EK)  </td><td class="markdownTableBodyCenter">exacelsius (_Ec)  </td><td class="markdownTableBodyCenter">exafahrenheit (_Ef)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettakelvin (_ZK)  </td><td class="markdownTableBodyCenter">zettacelsius (_Zc)  </td><td class="markdownTableBodyCenter">zettafahrenheit (_Zf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottakelvin  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottakelvin (_YK)  </td><td class="markdownTableBodyCenter">yottacelsius (_Yc)  </td><td class="markdownTableBodyCenter">yottafahrenheit (_Yf)   </td></tr>
 </table>
 <h3>Units for matter quantity</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yoctomol (_ymol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zeptomol (_zmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">attomol (_amol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">femtomol (_fmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">picomol (_pmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">nanomol (_nmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">micromol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">micromol (_umol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">millimol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">millimol (_mmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centimol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">centimol (_cmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decimol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decimol (_dmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">mol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">rawQuantity   </td></tr>
+<td class="markdownTableBodyCenter">mol (_mol)  </td><td class="markdownTableBodyCenter">amount (_amount)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decamol (_damol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">hectomol (_hmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilomol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">kilomol (_kmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">megamol (_Mmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">gigamol (_Gmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">teramol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">teramol (_Tmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">petamol (_Pmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">examol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">examol (_Emol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">zettamol (_Zmol)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottamol  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">yottamol (_Ymol)  </td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <h3>Units for luminosity</h3>
 <p>Luminous intensity and luminous flux have the same physical dimension, because steradian is not a physical dimension.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadCenter"><b>decimal system</b>  </th><th class="markdownTableHeadCenter"><b>microscopic system</b>  </th><th class="markdownTableHeadCenter"><b>astronomic system</b>  </th><th class="markdownTableHeadCenter"><b>other</b>   </th></tr>
+<th class="markdownTableHeadCenter"><b>metric</b>   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yoctocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">yoctolumen   </td></tr>
+<td class="markdownTableBodyCenter">yoctocandela (_ycd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zeptocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">zeptolumen   </td></tr>
+<td class="markdownTableBodyCenter">zeptocandela (_zcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">attocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">attolumen   </td></tr>
+<td class="markdownTableBodyCenter">attocandela (_acd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">femtocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">femtolumen   </td></tr>
+<td class="markdownTableBodyCenter">femtocandela (_fcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">picocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">picolumen   </td></tr>
+<td class="markdownTableBodyCenter">picocandela (_pcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">nanocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">nanolumen   </td></tr>
+<td class="markdownTableBodyCenter">nanocandela (_ncd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">microcandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">microlumen   </td></tr>
+<td class="markdownTableBodyCenter">microcandela (_ucd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">millicandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">millilumen   </td></tr>
+<td class="markdownTableBodyCenter">millicandela (_mcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">centicandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">centilumen   </td></tr>
+<td class="markdownTableBodyCenter">centicandela (_ccd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decicandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">decilumen   </td></tr>
+<td class="markdownTableBodyCenter">decicandela (_dcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">candela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">lumen   </td></tr>
+<td class="markdownTableBodyCenter">candela (_cd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">decalumen   </td></tr>
+<td class="markdownTableBodyCenter">decacandela (_dacd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">hectocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">hectolumen   </td></tr>
+<td class="markdownTableBodyCenter">hectocandela (_hcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">kilocandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">kilolumen   </td></tr>
+<td class="markdownTableBodyCenter">kilocandela (_kcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">megacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">megalumen   </td></tr>
+<td class="markdownTableBodyCenter">megacandela (_Mcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">gigacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">gigalumen   </td></tr>
+<td class="markdownTableBodyCenter">gigacandela (_Gcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">teracandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">teralumen   </td></tr>
+<td class="markdownTableBodyCenter">teracandela (_Tcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">petacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">petalumen   </td></tr>
+<td class="markdownTableBodyCenter">petacandela (_Pcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">exacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">exalumen   </td></tr>
+<td class="markdownTableBodyCenter">exacandela (_Ecd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">zettacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">zettalumen   </td></tr>
+<td class="markdownTableBodyCenter">zettacandela (_Zcd)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">yottacandela  </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter">yottalumen   </td></tr>
+<td class="markdownTableBodyCenter">yottacandela (_Ycd)   </td></tr>
 </table>
 <h2>Defined units for derived dimensions</h2>
 <h3>Units for Speed</h3>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jan 18 2019 18:47:07 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 4 2019 22:46:37 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

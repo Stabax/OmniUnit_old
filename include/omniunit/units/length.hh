@@ -271,9 +271,9 @@ constexpr yard<OMNI_LITTERAL_FLOATING> operator"" _yd(long double val){return va
 constexpr rod<OMNI_LITTERAL_FLOATING> operator"" _rod(long double val){return val;}
 constexpr chain<OMNI_LITTERAL_FLOATING> operator"" _chn(long double val){return val;}
 constexpr mile<OMNI_LITTERAL_FLOATING> operator"" _mi(long double val){return val;}
-constexpr league<OMNI_LITTERAL_FLOATING> operator"" _league(long double val){return val;}
+constexpr league<OMNI_LITTERAL_FLOATING> operator"" _lea(long double val){return val;}
 constexpr nauticmile<OMNI_LITTERAL_FLOATING> operator"" _nmi(long double val){return val;}
-constexpr fathom<OMNI_LITTERAL_FLOATING> operator"" _fathom(long double val){return val;}
+constexpr fathom<OMNI_LITTERAL_FLOATING> operator"" _ftm(long double val){return val;}
 constexpr pica<OMNI_LITTERAL_FLOATING> operator"" _pica(long double val){return val;}
 constexpr point<OMNI_LITTERAL_FLOATING> operator"" _pt(long double val){return val;}
 
@@ -312,12 +312,12 @@ constexpr gigaparsec<OMNI_LITTERAL_INTEGER> operator"" _Gpc(unsigned long long i
 
 constexpr inch<OMNI_LITTERAL_INTEGER> operator"" _in(unsigned long long int val){return val;}
 constexpr link<OMNI_LITTERAL_INTEGER> operator"" _lnk(unsigned long long int val){return val;}
-constexpr foot<OMNI_LITTERAL_INTEGER> operator"" _fathom(unsigned long long int val){return val;}
+constexpr foot<OMNI_LITTERAL_INTEGER> operator"" _ftm(unsigned long long int val){return val;}
 constexpr yard<OMNI_LITTERAL_INTEGER> operator"" _yd(unsigned long long int val){return val;}
 constexpr rod<OMNI_LITTERAL_INTEGER> operator"" _rod(unsigned long long int val){return val;}
 constexpr chain<OMNI_LITTERAL_INTEGER> operator"" _chn(unsigned long long int val){return val;}
 constexpr mile<OMNI_LITTERAL_INTEGER> operator"" _mi(unsigned long long int val){return val;}
-constexpr league<OMNI_LITTERAL_INTEGER> operator"" _league(unsigned long long int val){return val;}
+constexpr league<OMNI_LITTERAL_INTEGER> operator"" _lea(unsigned long long int val){return val;}
 constexpr nauticmile<OMNI_LITTERAL_INTEGER> operator"" _nmi(unsigned long long int val){return val;}
 constexpr fathom<OMNI_LITTERAL_INTEGER> operator"" _fh(unsigned long long int val){return val;}
 constexpr pica<OMNI_LITTERAL_INTEGER> operator"" _pica(unsigned long long int val){return val;}
