@@ -15,6 +15,126 @@ Dimension<0, 0, 0, 0, 1, 0, 0>   Temperature\n
 
 ### Derived dimensions ###
 
+Acceleration
+Action
+Activity
+Angular acceleration
+Angular jerk
+Angular jounce
+Angular mass
+Angular momentum
+Angular speed
+Area
+Area density
+Area frequency
+Capacitance
+Charge
+Charge density
+Compressibility
+Concentration
+Current
+Dose
+Dose rate
+Electric conductance
+Electric conductivity
+Electric current density
+Electric displacement field
+Electric field
+Electric resistance
+Electric resistivity
+Electron mobility
+Energy
+Energy density
+Energy flux
+Entropy
+Exposure
+Fluence
+Fluence rate
+Flux
+Force
+Frequency
+Illuminance
+Impulse
+Inductance
+Intensity
+Irradiance
+Jerk
+Jounce
+Light quantity
+Linear activity
+Linear charge density
+Linear mass
+Luminance
+Luminous energy
+Luminous efficacy
+Luminous flux
+Luminous exposure
+Magnetic induction
+Magnetic field
+Magnetic flux
+Magnetic moment
+Magnetic permeability
+Magnetic potential
+Magnetic reluctance
+Magnetic resistance
+Magnetic rigidity
+Magnetic suseptibility
+Magnetization
+Magnetomotive force
+Mass flow
+Molality
+Molarity
+Molar concentration
+Molar conductivity
+Molar energy
+Molar entropy
+Molar heat capacity
+Molar mass
+Molar volume
+Moment
+Moment of inertia
+Momentum
+Permittivity
+Permeability
+Polarization density
+Power
+Power density
+Pressure
+Quantity of light
+Radiance
+Radiant exposure
+Radiant intensity
+Resistance
+Spatial frequency
+Specific angular momentum
+Specific energy
+Specific entropy
+Specific thermal capacity
+Specific volume
+Spectral intensity
+Spectral irradiance
+Spectral power
+Spectral radiance
+Speed
+Stiffness
+Surface tension
+Temperature gradient
+Thermal capacity
+Thermal conductivity
+Thermal diffusivity
+Thermal expansion
+Thermal flux
+Thermal resistance
+Torque
+Viscosity (dynamic)
+Viscosity (kinematic)
+Voltage
+Volume
+Volume frequency
+Volumetric flow
+Volumetric mass
+Yank
+
 ## All defined ratios ##
 
 Ratio<E0, E24>   yocto;\n
@@ -268,7 +388,17 @@ See __Moment of inertia__
 
 ### Charge ###
 
+### Charge density ###
+
 ### Compressibility ###
+
+### Concentration  ###
+
+See __Volumetric mass__
+
+### Current ###
+
+See __Intensity__
 
 ### Dose ###
 
@@ -276,13 +406,31 @@ See __Moment of inertia__
 
 ### Electric conductance  ###
 
+### Electric conductivity  ###
+
+### Electric current density ###
+
+### Electric displacement field ###
+
+### Electric field ###
+
 ### Electric resistance  ###
+
+### Electric resistivity  ###
+
+### Electron mobility  ###
 
 ### Energy ###
 
 ### Energy density ###
 
 ### Energy flux ###
+
+### Entropy ###
+
+See __Thermal capacity__
+
+### Exposure ###
 
 ### Fluence ###
 
@@ -310,21 +458,79 @@ See __Thermal flux__
 
 ### Jerk ###
 
-### Jounce  ###
+### Jounce ###
+
+### Light quantity ###
+
+See __Luminous energy__
 
 ### Linear activity ###
 
+### Linear charge density ###
+
 ### Linear mass ###
 
-### Luminous flux  ###
+### Luminance ###
 
-### Magnetic induction  ###
+### Luminous energy ###
 
-### Magnetic flux  ###
+### Luminous efficacy ###
 
-### Magnetization  ###
+### Luminous flux ###
+
+### Luminous exposure ###
+
+### Magnetic induction ###
+
+### Magnetic field ###
+
+### Magnetic flux ###
+
+### Magnetic moment ###
+
+### Magnetic permeability ###
+
+### Magnetic potential ###
+
+### Magnetic reluctance ###
+
+### Magnetic resistance ###
+
+See __Magnetic reluctance__
+
+### Magnetic rigidity ###
+
+### Magnetic suseptibility ###
+
+### Magnetization ###
+
+See __Magnetic field strength__
+
+### Magnetomotive force ###
 
 ### Mass flow ###
+
+### Molality ###
+
+### Molarity ###
+
+### Molar concentration ###
+
+See __Molarity__
+
+### Molar conductivity ###
+
+### Molar energy ###
+
+### Molar entropy ###
+
+See __Molar heat capacity__
+
+### Molar heat capacity ###
+
+### Molar mass ###
+
+### Molar volume ###
 
 ### Moment ###
 
@@ -334,11 +540,25 @@ See __Thermal flux__
 
 See __Impulse__
 
+### Permittivity ###
+
+### Permeability ###
+
+See __Area__
+
+### Polarization density ###
+
+See __Electric displacement field__
+
 ### Power ###
 
 ### Power density ###
 
 ### Pressure ###
+
+### Quantity of light ###
+
+See __Luminous energy__
 
 ### Radiance ###
 
@@ -353,6 +573,12 @@ See __Impulse__
 ### Specific angular momentum ###
 
 ### Specific energy ###
+
+### Specific entropy ###
+
+See __Specific thermal capacity__
+
+### Specific thermal capacity ###
 
 ### Specific volume ###
 
@@ -374,11 +600,21 @@ See __Power density__
 
 See __Stiffness__
 
+### Temperature gradient ###
+
+### Thermal capacity ###
+
+### Thermal conductivity ###
+
 ### Thermal diffusivity ###
+
+### Thermal expansion ###
 
 See __Viscosity (kinematic)__
 
 ### Thermal flux ###
+
+### Thermal resistance ###
 
 ### Torque ###
 
@@ -396,6 +632,6 @@ See __Moment__
 
 ### Volumetric flow ###
 
-### Volumetric mass density ###
+### Volumetric mass ###
 
 ### Yank ###
