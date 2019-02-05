@@ -15,124 +15,124 @@ Dimension<0, 0, 0, 0, 1, 0, 0>   Temperature\n
 
 ### Derived dimensions ###
 
-Acceleration
-Action
-Activity
-Angular acceleration
-Angular jerk
-Angular jounce
-Angular mass
-Angular momentum
-Angular speed
-Area
-Area density
-Area frequency
-Capacitance
-Charge
-Charge density
-Compressibility
-Concentration
-Current
-Dose
-Dose rate
-Electric conductance
-Electric conductivity
-Electric current density
-Electric displacement field
-Electric field
-Electric resistance
-Electric resistivity
-Electron mobility
-Energy
-Energy density
-Energy flux
-Entropy
-Exposure
-Fluence
-Fluence rate
-Flux
-Force
-Frequency
-Illuminance
-Impulse
-Inductance
-Intensity
-Irradiance
-Jerk
-Jounce
-Light quantity
-Linear activity
-Linear charge density
-Linear mass
-Luminance
-Luminous energy
-Luminous efficacy
-Luminous flux
-Luminous exposure
-Magnetic induction
-Magnetic field
-Magnetic flux
-Magnetic moment
-Magnetic permeability
-Magnetic potential
-Magnetic reluctance
-Magnetic resistance
-Magnetic rigidity
-Magnetic suseptibility
-Magnetization
-Magnetomotive force
-Mass flow
-Molality
-Molarity
-Molar concentration
-Molar conductivity
-Molar energy
-Molar entropy
-Molar heat capacity
-Molar mass
-Molar volume
-Moment
-Moment of inertia
-Momentum
-Permittivity
-Permeability
-Polarization density
-Power
-Power density
-Pressure
-Quantity of light
-Radiance
-Radiant exposure
-Radiant intensity
-Resistance
-Spatial frequency
-Specific angular momentum
-Specific energy
-Specific entropy
-Specific thermal capacity
-Specific volume
-Spectral intensity
-Spectral irradiance
-Spectral power
-Spectral radiance
-Speed
-Stiffness
-Surface tension
-Temperature gradient
-Thermal capacity
-Thermal conductivity
-Thermal diffusivity
-Thermal expansion
-Thermal flux
-Thermal resistance
-Torque
-Viscosity (dynamic)
-Viscosity (kinematic)
-Voltage
-Volume
-Volumetric flow
-Volumetric mass
-Yank
+Acceleration\n
+Action\n
+Activity\n
+Angular acceleration\n
+Angular jerk\n
+Angular jounce\n
+Angular mass\n
+Angular momentum\n
+Angular speed\n
+Area\n
+Area density\n
+Area frequency\n
+Capacitance\n
+Charge\n
+Charge density\n
+Compressibility\n
+Concentration\n
+Current\n
+Dose\n
+Dose rate\n
+Electric conductance\n
+Electric conductivity\n
+Electric current density\n
+Electric displacement field\n
+Electric field\n
+Electric resistance\n
+Electric resistivity\n
+Electron mobility\n
+Energy\n
+Energy density\n
+Energy flux\n
+Entropy\n
+Exposure\n
+Fluence\n
+Fluence rate\n
+Flux\n
+Force\n
+Frequency\n
+Illuminance\n
+Impulse\n
+Inductance\n
+Intensity\n
+Irradiance\n
+Jerk\n
+Jounce\n
+Light quantity\n
+Linear activity\n
+Linear charge density\n
+Linear mass\n
+Luminance\n
+Luminous energy\n
+Luminous efficacy\n
+Luminous flux\n
+Luminous exposure\n
+Magnetic induction\n
+Magnetic field\n
+Magnetic flux\n
+Magnetic moment\n
+Magnetic permeability\n
+Magnetic potential\n
+Magnetic reluctance\n
+Magnetic resistance\n
+Magnetic rigidity\n
+Magnetic suseptibility\n
+Magnetization\n
+Magnetomotive force\n
+Mass flow\n
+Molality\n
+Molarity\n
+Molar concentration\n
+Molar conductivity\n
+Molar energy\n
+Molar entropy\n
+Molar heat capacity\n
+Molar mass\n
+Molar volume\n
+Moment\n
+Moment of inertia\n
+Momentum\n
+Permittivity\n
+Permeability\n
+Polarization density\n
+Power\n
+Power density\n
+Pressure\n
+Quantity of light\n
+Radiance\n
+Radiant exposure\n
+Radiant intensity\n
+Resistance\n
+Spatial frequency\n
+Specific angular momentum\n
+Specific energy\n
+Specific entropy\n
+Specific thermal capacity\n
+Specific volume\n
+Spectral intensity\n
+Spectral irradiance\n
+Spectral power\n
+Spectral radiance\n
+Speed\n
+Stiffness\n
+Surface tension\n
+Temperature gradient\n
+Thermal capacity\n
+Thermal conductivity\n
+Thermal diffusivity\n
+Thermal expansion\n
+Thermal flux\n
+Thermal resistance\n
+Torque\n
+Viscosity (dynamic)\n
+Viscosity (kinematic)\n
+Voltage\n
+Volume\n
+Volumetric flow\n
+Volumetric mass\n
+Yank\n
 
 ## All defined ratios ##
 
