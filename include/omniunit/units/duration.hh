@@ -111,7 +111,7 @@ using yottasecond = Unit<Duration, Rep, yotta, zero>;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using minute = Unit<Duration, Rep, Ratio<secondsPerMin, E0>, zero>;
+using minute = Unit<Duration, Rep, Ratio<sixty, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using hour = Unit<Duration, Rep, Ratio<secondsPerHour, E0>, zero>;

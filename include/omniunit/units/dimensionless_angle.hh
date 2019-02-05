@@ -53,13 +53,13 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using revolution = Unit<Dimensionless, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degree = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, degVal>::type, zero>;
+using degree = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, degDef>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using grad = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, gradVal>::type, zero>;
+using grad = Unit<Dimensionless, Rep, typename Ratio_over_value<pi, gradDef>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using arcminute = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerMin>::type, zero>;
+using arcminute = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, sixty>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using arcsecond = Unit<Dimensionless, Rep, typename Ratio_over_value<typename degree<Rep>::period, secondsPerHour>::type, zero>;

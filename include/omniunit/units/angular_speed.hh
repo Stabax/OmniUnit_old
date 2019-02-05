@@ -51,7 +51,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using radianPerSecond = Unit<AngularSpeed, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using radianPerMinute = Unit<AngularSpeed, Rep, Ratio<one, secondsPerMin>, zero>;
+using radianPerMinute = Unit<AngularSpeed, Rep, Ratio<one, sixty>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using radianPerHour = Unit<AngularSpeed, Rep, Ratio<one, secondsPerHour>, zero>;
@@ -77,7 +77,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using revolutionPerSecond = Unit<AngularSpeed, Rep, tau, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using revolutionPerMinute = Unit<AngularSpeed, Rep, typename Ratio_over_value<tau, secondsPerMin>::type, zero>;
+using revolutionPerMinute = Unit<AngularSpeed, Rep, typename Ratio_over_value<tau, sixty>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using revolutionPerHour = Unit<AngularSpeed, Rep, typename Ratio_over_value<tau, secondsPerHour>::type, zero>;
@@ -91,28 +91,28 @@ using revolutionPerYear = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<tau,
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerNanosecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degVal>::type, nano>::type, zero>;
+using degreePerNanosecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degDef>::type, nano>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerMicrosecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degVal>::type, micro>::type, zero>;
+using degreePerMicrosecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degDef>::type, micro>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerMillisecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degVal>::type, milli>::type, zero>;
+using degreePerMillisecond = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degDef>::type, milli>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerSecond = Unit<AngularSpeed, Rep, typename Ratio_over_value<pi, degVal>::type, zero>;
+using degreePerSecond = Unit<AngularSpeed, Rep, typename Ratio_over_value<pi, degDef>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerMinute = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degVal>::type, secondsPerMin>::type, zero>;
+using degreePerMinute = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degDef>::type, sixty>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerHour = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degVal>::type, secondsPerHour>::type, zero>;
+using degreePerHour = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degDef>::type, secondsPerHour>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerDay = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degVal>::type, secondsPerDay>::type, zero>;
+using degreePerDay = Unit<AngularSpeed, Rep, typename Ratio_over_value<typename Ratio_over_value<pi, degDef>::type, secondsPerDay>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using degreePerYear = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degVal>::type, secondsPerYear>::type, zero>;
+using degreePerYear = Unit<AngularSpeed, Rep, typename Ratio_over_Ratio<typename Ratio_over_value<pi, degDef>::type, secondsPerYear>::type, zero>;
 
 
 

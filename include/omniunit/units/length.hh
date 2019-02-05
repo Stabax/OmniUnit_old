@@ -121,7 +121,7 @@ using lightsecond = Unit<Length, Rep, Ratio<distanceTraveledByLightPerSec, E10>,
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightminute = Unit<Length, Rep, typename Ratio_times_Ratio<
-typename lightsecond<Rep>::period, Ratio<secondsPerMin, E0>>::type, zero>;
+typename lightsecond<Rep>::period, Ratio<sixty, E0>>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using lightyear = Unit<Length, Rep, typename Ratio_times_Ratio<
