@@ -180,11 +180,13 @@ constexpr zettaampere<OMNI_LITTERAL_INTEGER> operator"" _ZA(unsigned long long i
 constexpr yottaampere<OMNI_LITTERAL_INTEGER> operator"" _YA(unsigned long long int val){return val;}
 
 
-} //namespaxe suffixies
+
+} //namespace suffixes
 
 
 
 } //namespace omni
+
 
 
 #endif //INTENSITY_HH_

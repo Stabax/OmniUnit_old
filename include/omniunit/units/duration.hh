@@ -248,9 +248,14 @@ constexpr kiloyear<OMNI_LITTERAL_INTEGER> operator"" _ky(unsigned long long int 
 constexpr megayear<OMNI_LITTERAL_INTEGER> operator"" _My(unsigned long long int val){return val;}
 constexpr gigayear<OMNI_LITTERAL_INTEGER> operator"" _Gy(unsigned long long int val){return val;}
 
-} //namespaxe suffixies
+
+
+} //namespaxe suffixes
+
+
 
 } //namespace omni
+
 
 
 #endif //DURATION_HH_

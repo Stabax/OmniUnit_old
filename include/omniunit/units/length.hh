@@ -228,6 +228,8 @@ typedef fathom<> Fathom;
 typedef pica<> Pica;
 typedef point<> Point;
 
+
+
 namespace suffixes
 {
 
@@ -325,7 +327,7 @@ constexpr point<OMNI_LITTERAL_INTEGER> operator"" _pt(unsigned long long int val
 
 
 
-} //namespaxe suffixies
+} //namespaxe suffixes
 
 
 

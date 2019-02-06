@@ -142,6 +142,16 @@ typedef degreePerDay<> DegreePerDay;
 typedef degreePerYear<> DegreePerYear;
 
 
+
+namespace suffixes
+{
+
+
+
+} // namespace suffixes
+
+
+
 } // namespace omni
 
 

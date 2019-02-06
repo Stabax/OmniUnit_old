@@ -441,7 +441,7 @@ constexpr zettafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Zf(unsigned long l
 constexpr yottafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Yf(unsigned long long int val){return val;}
 
 
-} //namespaxe suffixies
+} //namespaxe suffixes
 
 
 

@@ -192,11 +192,14 @@ constexpr yottamol<OMNI_LITTERAL_INTEGER> operator"" _Ymol(unsigned long long in
 
 constexpr amount<OMNI_LITTERAL_INTEGER> operator"" _amount(unsigned long long int val){return val;}
 
-} //namespaxe suffixies
+
+
+} //namespaxe suffixes
 
 
 
 } //namespace omni
+
 
 
 #endif //QUANTITY_HH_

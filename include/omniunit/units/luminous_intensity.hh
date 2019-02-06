@@ -181,7 +181,9 @@ constexpr exacandela<OMNI_LITTERAL_INTEGER> operator"" _Ecd(unsigned long long i
 constexpr zettacandela<OMNI_LITTERAL_INTEGER> operator"" _Zcd(unsigned long long int val){return val;}
 constexpr yottacandela<OMNI_LITTERAL_INTEGER> operator"" _Ycd(unsigned long long int val){return val;}
 
-} //namespaxe suffixies
+
+
+} //namespaxe suffixes
 
 
 

@@ -31,7 +31,6 @@ Capacitance\n
 Charge\n
 Charge density\n
 Compressibility\n
-Concentration\n
 Current\n
 Dose\n
 Dose rate\n
@@ -81,6 +80,7 @@ Magnetic rigidity\n
 Magnetic suseptibility\n
 Magnetization\n
 Magnetomotive force\n
+Mass concentration\n
 Mass flow\n
 Molality\n
 Molarity\n
@@ -165,10 +165,10 @@ Ratio<E24, E0>   yotta;\n
 | **dimensionless** | **angle** | **solid angle** |
 | :----------------: | :--------------------: | :-------------------: |
 | value (_) | radian (_rad) | steradian (_sr) |
-| | milliradian (_mrad) | sphere (_sphe) |
-| | revolution (_rev) | hemisphere (_hsphe) |
-| | degree (_deg) | degree2 (_deg2) |
-| | grad (_grad) | |
+| percent (_ppc) | milliradian (_mrad) | sphere (_sphe) |
+| permille (_ppmi) | revolution (_rev) | hemisphere (_hsphe) |
+| perhundredthousand (_ppht) | degree (_deg) | degree2 (_deg2) |
+| permillion (_ppm) | grad (_grad) | |
 | | arcsecond (_arcs) | |
 | | arcminute (_arcmin) | |
 
@@ -377,6 +377,17 @@ See __Moment of inertia__
 
 ### Angular speed ###
 
+| **radian** | **revolution** | **degree** |
+| :----------------: | :----------------: | :----------------: |
+| radianPerNanosecond | revolutionPerNanosecond | degreePerNanosecond |
+| radianPerMicrosecond | revolutionPerMicrosecond | degreePerMicrosecond |
+| radianPerMillisecond | revolutionPerMillisecond | degreePerMillisecond |
+| radianPerSecond | revolutionPerSecond | degreePerSecond |
+| radianPerMinute | revolutionPerMinute | degreePerMinute |
+| radianPerHour | revolutionPerHour | degreePerHour |
+| radianPerDay | revolutionPerDay | degreePerDay |
+| radianPerYear | revolutionPerYear | degreePerYear |
+
 ### Area ###
 
 ### Area density ###
@@ -391,9 +402,9 @@ See __Moment of inertia__
 
 ### Compressibility ###
 
-### Concentration  ###
+### Cross section ###
 
-See __Volumetric mass__
+See __Area__
 
 ### Current ###
 
@@ -506,6 +517,10 @@ See __Magnetic reluctance__
 See __Magnetic field strength__
 
 ### Magnetomotive force ###
+
+### Mass concentration  ###
+
+See __Volumetric mass__
 
 ### Mass flow ###
 

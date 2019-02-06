@@ -36,10 +36,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace omni
 {
 
-  typedef Dimension<2,1,-2,0,0,0,0> Energy;
+  typedef Dimension<2,1,-2,0,0,0,0> Torque;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
-  using newtonMeter = Unit<Energy, Rep, base, zero>;
+  using newtonMeter = Unit<Torque, Rep, base, zero>;
 
 
 
@@ -128,9 +128,8 @@ namespace omni
   typedef milePerHour<> MilePerHour;
   typedef bar<> Bar;
 
-
-  constexpr mile<OMNI_LITTERAL_FLOATING> operator"" _mi(long double val) {return val;}
-  constexpr inch<OMNI_LITTERAL_FLOATING> operator"" _in(long double val) {return val;}
+  namespace suffixes
+  {
   constexpr centimeter3<OMNI_LITTERAL_FLOATING> operator"" _cm3(long double val) {return val;}
   constexpr liter<OMNI_LITTERAL_FLOATING> operator"" _L(long double val) {return val;}
   constexpr newton<OMNI_LITTERAL_FLOATING> operator"" _N(long double val) {return val;}
@@ -144,8 +143,6 @@ namespace omni
   constexpr milePerHour<OMNI_LITTERAL_FLOATING> operator"" _miPerh(long double val) {return val;}
   constexpr bar<OMNI_LITTERAL_FLOATING> operator"" _bar(long double val) {return val;}
 
-  constexpr mile<OMNI_LITTERAL_INTEGER> operator"" _mi(unsigned long long int val) {return val;}
-  constexpr inch<OMNI_LITTERAL_INTEGER> operator"" _in(unsigned long long int val) {return val;}
   constexpr centimeter3<OMNI_LITTERAL_INTEGER> operator"" _cm3(unsigned long long int val) {return val;}
   constexpr liter<OMNI_LITTERAL_INTEGER> operator"" _L(unsigned long long int val) {return val;}
   constexpr newton<OMNI_LITTERAL_INTEGER> operator"" _N(unsigned long long int val) {return val;}
@@ -158,7 +155,7 @@ namespace omni
   constexpr meterPerSecond2<OMNI_LITTERAL_INTEGER> operator"" _mPers2(unsigned long long int val) {return val;}
   constexpr milePerHour<OMNI_LITTERAL_INTEGER> operator"" _miPerh(unsigned long long int val) {return val;}
   constexpr bar<OMNI_LITTERAL_INTEGER> operator"" _bar(unsigned long long int val) {return val;}
-
+  }
 } // namespace omni
 
 

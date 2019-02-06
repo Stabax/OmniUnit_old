@@ -41,6 +41,18 @@ namespace omni
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using value = Unit<Dimensionless, Rep, base, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using percent = Unit<Dimensionless, Rep, base, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using permille = Unit<Dimensionless, Rep, base, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using perhundredthousand = Unit<Dimensionless, Rep, base, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using permillion = Unit<Dimensionless, Rep, base, zero>;
+
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -80,6 +92,11 @@ using  degree2 = Unit<Dimensionless, Rep, typename Ratio_power<typename degree<R
 
 
 typedef value<> Value;
+typedef percent<> Percent;
+typedef permille<> Permille;
+typedef perhundredthousand<> Perhundredthousand;
+typedef permillion<> Permillion;
+
 typedef radian<> Radian;
 typedef milliradian<> Milliradian;
 typedef revolution<> Revolution;
@@ -100,6 +117,11 @@ namespace suffixes
 
 
 constexpr value<OMNI_LITTERAL_FLOATING> operator"" _(long double val){return val;}
+constexpr percent<OMNI_LITTERAL_FLOATING> operator"" _ppc(long double val){return val;}
+constexpr permille<OMNI_LITTERAL_FLOATING> operator"" _ppmi(long double val){return val;}
+constexpr perhundredthousand<OMNI_LITTERAL_FLOATING> operator"" _ppht(long double val){return val;}
+constexpr permillion<OMNI_LITTERAL_FLOATING> operator"" _ppm(long double val){return val;}
+
 constexpr radian<OMNI_LITTERAL_FLOATING> operator"" _rad(long double val){return val;}
 constexpr milliradian<OMNI_LITTERAL_FLOATING> operator"" _mrad(long double val){return val;}
 constexpr revolution<OMNI_LITTERAL_FLOATING> operator"" _rev(long double val){return val;}
@@ -112,7 +134,14 @@ constexpr hemisphere<OMNI_LITTERAL_FLOATING> operator"" _hsphe(long double val){
 constexpr sphere<OMNI_LITTERAL_FLOATING> operator"" _sphe(long double val){return val;}
 constexpr degree2<OMNI_LITTERAL_FLOATING> operator"" _deg2(long double val){return val;}
 
+
+
 constexpr value<OMNI_LITTERAL_INTEGER> operator"" _(unsigned long long int val){return val;}
+constexpr percent<OMNI_LITTERAL_INTEGER> operator"" _ppc(unsigned long long int val){return val;}
+constexpr permille<OMNI_LITTERAL_INTEGER> operator"" _ppmi(unsigned long long int val){return val;}
+constexpr perhundredthousand<OMNI_LITTERAL_INTEGER> operator"" _ppht(unsigned long long int val){return val;}
+constexpr permillion<OMNI_LITTERAL_INTEGER> operator"" _ppm(unsigned long long int val){return val;}
+
 constexpr radian<OMNI_LITTERAL_INTEGER> operator"" _rad(unsigned long long int val){return val;}
 constexpr milliradian<OMNI_LITTERAL_INTEGER> operator"" _mrad(unsigned long long int val){return val;}
 constexpr revolution<OMNI_LITTERAL_INTEGER> operator"" _rev(unsigned long long int val){return val;}

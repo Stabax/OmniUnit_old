@@ -281,7 +281,9 @@ constexpr ounce<OMNI_LITTERAL_INTEGER> operator"" _oz(unsigned long long int val
 constexpr longton<OMNI_LITTERAL_INTEGER> operator"" _lton(unsigned long long int val){return val;}
 constexpr shortton<OMNI_LITTERAL_INTEGER> operator"" _ston(unsigned long long int val){return val;}
 
-} //namespaxe suffixies
+
+
+} //namespaxe suffixes
 
 
 
