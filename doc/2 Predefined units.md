@@ -164,7 +164,7 @@ Ratio<E24, E0>   yotta;\n
 
 | **dimensionless** | **angle** | **solid angle** |
 | :----------------: | :--------------------: | :-------------------: |
-| value (_) | radian (_rad) | steradian (_sr) |
+| value (_v) | radian (_rad) | steradian (_sr) |
 | percent (_ppc) | milliradian (_mrad) | sphere (_sphe) |
 | permille (_ppmi) | revolution (_rev) | hemisphere (_hsphe) |
 | perhundredthousand (_ppht) | degree (_deg) | degree2 (_deg2) |
@@ -238,7 +238,7 @@ Ratio<E24, E0>   yotta;\n
 | millimeter (_mm) | | | league (_lea) |
 | centimeter (_cm) | | | nauticmile (_nmi) |
 | decimeter (_dm) | | | fathom (_ftm) |
-| meter (_m) | | macroscopical_unit (_au) | pica (_pica) |
+| meter (_m) | | astronomical_unit (_au) | pica (_pica) |
 | decameter (_dam) | | | point (_pt) |
 | hectometer (_hm) | | lightsecond (_ls) | cable (_cb) |
 | kilometer (_km) | | lightminute (_lmin) | |

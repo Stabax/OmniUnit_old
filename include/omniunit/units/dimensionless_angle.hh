@@ -116,7 +116,7 @@ namespace suffixes
 
 
 
-constexpr value<OMNI_LITTERAL_FLOATING> operator"" _(long double val){return val;}
+constexpr value<OMNI_LITTERAL_FLOATING> operator"" _v(long double val){return val;}
 constexpr percent<OMNI_LITTERAL_FLOATING> operator"" _ppc(long double val){return val;}
 constexpr permille<OMNI_LITTERAL_FLOATING> operator"" _ppmi(long double val){return val;}
 constexpr perhundredthousand<OMNI_LITTERAL_FLOATING> operator"" _ppht(long double val){return val;}
