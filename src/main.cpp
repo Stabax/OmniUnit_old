@@ -326,6 +326,7 @@ int main()
   constexpr auto youg = 8_;
   [[maybe_unused]] constexpr auto youga = omni::exp(youg);
 
+  std::cout << omni::Joule(omni::tonTNT<double>(1)).count() << "\n";
 
 
 return 0;

@@ -181,6 +181,9 @@ using pica = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<picaE4, E4>, mil
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using point = Unit<Length, Rep, typename Ratio_times_Ratio<Ratio<pointE6, E6>, milli>::type, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using cable = Unit<Length, Rep, Ratio<cableE3, E3>, zero>;
+
 
 
 typedef yoctometer<> Yoctometer;
@@ -227,6 +230,7 @@ typedef nauticmile<> Nauticmile;
 typedef fathom<> Fathom;
 typedef pica<> Pica;
 typedef point<> Point;
+typedef cable<> Cable;
 
 
 
@@ -278,6 +282,8 @@ constexpr nauticmile<OMNI_LITTERAL_FLOATING> operator"" _nmi(long double val){re
 constexpr fathom<OMNI_LITTERAL_FLOATING> operator"" _ftm(long double val){return val;}
 constexpr pica<OMNI_LITTERAL_FLOATING> operator"" _pica(long double val){return val;}
 constexpr point<OMNI_LITTERAL_FLOATING> operator"" _pt(long double val){return val;}
+constexpr cable<OMNI_LITTERAL_FLOATING> operator"" _cb(long double val){return val;}
+
 
 
 
@@ -324,6 +330,8 @@ constexpr nauticmile<OMNI_LITTERAL_INTEGER> operator"" _nmi(unsigned long long i
 constexpr fathom<OMNI_LITTERAL_INTEGER> operator"" _fh(unsigned long long int val){return val;}
 constexpr pica<OMNI_LITTERAL_INTEGER> operator"" _pica(unsigned long long int val){return val;}
 constexpr point<OMNI_LITTERAL_INTEGER> operator"" _pt(unsigned long long int val){return val;}
+constexpr cable<OMNI_LITTERAL_INTEGER> operator"" _cb(unsigned long long int val){return val;}
+
 
 
 

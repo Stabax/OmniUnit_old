@@ -240,7 +240,7 @@ Ratio<E24, E0>   yotta;\n
 | decimeter (_dm) | | | fathom (_ftm) |
 | meter (_m) | | macroscopical_unit (_au) | pica (_pica) |
 | decameter (_dam) | | | point (_pt) |
-| hectometer (_hm) | | lightsecond (_ls) | |
+| hectometer (_hm) | | lightsecond (_ls) | cable (_cb) |
 | kilometer (_km) | | lightminute (_lmin) | |
 | megameter (_Mm) | | lightyear (_ly) | |
 | gigameter (_Gm) | | | |
@@ -431,6 +431,28 @@ See __Intensity__
 ### Electron mobility  ###
 
 ### Energy ###
+
+| **metric** | **microscopic** | **macroscopic** | **other** |
+| :----------------: | :----------------: | :----------------: | :----------------: |
+| yoctojoule (_yJ) | microev (_ueV) | wattHour (_Wh) | erg (_erg) |
+| zeptojoule (_zJ) | milliev (_meV) | kilowattHour (_kWh) | calorie (_cal) |
+| attojoule (_aJ) | ev (_eV) | megawattHour (_MWh) | kilocalorie (_kcal) |
+| femtojoule (_fJ) | kiloev (_keV) | gigawattHour (_GWh) | btu (_btu) |
+| nanojoule (_nJ) | megaev (_MeV) | terawattHour (_TWh) | tonTNT (_tTNT) |
+| millijoule (_mJ) | gigaev (_GeV) | petawattHour (_PWh) |  |
+| centijoule (_cJ) | teraev (_TeV) | boe (_boe) |  |
+| decijoule (_dJ) | petaev (_PeV) | kiloboe (_kboe) |  |
+| joule (_J) |  | megaboe (_Mboe) |  |
+| decajoule (_daJ) |  | gigaboe (_Gboe) |  |
+| hectojoule (_hJ) |  | tec (_tec) |  |
+| kilojoule (_kJ) |  | kilotec (_ktec) |  |
+| megajoule (_MJ) |  | megatec (_Mtec) |  |
+| gigajoule (_GJ) |  | tep (_tep) |  |
+| terajoule (_TJ) |  | kilotep (_ktep) |  |
+| petajoule (_PJ) |  | megatep (_Mtep) |  |
+| exajoule (_EJ) |  | gigatep (_Gtep) |  |
+| zettajoule (_ZJ) |  |  |  |
+| yottajoule (_YJ) |  |  |  |
 
 ### Energy density ###
 

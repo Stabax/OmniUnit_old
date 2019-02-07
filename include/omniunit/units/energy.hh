@@ -107,6 +107,104 @@ using yottajoule = Unit<Energy, Rep, yotta, zero>;
 
 
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using ev = Unit<Energy, Rep, typename Ratio_over_value<Ratio<CoulombE9, E9>, E19>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using microev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, micro>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using milliev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, milli>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kiloev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, kilo>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megaev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, mega>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigaev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, giga>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using teraev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, tera>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using petaev = Unit<Energy, Rep, typename Ratio_times_Ratio<ev<OMNI_DEFAULT_TYPE>::period, peta>::type, zero>;
+
+
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using erg = Unit<Energy, Rep, Ratio<E0, E7>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using calorie = Unit<Energy, Rep, Ratio<calorieE4, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilocalorie = Unit<Energy, Rep, Ratio<calorieE4, E1>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using btu = Unit<Energy, Rep, Ratio<btuDef, E0>, zero>;
+
+
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using wattHour = Unit<Energy, Rep, Ratio<secondsPerHour, E0>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilowattHour = Unit<Energy, Rep, typename Ratio_times_Ratio<wattHour<OMNI_DEFAULT_TYPE>::period, kilo>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megawattHour = Unit<Energy, Rep, typename Ratio_times_Ratio<wattHour<OMNI_DEFAULT_TYPE>::period, mega>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigawattHour = Unit<Energy, Rep, typename Ratio_times_Ratio<wattHour<OMNI_DEFAULT_TYPE>::period, giga>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using terawattHour = Unit<Energy, Rep, typename Ratio_times_Ratio<wattHour<OMNI_DEFAULT_TYPE>::period, tera>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using petawattHour = Unit<Energy, Rep, typename Ratio_times_Ratio<wattHour<OMNI_DEFAULT_TYPE>::period, peta>::type, zero>;
+
+
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using tonTNT = Unit<Energy, Rep, typename Ratio_times_value<Ratio<tonTNTE3, E3>, E9>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using boe = Unit<Energy, Rep, typename Ratio_times_value<Ratio<boeE7, E7>, E9>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kiloboe = Unit<Energy, Rep, typename Ratio_times_Ratio<boe<OMNI_DEFAULT_TYPE>::period, kilo>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megaboe = Unit<Energy, Rep, typename Ratio_times_Ratio<boe<OMNI_DEFAULT_TYPE>::period, mega>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigaboe = Unit<Energy, Rep, typename Ratio_times_Ratio<boe<OMNI_DEFAULT_TYPE>::period, giga>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using tec = Unit<Energy, Rep, typename Ratio_times_value<Ratio<tecE5, E5>, E9>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilotec = Unit<Energy, Rep, typename Ratio_times_Ratio<tec<OMNI_DEFAULT_TYPE>::period, kilo>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megatec = Unit<Energy, Rep, typename Ratio_times_Ratio<tec<OMNI_DEFAULT_TYPE>::period, mega>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using tep = Unit<Energy, Rep, typename Ratio_times_value<Ratio<tepE3, E3>, E9>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilotep = Unit<Energy, Rep, typename Ratio_times_Ratio<tep<OMNI_DEFAULT_TYPE>::period, kilo>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using megatep = Unit<Energy, Rep, typename Ratio_times_Ratio<tep<OMNI_DEFAULT_TYPE>::period, mega>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gigatep = Unit<Energy, Rep, typename Ratio_times_Ratio<tep<OMNI_DEFAULT_TYPE>::period, giga>::type, zero>;
+
+
+
 typedef yoctojoule<> Yoctojoule;
 typedef zeptojoule<> Zeptojoule;
 typedef attojoule<> Attojoule;
@@ -117,7 +215,7 @@ typedef microjoule<> Microjoule;
 typedef millijoule<> Millijoule;
 typedef centijoule<> Centijoule;
 typedef decijoule<> Decijoule;
-typedef joule<> Ampere;
+typedef joule<> Joule;
 typedef decajoule<> Decajoule;
 typedef hectojoule<> Hectojoule;
 typedef kilojoule<> Kilojoule;
@@ -129,6 +227,40 @@ typedef exajoule<> Exajoule;
 typedef zettajoule<> Zettajoule;
 typedef yottajoule<> Yottajoule;
 
+typedef ev<> Ev;
+typedef microev<> Microev;
+typedef milliev<> Milliev;
+typedef kiloev<> Kiloev;
+typedef megaev<> Megaev;
+typedef gigaev<> Gigaev;
+typedef teraev<> Teraev;
+typedef petaev<> Petaev;
+
+typedef erg<> Erg;
+typedef calorie<> Calorie;
+typedef kilocalorie<> Kilocalorie;
+typedef btu<> Btu;
+
+typedef wattHour<> WattHour;
+typedef kilowattHour<> KilowattHour;
+typedef megawattHour<> MegawattHour;
+typedef gigawattHour<> GigawattHour;
+typedef terawattHour<> TerawattHour;
+typedef petawattHour<> PetawattHour;
+
+typedef tonTNT<> TonTNT;
+typedef boe<> Boe;
+typedef kiloboe<> Kiloboe;
+typedef megaboe<> Megaboe;
+typedef gigaboe<> Gigaboe;
+typedef tec<> Tec;
+typedef kilotec<> Kilotec;
+typedef megatec<> Megatec;
+typedef tep<> Tep;
+typedef kilotep<> Kilotep;
+typedef megatep<> Megatep;
+typedef gigatep<> Gigatep;
+
 
 
 namespace suffixes
@@ -136,7 +268,7 @@ namespace suffixes
 
 
 
-constexpr yoctojoule<OMNI_LITTERAL_FLOATING> operator"" _y(long double val){return val;}
+constexpr yoctojoule<OMNI_LITTERAL_FLOATING> operator"" _yJ(long double val){return val;}
 constexpr zeptojoule<OMNI_LITTERAL_FLOATING> operator"" _zJ(long double val){return val;}
 constexpr attojoule<OMNI_LITTERAL_FLOATING> operator"" _aJ(long double val){return val;}
 constexpr femtojoule<OMNI_LITTERAL_FLOATING> operator"" _fJ(long double val){return val;}
@@ -156,6 +288,40 @@ constexpr petajoule<OMNI_LITTERAL_FLOATING> operator"" _PJ(long double val){retu
 constexpr exajoule<OMNI_LITTERAL_FLOATING> operator"" _EJ(long double val){return val;}
 constexpr zettajoule<OMNI_LITTERAL_FLOATING> operator"" _ZJ(long double val){return val;}
 constexpr yottajoule<OMNI_LITTERAL_FLOATING> operator"" _YJ(long double val){return val;}
+
+constexpr ev<OMNI_LITTERAL_FLOATING> operator"" _eV(long double val){return val;}
+constexpr microev<OMNI_LITTERAL_FLOATING> operator"" _ueV(long double val){return val;}
+constexpr milliev<OMNI_LITTERAL_FLOATING> operator"" _meV(long double val){return val;}
+constexpr kiloev<OMNI_LITTERAL_FLOATING> operator"" _keV(long double val){return val;}
+constexpr megaev<OMNI_LITTERAL_FLOATING> operator"" _MeV(long double val){return val;}
+constexpr gigaev<OMNI_LITTERAL_FLOATING> operator"" _GeV(long double val){return val;}
+constexpr teraev<OMNI_LITTERAL_FLOATING> operator"" _TeV(long double val){return val;}
+constexpr petaev<OMNI_LITTERAL_FLOATING> operator"" _PeV(long double val){return val;}
+
+constexpr erg<OMNI_LITTERAL_FLOATING> operator"" _erg(long double val){return val;}
+constexpr calorie<OMNI_LITTERAL_FLOATING> operator"" _cal(long double val){return val;}
+constexpr kilocalorie<OMNI_LITTERAL_FLOATING> operator"" _kcal(long double val){return val;}
+constexpr btu<OMNI_LITTERAL_FLOATING> operator"" _btu(long double val){return val;}
+
+constexpr wattHour<OMNI_LITTERAL_FLOATING> operator"" _Wh(long double val){return val;}
+constexpr kilowattHour<OMNI_LITTERAL_FLOATING> operator"" _kWh(long double val){return val;}
+constexpr megawattHour<OMNI_LITTERAL_FLOATING> operator"" _MWh(long double val){return val;}
+constexpr gigawattHour<OMNI_LITTERAL_FLOATING> operator"" _GWh(long double val){return val;}
+constexpr terawattHour<OMNI_LITTERAL_FLOATING> operator"" _TWh(long double val){return val;}
+constexpr petawattHour<OMNI_LITTERAL_FLOATING> operator"" _PWh(long double val){return val;}
+
+constexpr tonTNT<OMNI_LITTERAL_FLOATING> operator"" _tTNT(long double val){return val;}
+constexpr boe<OMNI_LITTERAL_FLOATING> operator"" _boe(long double val){return val;}
+constexpr kiloboe<OMNI_LITTERAL_FLOATING> operator"" _kboe(long double val){return val;}
+constexpr megaboe<OMNI_LITTERAL_FLOATING> operator"" _Mboe(long double val){return val;}
+constexpr gigaboe<OMNI_LITTERAL_FLOATING> operator"" _Gboe(long double val){return val;}
+constexpr tec<OMNI_LITTERAL_FLOATING> operator"" _tec(long double val){return val;}
+constexpr kilotec<OMNI_LITTERAL_FLOATING> operator"" _ktec(long double val){return val;}
+constexpr megatec<OMNI_LITTERAL_FLOATING> operator"" _Mtec(long double val){return val;}
+constexpr tep<OMNI_LITTERAL_FLOATING> operator"" _tep(long double val){return val;}
+constexpr kilotep<OMNI_LITTERAL_FLOATING> operator"" _ktep(long double val){return val;}
+constexpr megatep<OMNI_LITTERAL_FLOATING> operator"" _Mtep(long double val){return val;}
+constexpr gigatep<OMNI_LITTERAL_FLOATING> operator"" _Gtep(long double val){return val;}
 
 
 
@@ -179,6 +345,40 @@ constexpr petajoule<OMNI_LITTERAL_INTEGER> operator"" _PJ(unsigned long long int
 constexpr exajoule<OMNI_LITTERAL_INTEGER> operator"" _EJ(unsigned long long int val){return val;}
 constexpr zettajoule<OMNI_LITTERAL_INTEGER> operator"" _ZJ(unsigned long long int val){return val;}
 constexpr yottajoule<OMNI_LITTERAL_INTEGER> operator"" _YJ(unsigned long long int val){return val;}
+
+constexpr ev<OMNI_LITTERAL_INTEGER> operator"" _eV(unsigned long long int val){return val;}
+constexpr microev<OMNI_LITTERAL_INTEGER> operator"" _ueV(unsigned long long int val){return val;}
+constexpr milliev<OMNI_LITTERAL_INTEGER> operator"" _meV(unsigned long long int val){return val;}
+constexpr kiloev<OMNI_LITTERAL_INTEGER> operator"" _keV(unsigned long long int val){return val;}
+constexpr megaev<OMNI_LITTERAL_INTEGER> operator"" _MeV(unsigned long long int val){return val;}
+constexpr gigaev<OMNI_LITTERAL_INTEGER> operator"" _GeV(unsigned long long int val){return val;}
+constexpr teraev<OMNI_LITTERAL_INTEGER> operator"" _TeV(unsigned long long int val){return val;}
+constexpr petaev<OMNI_LITTERAL_INTEGER> operator"" _PeV(unsigned long long int val){return val;}
+
+constexpr erg<OMNI_LITTERAL_INTEGER> operator"" _erg(unsigned long long int val){return val;}
+constexpr calorie<OMNI_LITTERAL_INTEGER> operator"" _cal(unsigned long long int val){return val;}
+constexpr kilocalorie<OMNI_LITTERAL_INTEGER> operator"" _kcal(unsigned long long int val){return val;}
+constexpr btu<OMNI_LITTERAL_INTEGER> operator"" _btu(unsigned long long int val){return val;}
+
+constexpr wattHour<OMNI_LITTERAL_INTEGER> operator"" _Wh(unsigned long long int val){return val;}
+constexpr kilowattHour<OMNI_LITTERAL_INTEGER> operator"" _kWh(unsigned long long int val){return val;}
+constexpr megawattHour<OMNI_LITTERAL_INTEGER> operator"" _MWh(unsigned long long int val){return val;}
+constexpr gigawattHour<OMNI_LITTERAL_INTEGER> operator"" _GWh(unsigned long long int val){return val;}
+constexpr terawattHour<OMNI_LITTERAL_INTEGER> operator"" _TWh(unsigned long long int val){return val;}
+constexpr petawattHour<OMNI_LITTERAL_INTEGER> operator"" _PWh(unsigned long long int val){return val;}
+
+constexpr tonTNT<OMNI_LITTERAL_INTEGER> operator"" _tTNT(unsigned long long int val){return val;}
+constexpr boe<OMNI_LITTERAL_INTEGER> operator"" _boe(unsigned long long int val){return val;}
+constexpr kiloboe<OMNI_LITTERAL_INTEGER> operator"" _kboe(unsigned long long int val){return val;}
+constexpr megaboe<OMNI_LITTERAL_INTEGER> operator"" _Mboe(unsigned long long int val){return val;}
+constexpr gigaboe<OMNI_LITTERAL_INTEGER> operator"" _Gboe(unsigned long long int val){return val;}
+constexpr tec<OMNI_LITTERAL_INTEGER> operator"" _tec(unsigned long long int val){return val;}
+constexpr kilotec<OMNI_LITTERAL_INTEGER> operator"" _ktec(unsigned long long int val){return val;}
+constexpr megatec<OMNI_LITTERAL_INTEGER> operator"" _Mtec(unsigned long long int val){return val;}
+constexpr tep<OMNI_LITTERAL_INTEGER> operator"" _tep(unsigned long long int val){return val;}
+constexpr kilotep<OMNI_LITTERAL_INTEGER> operator"" _ktep(unsigned long long int val){return val;}
+constexpr megatep<OMNI_LITTERAL_INTEGER> operator"" _Mtep(unsigned long long int val){return val;}
+constexpr gigatep<OMNI_LITTERAL_INTEGER> operator"" _Gtep(unsigned long long int val){return val;}
 
 
 
