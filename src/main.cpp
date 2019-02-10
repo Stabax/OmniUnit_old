@@ -328,6 +328,7 @@ int main()
 
   std::cout << omni::Joule(omni::tonTNT<double>(1)).count() << "\n";
 
+  std::cout << omni::Value(omni::Percent(100)) << "\n";
 
 return 0;
 }

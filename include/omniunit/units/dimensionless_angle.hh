@@ -42,16 +42,16 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using value = Unit<Dimensionless, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using percent = Unit<Dimensionless, Rep, base, zero>;
+using percent = Unit<Dimensionless, Rep, Ratio<E0, E2>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using permille = Unit<Dimensionless, Rep, base, zero>;
+using permille = Unit<Dimensionless, Rep, Ratio<E0, E3>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using perhundredthousand = Unit<Dimensionless, Rep, base, zero>;
+using perhundredthousand = Unit<Dimensionless, Rep, Ratio<E0, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using permillion = Unit<Dimensionless, Rep, base, zero>;
+using permillion = Unit<Dimensionless, Rep, Ratio<E0, E6>, zero>;
 
 
 
