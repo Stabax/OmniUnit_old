@@ -61,10 +61,11 @@ namespace omni
 
 } //namespace omni
 
-
+#if OMNI_INCLUDE_ALL_UNITS == true
 
 #include "units/units.hh"
 
+#endif // OMNI_INCLUDE_ALL_UNITS
 
 
 #endif //OMNIUNIT_HH_
