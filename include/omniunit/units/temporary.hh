@@ -89,6 +89,9 @@ namespace omni
   using meterPerSecond = Unit<Speed, Rep, base, zero>;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
+  using meterPerMinute = Unit<Speed, Rep, Ratio<E0, sixty>, zero>;
+
+  template <typename Rep = OMNI_DEFAULT_TYPE>
   using kilometerPerHour = Unit<Speed, Rep, Ratio<E3, secondsPerHour>, zero>;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -123,6 +126,7 @@ namespace omni
   typedef mechanicalhorsepower<> Mechanicalhorsepower;
   typedef perMinute<> PerMinute;
   typedef meterPerSecond<> MeterPerSecond;
+  typedef meterPerMinute<> MeterPerMinute;
   typedef kilometerPerHour<> KilometerPerHour;
   typedef meterPerSecond2<> MeterPerSecond2;
   typedef milePerHour<> MilePerHour;

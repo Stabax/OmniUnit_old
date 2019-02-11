@@ -47,7 +47,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // for example, if OMNI_TRUE_ZERO is :
 // - true  : 0 celsius * 10 =       0 celsius (aka 273.15 kelvin)
 // - false : 0 celsius * 10 = 2458.35 celsius (aka 2731.5 kelvin)
-// because 0 C = 273.15K, multiplied by 10 it equals 2731.5K = 2458.35 C
+// because 0C = 273.15K, multiplied by 10 it equals 2731.5K = 2458.35C
 // default : false
 #define OMNI_TRUE_ZERO false
 
@@ -68,8 +68,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // if OMNI_DEFAULT_IS_UNCERTAINTY is true, then Unit is a typedef on
 // Complete_unit instead of Basic_Unit. It meeans that all predefined units
 // are Complete_Unit. If uncertainties are not needed, set OMNI_DEFAULT_IS_UNCERTAINTY to
-// false to increase runtime speed, since Complete_Unit handles and compute more informations
-// than Basic_Unit
+// false to increase runtime speed, because Complete_Unit handles and computes more informations
+// than Basic_Unit.
+// default : false
 #define OMNI_DEFAULT_IS_UNCERTAINTY false
 
 // WIP

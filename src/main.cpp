@@ -323,12 +323,14 @@ int main()
   getM();
   foo();
 
-  constexpr auto youg = 8_;
-  [[maybe_unused]] constexpr auto youga = omni::exp(youg);
 
-  std::cout << omni::Joule(omni::tonTNT<double>(1)).count() << "\n";
+  omni::Watt puiss = omni::RevolutionPerMinute(100) * omni::NewtonMeter(100);
 
-  std::cout << omni::Value(omni::Percent(100)) << "\n";
+  std::cout << puiss << "\n";
+
+  omni::RevolutionPerMinute res = omni::KilometerPerHour(57.45) * omni::Revolution(1) / (omni::Inch(15) * omni::pi::value);
+
+  std::cout << res << "\n";
 
 return 0;
 }

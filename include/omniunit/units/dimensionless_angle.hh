@@ -136,7 +136,7 @@ constexpr degree2<OMNI_LITTERAL_FLOATING> operator"" _deg2(long double val){retu
 
 
 
-constexpr value<OMNI_LITTERAL_INTEGER> operator"" _(unsigned long long int val){return val;}
+constexpr value<OMNI_LITTERAL_INTEGER> operator"" _v(unsigned long long int val){return val;}
 constexpr percent<OMNI_LITTERAL_INTEGER> operator"" _ppc(unsigned long long int val){return val;}
 constexpr permille<OMNI_LITTERAL_INTEGER> operator"" _ppmi(unsigned long long int val){return val;}
 constexpr perhundredthousand<OMNI_LITTERAL_INTEGER> operator"" _ppht(unsigned long long int val){return val;}
