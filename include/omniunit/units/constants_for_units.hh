@@ -84,6 +84,8 @@ inline constexpr double tonTNTE3 = 4184; // 10^9 J
 inline constexpr double boeE7 = 61178632; // 10^9 J
 inline constexpr double tecE5 = 2930760; // 10^9 J
 inline constexpr double tepE3 = 41868; // 10^9 J
+inline constexpr double gE5 = 980665;
+inline constexpr double poundforceE13 = 44482216152605; // N
 
 
 

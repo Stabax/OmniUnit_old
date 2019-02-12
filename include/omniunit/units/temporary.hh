@@ -36,13 +36,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace omni
 {
 
-  typedef Dimension<2,1,-2,0,0,0,0> Torque;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using newtonMeter = Unit<Torque, Rep, base, zero>;
-
-
-
   typedef Dimension<3,0,0,0,0,0,0> Volume;
 
   template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -119,7 +112,6 @@ namespace omni
   typedef inch<> Inch;
   typedef centimeter3<> Centimeter3;
   typedef liter<> Liter;
-  typedef newtonMeter<> NewtonMeter;
   typedef newton<> Newton;
   typedef watt<> Watt;
   typedef horsepower<> Horsepower;

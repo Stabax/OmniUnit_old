@@ -1,4 +1,4 @@
-//units.hh
+//torque.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.
@@ -28,22 +28,33 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef UNITS_HH_
-#define UNITS_HH_
+#ifndef TORQUE_HH_
+#define TORQUE_HH_
 
-#include "angular_speed.hh"
-#include "dimensionless_angle.hh"
-#include "duration.hh"
-#include "electric_intensity.hh"
-#include "energy.hh"
-#include "length.hh"
-#include "luminous_intensity.hh"
-#include "mass.hh"
 #include "moment_of_force.hh"
-#include "quantity.hh"
-#include "temperature.hh"
-#include "torque.hh"
 
-#include "temporary.hh"
 
-#endif //UNITS_HH_
+
+namespace omni
+{
+
+
+
+typedef Dimension<2,1,-2,0,0,0,0> Torque;
+
+
+
+namespace suffixes
+{
+
+
+
+} // namespace suffixes
+
+
+
+} // namespace omni
+
+
+
+#endif // TORQUE_HH_
