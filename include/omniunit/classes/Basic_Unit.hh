@@ -127,7 +127,7 @@ constexpr Basic_Unit<Dimension, Rep, Period, O> unit_cast(const Basic_Unit<Dimen
 //wrapper for function partial specialization emulation
 //allow to replace partial specialization (which doesn't exist for functions) with an overload
 template <typename T>
-struct partial_specialization_wrapper
+struct partial_specialization_emulator
 {
 };
 
@@ -136,7 +136,7 @@ struct partial_specialization_wrapper
 //cast omniunit::duration to another omniunit::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+partial_specialization_emulator<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return unit_cast<toUnit, Dimension<0,0,1,0,0,0,0>>(Obj);
@@ -147,7 +147,7 @@ Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 //cast omniunit::duration to std::chrono::duration
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+partial_specialization_emulator<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
 Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
   return toUnit(Obj);
@@ -158,7 +158,7 @@ Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 template <typename toUnit, typename Rep, typename Period, double const& Origin>
 constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Origin> const& Obj)
 {
-  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+  return unit_cast_impl<toUnit>(partial_specialization_emulator<toUnit>{}, Obj);
 }
 
 
@@ -166,7 +166,7 @@ constexpr toUnit unit_cast(Basic_Unit<Dimension<0,0,1,0,0,0,0>, Rep, Period, Ori
 //cast std::chrono::duration to omniunit::duration
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
+partial_specialization_emulator<Basic_Unit<Dimension<0,0,1,0,0,0,0>, typename toUnit::rep, typename toUnit::period, toUnit::origin>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return toUnit(Obj);
@@ -177,7 +177,7 @@ std::chrono::duration<Rep, Period> const& Obj)
 //cast std::chrono::duration to another std::chrono::duration
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast_impl(
-partial_specialization_wrapper<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
+partial_specialization_emulator<std::chrono::duration<typename toUnit::rep, typename toUnit::period>>,
 std::chrono::duration<Rep, Period> const& Obj)
 {
   return std::chrono::duration_cast<toUnit>(Obj);
@@ -188,7 +188,7 @@ std::chrono::duration<Rep, Period> const& Obj)
 template <typename toUnit, typename Rep, typename Period>
 constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 {
-  return unit_cast_impl<toUnit>(partial_specialization_wrapper<toUnit>{}, Obj);
+  return unit_cast_impl<toUnit>(partial_specialization_emulator<toUnit>{}, Obj);
 }
 
 
@@ -270,7 +270,7 @@ public:
   constexpr operator std::chrono::duration<_Rep, _Period>() const
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is convertible to an std::chrono::duration");
-    return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, zero>(*this).count());
+    return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, omni::zero>(*this).count());
   }
 
   static constexpr Basic_Unit zero()
@@ -1318,11 +1318,11 @@ constexpr auto trunc(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned d
 
 
 
-template <typename stream_t, typename Dimension, typename Rep, typename Period, double const& Origin>
-stream_t& operator<<(stream_t& stream, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
+template <typename out_t, typename Dimension, typename Rep, typename Period, double const& Origin>
+out_t& operator<<(out_t& out, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
-  stream << Obj.count();
-  return stream;
+  out << Obj.count();
+  return out;
 }
 
 

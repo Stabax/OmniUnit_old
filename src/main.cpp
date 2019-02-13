@@ -332,5 +332,12 @@ int main()
 
   std::cout << res << "\n";
 
+  omni::Second t2(0);
+  std::chrono::seconds t3(t2);
+
+  omni::Timer tim;
+  tim.start();
+  auto dur = tim.get();
+
 return 0;
 }
