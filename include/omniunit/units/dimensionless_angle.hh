@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DIMENSIONLESS_ANGLE_HH_
-#define DIMENSIONLESS_ANGLE_HH_
+#ifndef OMNIUNIT_DIMENSIONLESS_ANGLE_HH_
+#define OMNIUNIT_DIMENSIONLESS_ANGLE_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 
@@ -163,4 +164,4 @@ constexpr degree2<OMNI_LITTERAL_INTEGER> operator"" _deg2(unsigned long long int
 } //namespace omni
 
 
-#endif //DIMENSIONLESS_ANGLE_HH_
+#endif //OMNIUNIT_DIMENSIONLESS_ANGLE_HH_

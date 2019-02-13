@@ -31,6 +31,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef UNITS_HH_
 #define UNITS_HH_
 
+#include "../omniunit.hh"
+
 #include "angular_speed.hh"
 #include "dimensionless_angle.hh"
 #include "duration.hh"
@@ -40,6 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "luminous_intensity.hh"
 #include "mass.hh"
 #include "moment_of_force.hh"
+#include "power.hh"
 #include "quantity.hh"
 #include "temperature.hh"
 #include "torque.hh"

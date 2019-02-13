@@ -53,21 +53,6 @@ namespace omni
 
 
 
-  typedef Dimension<2,1,-3,0,0,0,0> Power;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using watt = Unit<Power, Rep, base, zero>;
-
-  inline constexpr double chE1 = 7355.;
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using horsepower = Unit<Power, Rep, Ratio<chE1, E1>, zero>;
-
-  inline constexpr double hpDoubleE1 = 7457.;
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using mechanicalhorsepower = Unit<Power, Rep, Ratio<hpDoubleE1, E1>, zero>;
-
-
-
   typedef Dimension<0,0,-1,0,0,0,0> Frequency;
   inline constexpr double perMinRatio = 60.;
 
@@ -114,8 +99,6 @@ namespace omni
   typedef liter<> Liter;
   typedef newton<> Newton;
   typedef watt<> Watt;
-  typedef horsepower<> Horsepower;
-  typedef mechanicalhorsepower<> Mechanicalhorsepower;
   typedef perMinute<> PerMinute;
   typedef meterPerSecond<> MeterPerSecond;
   typedef meterPerMinute<> MeterPerMinute;
@@ -126,12 +109,11 @@ namespace omni
 
   namespace suffixes
   {
+
+
   constexpr centimeter3<OMNI_LITTERAL_FLOATING> operator"" _cm3(long double val) {return val;}
   constexpr liter<OMNI_LITTERAL_FLOATING> operator"" _L(long double val) {return val;}
   constexpr newton<OMNI_LITTERAL_FLOATING> operator"" _N(long double val) {return val;}
-  constexpr watt<OMNI_LITTERAL_FLOATING> operator"" _W(long double val) {return val;}
-  constexpr horsepower<OMNI_LITTERAL_FLOATING> operator""_hp (long double val) {return val;}
-  constexpr mechanicalhorsepower<OMNI_LITTERAL_FLOATING> operator""_mhp (long double val) {return val;}
   constexpr perMinute<OMNI_LITTERAL_FLOATING> operator"" _PerMin(long double val) {return val;}
   constexpr meterPerSecond<OMNI_LITTERAL_FLOATING> operator""_mPers(long double val) {return val;}
   constexpr kilometerPerHour<OMNI_LITTERAL_FLOATING> operator"" _kmPerh(long double val) {return val;}
@@ -142,9 +124,6 @@ namespace omni
   constexpr centimeter3<OMNI_LITTERAL_INTEGER> operator"" _cm3(unsigned long long int val) {return val;}
   constexpr liter<OMNI_LITTERAL_INTEGER> operator"" _L(unsigned long long int val) {return val;}
   constexpr newton<OMNI_LITTERAL_INTEGER> operator"" _N(unsigned long long int val) {return val;}
-  constexpr watt<OMNI_LITTERAL_INTEGER> operator"" _W(unsigned long long int val) {return val;}
-  constexpr horsepower<OMNI_LITTERAL_INTEGER> operator""_hp (unsigned long long int val) {return val;}
-  constexpr mechanicalhorsepower<OMNI_LITTERAL_INTEGER> operator""_mhp (unsigned long long int val) {return val;}
   constexpr perMinute<OMNI_LITTERAL_INTEGER> operator"" _PerMin(unsigned long long int val) {return val;}
   constexpr meterPerSecond<OMNI_LITTERAL_INTEGER> operator""_mPers(unsigned long long int val) {return val;}
   constexpr kilometerPerHour<OMNI_LITTERAL_INTEGER> operator"" _kmPerh(unsigned long long int val) {return val;}

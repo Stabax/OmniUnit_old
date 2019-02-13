@@ -30,8 +30,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-#ifndef OMNIUNIT_HH_
-#define OMNIUNIT_HH_
+#ifndef OMNIUNIT_OMNIUNIT_HH_
+#define OMNIUNIT_OMNIUNIT_HH_
 
 
 #include "settings.hh"
@@ -68,4 +68,4 @@ namespace omni
 #endif // OMNI_INCLUDE_ALL_UNITS
 
 
-#endif //OMNIUNIT_HH_
+#endif //OMNIUNIT_OMNIUNIT_HH_

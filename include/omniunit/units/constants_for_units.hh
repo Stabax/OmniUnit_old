@@ -28,8 +28,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef CONSTANTS_FOR_UNITS_HH_
-#define CONSTANTS_FOR_UNITS_HH_
+#ifndef OMNIUNIT_CONSTANTS_FOR_UNITS_HH_
+#define OMNIUNIT_CONSTANTS_FOR_UNITS_HH_
 
 
 namespace omni
@@ -86,6 +86,8 @@ inline constexpr double tecE5 = 2930760; // 10^9 J
 inline constexpr double tepE3 = 41868; // 10^9 J
 inline constexpr double gE5 = 980665;
 inline constexpr double poundforceE13 = 44482216152605; // N
+inline constexpr double hpE1 = 7355.; // W
+inline constexpr double mhpE1 = 7457.; // W
 
 
 
@@ -104,4 +106,4 @@ typedef Ratio<nine, five> fahrenheitRatio;
 
 } //namespace omni
 
-#endif //CONSTANTS_FOR_UNITS_HH_
+#endif //OMNIUNIT_CONSTANTS_FOR_UNITS_HH_

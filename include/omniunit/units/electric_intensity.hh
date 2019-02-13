@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef INTENSITY_HH_
-#define INTENSITY_HH_
+#ifndef OMNIUNIT_INTENSITY_HH_
+#define OMNIUNIT_INTENSITY_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 
@@ -189,4 +190,4 @@ constexpr yottaampere<OMNI_LITTERAL_INTEGER> operator"" _YA(unsigned long long i
 
 
 
-#endif //INTENSITY_HH_
+#endif //OMNIUNIT_INTENSITY_HH_

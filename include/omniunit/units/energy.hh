@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ENERGY_HH_
-#define ENERGY_HH_
+#ifndef OMNIUNIT_ENERGY_HH_
+#define OMNIUNIT_ENERGY_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 namespace omni
@@ -388,4 +389,4 @@ constexpr gigatep<OMNI_LITTERAL_INTEGER> operator"" _Gtep(unsigned long long int
 
 } //namespace omni
 
-#endif //ENERGY_HH_
+#endif //OMNIUNIT_ENERGY_HH_

@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef ANGULAR_SPEED_HH_
-#define ANGULAR_SPEED_HH_
+#ifndef OMNIUNIT_ANGULAR_SPEED_HH_
+#define OMNIUNIT_ANGULAR_SPEED_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 namespace omni
@@ -156,4 +157,4 @@ namespace suffixes
 
 
 
-#endif // ANGULAR_SPEED_HH_
+#endif // OMNIUNIT_ANGULAR_SPEED_HH_

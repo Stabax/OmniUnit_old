@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LUMINOUS_INTENSITY_HH_
-#define LUMINOUS_INTENSITY_HH_
+#ifndef OMNIUNIT_LUMINOUS_INTENSITY_HH_
+#define OMNIUNIT_LUMINOUS_INTENSITY_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 
@@ -190,4 +191,4 @@ constexpr yottacandela<OMNI_LITTERAL_INTEGER> operator"" _Ycd(unsigned long long
 } //namespace omni
 
 
-#endif //LUMINOUS_INTENSITY_HH_
+#endif //OMNIUNIT_LUMINOUS_INTENSITY_HH_

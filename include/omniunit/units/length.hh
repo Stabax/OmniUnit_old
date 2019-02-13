@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef LENGTH_HH_
-#define LENGTH_HH_
+#ifndef OMNIUNIT_LENGTH_HH_
+#define OMNIUNIT_LENGTH_HH_
 
+#include "../omniunit.hh"
 #include"constants_for_units.hh"
 
 
@@ -342,4 +343,4 @@ constexpr cable<OMNI_LITTERAL_INTEGER> operator"" _cb(unsigned long long int val
 } //namespace omni
 
 
-#endif //LENGTH_HH_
+#endif //OMNIUNIT_LENGTH_HH_

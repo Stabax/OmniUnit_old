@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TORQUE_HH_
-#define TORQUE_HH_
+#ifndef OMNIUNIT_TORQUE_HH_
+#define OMNIUNIT_TORQUE_HH_
 
+#include "../omniunit.hh"
 #include "moment_of_force.hh"
 
 
@@ -57,4 +58,4 @@ namespace suffixes
 
 
 
-#endif // TORQUE_HH_
+#endif // OMNIUNIT_TORQUE_HH_

@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef DURATION_HH_
-#define DURATION_HH_
+#ifndef OMNIUNIT_DURATION_HH_
+#define OMNIUNIT_DURATION_HH_
 
+#include "../omniunit.hh"
 #include"constants_for_units.hh"
 
 
@@ -258,4 +259,4 @@ constexpr gigayear<OMNI_LITTERAL_INTEGER> operator"" _Gy(unsigned long long int 
 
 
 
-#endif //DURATION_HH_
+#endif //OMNIUNIT_DURATION_HH_

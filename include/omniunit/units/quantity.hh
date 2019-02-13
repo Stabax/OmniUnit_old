@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef QUANTITY_HH_
-#define QUANTITY_HH_
+#ifndef OMNIUNIT_QUANTITY_HH_
+#define OMNIUNIT_QUANTITY_HH_
 
+#include "../omniunit.hh"
 #include"constants_for_units.hh"
 
 
@@ -202,4 +203,4 @@ constexpr amount<OMNI_LITTERAL_INTEGER> operator"" _amount(unsigned long long in
 
 
 
-#endif //QUANTITY_HH_
+#endif //OMNIUNIT_QUANTITY_HH_

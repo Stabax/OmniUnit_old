@@ -30,9 +30,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-#ifndef MASS_HH_
-#define MASS_HH_
+#ifndef OMNIUNIT_MASS_HH_
+#define OMNIUNIT_MASS_HH_
 
+#include "../omniunit.hh"
 #include"constants_for_units.hh"
 
 
@@ -290,4 +291,4 @@ constexpr shortton<OMNI_LITTERAL_INTEGER> operator"" _ston(unsigned long long in
 } //namespace omni
 
 
-#endif //MASS_HH_
+#endif //OMNIUNIT_MASS_HH_

@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef MOMENT_OF_FORCE_HH_
-#define MOMENT_OF_FORCE_HH_
+#ifndef OMNIUNIT_MOMENT_OF_FORCE_HH_
+#define OMNIUNIT_MOMENT_OF_FORCE_HH_
 
+#include "../omniunit.hh"
 #include "constants_for_units.hh"
 
 
@@ -97,4 +98,4 @@ namespace suffixes
 
 
 
-#endif // MOMENT_OF_FORCE_HH_
+#endif // OMNIUNIT_MOMENT_OF_FORCE_HH_

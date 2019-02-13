@@ -28,9 +28,10 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef TEMPERATURE_HH_
-#define TEMPERATURE_HH_
+#ifndef OMNIUNIT_TEMPERATURE_HH_
+#define OMNIUNIT_TEMPERATURE_HH_
 
+#include "../omniunit.hh"
 #include"constants_for_units.hh"
 
 
@@ -448,4 +449,4 @@ constexpr yottafahrenheit<OMNI_LITTERAL_FLOATING> operator"" _Yf(unsigned long l
 } //namespace omni
 
 
-#endif //TEMPERATURE_HH_
+#endif //OMNIUNIT_TEMPERATURE_HH_
