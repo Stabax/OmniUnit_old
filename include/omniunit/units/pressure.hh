@@ -124,6 +124,24 @@ using poundforcePerInch2 = Unit<Pressure, Rep, typename Ratio_over_Ratio<Ratio<p
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using barye = Unit<Pressure, Rep, Ratio<E0, E1>, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using gramforcePerCm2 = Unit<Pressure, Rep, Ratio<E0, E2>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kilogramforcePerCm2 = Unit<Pressure, Rep, Ratio<E0, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using technicalatmosphere = Unit<Pressure, Rep, Ratio<E0, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using millibar = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using torr = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using millimetermercury = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+
 
 
 typedef yoctopascal<> Yoctopascal;
