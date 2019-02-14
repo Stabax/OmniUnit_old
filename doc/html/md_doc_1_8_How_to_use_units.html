@@ -75,15 +75,16 @@ omni::gram&lt;float&gt; var3(12.9); //var3 equals 12.9
 //you can of course use any primitive type
 
 var1 = var3; //var1 equals 12, the value is truncated, not rounded
-</pre><p>If you don't need units to handle different types inside them, you can use the default type. Units using the default type begin with a capital : </p><pre class="fragment">omni::meter&lt;&gt; var4(0); //the internal type of var4 is float
-omni::Meter var5(0); //notice the capital
-//var4 and var5 are exaclty the same, but the definition of var5 is most user friendly
+</pre><p>If you don't need units to handle different types inside them, you can use the default type. Units using the default type begin with a capital : </p><pre class="fragment">omni::meter&lt;&gt; var4(0); //the internal type of var4 is double
+omni::Meter var5(0);   //idem, but notice the capital
+//var4 and var5 are exaclty the same, but the definition of var5 is most friendly
 </pre><p>So all <b>non-defaulted</b> units begin with a tiny character, and all <b>defaulted</b> units begin with a capital. The default type is defined by the <b>OMNI_DEFAULT_TYPE</b> macro in <a class="el" href="settings_8hh_source.html">settings.hh</a>. It equals <b>double</b> by default.</p>
 <p>Literal operators are also available : </p><pre class="fragment">using namespace suffixes; //this line is mandatory to use literals operator in omniunit
 
 auto var6 = 30_m;  //30 meters
 auto var7 = 30.2_m //30.2 meters
-</pre><p>For technical reasons, literal operators are only implemented for <b>official</b> and <b>derived</b> units. They aren't defined for composed units (like speed units for example). You can change the <b>OMNI_LITTERAL_INTEGER</b> and the <b>OMNI_LITTERAL_FLOATING</b> macros in setting.hh to modify the type handeled by units returned by a literal operator. The first one is used when the literal is an integer (see var6) and the second one when the literal is a double (see var7).</p>
+</pre><p>For technical reasons, litteral operators are not implemented for all units. See <b>2. Predefined units</b> to know what are the litteral operator associated to a unit, if any.</p>
+<p>You can change the <b>OMNI_LITTERAL_INTEGER</b> and the <b>OMNI_LITTERAL_FLOATING</b> macros in setting.hh to modify the type handeled by units returned by a literal operator. The first one is used when the literal is an integer (see var6) and the second one when the literal is a double (see var7).</p>
 <h2>Implicit conversions</h2>
 <p>You can convert a unit to another <b>if they have the same dimension</b> (mass in these examples) : </p><pre class="fragment">omni::kilogram&lt;float&gt; var1(3.1);
 omni::milligram&lt;float&gt; var2(var1);  //conversion by construction
@@ -94,7 +95,7 @@ auto var5 = omni::unit_cast&lt;omni::milli&gt;(var1);          //var5 is a gram&
 auto var6 = omni::unit_cast&lt;short&gt;(var1);                //var6 is a kilogram&lt;short&gt;
 auto var7 = omni::unit_cast&lt;omni::E1&gt;(var1);             //var1 looks like a kilogram&lt;float&gt; but with origin = 10 (see the meaning of origin of a unit in "how to create units")
 </pre><h2>Compile-time dimension check</h2>
-<p>Dimension check is done at compile-time, which mean that if you made a dimensional error, the code won't compile. It is one of the goals of omniunit, preventing calculation errors. </p><pre class="fragment">omni::Kilometer var1(1);
+<p>Dimension check is done at compile-time, which mean that if you made a dimensional error, the code won't compile. It is one of the goals of omniunit : preventing calculation errors. </p><pre class="fragment">omni::Kilometer var1(1);
 omni::Hour var2(1);
 
 omni::Gram var3 = var1/var2;
@@ -104,11 +105,11 @@ omni::MeterPerSecond var4 = var1/var2;
 //OK, although var1/var2 returns kilometerPerHour, it and var4 have the same dimension. There will just be an implicit conversion
 </pre><p>Generally, given the internal complexity of OmniUnit types, compilation errors are very long and hard to read. You have to look for the presence of : </p><pre class="fragment">error: static assertion failed: ...
 </pre><p>or </p><pre class="fragment">error: conversion from ...
-</pre><p>If one of these two lines are present, then you probably tried to sum/subtract/assign two values with defferent dimensions, or you tried to pass to exp(), log(), or other function a value which is not dimensionless. You have to fix the homogeneity of your calculation.</p>
+</pre><p>If one of these two lines are present, then you probably tried to sum/subtract/assign/construct two units with defferent dimensions, or you tried to pass to exp(), log(), or other function a unit which is not dimensionless. You have to fix the homogeneity of your calculation.</p>
 <h2>Compliance between standard duration and OmniUnit duration</h2>
 <p>If you are familiar with standard duration (std::chrono::duration), you may want to use and convert them into OmniUnit duration, and vice versa. Happily, there is a full compliance between them. You can simply do this by constructing or assigning them : </p><pre class="fragment">omni::Millisecond omni1(1.8);
 std::chrono::hours standard1(omni1); //construction
-//notice that here, std::chrono::hours handle an integer while omni::Millisecond handle a double by default, so trucations may appear
+//notice that here, std::chrono::hours handles an integer while omni::Millisecond handles a double by default, so trucations may appear
 
 std::chrono::hours standard2 = omni1; //assignment
 //idem
@@ -132,22 +133,23 @@ foo2(standard4); //ERROR
 foo2(omni::Second(standard4)); //OK
 foo2(omni::duration_cast&lt;omni::Second&gt;(standard4)); //OK
 </pre><p>The previous tips may be useful if you want to pass an omni::duration to std::this_thread::sleep_for(), for exemple.</p>
-<h2>About angles</h2>
-<p>Angles are dimensionless units. So, although it is physically wrong, it is sufficient to implement them the same way. Thus, in OmniUnit : </p><pre class="fragment">1 scalar = 1 radian = 1 steradian
+<h2>Troubles with angles</h2>
+<p>Angles are dimensionless units. Thus, although it is physically wrong, it is sufficient to implement them as dimensionless units. In OmniUnit : </p><pre class="fragment">1 scalar = 1 radian = 1 steradian
 </pre><p>assuming here that scalar is a simple dimensionless number. You can see that in OmniUnit, radian and steradian are considered to be the basic unit of angle and solid angle.</p>
-<p>The other effect of this fact is that multiplying by an angle doesn't change the dimension of the result. It means for exemple that luminous intensity (candela) and luminous flux (lumen) have exactly the same dimension.</p>
-<p>So you are asked to be careful : compilation error <b>WON'T</b> occur if you mix angle and solid angle : mistakes can happen.</p>
+<p>The effect of this fact is that multiplying by an angle doesn't change the dimension of the result. It means for exemple that luminous intensity (candela) and luminous flux (lumen) have exactly the same dimension.</p>
+<p>You are asked to be careful : compilation error <b>WON'T</b> occur if you mix angle, solid angle and other dimensions : mistakes can happen.</p>
+<p>For example : a torque in a car is calculated as</p>
 <h2>Mathematic functions</h2>
 <p>The five main operators are provided : +-*/% (together with +=, -=, *=, /=, %=, ++, &ndash; and unary -)</p>
 <p>Of course, using units only with these main operators looks limited. thus, some other functions are provided.</p>
-<p>Exponential/power functions :</p><ul>
+<p><b>Exponential/power functions :</b></p><ul>
 <li>exp() : taking a dimensionless value, and optionally a basis</li>
 <li>log() : taking a dimensionless value, and optionally a basis</li>
 <li>pow&lt;&gt;() : taking the exponent by template parameter (must be an integer, equals 2 by default)</li>
 <li>nroot&lt;&gt;(): taking the basis by template parameter (must be an integer, equals 2 by default)</li>
 <li>sqrt()</li>
 </ul>
-<p>Trigonometric functions :</p><ul>
+<p><b>Trigonometric functions :</b></p><ul>
 <li>cos() : taking a dimensionless value</li>
 <li>sin() : taking a dimensionless value</li>
 <li>tan() : taking a dimensionless value</li>
@@ -161,7 +163,7 @@ foo2(omni::duration_cast&lt;omni::Second&gt;(standard4)); //OK
 <li>acsc(): taking a dimensionless value</li>
 <li>acot(): taking a dimensionless value</li>
 </ul>
-<p>Hyperbolic functions :</p><ul>
+<p><b>Hyperbolic functions :</b></p><ul>
 <li>cosh() : taking a dimensionless value</li>
 <li>sinh() : taking a dimensionless value</li>
 <li>tanh() : taking a dimensionless value</li>
@@ -175,7 +177,7 @@ foo2(omni::duration_cast&lt;omni::Second&gt;(standard4)); //OK
 <li>acsch(): taking a dimensionless value</li>
 <li>acoth(): taking a dimensionless value</li>
 </ul>
-<p>Rounding functions :</p><ul>
+<p><b>Rounding functions :</b></p><ul>
 <li>ceil()</li>
 <li>floor()</li>
 <li>round()</li>
@@ -186,7 +188,7 @@ foo2(omni::duration_cast&lt;omni::Second&gt;(standard4)); //OK
 <p>To improve the execution speed of your application, you can perform calculations at compile time : it is a kind of metaprogramming. To do so, you have to declare a value with the <b>constexpr</b> keyword : </p><pre class="fragment">constexpr omni::Meter var1(1.2);
 constexpr omni::Second var2(3.55);
 constexpr omni::MeterPerSecond = var1/var2;
-</pre><p>A constexpr variable must be declared and initialized at the same time. You cannot use value determined during runtime. Moreover, a constexpr variable is const, once initialized, you cannot change its value. </p><pre class="fragment">int a = 3;
+</pre><p>A constexpr variable must be declared and initialized at the same time. You cannot use values determined during runtime. Moreover, a constexpr variable is const : once initialized, you cannot change its value. </p><pre class="fragment">int a = 3;
 constexpr omni::Newton(a) var3; // ERROR : "a" is not constexpr
 
 constexpr int b = a;
@@ -197,14 +199,14 @@ constexpr omni::Newton(b) var5; // OK
 
 omni::Meter var6(1.2);
 constexpr omni::Second var7(3.55);
-constexpr omni::MeterPerSecond = var1/var2; // ERROR : var7 is not constexpr
+constexpr omni::MilePerHour var8 = var6/var7; // ERROR : var6 is not constexpr
 
 var7++; //ERROR : var7 is constexpr and cannot be modified
 
 var7 = omni::MeterPerSecond(2); // idem
 
-constexpr auto var8 = omni::pow&lt;3&gt;(omni::Value(1.54)); // OK
-</pre><p>Focus on var8 : the function omni::pow is constexpr. In fact, all mathematic functions provided by OmniUnit are constexpr.</p>
+constexpr auto var9 = omni::pow&lt;3&gt;(omni::Value(1.54)); // OK
+</pre><p>Focus on var9 : the function omni::pow is constexpr. In fact, all mathematic functions provided by OmniUnit are constexpr.</p>
 <h2>Runetime errors and exception safety</h2>
 <p>Most of the library works at compile time, there is absolutly no exception throwing in order to allow constexpr units and functions (see the previous section). Nevertheless, <b>there is no</b> "no throw guarentee" because some <b>standard</b> functions (exp, log, pow, round, cos...) used in Omniunit at runtime may (or not) throw. See the exception safety of these functions in the C++ standard documentation.</p>
 <p>The others errors that could occur during execution are :</p><ul>
@@ -214,7 +216,7 @@ constexpr auto var8 = omni::pow&lt;3&gt;(omni::Value(1.54)); // OK
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 7 2019 22:28:39 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 14 2019 18:46:10 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

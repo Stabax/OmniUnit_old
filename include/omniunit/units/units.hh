@@ -44,6 +44,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "mass.hh"
 #include "moment_of_force.hh"
 #include "power.hh"
+#include "pressure.hh"
 #include "quantity.hh"
 #include "temperature.hh"
 #include "torque.hh"

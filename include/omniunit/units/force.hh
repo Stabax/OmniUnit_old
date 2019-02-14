@@ -1,4 +1,4 @@
-//electric_intensity.hh
+//force.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.

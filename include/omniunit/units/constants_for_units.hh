@@ -88,6 +88,7 @@ inline constexpr double gE5 = 980665;
 inline constexpr double poundforceE13 = 44482216152605; // N
 inline constexpr double hpE1 = 7355.; // W
 inline constexpr double mhpE1 = 7457.; // W
+inline constexpr double atmDef = 101325; // Pa
 
 
 
