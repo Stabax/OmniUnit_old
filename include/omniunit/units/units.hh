@@ -38,6 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "duration.hh"
 #include "electric_intensity.hh"
 #include "energy.hh"
+#include "force.hh"
 #include "length.hh"
 #include "luminous_intensity.hh"
 #include "mass.hh"

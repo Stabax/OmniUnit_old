@@ -337,7 +337,7 @@ int main()
 
   omni::Timer tim;
   tim.start();
-  auto dur = tim.get();
+  //auto dur = tim.get();
 
 return 0;
 }

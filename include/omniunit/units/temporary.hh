@@ -46,13 +46,6 @@ namespace omni
 
 
 
-  typedef Dimension<1,1,-2,0,0,0,0> Force;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using newton = Unit<Force, Rep, base, zero>;
-
-
-
   typedef Dimension<0,0,-1,0,0,0,0> Frequency;
   inline constexpr double perMinRatio = 60.;
 
@@ -97,7 +90,6 @@ namespace omni
   typedef inch<> Inch;
   typedef centimeter3<> Centimeter3;
   typedef liter<> Liter;
-  typedef newton<> Newton;
   typedef watt<> Watt;
   typedef perMinute<> PerMinute;
   typedef meterPerSecond<> MeterPerSecond;
@@ -113,7 +105,6 @@ namespace omni
 
   constexpr centimeter3<OMNI_LITTERAL_FLOATING> operator"" _cm3(long double val) {return val;}
   constexpr liter<OMNI_LITTERAL_FLOATING> operator"" _L(long double val) {return val;}
-  constexpr newton<OMNI_LITTERAL_FLOATING> operator"" _N(long double val) {return val;}
   constexpr perMinute<OMNI_LITTERAL_FLOATING> operator"" _PerMin(long double val) {return val;}
   constexpr meterPerSecond<OMNI_LITTERAL_FLOATING> operator""_mPers(long double val) {return val;}
   constexpr kilometerPerHour<OMNI_LITTERAL_FLOATING> operator"" _kmPerh(long double val) {return val;}
@@ -123,7 +114,6 @@ namespace omni
 
   constexpr centimeter3<OMNI_LITTERAL_INTEGER> operator"" _cm3(unsigned long long int val) {return val;}
   constexpr liter<OMNI_LITTERAL_INTEGER> operator"" _L(unsigned long long int val) {return val;}
-  constexpr newton<OMNI_LITTERAL_INTEGER> operator"" _N(unsigned long long int val) {return val;}
   constexpr perMinute<OMNI_LITTERAL_INTEGER> operator"" _PerMin(unsigned long long int val) {return val;}
   constexpr meterPerSecond<OMNI_LITTERAL_INTEGER> operator""_mPers(unsigned long long int val) {return val;}
   constexpr kilometerPerHour<OMNI_LITTERAL_INTEGER> operator"" _kmPerh(unsigned long long int val) {return val;}
