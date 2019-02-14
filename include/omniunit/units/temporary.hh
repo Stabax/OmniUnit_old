@@ -77,15 +77,6 @@ namespace omni
 
 
 
-  typedef Dimension<-1,1,-2,0,0,0,0> Pressure;
-
-  template <typename Rep = OMNI_DEFAULT_TYPE>
-  using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
-
-
-
-
-
   typedef mile<> Mile;
   typedef inch<> Inch;
   typedef centimeter3<> Centimeter3;
@@ -110,7 +101,6 @@ namespace omni
   constexpr kilometerPerHour<OMNI_LITTERAL_FLOATING> operator"" _kmPerh(long double val) {return val;}
   constexpr meterPerSecond2<OMNI_LITTERAL_FLOATING> operator"" _mPers2(long double val) {return val;}
   constexpr milePerHour<OMNI_LITTERAL_FLOATING> operator"" _miPerh(long double val) {return val;}
-  constexpr bar<OMNI_LITTERAL_FLOATING> operator"" _bar(long double val) {return val;}
 
   constexpr centimeter3<OMNI_LITTERAL_INTEGER> operator"" _cm3(unsigned long long int val) {return val;}
   constexpr liter<OMNI_LITTERAL_INTEGER> operator"" _L(unsigned long long int val) {return val;}
@@ -119,7 +109,6 @@ namespace omni
   constexpr kilometerPerHour<OMNI_LITTERAL_INTEGER> operator"" _kmPerh(unsigned long long int val) {return val;}
   constexpr meterPerSecond2<OMNI_LITTERAL_INTEGER> operator"" _mPers2(unsigned long long int val) {return val;}
   constexpr milePerHour<OMNI_LITTERAL_INTEGER> operator"" _miPerh(unsigned long long int val) {return val;}
-  constexpr bar<OMNI_LITTERAL_INTEGER> operator"" _bar(unsigned long long int val) {return val;}
   }
 } // namespace omni
 

@@ -40,89 +40,89 @@ namespace omni
 
 
 
-typedef Dimension<1,1,-2,0,0,0,0> Force;
+typedef Dimension<-1,1,-2,0,0,0,0> Pressure;
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yoctopascal = Unit<Force, Rep, yocto, zero>;
+using yoctopascal = Unit<Pressure, Rep, yocto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zeptopascal = Unit<Force, Rep, zepto, zero>;
+using zeptopascal = Unit<Pressure, Rep, zepto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using attopascal = Unit<Force, Rep, atto, zero>;
+using attopascal = Unit<Pressure, Rep, atto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using femtopascal = Unit<Force, Rep, femto, zero>;
+using femtopascal = Unit<Pressure, Rep, femto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using picopascal = Unit<Force, Rep, pico, zero>;
+using picopascal = Unit<Pressure, Rep, pico, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using nanopascal = Unit<Force, Rep, nano, zero>;
+using nanopascal = Unit<Pressure, Rep, nano, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using micropascal = Unit<Force, Rep, micro, zero>;
+using micropascal = Unit<Pressure, Rep, micro, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millipascal = Unit<Force, Rep, milli, zero>;
+using millipascal = Unit<Pressure, Rep, milli, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centipascal = Unit<Force, Rep, centi, zero>;
+using centipascal = Unit<Pressure, Rep, centi, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decipascal = Unit<Force, Rep, deci, zero>;
+using decipascal = Unit<Pressure, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using pascal = Unit<Force, Rep, base, zero>;
+using pascal = Unit<Pressure, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decapascal = Unit<Force, Rep, deca, zero>;
+using decapascal = Unit<Pressure, Rep, deca, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using hectopascal = Unit<Force, Rep, hecto, zero>;
+using hectopascal = Unit<Pressure, Rep, hecto, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilopascal = Unit<Force, Rep, kilo, zero>;
+using kilopascal = Unit<Pressure, Rep, kilo, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using megapascal = Unit<Force, Rep, mega, zero>;
+using megapascal = Unit<Pressure, Rep, mega, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gigapascal = Unit<Force, Rep, giga, zero>;
+using gigapascal = Unit<Pressure, Rep, giga, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using terapascal = Unit<Force, Rep, tera, zero>;
+using terapascal = Unit<Pressure, Rep, tera, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using petapascal = Unit<Force, Rep, peta, zero>;
+using petapascal = Unit<Pressure, Rep, peta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using exapascal = Unit<Force, Rep, exa, zero>;
+using exapascal = Unit<Pressure, Rep, exa, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using zettapascal = Unit<Force, Rep, zetta, zero>;
+using zettapascal = Unit<Pressure, Rep, zetta, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using yottapascal = Unit<Force, Rep, yotta, zero>;
+using yottapascal = Unit<Pressure, Rep, yotta, zero>;
 
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using decibar = Unit<Force, Rep, Ratio<E5, E1>, zero>;
+using decibar = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using bar = Unit<Force, Rep, Ratio<E5, E0>, zero>;
+using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using atmosphere = Unit<Force, Rep, Ratio<atmDef, E0>, zero>;
+using atmosphere = Unit<Pressure, Rep, Ratio<atmDef, E0>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using poundforcePerInch2 = Unit<Force, Rep, typename Ratio_over_Ratio<Ratio<poundforceE13, E13>, typename Ratio_power<Ratio<inchE2, E2>, 2>::type>::type, zero>;
+using poundforcePerInch2 = Unit<Pressure, Rep, typename Ratio_over_Ratio<Ratio<poundforceE13, E13>, typename Ratio_power<Ratio<inchE2, E2>, 2>::type>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using barye = Unit<Force, Rep, Ratio<E0, E1>, zero>;
+using barye = Unit<Pressure, Rep, Ratio<E0, E1>, zero>;
 
 
 
@@ -182,10 +182,11 @@ constexpr exapascal<OMNI_LITTERAL_FLOATING> operator"" _EPa(long double val){ret
 constexpr zettapascal<OMNI_LITTERAL_FLOATING> operator"" _ZPa(long double val){return val;}
 constexpr yottapascal<OMNI_LITTERAL_FLOATING> operator"" _YPa(long double val){return val;}
 
-constexpr dyne<OMNI_LITTERAL_FLOATING> operator"" _dyn(long double val){return val;}
-constexpr kilogramforce<OMNI_LITTERAL_FLOATING> operator"" _kgf(long double val){return val;}
-constexpr poundforce<OMNI_LITTERAL_FLOATING> operator"" _lbf(long double val){return val;}
-constexpr poundal<OMNI_LITTERAL_FLOATING> operator"" _pdl(long double val){return val;}
+constexpr decibar<OMNI_LITTERAL_FLOATING> operator"" _dbar(long double val){return val;}
+constexpr bar<OMNI_LITTERAL_FLOATING> operator"" _bar(long double val){return val;}
+constexpr atmosphere<OMNI_LITTERAL_FLOATING> operator"" _atm(long double val){return val;}
+constexpr poundforcePerInch2<OMNI_LITTERAL_FLOATING> operator"" _lbfIn2(long double val){return val;}
+constexpr barye<OMNI_LITTERAL_FLOATING> operator"" _Ba(long double val){return val;}
 
 
 
@@ -210,10 +211,11 @@ constexpr exapascal<OMNI_LITTERAL_INTEGER> operator"" _EPa(unsigned long long in
 constexpr zettapascal<OMNI_LITTERAL_INTEGER> operator"" _ZPa(unsigned long long int val){return val;}
 constexpr yottapascal<OMNI_LITTERAL_INTEGER> operator"" _YPa(unsigned long long int val){return val;}
 
-constexpr dyne<OMNI_LITTERAL_INTEGER> operator"" _dyn(unsigned long long int val){return val;}
-constexpr kilogramforce<OMNI_LITTERAL_INTEGER> operator"" _kgf(unsigned long long int val){return val;}
-constexpr poundforce<OMNI_LITTERAL_INTEGER> operator"" _lbf(unsigned long long int val){return val;}
-constexpr poundal<OMNI_LITTERAL_INTEGER> operator"" _pdl(unsigned long long int val){return val;}
+constexpr decibar<OMNI_LITTERAL_INTEGER> operator"" _dbar(unsigned long long int val){return val;}
+constexpr bar<OMNI_LITTERAL_INTEGER> operator"" _bar(unsigned long long int val){return val;}
+constexpr atmosphere<OMNI_LITTERAL_INTEGER> operator"" _atm(unsigned long long int val){return val;}
+constexpr poundforcePerInch2<OMNI_LITTERAL_INTEGER> operator"" _lbfIn2(unsigned long long int val){return val;}
+constexpr barye<OMNI_LITTERAL_INTEGER> operator"" _Ba(unsigned long long int val){return val;}
 
 
 
