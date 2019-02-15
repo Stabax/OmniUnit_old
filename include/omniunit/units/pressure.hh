@@ -142,6 +142,11 @@ using torr = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using millimetermercury = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using inchmercury = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using centimeterwater = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 
 
 typedef yoctopascal<> Yoctopascal;
