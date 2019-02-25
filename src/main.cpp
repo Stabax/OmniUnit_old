@@ -339,5 +339,7 @@ int main()
   tim.start();
   //auto dur = tim.get();
 
+  std::cout << omni::Pascal(omni::gramforcePerCm2<float>(1)) << "\n";
+
 return 0;
 }

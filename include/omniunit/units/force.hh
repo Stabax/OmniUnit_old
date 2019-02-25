@@ -113,6 +113,9 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using dyne = Unit<Force, Rep, Ratio<E0, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
+using gramforce = Unit<Force, Rep, Ratio<gE5, E8>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilogramforce = Unit<Force, Rep, Ratio<gE5, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -146,6 +149,7 @@ typedef zettanewton<> Zettanewton;
 typedef yottanewton<> Yottanewton;
 
 typedef dyne<> Dyne;
+typedef gramforce<> Gramforce;
 typedef kilogramforce<> Kilogramforce;
 typedef poundforce<> Poundforce;
 typedef poundal<> Poundal;
@@ -179,6 +183,7 @@ constexpr zettanewton<OMNI_LITTERAL_FLOATING> operator"" _ZN(long double val){re
 constexpr yottanewton<OMNI_LITTERAL_FLOATING> operator"" _YN(long double val){return val;}
 
 constexpr dyne<OMNI_LITTERAL_FLOATING> operator"" _dyn(long double val){return val;}
+constexpr gramforce<OMNI_LITTERAL_FLOATING> operator"" _gf(long double val){return val;}
 constexpr kilogramforce<OMNI_LITTERAL_FLOATING> operator"" _kgf(long double val){return val;}
 constexpr poundforce<OMNI_LITTERAL_FLOATING> operator"" _lbf(long double val){return val;}
 constexpr poundal<OMNI_LITTERAL_FLOATING> operator"" _pdl(long double val){return val;}
@@ -207,6 +212,7 @@ constexpr zettanewton<OMNI_LITTERAL_INTEGER> operator"" _ZN(unsigned long long i
 constexpr yottanewton<OMNI_LITTERAL_INTEGER> operator"" _YN(unsigned long long int val){return val;}
 
 constexpr dyne<OMNI_LITTERAL_INTEGER> operator"" _dyn(unsigned long long int val){return val;}
+constexpr gramforce<OMNI_LITTERAL_INTEGER> operator"" _gf(unsigned long long int val){return val;}
 constexpr kilogramforce<OMNI_LITTERAL_INTEGER> operator"" _kgf(unsigned long long int val){return val;}
 constexpr poundforce<OMNI_LITTERAL_INTEGER> operator"" _lbf(unsigned long long int val){return val;}
 constexpr poundal<OMNI_LITTERAL_INTEGER> operator"" _pdl(unsigned long long int val){return val;}

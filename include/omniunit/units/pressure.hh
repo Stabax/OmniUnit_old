@@ -75,7 +75,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using decipascal = Unit<Pressure, Rep, deci, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using pascal = Unit<Pressure, Rep, base, zero>;
+using pascal_t = Unit<Pressure, Rep, base, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using decapascal = Unit<Pressure, Rep, deca, zero>;
@@ -110,6 +110,9 @@ using yottapascal = Unit<Pressure, Rep, yotta, zero>;
 
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
+using millibar = Unit<Pressure, Rep, Ratio<E5, E3>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using decibar = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
@@ -125,28 +128,31 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using barye = Unit<Pressure, Rep, Ratio<E0, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gramforcePerCm2 = Unit<Pressure, Rep, Ratio<E0, E2>, zero>;
+using gramforcePerCm2 = Unit<Pressure, Rep, Ratio<gE5, E4>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilogramforcePerCm2 = Unit<Pressure, Rep, Ratio<E0, E4>, zero>;
+using kilogramforcePerCm2 = Unit<Pressure, Rep, Ratio<gE5, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using technicalatmosphere = Unit<Pressure, Rep, Ratio<E0, E4>, zero>;
+using kilogramforcePerM2 = Unit<Pressure, Rep, Ratio<gE5, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millibar = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+using tonforcePerM2 = Unit<Pressure, Rep, Ratio<gE5, E2>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using torr = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+using technicalatmosphere = Unit<Pressure, Rep, Ratio<gE5, E1>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using millimetermercury = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+using torr = Unit<Pressure, Rep, Ratio<atmDef, torrDenominator>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using inchmercury = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+using millimetermercury = Unit<Pressure, Rep, Ratio<atmDef, torrDenominator>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using centimeterwater = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
+using inchmercury = Unit<Pressure, Rep, Ratio<inchmercuryE3, E3>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using centimeterwater = Unit<Pressure, Rep, Ratio<gE5, E4>, zero>;
 
 
 typedef yoctopascal<> Yoctopascal;
@@ -159,7 +165,7 @@ typedef micropascal<> Micropascal;
 typedef millipascal<> Millipascal;
 typedef centipascal<> Centipascal;
 typedef decipascal<> Decipascal;
-typedef pascal<> Pascal;
+typedef pascal_t<> Pascal;
 typedef decapascal<> Decapascal;
 typedef hectopascal<> Hectopascal;
 typedef kilopascal<> Kilopascal;
@@ -193,7 +199,7 @@ constexpr micropascal<OMNI_LITTERAL_FLOATING> operator"" _uPa(long double val){r
 constexpr millipascal<OMNI_LITTERAL_FLOATING> operator"" _mPa(long double val){return val;}
 constexpr centipascal<OMNI_LITTERAL_FLOATING> operator"" _cPa(long double val){return val;}
 constexpr decipascal<OMNI_LITTERAL_FLOATING> operator"" _dPa(long double val){return val;}
-constexpr pascal<OMNI_LITTERAL_FLOATING> operator"" _Pa(long double val){return val;}
+constexpr pascal_t<OMNI_LITTERAL_FLOATING> operator"" _Pa(long double val){return val;}
 constexpr decapascal<OMNI_LITTERAL_FLOATING> operator"" _daPa(long double val){return val;}
 constexpr hectopascal<OMNI_LITTERAL_FLOATING> operator"" _hPa(long double val){return val;}
 constexpr kilopascal<OMNI_LITTERAL_FLOATING> operator"" _kPa(long double val){return val;}
@@ -222,7 +228,7 @@ constexpr micropascal<OMNI_LITTERAL_INTEGER> operator"" _uPa(unsigned long long 
 constexpr millipascal<OMNI_LITTERAL_INTEGER> operator"" _mPa(unsigned long long int val){return val;}
 constexpr centipascal<OMNI_LITTERAL_INTEGER> operator"" _cPa(unsigned long long int val){return val;}
 constexpr decipascal<OMNI_LITTERAL_INTEGER> operator"" _dPa(unsigned long long int val){return val;}
-constexpr pascal<OMNI_LITTERAL_INTEGER> operator"" _Pa(unsigned long long int val){return val;}
+constexpr pascal_t<OMNI_LITTERAL_INTEGER> operator"" _Pa(unsigned long long int val){return val;}
 constexpr decapascal<OMNI_LITTERAL_INTEGER> operator"" _daPa(unsigned long long int val){return val;}
 constexpr hectopascal<OMNI_LITTERAL_INTEGER> operator"" _hPa(unsigned long long int val){return val;}
 constexpr kilopascal<OMNI_LITTERAL_INTEGER> operator"" _kPa(unsigned long long int val){return val;}

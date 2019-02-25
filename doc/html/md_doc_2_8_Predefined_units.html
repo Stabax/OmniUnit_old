@@ -69,157 +69,317 @@ $(function() {
 <div class="textblock"><p>NOTE : if a unit exists in both american and imperial systems, those represented in omniunit is the american one.</p>
 <h2>All defined dimensions</h2>
 <h3>Basic dimensions</h3>
-<p>&lt;0, 0, 0, 0, 0, 0, 0&gt; Dimensionless<br />
-&lt;0, 0, 1, 0, 0, 0, 0&gt; Duration<br />
-&lt;0, 0, 0, 1, 0, 0, 0&gt; ElectricIntensity<br />
-&lt;1, 0, 0, 0, 0, 0, 0&gt; Length<br />
-&lt;0, 0, 0, 0, 0, 0, 1&gt; Luminosity<br />
-&lt;0, 1, 0, 0, 0, 0, 0&gt; Mass<br />
-&lt;0, 0, 0, 0, 0, 1, 0&gt; Quantity<br />
-&lt;0, 0, 0, 0, 1, 0, 0&gt; Temperature<br />
- </p><h3>Derived dimensions</h3>
-<p>Acceleration<br />
-Action<br />
-Activity<br />
-Angular acceleration<br />
-Angular jerk<br />
-Angular jounce<br />
-Angular mass<br />
-Angular momentum<br />
-&lt;0, 0, -1, 0, 0, 0, 0&gt; Angular speed<br />
-Area<br />
-Area density<br />
-Area frequency<br />
-Capacitance<br />
-Charge<br />
-Charge density<br />
-Compressibility<br />
-Current<br />
-Dose<br />
-Dose rate<br />
-Electric conductance<br />
-Electric conductivity<br />
-Electric current density<br />
-Electric dipole moment<br />
-Electric displacement field<br />
-Electric field<br />
-Electric resistance<br />
-Electric resistivity<br />
-Electron mobility<br />
-&lt;2, 1, -2, 0, 0, 0, 0&gt; Energy<br />
-Energy density<br />
-Energy flux<br />
-Entropy<br />
-Exposure<br />
-Fluence<br />
-Fluence rate<br />
-Flux<br />
-Force<br />
-Frequency<br />
-Illuminance<br />
-Impulse<br />
-Inductance<br />
-Intensity<br />
-Irradiance<br />
-Jerk<br />
-Jounce<br />
-Light quantity<br />
-Linear activity<br />
-Linear charge density<br />
-Linear mass<br />
-Luminance<br />
-Luminous energy<br />
-Luminous efficacy<br />
-Luminous flux<br />
-Luminous exposure<br />
-Magnetic induction<br />
-Magnetic field<br />
-Magnetic flux<br />
-Magnetic moment<br />
-Magnetic permeability<br />
-Magnetic potential<br />
-Magnetic reluctance<br />
-Magnetic resistance<br />
-Magnetic rigidity<br />
-Magnetic suseptibility<br />
-Magnetization<br />
-Magnetomotive force<br />
-Mass concentration<br />
-Mass flow<br />
-Molality<br />
-Molarity<br />
-Molar concentration<br />
-Molar conductivity<br />
-Molar energy<br />
-Molar entropy<br />
-Molar heat capacity<br />
-Molar mass<br />
-Molar volume<br />
-&lt;2, 1, -2, 0, 0, 0, 0&gt; Moment of force<br />
-Moment of inertia<br />
-Momentum<br />
-Permittivity<br />
-Permeability<br />
-Polarization density<br />
-Power<br />
-Power density<br />
-Pressure<br />
-Quantity of light<br />
-Radiance<br />
-Radiant exposure<br />
-Radiant intensity<br />
-Resistance<br />
-Spatial frequency<br />
-Specific angular momentum<br />
-Specific energy<br />
-Specific entropy<br />
-Specific thermal capacity<br />
-Specific volume<br />
-Spectral intensity<br />
-Spectral irradiance<br />
-Spectral power<br />
-Spectral radiance<br />
-Speed<br />
-Stiffness<br />
-Surface tension<br />
-Temperature gradient<br />
-Thermal capacity<br />
-Thermal conductivity<br />
-Thermal diffusivity<br />
-Thermal expansion<br />
-Thermal flux<br />
-Thermal resistance<br />
-&lt;2, 1, -2, 0, 0, 0, 0&gt; Torque<br />
-Viscosity (dynamic)<br />
-Viscosity (kinematic)<br />
-Voltage<br />
-Volume<br />
-Volumetric flow<br />
-Volumetric mass<br />
-Yank<br />
- </p><h2>All defined ratios</h2>
-<p>Ratio&lt;E0, E24&gt; yocto;<br />
-Ratio&lt;E0, E21&gt; zepto;<br />
-Ratio&lt;E0, E18&gt; atto;<br />
-Ratio&lt;E0, E15&gt; femto;<br />
-Ratio&lt;E0, E12&gt; pico;<br />
-Ratio&lt;E0, E9&gt; nano;<br />
-Ratio&lt;E0, E6&gt; micro;<br />
-Ratio&lt;E0, E3&gt; milli;<br />
-Ratio&lt;E0, E2&gt; centi;<br />
-Ratio&lt;E0, E1&gt; deci;<br />
-Ratio&lt;E0, E0&gt; base;<br />
-Ratio&lt;E1, E0&gt; deca;<br />
-Ratio&lt;E2, E0&gt; hecto;<br />
-Ratio&lt;E3, E0&gt; kilo;<br />
-Ratio&lt;E6, E0&gt; mega;<br />
-Ratio&lt;E9, E0&gt; giga;<br />
-Ratio&lt;E12, E0&gt; tera;<br />
-Ratio&lt;E15, E0&gt; peta;<br />
-Ratio&lt;E18, E0&gt; exa;<br />
-Ratio&lt;E21, E0&gt; zetta;<br />
-Ratio&lt;E24, E0&gt; yotta;<br />
- </p><h2>Defined units for basic dimensions</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter"><b>name</b>  </th><th class="markdownTableHeadCenter"><b>internal value</b>   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Dimensionless  </td><td class="markdownTableBodyCenter">&lt;0, 0, 0, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Duration  </td><td class="markdownTableBodyCenter">&lt;0, 0, 1, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">ElectricIntensity  </td><td class="markdownTableBodyCenter">&lt;0, 0, 0, 1, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Length  </td><td class="markdownTableBodyCenter">&lt;1, 0, 0, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Luminosity  </td><td class="markdownTableBodyCenter">&lt;0, 0, 0, 0, 0, 0, 1&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Mass  </td><td class="markdownTableBodyCenter">&lt;0, 1, 0, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Quantity  </td><td class="markdownTableBodyCenter">&lt;0, 0, 0, 0, 0, 1, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Temperature  </td><td class="markdownTableBodyCenter">&lt;0, 0, 0, 0, 1, 0, 0&gt;   </td></tr>
+</table>
+<h3>Derived dimensions</h3>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter"><b>name</b>  </th><th class="markdownTableHeadCenter"><b>internal value</b>   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Acceleration  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Action  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Activity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Angular acceleration  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Angular jerk  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Angular jounce  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Angular mass  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Angular momentum  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Angular speed  </td><td class="markdownTableBodyCenter">&lt;0, 0, -1, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Area  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Area density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Area frequency  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Capacitance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Charge  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Charge density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Compressibility  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Current  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Dose  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Dose rate  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Electric conductance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Electric conductivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Electric current density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Electric dipole moment  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Electric displacement field  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Electric field  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Electric resistance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Electric resistivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Electron mobility  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Energy  </td><td class="markdownTableBodyCenter">&lt;2, 1, -2, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Energy density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Energy flux  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Entropy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Exposure  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Fluence  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Fluence rate  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Flux  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Force  </td><td class="markdownTableBodyCenter">&lt;1, 1, -2, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Frequency  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Illuminance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Impulse  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Inductance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Intensity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Irradiance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Jerk  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Jounce  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Light quantity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Linear activity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Linear charge density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Linear mass  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Luminance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Luminous energy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Luminous efficacy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Luminous flux  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Luminous exposure  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetic induction  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetic field  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetic flux  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetic moment  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetic permeability  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetic potential  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetic reluctance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetic resistance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetic rigidity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetic suseptibility  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Magnetization  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Magnetomotive force  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Mass concentration  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Mass flow  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Molality  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Molarity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Molar concentration  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Molar conductivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Molar energy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Molar entropy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Molar heat capacity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Molar mass  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Molar volume  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Moment of force  </td><td class="markdownTableBodyCenter">&lt;2, 1, -2, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Moment of inertia  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Momentum  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Permittivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Permeability  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Polarization density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Power  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Power density  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Pressure  </td><td class="markdownTableBodyCenter">&lt;-1,1,-2,0,0,0,0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Quantity of light  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Radiance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Radiant exposure  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Radiant intensity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Resistance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Spatial frequency  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Specific angular momentum  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Specific energy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Specific entropy  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Specific thermal capacity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Specific volume  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Spectral intensity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Spectral irradiance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Spectral power  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Spectral radiance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Speed  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Stiffness  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Surface tension  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Temperature gradient  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Thermal capacity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Thermal conductivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Thermal diffusivity  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Thermal expansion  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Thermal flux  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Thermal resistance  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Torque  </td><td class="markdownTableBodyCenter">&lt;2, 1, -2, 0, 0, 0, 0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Viscosity (dynamic)  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Viscosity (kinematic)  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Voltage  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Volume  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Volumetric flow  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">Volumetric mass  </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Yank  </td><td class="markdownTableBodyCenter"></td></tr>
+</table>
+<h2>Ratios</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter"><b>name</b>  </th><th class="markdownTableHeadCenter"><b>internal value</b>   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">yocto  </td><td class="markdownTableBodyCenter">&lt;E0, E24&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">zepto  </td><td class="markdownTableBodyCenter">&lt;E0, E21&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">atto  </td><td class="markdownTableBodyCenter">&lt;E0, E18&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">femto  </td><td class="markdownTableBodyCenter">&lt;E0, E15&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">pico  </td><td class="markdownTableBodyCenter">&lt;E0, E12&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">nano  </td><td class="markdownTableBodyCenter">&lt;E0, E9&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">micro  </td><td class="markdownTableBodyCenter">&lt;E0, E6&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">milli  </td><td class="markdownTableBodyCenter">&lt;E0, E3&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">centi  </td><td class="markdownTableBodyCenter">&lt;E0, E2&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">deci  </td><td class="markdownTableBodyCenter">&lt;E0, E1&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">base  </td><td class="markdownTableBodyCenter">&lt;E0, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">deca  </td><td class="markdownTableBodyCenter">&lt;E1, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">hecto  </td><td class="markdownTableBodyCenter">&lt;E2, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">kilo  </td><td class="markdownTableBodyCenter">&lt;E3, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">mega  </td><td class="markdownTableBodyCenter">&lt;E6, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">giga  </td><td class="markdownTableBodyCenter">&lt;E9, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">tera  </td><td class="markdownTableBodyCenter">&lt;E12, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">peta  </td><td class="markdownTableBodyCenter">&lt;E15, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">exa  </td><td class="markdownTableBodyCenter">&lt;E18, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">zetta  </td><td class="markdownTableBodyCenter">&lt;E21, E0&gt;   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">yotta  </td><td class="markdownTableBodyCenter">&lt;E24, E0&gt;   </td></tr>
+</table>
+<h2>Defined units for basic dimensions</h2>
 <h3>Angle and Dimensionless</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -696,9 +856,9 @@ Ratio&lt;E24, E0&gt; yotta;<br />
 <tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter">centinewton (_cN)  </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyCenter">decinewton (_dN)  </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyCenter">decinewton (_dN)  </td><td class="markdownTableBodyCenter">dyne (_dyn)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">newton (_N)  </td><td class="markdownTableBodyCenter">dyne (_dyn)   </td></tr>
+<td class="markdownTableBodyCenter">newton (_N)  </td><td class="markdownTableBodyCenter">gramforce (_gf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyCenter">decanewton (_daN)  </td><td class="markdownTableBodyCenter">kilogramforce (_kgf)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
@@ -883,7 +1043,7 @@ Ratio&lt;E24, E0&gt; yotta;<br />
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 14 2019 23:35:31 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Feb 25 2019 22:30:29 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
