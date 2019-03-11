@@ -1318,11 +1318,11 @@ constexpr auto trunc(Basic_Unit<_Dimension, Rep, Period, Origin> Obj, unsigned d
 
 
 
-template <typename out_t, typename Dimension, typename Rep, typename Period, double const& Origin>
-out_t& operator<<(out_t& out, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
+template <typename left_operande_t, typename Dimension, typename Rep, typename Period, double const& Origin>
+left_operande_t& operator<<(left_operande_t& left_operande, Basic_Unit<Dimension, Rep, Period, Origin> const& Obj)
 {
-  out << Obj.count();
-  return out;
+  left_operande << Obj.count();
+  return left_operande;
 }
 
 

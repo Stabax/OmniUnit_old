@@ -59,14 +59,23 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNI_LITTERAL_INTEGER int
 #define OMNI_LITTERAL_FLOATING double
 
+// if OMNI_COMPARE_WITH_PRECISION equals true, all internal comparisons between floating points are
+// done according to default epsilon (FLT_EPSILON, DBL_EPSILON...). Else, comparisions are done with
+// the value of OMNI_FLOAT_PRECISION_VALUE, OMNI_DOUBLE_PRECISION_VALUE and OMNI_LDOUBLE_PRECISION_VALUE.
+// default : true, 0.f, 0., and 0.. (NOT TAKEN INTO ACCOUND YET)
+#define OMNI_COMPARE_WITH_PRECISION = true
+#define OMNI_FLOAT_PRECISION_VALUE = 0.f
+#define OMNI_DOUBLE_PRECISION_VALUE = 0.
+#define OMNI_LDOUBLE_PRECISION_VALUE = 0.
+
 // if OMNI_ENABLE_UNCERTAINTIES is true, then all the content of Complete_Units.hh is included
-// and compiled. If uncertainties are not needed, then OMNI_ENABLE_UNCERTAINTIES should
-// be set on false to decrease the compilation time.
+// and compiled with omniunit. If uncertainties are not needed, then OMNI_ENABLE_UNCERTAINTIES should
+// be set on false to decrease compilation time.
 // default : true
 #define OMNI_ENABLE_UNCERTAINTIES true
 
 // if OMNI_DEFAULT_IS_UNCERTAINTY is true, then Unit is a typedef on
-// Complete_unit instead of Basic_Unit. It meeans that all predefined units
+// Complete_Unit instead of Basic_Unit. It meeans that all predefined units
 // are Complete_Unit. If uncertainties are not needed, set OMNI_DEFAULT_IS_UNCERTAINTY to
 // false to increase runtime speed, because Complete_Unit handles and computes more informations
 // than Basic_Unit.
