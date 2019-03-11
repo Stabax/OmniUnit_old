@@ -132,7 +132,7 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using poundforcePerInch2 = Unit<Pressure, Rep, typename Ratio_over_Ratio<Ratio<poundforceE13, E13>, typename Ratio_power<Ratio<inchE2, E2>, 2>::type>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using shorttomforcePerInch2 = Unit<Pressure, Rep, typename Ratio_times_value<typename poundforcePerInch2<Rep>::period, twoThousand>::type, zero>;
+using shorttonforcePerInch2 = Unit<Pressure, Rep, typename Ratio_times_value<typename poundforcePerInch2<Rep>::period, twoThousand>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using longtonforcePerInch2 = Unit<Pressure, Rep, typename Ratio_times_value<typename poundforcePerInch2<Rep>::period, longtonforceDef>::type, zero>;
@@ -221,11 +221,32 @@ typedef exapascal<> Exapascal;
 typedef zettapascal<> Zettapascal;
 typedef yottapascal<> Yottapascal;
 
+typedef millibar<> Millibar;
 typedef decibar<> Decibar;
 typedef bar<> Bar;
 typedef atmosphere<> Atmosphere;
+typedef technicalatmosphere<> Technicalatmosphere;
 typedef poundforcePerInch2<> PoundforcePerInch2;
+typedef shorttonforcePerInch2<> ShorttonforcePerInch2;
+typedef longtonforcePerInch2<> LongtonforcePerInch2;
+typedef gramforcePerCentimeter2<> GramforcePerCentimeter2;
+typedef kilogramforcePerCentimeter2<> KilogramforcePerCentimeter2;
+typedef kilogramforcePerMeter2<> KilogramforcePerMeter2;
+typedef tonforcePerCentimeter2<> TonforcePerCentimeter2;
+typedef tonforcePerMeter2<> TonforcePerMeter2;
+typedef torr<> Torr;
+typedef millitorr<> Millitorr;
+typedef millimetermercury<> Millimetermercury;
+typedef centimetermercury<> Centimetermercury;
+typedef micrometermercury<> Micrometermercury;
+typedef inchmercury<> Inchmercury;
+typedef centimeterwater<> Centimeterwater;
+typedef millimeterwater<> Millimeterwater;
+typedef meterwater<> Meterwater;
+typedef inchwater<> Inchwater;
+typedef footwater<> Footwater;
 typedef barye<> Barye;
+typedef meterseawater<> Meterseawater;
 
 
 
@@ -255,11 +276,24 @@ constexpr exapascal<OMNI_LITTERAL_FLOATING> operator"" _EPa(long double val){ret
 constexpr zettapascal<OMNI_LITTERAL_FLOATING> operator"" _ZPa(long double val){return val;}
 constexpr yottapascal<OMNI_LITTERAL_FLOATING> operator"" _YPa(long double val){return val;}
 
+constexpr millibar<OMNI_LITTERAL_FLOATING> operator"" _mbar(long double val){return val;}
 constexpr decibar<OMNI_LITTERAL_FLOATING> operator"" _dbar(long double val){return val;}
 constexpr bar<OMNI_LITTERAL_FLOATING> operator"" _bar(long double val){return val;}
 constexpr atmosphere<OMNI_LITTERAL_FLOATING> operator"" _atm(long double val){return val;}
-constexpr poundforcePerInch2<OMNI_LITTERAL_FLOATING> operator"" _lbfIn2(long double val){return val;}
-constexpr barye<OMNI_LITTERAL_FLOATING> operator"" _Ba(long double val){return val;}
+constexpr technicalatmosphere<OMNI_LITTERAL_FLOATING> operator"" _at(long double val){return val;}
+constexpr torr<OMNI_LITTERAL_FLOATING> operator"" _torr(long double val){return val;}
+constexpr millitorr<OMNI_LITTERAL_FLOATING> operator"" _mtorr(long double val){return val;}
+constexpr millimetermercury<OMNI_LITTERAL_FLOATING> operator"" _mmHg(long double val){return val;}
+constexpr centimetermercury<OMNI_LITTERAL_FLOATING> operator"" _cmHg(long double val){return val;}
+constexpr micrometermercury<OMNI_LITTERAL_FLOATING> operator"" _umHg(long double val){return val;}
+constexpr inchmercury<OMNI_LITTERAL_FLOATING> operator"" _inHg(long double val){return val;}
+constexpr centimeterwater<OMNI_LITTERAL_FLOATING> operator"" _cmH2O(long double val){return val;}
+constexpr millimeterwater<OMNI_LITTERAL_FLOATING> operator"" _mmH2O(long double val){return val;}
+constexpr meterwater<OMNI_LITTERAL_FLOATING> operator"" _mH2O(long double val){return val;}
+constexpr inchwater<OMNI_LITTERAL_FLOATING> operator"" _inH2O(long double val){return val;}
+constexpr footwater<OMNI_LITTERAL_FLOATING> operator"" _fH2O(long double val){return val;}
+constexpr barye<OMNI_LITTERAL_FLOATING> operator"" _bary(long double val){return val;}
+constexpr meterseawater<OMNI_LITTERAL_FLOATING> operator"" _msw(long double val){return val;}
 
 
 
@@ -284,11 +318,24 @@ constexpr exapascal<OMNI_LITTERAL_INTEGER> operator"" _EPa(unsigned long long in
 constexpr zettapascal<OMNI_LITTERAL_INTEGER> operator"" _ZPa(unsigned long long int val){return val;}
 constexpr yottapascal<OMNI_LITTERAL_INTEGER> operator"" _YPa(unsigned long long int val){return val;}
 
+constexpr millibar<OMNI_LITTERAL_INTEGER> operator"" _mbar(unsigned long long int val){return val;}
 constexpr decibar<OMNI_LITTERAL_INTEGER> operator"" _dbar(unsigned long long int val){return val;}
 constexpr bar<OMNI_LITTERAL_INTEGER> operator"" _bar(unsigned long long int val){return val;}
 constexpr atmosphere<OMNI_LITTERAL_INTEGER> operator"" _atm(unsigned long long int val){return val;}
-constexpr poundforcePerInch2<OMNI_LITTERAL_INTEGER> operator"" _lbfIn2(unsigned long long int val){return val;}
-constexpr barye<OMNI_LITTERAL_INTEGER> operator"" _Ba(unsigned long long int val){return val;}
+constexpr technicalatmosphere<OMNI_LITTERAL_INTEGER> operator"" _at(unsigned long long int val){return val;}
+constexpr torr<OMNI_LITTERAL_INTEGER> operator"" _torr(unsigned long long int val){return val;}
+constexpr millitorr<OMNI_LITTERAL_INTEGER> operator"" _mtorr(unsigned long long int val){return val;}
+constexpr millimetermercury<OMNI_LITTERAL_INTEGER> operator"" _mmHg(unsigned long long int val){return val;}
+constexpr centimetermercury<OMNI_LITTERAL_INTEGER> operator"" _cmHg(unsigned long long int val){return val;}
+constexpr micrometermercury<OMNI_LITTERAL_INTEGER> operator"" _umHg(unsigned long long int val){return val;}
+constexpr inchmercury<OMNI_LITTERAL_INTEGER> operator"" _inHg(unsigned long long int val){return val;}
+constexpr centimeterwater<OMNI_LITTERAL_INTEGER> operator"" _cmH2O(unsigned long long int val){return val;}
+constexpr millimeterwater<OMNI_LITTERAL_INTEGER> operator"" _mmH2O(unsigned long long int val){return val;}
+constexpr meterwater<OMNI_LITTERAL_INTEGER> operator"" _mH2O(unsigned long long int val){return val;}
+constexpr inchwater<OMNI_LITTERAL_INTEGER> operator"" _inH2O(unsigned long long int val){return val;}
+constexpr footwater<OMNI_LITTERAL_INTEGER> operator"" _fH2O(unsigned long long int val){return val;}
+constexpr barye<OMNI_LITTERAL_INTEGER> operator"" _bary(unsigned long long int val){return val;}
+constexpr meterseawater<OMNI_LITTERAL_INTEGER> operator"" _msw(unsigned long long int val){return val;}
 
 
 
