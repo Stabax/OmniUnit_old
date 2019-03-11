@@ -119,10 +119,22 @@ template <typename Rep = OMNI_DEFAULT_TYPE>
 using kilogramforce = Unit<Force, Rep, Ratio<gE5, E5>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
+using tonforce = Unit<Force, Rep, typename Ratio_times_value<typename kilogramforce<Rep>::period, E3>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using poundforce = Unit<Force, Rep, Ratio<poundforceE13, E13>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using poundal = Unit<Force, Rep, typename Ratio_times_Ratio<Ratio<footE2, E4>, Ratio<poundE8, E8>>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kipforce = Unit<Force, Rep, typename Ratio_times_value<typename poundforce<Rep>::period, E3>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using shorttonforce = Unit<Force, Rep, typename Ratio_times_value<typename poundforce<Rep>::period, twoThousand>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using longtonforce = Unit<Force, Rep, typename Ratio_times_value<typename poundforce<Rep>::period, longtonforceDef>::type, zero>;
 
 
 
@@ -151,8 +163,12 @@ typedef yottanewton<> Yottanewton;
 typedef dyne<> Dyne;
 typedef gramforce<> Gramforce;
 typedef kilogramforce<> Kilogramforce;
+typedef tonforce<> Tonforce;
 typedef poundforce<> Poundforce;
 typedef poundal<> Poundal;
+typedef kipforce<> Kipforce;
+typedef shorttonforce<> Shorttonforce;
+typedef longtonforce<> LongtonForce;
 
 
 
@@ -185,8 +201,13 @@ constexpr yottanewton<OMNI_LITTERAL_FLOATING> operator"" _YN(long double val){re
 constexpr dyne<OMNI_LITTERAL_FLOATING> operator"" _dyn(long double val){return val;}
 constexpr gramforce<OMNI_LITTERAL_FLOATING> operator"" _gf(long double val){return val;}
 constexpr kilogramforce<OMNI_LITTERAL_FLOATING> operator"" _kgf(long double val){return val;}
+constexpr tonforce<OMNI_LITTERAL_FLOATING> operator"" _tonf(long double val){return val;}
 constexpr poundforce<OMNI_LITTERAL_FLOATING> operator"" _lbf(long double val){return val;}
 constexpr poundal<OMNI_LITTERAL_FLOATING> operator"" _pdl(long double val){return val;}
+constexpr kipforce<OMNI_LITTERAL_FLOATING> operator"" _kipf(long double val){return val;}
+constexpr shorttonforce<OMNI_LITTERAL_FLOATING> operator"" _stonf(long double val){return val;}
+constexpr longtonforce<OMNI_LITTERAL_FLOATING> operator"" _ltonf(long double val){return val;}
+
 
 
 
@@ -214,8 +235,13 @@ constexpr yottanewton<OMNI_LITTERAL_INTEGER> operator"" _YN(unsigned long long i
 constexpr dyne<OMNI_LITTERAL_INTEGER> operator"" _dyn(unsigned long long int val){return val;}
 constexpr gramforce<OMNI_LITTERAL_INTEGER> operator"" _gf(unsigned long long int val){return val;}
 constexpr kilogramforce<OMNI_LITTERAL_INTEGER> operator"" _kgf(unsigned long long int val){return val;}
+constexpr tonforce<OMNI_LITTERAL_INTEGER> operator"" _tonf(unsigned long long int val){return val;}
 constexpr poundforce<OMNI_LITTERAL_INTEGER> operator"" _lbf(unsigned long long int val){return val;}
 constexpr poundal<OMNI_LITTERAL_INTEGER> operator"" _pdl(unsigned long long int val){return val;}
+constexpr kipforce<OMNI_LITTERAL_INTEGER> operator"" _kipf(unsigned long long int val){return val;}
+constexpr shorttonforce<OMNI_LITTERAL_INTEGER> operator"" _stonf(unsigned long long int val){return val;}
+constexpr longtonforce<OMNI_LITTERAL_INTEGER> operator"" _ltonf(unsigned long long int val){return val;}
+
 
 
 

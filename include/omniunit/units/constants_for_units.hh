@@ -42,6 +42,7 @@ inline constexpr double four = 4.;
 inline constexpr double five = 5.;
 inline constexpr double nine = 9.;
 inline constexpr double sixty = 60.;
+inline constexpr double twoThousand = 2000.;
 inline constexpr double degDef = 180.;
 inline constexpr double gradDef = 200.;
 inline constexpr double piE36 = 3141592653589793238462643383279502884.;
@@ -90,7 +91,8 @@ inline constexpr double hpE1 = 7355.; // W
 inline constexpr double mhpE1 = 7457.; // W
 inline constexpr double atmDef = 101325.; // Pa
 inline constexpr double torrDenominator = 760.;
-inline constexpr double inchmercuryE3 = 3386389; // P
+inline constexpr double inchmercuryE3 = 3386389.; // Pa
+inline constexpr double longtonforceDef = 2240.; // lbf
 
 
 

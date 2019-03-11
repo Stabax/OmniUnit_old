@@ -118,41 +118,85 @@ using decibar = Unit<Pressure, Rep, Ratio<E5, E1>, zero>;
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using bar = Unit<Pressure, Rep, Ratio<E5, E0>, zero>;
 
+
+
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using atmosphere = Unit<Pressure, Rep, Ratio<atmDef, E0>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using technicalatmosphere = Unit<Pressure, Rep, Ratio<gE5, E1>, zero>;
+
+
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using poundforcePerInch2 = Unit<Pressure, Rep, typename Ratio_over_Ratio<Ratio<poundforceE13, E13>, typename Ratio_power<Ratio<inchE2, E2>, 2>::type>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using barye = Unit<Pressure, Rep, Ratio<E0, E1>, zero>;
+using shorttomforcePerInch2 = Unit<Pressure, Rep, typename Ratio_times_value<typename poundforcePerInch2<Rep>::period, twoThousand>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using gramforcePerCm2 = Unit<Pressure, Rep, Ratio<gE5, E4>, zero>;
+using longtonforcePerInch2 = Unit<Pressure, Rep, typename Ratio_times_value<typename poundforcePerInch2<Rep>::period, longtonforceDef>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilogramforcePerCm2 = Unit<Pressure, Rep, Ratio<gE5, E1>, zero>;
+using gramforcePerCentimeter2 = Unit<Pressure, Rep, Ratio<gE5, E4>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using kilogramforcePerM2 = Unit<Pressure, Rep, Ratio<gE5, E5>, zero>;
+using gramforcePerMeter2 = Unit<Pressure, Rep, Ratio<gE5, E8>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using tonforcePerM2 = Unit<Pressure, Rep, Ratio<gE5, E2>, zero>;
+using kilogramforcePerCentimeter2 = technicalatmosphere<Rep>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
-using technicalatmosphere = Unit<Pressure, Rep, Ratio<gE5, E1>, zero>;
+using kilogramforcePerMeter2 = Unit<Pressure, Rep, Ratio<gE5, E5>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using tonforcePerCentimeter2 = Unit<Pressure, Rep, typename Ratio_times_value<Ratio<gE5, E2>, E4>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using tonforcePerMeter2 = Unit<Pressure, Rep, Ratio<gE5, E2>, zero>;
+
+
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using torr = Unit<Pressure, Rep, Ratio<atmDef, torrDenominator>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
+using millitorr = Unit<Pressure, Rep, typename Ratio_over_value<typename torr<Rep>::period, E3>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
 using millimetermercury = Unit<Pressure, Rep, Ratio<atmDef, torrDenominator>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using centimetermercury = Unit<Pressure, Rep, typename Ratio_times_value<typename millimetermercury<Rep>::period, E1>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using micrometermercury = Unit<Pressure, Rep, typename Ratio_over_value<typename millimetermercury<Rep>::period, E3>::type, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using inchmercury = Unit<Pressure, Rep, Ratio<inchmercuryE3, E3>, zero>;
 
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using centimeterwater = Unit<Pressure, Rep, Ratio<gE5, E4>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using millimeterwater = Unit<Pressure, Rep, Ratio<gE5, E5>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using meterwater = Unit<Pressure, Rep, Ratio<gE5, E2>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using inchwater = Unit<Pressure, Rep, typename Ratio_times_Ratio<Ratio<gE5, E2>, Ratio<inchE2, E4>>::type, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using footwater = Unit<Pressure, Rep, typename Ratio_times_Ratio<Ratio<gE5, E2>, Ratio<footE2, E4>>::type, zero>;
+
+
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using barye = Unit<Pressure, Rep, Ratio<E0, E1>, zero>;
+
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using meterseawater = Unit<Pressure, Rep, Ratio<E4, E0>, zero>;
 
 
 typedef yoctopascal<> Yoctopascal;

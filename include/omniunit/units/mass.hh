@@ -162,6 +162,9 @@ using longton = Unit<Mass, Rep, Ratio<longtonDef, E0>, zero>;
 template <typename Rep = OMNI_DEFAULT_TYPE>
 using shortton = Unit<Mass, Rep, Ratio<shorttonE1, E1>, zero>;
 
+template <typename Rep = OMNI_DEFAULT_TYPE>
+using kip = Unit<Mass, Rep, Ratio<poundE8, E5>, zero>;
+
 
 
 typedef zeptogram<> Zeptogram;
@@ -201,6 +204,7 @@ typedef pound<> Pound;
 typedef ounce<> Ounce;
 typedef longton<> Longton;
 typedef shortton<> Shortton;
+typedef kip<> Kip;
 
 
 
@@ -243,6 +247,8 @@ constexpr pound<OMNI_LITTERAL_FLOATING> operator"" _lb(long double val){return v
 constexpr ounce<OMNI_LITTERAL_FLOATING> operator"" _oz(long double val){return val;}
 constexpr longton<OMNI_LITTERAL_FLOATING> operator"" _lton(long double val){return val;}
 constexpr shortton<OMNI_LITTERAL_FLOATING> operator"" _ston(long double val){return val;}
+constexpr kip<OMNI_LITTERAL_FLOATING> operator"" _kip(long double val){return val;}
+
 
 
 
@@ -281,6 +287,8 @@ constexpr pound<OMNI_LITTERAL_INTEGER> operator"" _lb(unsigned long long int val
 constexpr ounce<OMNI_LITTERAL_INTEGER> operator"" _oz(unsigned long long int val){return val;}
 constexpr longton<OMNI_LITTERAL_INTEGER> operator"" _lton(unsigned long long int val){return val;}
 constexpr shortton<OMNI_LITTERAL_INTEGER> operator"" _ston(unsigned long long int val){return val;}
+constexpr kip<OMNI_LITTERAL_INTEGER> operator"" _kip(unsigned long long int val){return val;}
+
 
 
 
