@@ -1361,7 +1361,7 @@ private:
   typedef typename std::common_type<Rep1, Rep2>::type common;
 
   //if origins are differents, then the common origin is 0...
-  static constexpr double origin = (std::abs(Origin1 - Origin2) <= std::numeric_limits<double>::epsilon()) ? Origin1 : omni::zero;
+  static constexpr double origin = (std::abs(Origin1 - Origin2) <= omni::Epsilon<double>::value) ? Origin1 : omni::zero;
 
 public:
   typedef omni::Basic_Unit<Dimension1, common, new_Ratio, origin> type;

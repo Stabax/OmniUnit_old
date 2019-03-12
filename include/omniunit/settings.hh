@@ -59,14 +59,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNI_LITTERAL_INTEGER int
 #define OMNI_LITTERAL_FLOATING double
 
-// if OMNI_COMPARE_WITH_PRECISION equals true, all internal comparisons between floating points are
+// if OMNI_USE_STD_EPSILON equals true, all internal comparisons between floating points are
 // done according to default epsilon (FLT_EPSILON, DBL_EPSILON...). Else, comparisions are done with
-// the value of OMNI_FLOAT_PRECISION_VALUE, OMNI_DOUBLE_PRECISION_VALUE and OMNI_LDOUBLE_PRECISION_VALUE.
-// default : true, 0.f, 0., and 0.. (NOT TAKEN INTO ACCOUND YET)
-#define OMNI_COMPARE_WITH_PRECISION = true
-#define OMNI_FLOAT_PRECISION_VALUE = 0.f
-#define OMNI_DOUBLE_PRECISION_VALUE = 0.
-#define OMNI_LDOUBLE_PRECISION_VALUE = 0.
+// the value of OMNI_FLT_EPSILON, OMNI_DBL_EPSILON and OMNI_LDBL_EPSILON.
+// default : true, 0.f, 0., and 0..
+#define OMNI_USE_STD_EPSILON true
+#define OMNI_FLT_EPSILON 0.f
+#define OMNI_DBL_EPSILON 0.
+#define OMNI_LDBL_EPSILON 0.
 
 // if OMNI_ENABLE_UNCERTAINTIES is true, then all the content of Complete_Units.hh is included
 // and compiled with omniunit. If uncertainties are not needed, then OMNI_ENABLE_UNCERTAINTIES should
