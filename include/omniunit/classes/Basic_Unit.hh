@@ -681,7 +681,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
   typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>,
   Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
-  return type(Obj1).count() == type(Obj2).count();
+  return (type(Obj1).count() - type(Obj2).count()) <= Epsilon<typename type::rep>::value;
 }
 
 
@@ -1361,7 +1361,7 @@ private:
   typedef typename std::common_type<Rep1, Rep2>::type common;
 
   //if origins are differents, then the common origin is 0...
-  static constexpr double origin = (std::abs(Origin1 - Origin2) <= omni::Epsilon<double>::value) ? Origin1 : omni::zero;
+  static constexpr double origin = (std::abs(Origin1 - Origin2) <= omni::InternEpsilon<double>::value) ? Origin1 : omni::zero;
 
 public:
   typedef omni::Basic_Unit<Dimension1, common, new_Ratio, origin> type;

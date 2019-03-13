@@ -330,7 +330,6 @@ int main()
 
   omni::RevolutionPerMinute res = omni::KilometerPerHour(57.45) * omni::Revolution(1) / (omni::Inch(15) * omni::pi::value);
 
-  std::cout << omni::Epsilon<float>::value << "\n";
 
   omni::Second t2(0);
   std::chrono::seconds t3(t2);

@@ -49,7 +49,47 @@ namespace omni
 //=============================================================================
 //=============================================================================
 //=============================================================================
-//=== CUSTOM EPSILON ==========================================================
+//=== INTERNAL EPSILON ========================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+template <typename T>
+struct InternEpsilon
+{
+  static_assert(std::is_integral<T>::value, "Type is not arithmetic.");
+  inline static constexpr T value =  std::numeric_limits<T>::epsilon();
+};
+
+
+template <>
+struct InternEpsilon<float>
+{
+  inline static constexpr float value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<float>::epsilon() : OMNI_FLT_EPSILON);
+};
+
+
+template <>
+struct InternEpsilon<double>
+{
+  inline static constexpr double value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<double>::epsilon() : OMNI_DBL_EPSILON);
+};
+
+
+template <>
+struct InternEpsilon<long double>
+{
+  inline static constexpr long double value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<long double>::epsilon() : OMNI_LDBL_EPSILON);
+};
+
+
+
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== INTERNAL EPSILON ========================================================
 //=============================================================================
 //=============================================================================
 //=============================================================================
@@ -67,21 +107,21 @@ struct Epsilon
 template <>
 struct Epsilon<float>
 {
-  inline static constexpr float value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<float>::epsilon() : OMNI_FLT_EPSILON);
+  inline static constexpr float value = (OMNI_COMPARISON_USE_STD_EPSILON ? std::numeric_limits<float>::epsilon() : OMNI_COMPARISON_FLT_EPSILON);
 };
 
 
 template <>
 struct Epsilon<double>
 {
-  inline static constexpr double value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<double>::epsilon() : OMNI_DBL_EPSILON);
+  inline static constexpr double value = (OMNI_COMPARISON_USE_STD_EPSILON ? std::numeric_limits<double>::epsilon() : OMNI_COMPARISON_DBL_EPSILON);
 };
 
 
 template <>
 struct Epsilon<long double>
 {
-  inline static constexpr long double value = (OMNI_USE_STD_EPSILON ? std::numeric_limits<long double>::epsilon() : OMNI_LDBL_EPSILON);
+  inline static constexpr long double value = (OMNI_COMPARISON_USE_STD_EPSILON ? std::numeric_limits<long double>::epsilon() : OMNI_COMPARISON_LDBL_EPSILON);
 };
 
 
@@ -121,7 +161,7 @@ gcd(T const& a, U const& b)
   common b2 = static_cast<common>(b);
 
   double temp = 0;
-  while (std::abs(b2) > Epsilon<common>::value)
+  while (std::abs(b2) > InternEpsilon<common>::value)
   {
     temp = modulo(a2, b2);
     a2 = b2;
@@ -137,7 +177,7 @@ constexpr bool is_positive_integer(T const& number)
 {
   static_assert(std::is_arithmetic<T>::value, "Arguments should be arithmetic values.");
   T res = number - static_cast<T>(std::floor(number));
-  return (std::abs(res) <= Epsilon<T>::value && number >= 0) ? true : false;
+  return (std::abs(res) <= InternEpsilon<T>::value && number >= 0) ? true : false;
 }
 
 
@@ -272,7 +312,7 @@ inline constexpr double E90 = 10000000000000000000000000000000000000000000000000
 template<double const& _Num, double const& _Den>
 struct Ratio
 {
-  static_assert(std::abs(_Den) > Epsilon<double>::value, "Denominator cannot be zero.");
+  static_assert(std::abs(_Den) > InternEpsilon<double>::value, "Denominator cannot be zero.");
   static_assert(is_positive_integer(_Num), "Numerator may not have decimals and may be positive.");
   static_assert(is_positive_integer(_Den), "Denominator may not have decimals and may be positive.");
 
@@ -309,7 +349,7 @@ struct is_stb_Ratio<Ratio<Num, Den>> : public std::true_type
 template <typename ratio>
 class Ratio_invert
 {
-  static_assert(std::abs(ratio::num) > Epsilon<double>::value, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio::num) > InternEpsilon<double>::value, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value , "Template parameter should be an OmniUnit ratio.");
 public:
   typedef Ratio<ratio::den, ratio::num> type;
@@ -356,7 +396,7 @@ public:
 template <typename ratio1, typename ratio2>
 class Ratio_over_Ratio
 {
-  static_assert(std::abs(ratio2::num) > Epsilon<double>::value, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio2::num) > InternEpsilon<double>::value, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio1>::value && is_stb_Ratio<ratio2>::value, "Template parameters should be OmniUnit ratios.");
 
   static constexpr double _gcd = gcd(ratio1::num * ratio2::den, ratio1::den * ratio2::num);
@@ -370,7 +410,7 @@ public:
 template <typename ratio, double const& val>
 class Ratio_over_value
 {
-  static_assert(std::abs(val) > Epsilon<double>::value, "Denominator cannot be zero.");
+  static_assert(std::abs(val) > InternEpsilon<double>::value, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "First template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "Second template parameter may not have decimals and may be positive.");
 
@@ -385,7 +425,7 @@ public:
 template <double const& val, typename ratio>
 class value_over_Ratio
 {
-  static_assert(std::abs(ratio::num) > Epsilon<double>::value, "Denominator cannot be zero.");
+  static_assert(std::abs(ratio::num) > InternEpsilon<double>::value, "Denominator cannot be zero.");
   static_assert(is_stb_Ratio<ratio>::value, "Second template parameter should be an OmniUnit ratio.");
   static_assert(is_positive_integer(val), "First template parameter may not have decimals and may be positive.");
 
@@ -605,13 +645,13 @@ struct Dimension_root
   static_assert(basis != 0, "Basis must not be 0.");
 
   static_assert(
-  modulo(static_cast<double>(dim::length) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::mass) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::time) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= Epsilon<double>::value &&
-  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= Epsilon<double>::value,
+  modulo(static_cast<double>(dim::length) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::mass) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::time) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
+  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value,
   "Cannot root this dimension with this basis.");
 
   typedef Dimension<
@@ -678,7 +718,7 @@ struct origin_product
 template<double const& a, double const& b>
 struct origin_division
 {
-  inline static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= Epsilon<double>::value) ? zero : a/b;
+  inline static constexpr double value = (OMNI_TRUE_ZERO || std::abs(b) <= InternEpsilon<double>::value) ? zero : a/b;
 };
 
 
