@@ -503,6 +503,7 @@ public:
 
 private:
   Rep _count;
+  //OMNI_UTYPE _uncertainty;
 };
 
 
@@ -681,7 +682,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
   typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>,
   Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
-  return (type(Obj1).count() - type(Obj2).count()) <= Epsilon<typename type::rep>::value;
+  return std::abs(type(Obj1).count() - type(Obj2).count()) <= Epsilon<typename type::rep>::value;
 }
 
 
@@ -707,7 +708,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
 
   typedef typename std::common_type<Basic_Unit<Dimension1, Rep1, Period1, Origin1>,
   Basic_Unit<Dimension2, Rep2, Period2, Origin2>>::type type;
-  return type(Obj1).count() < type(Obj2).count();
+  return (type(Obj1).count() - type(Obj2).count()) < -Epsilon<typename type::rep>::value;
 }
 
 
@@ -743,7 +744,7 @@ Basic_Unit<Dimension2, Rep2, Period2, Origin2> const& Obj2)
   static_assert(std::is_same<Dimension1, Dimension2>::value,
   "Cannot compare different dimensions.");
 
-  return ! (Obj1 < Obj2);
+  return !(Obj1 < Obj2);
 }
 
 

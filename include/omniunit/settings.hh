@@ -39,9 +39,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNI_INCLUDE_ALL_UNITS true
 
 // OMNI_DEFAULT_TYPE is the default type internally handled by units
-// when they are used with a capital (like Meter != meter)
+// to represent the value (not the uncertainty) when they
+// are used with a capital (like Meter != meter).
 // default : double
 #define OMNI_DEFAULT_TYPE double
+
+// if OMNI_USE_SAME_TYPE_FOR_UNCERTAINTIES is true, the type internally
+// handled by units to represent the uncertainty is the same as the value type.
+// Othewise, OMNI_DEFAULT_UNCERTAINTY_TYPE is used.
+// default : true, double
+#define OMNI_USE_SAME_TYPE_FOR_UNCERTAINTIES true
+#define OMNI_DEFAULT_UNCERTAINTY_TYPE double
 
 // if OMNI_TRUE_ZERO is true, then the true zero of the unit is considered in calculations.
 // for example, if OMNI_TRUE_ZERO is :

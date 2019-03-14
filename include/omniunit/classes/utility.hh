@@ -645,14 +645,14 @@ struct Dimension_root
   static_assert(basis != 0, "Basis must not be 0.");
 
   static_assert(
-  modulo(static_cast<double>(dim::length) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::mass) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::time) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value &&
-  modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1) <= InternEpsilon<double>::value,
-  "Cannot root this dimension with this basis.");
+  std::abs(modulo(static_cast<double>(dim::length) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::mass) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::time) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::current) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::temperature) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::quantity) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value &&
+  std::abs(modulo(static_cast<double>(dim::luminous_intensity) / static_cast<double>(basis), 1)) <= InternEpsilon<double>::value,
+  "Cannot root this dimension with this basis (some values may not be integers).");
 
   typedef Dimension<
   dim::length / basis,

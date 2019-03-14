@@ -33,31 +33,24 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef OMNIUNIT_OMNIUNIT_HH_
 #define OMNIUNIT_OMNIUNIT_HH_
 
-
 #include "settings.hh"
+
+#if OMNI_USE_SAME_TYPE_FOR_UNCERTAINTIES
+  #define OMNI_UTYPE Rep
+  #define OMNI_UTYPE1 Rep1
+  #define OMNI_UTYPE2 Rep2
+#else
+  #define OMNI_UTYPE OMNI_DEFAULT_UNCERTAINTY_TYPE
+  #define OMNI_UTYPE1 OMNI_DEFAULT_UNCERTAINTY_TYPE
+  #define OMNI_UTYPE2 OMNI_DEFAULT_UNCERTAINTY_TYPE
+#endif //OMNI_USE_SAME_TYPE_FOR_UNCERTAINTIES
+
 #include "classes/Complete_Unit.hh"
-
-
 
 namespace omni
 {
-
-#if OMNI_DEFAULT_IS_UNCERTAINTY == true
-  #if OMNI_ENABLE_UNCERTAINTIES == false
-    #error "default unit is set on uncertainty but uncertainties aren't enabled."
-  #endif //OMNI_ENABLE_UNCERTAINTIES == false
-
-  template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-  using Unit = Complete_Unit<_Dimension, Rep, Period, Origin>;
-
-#else
-
   template <typename _Dimension, typename Rep, typename Period, double const& Origin>
   using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
-
-#endif // OMNI_USE_UNCERTAINTIES
-
-
 
 } //namespace omni
 
