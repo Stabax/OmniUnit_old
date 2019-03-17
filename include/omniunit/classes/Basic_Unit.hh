@@ -212,7 +212,8 @@ public:
   typedef _Dimension dim;
   typedef Rep rep;
   typedef Period period;
-  inline static constexpr double origin = Origin;
+  inline static constexpr const double& origin = Origin;
+  //const keyword is needed because we can't assign double& to const double (const qualifier would be lost)
 
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
