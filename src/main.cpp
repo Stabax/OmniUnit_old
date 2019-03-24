@@ -107,7 +107,7 @@ int faux::value = 0;
 
 
 template <typename dim, typename rep, typename rat, double const& ori>
-void show(int test, omni::Basic_Unit<dim, rep, rat, ori> const& var1, double ref = 0)
+void show(int test, omni::Unit<dim, rep, rat, ori> const& var1, double ref = 0)
 {
   bool a = (static_cast<float>(var1.count() - ref) <= std::numeric_limits<float>::epsilon());
   std::cout << std::left << std::setw(8) << "TEST " + std::to_string(test)
@@ -285,7 +285,7 @@ int main()
   auto var31 = omni::pow(temp31);
   show(31, var31, VAR31);
 
-  omni::Basic_Unit<omni::Dimension<0,0,0,0,2,0,0>, double, omni::base, omni::celsiusConstant> temp32(0);
+  omni::Unit<omni::Dimension<0,0,0,0,2,0,0>, double, omni::base, omni::celsiusConstant> temp32(0);
   auto var32 = omni::nroot(temp32);
   show(32, var32, VAR32);
 

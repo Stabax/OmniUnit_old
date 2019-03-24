@@ -49,12 +49,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "classes/Unit.hh"
 
-namespace omni
-{
-  template <typename _Dimension, typename Rep, typename Period, double const& Origin>
-  using Unit = Basic_Unit<_Dimension, Rep, Period, Origin>;
-
-} //namespace omni
 
 #if OMNI_INCLUDE_ALL_UNITS == true
 
