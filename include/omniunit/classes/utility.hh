@@ -737,6 +737,7 @@ struct origin_root
 };
 
 
+
 } // namespace omni
 
 #endif //OMNIUNIT_UTILITY_HH_

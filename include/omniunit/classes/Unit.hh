@@ -1,4 +1,4 @@
-//Basic_Unit.hh
+//Unit.hh
 
 /*
 Copyright (c) 2019, Denis Tosetto All rights reserved.
@@ -30,8 +30,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-#ifndef OMNIUNIT_BASIC_UNIT_HH_
-#define OMNIUNIT_BASIC_UNIT_HH_
+#ifndef OMNIUNIT_UNIT_HH_
+#define OMNIUNIT_UNIT_HH_
 
 
 #include "utility.hh"
@@ -54,11 +54,8 @@ namespace omni
 //=============================================================================
 //=============================================================================
 
-//Basic_Unit represent a unit without handling uncertainties
-
-
 //forward declaration
-//origin is given in official unit (ratio<1, 1>)
+//origin is given for Ratio<1, 1>
 template<typename _Dimension, typename Rep, typename Period, double const& Origin>
 class Basic_Unit;
 
@@ -192,6 +189,38 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 }
 
 
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== UNCERTAINTY UTILITIES ===================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+enum class Law {none, uniform, triangular, asymetric, normal, arcsinus, uniform_gap};
+
+template <typename _Dimension, typename Period, double const& Origin>
+float getDeviation(Basic_Unit<_Dimension, float, Period, Origin> variation, Law law)
+{
+  if(law == Law::none)
+    return variation;
+  else if(law == Law::uniform)
+    return variation / std::sqrt(3.);
+  else if(law == Law::triangular)
+    return variation / std::sqrt(6.);
+  else if(law == Law::asymetric)
+    return variation / (3. * std::sqrt(2.)); //average = val min (or max) +/- variation/3
+  else if(law == Law::arcsinus)
+    return variation / std::sqrt(2.);
+  else if(law == Law::normal)
+    return variation / 3.;
+  else if(law == Law::uniform_gap)
+    return variation / (2. * std::sqrt(3.));
+}
+
+
 
 //=============================================================================
 //=============================================================================
@@ -219,29 +248,47 @@ public:
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
 
+  //default constructor
   constexpr Basic_Unit():
-  _count(static_cast<Rep>(0))
+  _count(static_cast<Rep>(0)), _uncertainty(static_cast<OMNI_UTYPE>(0))
   {
   }
 
 
-  template<typename _Rep, typename = typename std::enable_if<std::is_arithmetic<_Rep>::value, _Rep>::type>
+  //constructor taking an arithmetic, and uncertainty = 0
+  template<typename _Rep, typename = typename std::enable_if<(std::is_arithmetic<_Rep>::value), _Rep>::type>
   constexpr Basic_Unit(_Rep const& countArg):
-  _count(static_cast<Rep>(countArg))
+  _count(static_cast<Rep>(countArg)), _uncertainty(static_cast<OMNI_UTYPE>(0))
   {
   }
 
 
+  //constructor taking two arithmetics
+  template<typename _RepC, typename _RepU, typename = typename std::enable_if<(std::is_arithmetic<_RepC>::value && std::is_arithmetic<_RepU>::value), _RepC>::type>
+  constexpr Basic_Unit(_RepC const& countArg, _RepU const& uncertaintyArg):
+  _count(static_cast<Rep>(countArg)), _uncertainty(static_cast<OMNI_UTYPE>(uncertaintyArg))
+  {
+  }
+
+
+  template<typename _RepC, typename _Rep, typename _Period, double const& _Origin>
+  constexpr Basic_Unit(_RepC const& countArg, Basic_Unit<dim, _Rep, _Period, _Origin> const& Obj):
+  Basic_Unit(static_cast<Rep>(countArg), unit_cast<Basic_Unit, dim>(Obj).count())
+  {
+  }
+
+
+  // copy constructor
   template<typename _Rep, typename _Period, double const& _Origin>
   constexpr Basic_Unit(Basic_Unit<dim, _Rep, _Period, _Origin> const& Obj):
-  Basic_Unit(unit_cast<Basic_Unit, dim>(Obj).count())
+  Basic_Unit(unit_cast<Basic_Unit, dim>(Obj).count(), unit_cast<Basic_Unit, dim>(Obj).absolute())
   {
   }
 
 
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   constexpr Basic_Unit(std::chrono::duration<_Rep, _Period> const& Obj):
-  Basic_Unit(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count()))
+  Basic_Unit(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count(), 0))
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
@@ -274,6 +321,7 @@ public:
     return std::chrono::duration<_Rep, _Period>(Basic_Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, omni::zero>(*this).count());
   }
 
+
   static constexpr Basic_Unit zero()
   {
     return Basic_Unit(0);
@@ -283,6 +331,17 @@ public:
   constexpr Rep count() const
   {
     return _count;
+  }
+
+
+  constexpr OMNI_UTYPE absolute()
+  {
+    return _uncertainty;
+  }
+
+  constexpr double relative()
+  {
+    return _uncertainty / _count;
   }
 
 
@@ -504,7 +563,7 @@ public:
 
 private:
   Rep _count;
-  //OMNI_UTYPE _uncertainty;
+  OMNI_UTYPE _uncertainty;
 };
 
 
