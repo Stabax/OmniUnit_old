@@ -83,6 +83,9 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
 
   return toUnit(static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.count())
     * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den))
+    + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)),
+    static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.absolute())
+    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den))
     + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)));
 }
 
@@ -199,24 +202,24 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 
 
 
-enum class Law {none, uniform, triangular, asymetric, normal, arcsinus, uniform_gap};
+enum class Law {None, Uniform, Triangular, Asymetric, Normal, Arcsinus, Uniform_gap};
 
 template <typename _Dimension, typename Period, double const& Origin>
 float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
 {
-  if(law == Law::none)
+  if(law == Law::None)
     return variation;
-  else if(law == Law::uniform)
+  else if(law == Law::Uniform)
     return variation / std::sqrt(3.);
-  else if(law == Law::triangular)
+  else if(law == Law::Triangular)
     return variation / std::sqrt(6.);
-  else if(law == Law::asymetric)
+  else if(law == Law::Asymetric)
     return variation / (3. * std::sqrt(2.)); //average = val min (or max) +/- variation/3
-  else if(law == Law::arcsinus)
+  else if(law == Law::Arcsinus)
     return variation / std::sqrt(2.);
-  else if(law == Law::normal)
+  else if(law == Law::Normal)
     return variation / 3.;
-  else if(law == Law::uniform_gap)
+  else if(law == Law::Uniform_gap)
     return variation / (2. * std::sqrt(3.));
 }
 
@@ -247,6 +250,8 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
+
+  enum class PropagationType {Derived, Extreme};
 
   //default constructor
   constexpr Unit():
@@ -334,12 +339,12 @@ public:
   }
 
 
-  constexpr OMNI_UTYPE absolute()
+  constexpr OMNI_UTYPE absolute() const
   {
     return _uncertainty;
   }
 
-  constexpr double relative()
+  constexpr double relative() const
   {
     return _uncertainty / _count;
   }
@@ -418,7 +423,21 @@ public:
   Unit& operator+=(Unit<__Dimension, _Rep, _Period, _origin> const& Obj)
   {
     static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot sum values with different dimension.");
-    _count += Unit<__Dimension, Rep, Period, _origin>(Obj).count();
+    Unit<__Dimension, Rep, Period, _origin> ObjTemp(Obj);
+    _count += ObjTemp.count();
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+      if(PropagationType::OMNI_UNCERTAINTY_PROPAGATION_METHOD == PropagationType::Derived)
+      {
+        _uncertainty = std::sqrt(std::pow(_uncertainty, 2) + std::pow(ObjTemp.absolute(), 2));
+      }
+      else if(PropagationType::OMNI_UNCERTAINTY_PROPAGATION_METHOD == PropagationType::Extreme)
+      {
+        _uncertainty = _uncertainty + ObjTemp.absolute();
+      }
+    }
+
     return *this;
   }
 
@@ -427,7 +446,7 @@ public:
   Unit& operator-=(Unit<__Dimension, _Rep, _Period, _origin> const& Obj)
   {
     static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot subtract values with different dimension.");
-    _count -= Unit<__Dimension, Rep, Period, _origin>(Obj).count();
+    *this += (-Obj);
     return *this;
   }
 
@@ -563,7 +582,7 @@ public:
 
 private:
   Rep _count;
-  OMNI_UTYPE _uncertainty;
+  OMNI_UTYPE _uncertainty; // absolute, in the same unit than _count
 };
 
 

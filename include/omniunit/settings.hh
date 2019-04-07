@@ -88,24 +88,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNI_COMPARISON_DBL_EPSILON 0.
 #define OMNI_COMPARISON_LDBL_EPSILON 0.
 
-// if OMNI_ENABLE_UNCERTAINTIES is true, then all the content of Complete_Units.hh is included
-// and compiled with omniunit. If uncertainties are not needed, then OMNI_ENABLE_UNCERTAINTIES should
-// be set on false to decrease compilation time.
-// default : true
-#define OMNI_ENABLE_UNCERTAINTIES true
-
-// if OMNI_DEFAULT_IS_UNCERTAINTY is true, then Unit is a typedef on
-// Complete_Unit instead of Basic_Unit. It meeans that all predefined units
-// are Complete_Unit. If uncertainties are not needed, set OMNI_DEFAULT_IS_UNCERTAINTY to
-// false to increase runtime speed, because Complete_Unit handles and computes more informations
-// than Basic_Unit. Hard compilation error may appear if OMNI_ENABLE_UNCERTAINTIES is false and
-// OMNI_DEFAULT_IS_UNCERTAINTY is true.
+// if OMNI_USE_UNCERTAINTIES is true, then uncertainties
+// are propagated through arithmetic operations and functions.
+// Set it to false to speed up runtime execution.
 // default : false
-#define OMNI_DEFAULT_IS_UNCERTAINTY false
+#define OMNI_USE_UNCERTAINTIES false
 
-// WIP
-#define OMNI_DEFAULT_PROPAGATION quadratic
-#define OMNI_PRIORITY_PROPAGATION linear
+// OMNI_UNCERTAINTY_PROPAGATION_METHOD is the way uncertainties
+// are propagated. Available values are : Derived, Extreme.
+// - Derived : uncertainties are propagated by adding the squared first order partial
+// derivative of the function with respect to the variables,
+// - Extreme : operations are performed twice, the second one is done with var + uncertainty.
+// With extreme, uncertainties would be greater than with Derived.
+// Be careful, is the value is misspelled, uncertainties won't be propagated.
+// default : Derived
+#define OMNI_UNCERTAINTY_PROPAGATION_METHOD Derived
+
+// OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM if the amount of
+// systematic errors under which they are lineary added and
+// above which they are quadratically added.
+// default : 3
+#define OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM 3
+
+//WIP
 #define OMNI_VALID_SAMPLE_SIZE 100
 
 #endif //OMNIUNIT_SETTINGS_HH_
