@@ -223,6 +223,17 @@ float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
     return variation / (2. * std::sqrt(3.));
 }
 
+template <typename container_t>
+typename container_t::value_type getAverage(container_t const& Obj)
+{
+  typename container_t::value_type average = 0;
+
+  for(unsigned count = 0; count < Obj.size(); count++)
+    average += Obj[count];
+
+  average /= Obj.size();
+  return average;
+}
 
 
 //=============================================================================
@@ -276,13 +287,6 @@ public:
   }
 
 
-  template<typename _RepC, typename _Rep, typename _Period, double const& _Origin>
-  constexpr Unit(_RepC const& countArg, Unit<dim, _Rep, _Period, _Origin> const& Obj):
-  Unit(static_cast<Rep>(countArg), unit_cast<Unit, dim>(Obj).count())
-  {
-  }
-
-
   // copy constructor
   template<typename _Rep, typename _Period, double const& _Origin>
   constexpr Unit(Unit<dim, _Rep, _Period, _Origin> const& Obj):
@@ -291,9 +295,27 @@ public:
   }
 
 
+  // constructor taking a unit and an arithmetic
+  template<typename _Rep, typename _Period, double const& _Origin, typename _RepU>
+  constexpr Unit(Unit<dim, _Rep, _Period, _Origin> const& Obj, _RepU const& uncertaintyArg):
+  Unit(unit_cast<Unit, dim>(Obj).count(), uncertaintyArg)
+  {
+  }
+
+
+  // constructor taking a std::chrono::duration
   template<typename _Rep, typename _Period> //std::chrono::duration has no Origin parameter
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj):
   Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count(), 0))
+  {
+    static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
+  }
+
+
+  // constructor taking a std::chrono::duration and an arithmetic
+  template<typename _Rep, typename _Period, typename _RepU> //std::chrono::duration has no Origin parameter
+  constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj, _RepU uncertaintyArg):
+  Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count(), uncertaintyArg))
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
