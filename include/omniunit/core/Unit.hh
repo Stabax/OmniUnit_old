@@ -35,6 +35,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #include "utility.hh"
+#include "student_quantile.hh"
 
 #include <chrono>
 #include <iostream>
@@ -224,35 +225,42 @@ constexpr float getDeviation(Unit<_Dimension, float, Period, Origin> variation, 
     return variation / (2. * std::sqrt(3.));
 }
 
-template <typename container_t>
-constexpr std::initializer_list<double> getAverageAndDeviation(container_t const& Obj)
+template <typename container_t, typename systContainer_t>
+constexpr std::initializer_list<double> getAverageAndDeviation(container_t const& Obj, systContainer_t systErr)
 {
   double average = 0.;
-
-  // PRENDRE L'ERR SYSTEMATIQUE EN COMPTE
-
-  for(unsigned count = 0; count < Obj.size(); count++)
-    average += static_cast<double>(Obj[count]);
-
-  if(Obj.size()>1)
-    average /= static_cast<double>(Obj.size());
-
   double deviation = 0.;
 
-  // non-biased variance
-  if(Obj.size()>1)
+  if(Obj.size() > 0)
   {
     for(unsigned count = 0; count < Obj.size(); count++)
-    {
+      average += static_cast<double>(Obj[count]);
+    average /= static_cast<double>(Obj.size());
+
+    // non-biased variance
+    for(unsigned count = 0; count < Obj.size(); count++)
       deviation += std::pow(static_cast<double>(Obj[count]) - average, 2);
-    }
-    deviation *= static_cast<double>(Obj.size()) / (static_cast<double>(Obj.size())-1);
+
+    if(Obj.size() > 1)
+      deviation *= static_cast<double>(Obj.size()) / (static_cast<double>(Obj.size())-1);
+    deviation = std::sqrt(deviation/static_cast<double>(Obj.size()))* quantile(Obj.size());
   }
 
-  //PRENDRE LES COEF DE STUDENT EN COMPTE
+  // systematic error
+  double syst = 0.;
 
-  //return the average and the confidence interval
-  return {average, std::sqrt(deviation/static_cast<double>(Obj.size()))};
+  if(systErr.size() <= OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM)
+    for(unsigned count = 0; count < systErr.size(); count++)
+      syst += static_cast<double>(systErr[count]);
+  else
+  {
+    for(unsigned count = 0; count < systErr.size(); count++)
+      syst += std::pow(static_cast<double>(systErr[count]), 2);
+    syst = std::sqrt(syst);
+  }
+
+  //return the average and the absolute confidence interval at 1 sigma
+  return {average + syst, average + syst + deviation};
 }
 
 
@@ -340,21 +348,19 @@ public:
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
-/*
+
   // constructor taking a container (this arithmetic is the systematic error = 0)
-  template<typename _Rep, typename = typename std::enable_if<(!std::is_arithmetic<_Rep>::value), _Rep>::type>
+  template<typename _Rep, typename = typename std::enable_if<(!std::is_arithmetic<_Rep>::value), _Rep>::type, typename>
   constexpr Unit(_Rep const& Obj):
-  Unit(getAverageAndDeviation(Obj))
+  Unit(getAverageAndDeviation(Obj, 0))
   {
   }
-*/
 
-  // SPECIALISER CES CONSTRUCTEURS <>
 
   // constructor taking a container and an arithmetic (this arithmetic is the systematic error, not the uncertainty)
   template<typename container_t, typename _RepSyst, typename = typename std::enable_if<(std::is_arithmetic<_RepSyst>::value), _RepSyst>::type, typename = typename std::enable_if<(!std::is_arithmetic<container_t>::value), container_t>::type>
   constexpr Unit(container_t const& Obj, _RepSyst const& systematicError):
-  Unit(getAverageAndDeviation(Obj))
+  Unit(getAverageAndDeviation(Obj, systematicError))
   {
   }
 
