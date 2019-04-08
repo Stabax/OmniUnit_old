@@ -38,6 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <chrono>
 #include <iostream>
+#include <initializer_list>
 
 
 
@@ -205,7 +206,7 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 enum class Law {None, Uniform, Triangular, Asymetric, Normal, Arcsinus, Uniform_gap};
 
 template <typename _Dimension, typename Period, double const& Origin>
-float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
+constexpr float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
 {
   if(law == Law::None)
     return variation;
@@ -224,15 +225,34 @@ float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
 }
 
 template <typename container_t>
-typename container_t::value_type getAverage(container_t const& Obj)
+constexpr std::initializer_list<double> getAverageAndDeviation(container_t const& Obj)
 {
-  typename container_t::value_type average = 0;
+  double average = 0.;
+
+  // PRENDRE L'ERR SYSTEMATIQUE EN COMPTE
 
   for(unsigned count = 0; count < Obj.size(); count++)
-    average += Obj[count];
+    average += static_cast<double>(Obj[count]);
 
-  average /= Obj.size();
-  return average;
+  if(Obj.size()>1)
+    average /= static_cast<double>(Obj.size());
+
+  double deviation = 0.;
+
+  // non-biased variance
+  if(Obj.size()>1)
+  {
+    for(unsigned count = 0; count < Obj.size(); count++)
+    {
+      deviation += std::pow(static_cast<double>(Obj[count]) - average, 2);
+    }
+    deviation *= static_cast<double>(Obj.size()) / (static_cast<double>(Obj.size())-1);
+  }
+
+  //PRENDRE LES COEF DE STUDENT EN COMPTE
+
+  //return the average and the confidence interval
+  return {average, std::sqrt(deviation/static_cast<double>(Obj.size()))};
 }
 
 
@@ -296,7 +316,7 @@ public:
 
 
   // constructor taking a unit and an arithmetic
-  template<typename _Rep, typename _Period, double const& _Origin, typename _RepU>
+  template<typename _Rep, typename _Period, double const& _Origin, typename _RepU, typename = typename std::enable_if<(std::is_arithmetic<_RepU>::value), _RepU>::type>
   constexpr Unit(Unit<dim, _Rep, _Period, _Origin> const& Obj, _RepU const& uncertaintyArg):
   Unit(unit_cast<Unit, dim>(Obj).count(), uncertaintyArg)
   {
@@ -313,13 +333,30 @@ public:
 
 
   // constructor taking a std::chrono::duration and an arithmetic
-  template<typename _Rep, typename _Period, typename _RepU> //std::chrono::duration has no Origin parameter
+  template<typename _Rep, typename _Period, typename _RepU, typename = typename std::enable_if<(std::is_arithmetic<_RepU>::value), _RepU>::type> //std::chrono::duration has no Origin parameter
   constexpr Unit(std::chrono::duration<_Rep, _Period> const& Obj, _RepU uncertaintyArg):
   Unit(Unit<dim, _Rep, typename Ratio_std_to_omni<_Period>::type, Origin>(Obj.count(), uncertaintyArg))
   {
     static_assert(std::is_same<dim, Dimension<0,0,1,0,0,0,0>>::value, "Only a duration is constructible with an std::chrono::duration");
   }
 
+/*
+  // constructor taking a container (this arithmetic is the systematic error = 0)
+  template<typename _Rep, typename = typename std::enable_if<(!std::is_arithmetic<_Rep>::value), _Rep>::type>
+  constexpr Unit(_Rep const& Obj):
+  Unit(getAverageAndDeviation(Obj))
+  {
+  }
+*/
+
+  // SPECIALISER CES CONSTRUCTEURS <>
+
+  // constructor taking a container and an arithmetic (this arithmetic is the systematic error, not the uncertainty)
+  template<typename container_t, typename _RepSyst, typename = typename std::enable_if<(std::is_arithmetic<_RepSyst>::value), _RepSyst>::type, typename = typename std::enable_if<(!std::is_arithmetic<container_t>::value), container_t>::type>
+  constexpr Unit(container_t const& Obj, _RepSyst const& systematicError):
+  Unit(getAverageAndDeviation(Obj))
+  {
+  }
 
   ~Unit() = default;
 
