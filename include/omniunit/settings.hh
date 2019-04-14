@@ -104,7 +104,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // default : Derived
 #define OMNI_UNCERTAINTY_PROPAGATION_METHOD Derived
 
-// OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM if the amount of
+// OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM is the amount of
 // systematic errors under (or at) which they are lineary added and
 // above which they are quadratically added.
 // default : 3

@@ -32,12 +32,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define OMNIUNIT_STUDENT_QUANTILE_HH_
 
 
+namespace omni
+{
+
+
 
 // these quantiles have been generated from LibreOffice calc version 5.0.5.2
 // build 55b006a02d247b5f7215fc6ea0fde844b30035b3 with the function :
-// LOI.STUDENT.INVERSE.BILATERALE()
-// these quantiles are given for a bilateral probability of 0.32
-// (this means that there is a probability of 68% to be between -q and q)
+// LOI.STUDENT.INVERSE.BILATERALE(0,32; n)
+// This means that there is a probability of 68% to be between -q and q
 inline constexpr double studentQuantiles[500] =
 {
   1.8190	,
@@ -551,6 +554,9 @@ constexpr double quantile(unsigned index)
     return studentQuantiles[499];
 }
 
+
+
+} // namespace omni
 
 
 #endif // OMNIUNIT_STUDENT_QUANTILE_HH_

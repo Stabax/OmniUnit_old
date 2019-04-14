@@ -738,6 +738,75 @@ struct origin_root
 
 
 
+//=============================================================================
+//=============================================================================
+//=============================================================================
+//=== UNCERTAINTY UTILITIES ===================================================
+//=============================================================================
+//=============================================================================
+//=============================================================================
+
+
+
+enum class Law {None, Uniform, Triangular, Asymetric, Normal, Arcsinus, Uniform_gap};
+
+constexpr double getDeviation(double variation, Law law)
+{
+  if(law == Law::None || law == Law::Normal)
+    return variation;
+  else if(law == Law::Uniform)
+    return variation / std::sqrt(3.);
+  else if(law == Law::Triangular)
+    return variation / std::sqrt(6.);
+  else if(law == Law::Asymetric)
+    return variation / (3. * std::sqrt(2.));
+  else if(law == Law::Arcsinus)
+    return variation / std::sqrt(2.);
+  else if(law == Law::Uniform_gap)
+    return variation / (2. * std::sqrt(3.));
+}
+
+
+template <typename container_t, typename systContainer_t>
+constexpr std::initializer_list<double> getAverageAndDeviation(container_t const& Obj, systContainer_t systErr)
+{
+  double average = 0.;
+  double deviation = 0.;
+
+  if(Obj.size() > 0)
+  {
+    for(unsigned count = 0; count < Obj.size(); count++)
+      average += static_cast<double>(Obj[count]);
+    average /= static_cast<double>(Obj.size());
+
+    // non-biased variance
+    for(unsigned count = 0; count < Obj.size(); count++)
+      deviation += std::pow(static_cast<double>(Obj[count]) - average, 2);
+
+    if(Obj.size() > 1)
+      deviation *= (static_cast<double>(Obj.size()) / (static_cast<double>(Obj.size())-1));
+    deviation = std::sqrt(deviation/static_cast<double>(Obj.size()))* quantile(Obj.size() - 1);
+  }
+
+  // systematic error
+  double syst = 0.;
+
+  if(systErr.size() <= OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM)
+    for(unsigned count = 0; count < systErr.size(); count++)
+      syst += static_cast<double>(systErr[count]);
+  else
+  {
+    for(unsigned count = 0; count < systErr.size(); count++)
+      syst += std::pow(static_cast<double>(systErr[count]), 2);
+    syst = std::sqrt(syst);
+  }
+
+  //return the average and the absolute confidence interval at 1 sigma
+  return {average + syst, deviation};
+}
+
+
+
 } // namespace omni
 
 #endif //OMNIUNIT_UTILITY_HH_

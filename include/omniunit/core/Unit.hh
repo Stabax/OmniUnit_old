@@ -81,14 +81,14 @@ constexpr toUnit unit_cast(const Unit<Dimension, Rep, Period, Origin>& Obj)
   static_assert(std::is_same<typename toUnit::dim, Dimension>::value, "Cannot cast different dimensions.");
 
   typedef typename Ratio_over_Ratio<Period, typename toUnit::period>::type new_Ratio;
-  typedef typename std::common_type<typename toUnit::rep, Rep>::type common_rep;
+  typedef typename std::common_type<typename toUnit::rep, Rep>::type common;
 
-  return toUnit(static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.count())
-    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den))
-    + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)),
-    static_cast<typename toUnit::rep>((static_cast<common_rep>(Obj.absolute())
-    * static_cast<common_rep>(new_Ratio::num) / static_cast<common_rep>(new_Ratio::den))
-    + static_cast<common_rep>((Origin - toUnit::origin) / toUnit::period::value)));
+  return toUnit(static_cast<typename toUnit::rep>((static_cast<common>(Obj.count())
+    * static_cast<common>(new_Ratio::num) / static_cast<common>(new_Ratio::den))
+    + static_cast<common>((Origin - toUnit::origin) / toUnit::period::value)),
+    static_cast<typename toUnit::rep>((static_cast<OMNI_UTYPE_COMMON>(Obj.absolute())
+    * static_cast<OMNI_UTYPE_COMMON>(new_Ratio::num) / static_cast<OMNI_UTYPE_COMMON>(new_Ratio::den))
+    + static_cast<OMNI_UTYPE_COMMON>(zero)));
 }
 
 
@@ -193,75 +193,6 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
   return unit_cast_impl<toUnit>(partial_specialization_emulator<toUnit>{}, Obj);
 }
 
-
-//=============================================================================
-//=============================================================================
-//=============================================================================
-//=== UNCERTAINTY UTILITIES ===================================================
-//=============================================================================
-//=============================================================================
-//=============================================================================
-
-
-
-enum class Law {None, Uniform, Triangular, Asymetric, Normal, Arcsinus, Uniform_gap};
-
-template <typename _Dimension, typename Period, double const& Origin>
-constexpr float getDeviation(Unit<_Dimension, float, Period, Origin> variation, Law law)
-{
-  if(law == Law::None)
-    return variation;
-  else if(law == Law::Uniform)
-    return variation / std::sqrt(3.);
-  else if(law == Law::Triangular)
-    return variation / std::sqrt(6.);
-  else if(law == Law::Asymetric)
-    return variation / (3. * std::sqrt(2.)); //average = val min (or max) +/- variation/3
-  else if(law == Law::Arcsinus)
-    return variation / std::sqrt(2.);
-  else if(law == Law::Normal)
-    return variation / 3.;
-  else if(law == Law::Uniform_gap)
-    return variation / (2. * std::sqrt(3.));
-}
-
-template <typename container_t, typename systContainer_t>
-constexpr std::initializer_list<double> getAverageAndDeviation(container_t const& Obj, systContainer_t systErr)
-{
-  double average = 0.;
-  double deviation = 0.;
-
-  if(Obj.size() > 0)
-  {
-    for(unsigned count = 0; count < Obj.size(); count++)
-      average += static_cast<double>(Obj[count]);
-    average /= static_cast<double>(Obj.size());
-
-    // non-biased variance
-    for(unsigned count = 0; count < Obj.size(); count++)
-      deviation += std::pow(static_cast<double>(Obj[count]) - average, 2);
-
-    if(Obj.size() > 1)
-      deviation *= static_cast<double>(Obj.size()) / (static_cast<double>(Obj.size())-1);
-    deviation = std::sqrt(deviation/static_cast<double>(Obj.size()))* quantile(Obj.size());
-  }
-
-  // systematic error
-  double syst = 0.;
-
-  if(systErr.size() <= OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM)
-    for(unsigned count = 0; count < systErr.size(); count++)
-      syst += static_cast<double>(systErr[count]);
-  else
-  {
-    for(unsigned count = 0; count < systErr.size(); count++)
-      syst += std::pow(static_cast<double>(systErr[count]), 2);
-    syst = std::sqrt(syst);
-  }
-
-  //return the average and the absolute confidence interval at 1 sigma
-  return {average + syst, average + syst + deviation};
-}
 
 
 //=============================================================================
