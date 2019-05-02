@@ -203,8 +203,6 @@ constexpr toUnit unit_cast(std::chrono::duration<Rep, Period> const& Obj)
 //=============================================================================
 //=============================================================================
 
-//Unit represents a unit without handling uncertainties
-
 
 
 template<typename _Dimension, typename Rep, typename Period, double const& Origin>
@@ -220,8 +218,6 @@ public:
   static_assert(is_Dimension<_Dimension>::value, "First template argument sould be a dimension.");
   static_assert(std::is_arithmetic<Rep>::value, "Second template argument should be an arithmetic type.");
   static_assert(is_stb_Ratio<Period>::value, "Third template argument should be an OmniUnit ratio.");
-
-  enum class PropagationType {Derived, Extreme};
 
   //default constructor
   constexpr Unit():
@@ -358,6 +354,12 @@ public:
   }
 
 
+  constexpr double periodValue() const
+  {
+    return Period::value;
+  }
+
+
   constexpr std::string dimension() const //A MODIFIER, RETOURNER UNE CHAR*
   {
     return dimension_str<dim>();
@@ -420,19 +422,13 @@ public:
   {
     static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot sum values with different dimension.");
     Unit<__Dimension, Rep, Period, _origin> ObjTemp(Obj);
-    _count += ObjTemp.count();
 
     if(OMNI_USE_UNCERTAINTIES)
     {
-      if(PropagationType::OMNI_UNCERTAINTY_PROPAGATION_METHOD == PropagationType::Derived)
-      {
         _uncertainty = std::sqrt(std::pow(_uncertainty, 2) + std::pow(ObjTemp.absolute(), 2));
-      }
-      else if(PropagationType::OMNI_UNCERTAINTY_PROPAGATION_METHOD == PropagationType::Extreme)
-      {
-        _uncertainty = _uncertainty + ObjTemp.absolute();
-      }
     }
+
+    _count += ObjTemp.count();
 
     return *this;
   }
@@ -442,7 +438,15 @@ public:
   Unit& operator-=(Unit<__Dimension, _Rep, _Period, _origin> const& Obj)
   {
     static_assert(std::is_same<__Dimension, _Dimension>::value, "Cannot subtract values with different dimension.");
-    *this += (-Obj);
+    Unit<__Dimension, Rep, Period, _origin> ObjTemp(Obj);
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+        _uncertainty = std::sqrt(std::pow(_uncertainty, 2) + std::pow(ObjTemp.absolute(), 2));
+    }
+
+    _count -= ObjTemp.count();
+
     return *this;
   }
 
@@ -457,6 +461,12 @@ public:
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+        _uncertainty = std::abs(_uncertainty * static_cast<OMNI_UTYPE_COMMON>(coef));
+    }
+
     _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(coef));
 
     if(OMNI_TRUE_ZERO)
@@ -478,8 +488,13 @@ public:
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
-    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(newObj.count()));
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+      _uncertainty = std::sqrt(std::pow(_uncertainty * static_cast<OMNI_UTYPE_COMMON>(Obj.count() * Obj.periodValue()), 2) + std::pow(Obj.absolute() *  static_cast<OMNI_UTYPE_COMMON>(_count * Obj.periodValue()), 2));
+    }
+
+    _count = static_cast<Rep>(static_cast<common>(_count) * static_cast<common>(Obj.count())) * Obj.periodValue();
 
     if(OMNI_TRUE_ZERO)
     {
@@ -501,6 +516,12 @@ public:
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+      _uncertainty = std::abs(_uncertainty / coef);
+    }
+
     _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(coef));
 
     if(OMNI_TRUE_ZERO)
@@ -522,13 +543,18 @@ public:
     }
 
     typedef typename std::common_type<Rep, _Rep>::type common;
-    Unit<Dimension<0,0,0,0,0,0,0>, common, base, _Origin> newObj(Obj); //SEARCH NOT TO CONVERT TO BASE PLS
-    _count = static_cast<Rep>(static_cast<common>(_count) / static_cast<common>(newObj.count()));
+
+    if(OMNI_USE_UNCERTAINTIES)
+    {
+      _uncertainty = std::sqrt(std::pow(_uncertainty/(Obj.count()*Obj.periodValue()), 2) + std::pow(Obj.absolute() * Obj.periodValue()/_count, 2));
+    }
 
     if(OMNI_TRUE_ZERO)
     {
       *this -= Unit<_Dimension, Rep, base, Origin>(Origin);
     }
+
+    _count = static_cast<Rep>(static_cast<common>(_count) / (static_cast<common>(Obj.count()) *Obj.periodValue()));
 
     return *this;
   }

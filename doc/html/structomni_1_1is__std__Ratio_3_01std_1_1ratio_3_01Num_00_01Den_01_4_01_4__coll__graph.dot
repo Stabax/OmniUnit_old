@@ -4,5 +4,5 @@ digraph "omni::is_std_Ratio&lt; std::ratio&lt; Num, Den &gt; &gt;"
   node [fontname="Helvetica",fontsize="10",shape=record];
   Node0 [label="omni::is_std_Ratio\l\< std::ratio\< Num, Den \> \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node1 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node1 [label="std::true_type",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 [label="true_type",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
 }

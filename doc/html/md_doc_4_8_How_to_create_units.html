@@ -159,7 +159,7 @@ typedef omni::Ratio_power&lt;hourRatio, 2&gt;::type hour2Ratio;
 <p>Well, Origin is taken as <b>double</b> by <b>non-type</b> template parameter. So this value has to be of type <b>inline constexpr double</b>, must be an lvalue and must have linkage (see above, in "__Step 2 : Ratio__").</p>
 <p><b>Be aware :</b> don't forget to raise the power of the origin for a raised power unit. For exemple, the origin of celsius2 is 74610.9225, those of celsius3 is 20379973.48, etc.</p>
 <h2>Step 4 : Defining the new unit</h2>
-<p>Once you have understood the three above steps, the definition of a new unit is quite simple : the class omni::Unit takes 4 templates arguments. In order, they are the dimension of the unit, the internal representation type of the handled value of the unit, the ratio of the unit, and the origin of the unit. Let's define a meter from scratch : </p><pre class="fragment">    // Definition of the dimension
+<p>Once you have understood the three above steps, the definition of a new unit is quite simple : the class <a class="el" href="classomni_1_1Unit.html">omni::Unit</a> takes 4 templates arguments. In order, they are the dimension of the unit, the internal representation type of the handled value of the unit, the ratio of the unit, and the origin of the unit. Let's define a meter from scratch : </p><pre class="fragment">    // Definition of the dimension
     typedef omni::Dimension&lt;1,0,0,0,0,0,0,0,0&gt; Length;
 
     // Definition of the ratio
@@ -202,7 +202,7 @@ using millipoise_v4 = omni::Unit&lt;Viscosity, Rep, typename omni::Ratio_over_va
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 11 2019 22:55:07 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu May 2 2019 22:07:22 for OmniUnit by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

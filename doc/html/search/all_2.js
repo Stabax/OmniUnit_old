@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['date',['Date',['../classomni_1_1Date.html',1,'omni']]],
-  ['date_5fexception',['Date_exception',['../classomni_1_1Date__exception.html',1,'omni']]],
-  ['dimension',['Dimension',['../structomni_1_1Dimension.html',1,'omni']]],
-  ['dimension_5fdivide',['Dimension_divide',['../structomni_1_1Dimension__divide.html',1,'omni']]],
-  ['dimension_5fmultiply',['Dimension_multiply',['../structomni_1_1Dimension__multiply.html',1,'omni']]],
-  ['dimension_5fpower',['Dimension_power',['../structomni_1_1Dimension__power.html',1,'omni']]],
-  ['dimension_5froot',['Dimension_root',['../structomni_1_1Dimension__root.html',1,'omni']]]
+  ['epsilon',['Epsilon',['../structomni_1_1Epsilon.html',1,'omni']]],
+  ['epsilon_3c_20double_20_3e',['Epsilon&lt; double &gt;',['../structomni_1_1Epsilon_3_01double_01_4.html',1,'omni']]],
+  ['epsilon_3c_20float_20_3e',['Epsilon&lt; float &gt;',['../structomni_1_1Epsilon_3_01float_01_4.html',1,'omni']]],
+  ['epsilon_3c_20long_20double_20_3e',['Epsilon&lt; long double &gt;',['../structomni_1_1Epsilon_3_01long_01double_01_4.html',1,'omni']]],
+  ['exception',['Exception',['../classomni_1_1Exception.html',1,'omni']]]
 ];

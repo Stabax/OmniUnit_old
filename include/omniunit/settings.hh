@@ -94,18 +94,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // default : false
 #define OMNI_USE_UNCERTAINTIES false
 
-// OMNI_UNCERTAINTY_PROPAGATION_METHOD is the way uncertainties
-// are propagated. Available values are : Derived, Extreme.
-// - Derived : uncertainties are propagated by adding the squared first order partial
-// derivative of the function with respect to the variables,
-// - Extreme : operations are performed twice, the second one is done with var + uncertainty.
-// With extreme, uncertainties would be greater than with Derived.
-// Be careful, is the value is misspelled, uncertainties won't be propagated.
-// default : Derived
-#define OMNI_UNCERTAINTY_PROPAGATION_METHOD Derived
-
 // OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM is the amount of
-// systematic errors under (or at) which they are lineary added and
+// systematic errors under/at which they are lineary added and
 // above which they are quadratically added.
 // default : 3
 #define OMNI_NUMBER_OF_SYSTEM_ERROR_BEFORE_QUAD_SUM 3
